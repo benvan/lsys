@@ -1,0 +1,101 @@
+<html>
+<head>
+
+    <link rel="stylesheet" href="css/bootstrap.css"/>
+    <link rel="stylesheet" href="test.css"/>
+
+    <style>
+
+        body{
+            margin: 0;
+            font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+            line-height: 22px;
+            color: #C6C6C6;
+            background-color:#2F2F2F;
+        }
+
+        input, textarea{
+          width:100%;
+        }
+
+        .heading{
+
+        }
+        .controls{
+            width:300px;
+            float:left;
+            margin-right:25px;
+            height:600px;
+        }
+        .pad{
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            -ms-border-radius: 4px;
+            -o-border-radius: 4px;
+            border-radius: 4px;
+            padding: 15px 16px;
+            background: #202020;
+            color: #ccc;
+            border-color: #131313;
+            -webkit-box-shadow: rgba(255, 255, 255, 0.1) 0 1px 0, rgba(0, 0, 0, 0.8) 0 1px 7px 0px inset;
+            -moz-box-shadow: rgba(255, 255, 255, 0.1) 0 1px 0, rgba(0, 0, 0, 0.8) 0 1px 7px 0px inset;
+            box-shadow: rgba(255, 255, 255, 0.1) 0 1px 0, rgba(0, 0, 0, 0.8) 0 1px 7px 0px inset
+        }
+        .pad canvas{
+            background-color:#202020;
+        }
+    </style>
+
+</head>
+<body>
+
+<div style="padding: 10px;"></div>
+<div class="container">
+
+    <div class="row" style="height:650px">
+        <div class="span3">
+
+            <form style="height:100%">
+
+                <div class="input text">
+                    <input id="num" type="text" value="6"/>
+                    <input id="length" type="text" value="5"/>
+                    <input id="angle" type="text" value="25"/>
+                    <textarea id="rules" rows="8">F : F[++F][-F-)F]>)+(-F)</textarea>
+                </div>
+
+                <div>
+                    <button class="btn btn-primary btn-block" onclick="go(); return false">go</button>
+                </div>
+                <div id="data" class="pad" style="margin-top:25px;background-color:#1a1a20">
+                  <div>generated: <span id="generated"></span></div>
+                  <div>rendered : <span id="rendered"></span></div> 
+                </div>
+            </form>
+
+        </div>
+        <div class="span9">
+
+            <div class="pad" style="height:100%">
+                <canvas id="c" width="650px" height="650px"></canvas>
+            </div>
+
+        </div>
+    </div>
+
+
+
+</div>
+
+
+
+
+
+
+<script type="text/javascript" src="js/underscore.js"></script>
+<script type="text/javascript" src="js/lsys.js"></script>
+<script type="text/javascript">
+    window.go();
+</script>
+</body>
+</html>
