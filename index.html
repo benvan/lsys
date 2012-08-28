@@ -3,6 +3,7 @@
 
     <link rel="stylesheet" href="css/bootstrap.css"/>
     <link rel="stylesheet" href="test.css"/>
+    <!--<script type="text/javascript" src="js/live.js"></script>-->
 
     <style>
 
@@ -55,24 +56,24 @@
     <div class="row" style="height:650px">
         <div class="span3">
 
-            <form style="height:100%">
+            <form> 
 
                 <div class="input text">
-                    <input id="num" type="text" value="6"/>
-                    <input id="length" type="text" value="5"/>
-                    <input id="angle" type="text" value="25"/>
-                    <textarea id="rules" rows="8">F : F[++F][-F-)F]>)+(-F)</textarea>
+                    <input id="num" type="text" value="5"/>
+                    <input id="length" type="text" value="-5.7"/>
+                    <input id="angle" type="text" value="14.5"/>
+                    <textarea id="rules" rows="8">F : F[+F!+F][-F-!)F]>)+(-F)F</textarea>
                 </div>
 
-                <div>
-                    <button class="btn btn-primary btn-block" onclick="go(); return false">go</button>
-                </div>
-                <div id="data" class="pad" style="margin-top:25px;background-color:#1a1a20">
-                  <div>generated: <span id="generated"></span></div>
-                  <div>rendered : <span id="rendered"></span></div> 
-                </div>
             </form>
 
+            <div>
+                <button class="btn btn-primary btn-block" onclick="go(); return false">go</button>
+            </div>
+            <div id="data" class="pad" style="margin-top:25px;background-color:#1a1a20">
+              <div>segments: <span id="segments"></span></div>
+              <div>rendered : <span id="rendered"></span></div> 
+            </div>
         </div>
         <div class="span9">
 
