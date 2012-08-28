@@ -3,7 +3,8 @@ window.go = () ->
   context = {}
   log = (x) -> console.log(x)
   control = (name) -> document.getElementById(name)
-  value = (name) -> control(name).value
+  value = (name) -> parseFloat(stringvalue(name))
+  stringvalue = (name) -> control(name).value
   canvas = document.getElementById('c')
   g = canvas.getContext('2d')
 
@@ -26,11 +27,14 @@ window.go = () ->
 
 
 
-  rules = value('rules').split("\n").map (rule) -> rule.split(" : ")
+  rules = stringvalue('rules').split("\n").map (rule) -> rule.split(" : ")
   iterations = value("num")
 
   rule = `{}`
   rule[r] = exp for [r,exp] in rules
+
+  document.onkeydown = (ev) ->
+    window.go() if ev.keyCode == 13 and ev.ctrlKey
 
   canvas.onmousedown = (ev) ->
     client.down = true
@@ -44,26 +48,27 @@ window.go = () ->
     client.now.x = ev.clientX
     client.now.y = ev.clientY
     if (client.down)
-      x = (client.now.x - client.start.x) / 10
-      y = (client.now.y - client.start.y) / 100
+      x = (client.now.x - client.start.x) / 20
+      y = (client.start.y - client.now.y) / 100
       control("angle").value = x + client.context.angle
       control("length").value = y + client.context.length
-      if not isDrawing
-        draw()
-      #draw() if not isDrawing
+      draw() if not isDrawing 
 
 
 
   stack = []
   cos = Math.cos
   sin = Math.sin
+  fn = (g) ->
+    len = context.incLength
+    ang = ((context.angle%360) / 180) * Math.PI
+    context.x = context.x+cos(ang)*len
+    context.y = context.y+sin(ang)*len
+    g.lineTo(context.x,context.y)
   functions = {
-    "F": (g) ->
-      len = context.incLength
-      ang = (context.angle / 180) * Math.PI
-      context.x = context.x+cos(ang)*len
-      context.y = context.y+sin(ang)*len
-      g.lineTo(context.x,context.y)
+    "F": fn
+    "A": fn
+    "B": fn
     "+": -> context.angle += context.incAngle
     "-": -> context.angle -= context.incAngle
     "|": -> context.angle += 180
@@ -78,22 +83,22 @@ window.go = () ->
 
   isDrawing = false
   draw = () ->
+    isDrawing = true
     context = {
-      x:canvas.width/2 + 250,
-      y:canvas.height/2,
-      angle:0,
+      x:canvas.width/2,
+      y:canvas.height,
+      angle:-90,
       incAngle:value("angle"),
       incLength:value("length")
     }
     start = rules[0][0]
     expr = start
-    isDrawing = true 
     g.globalAlpha=1
     g.fillStyle="#202020"
     g.beginPath()
-    g.rect(0,0,1000,1000)
-    g.fill()
+    g.rect(-1,-1,1000,1000)
     g.closePath()
+    g.fill()
     g.lineWidth = 0.7
     g.strokeStyle="#fff"
     g.globalAlpha=0.4
@@ -108,10 +113,9 @@ window.go = () ->
       elems = expr.split("")
 
     s = time -> 
-      g.beginPath()
+      g.moveTo(context.x, context.y)
       _.each elems, (e) ->
-        functions[e](g)
-      g.closePath()
+        functions[e] && functions[e](g)
       g.stroke()
 
     control("rendered").innerText = t+"ms"
