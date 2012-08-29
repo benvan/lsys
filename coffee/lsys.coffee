@@ -60,7 +60,7 @@ window.lsys = () ->
   
   setupControls = ->
     document.onkeydown = (ev) ->
-      window.lsys.run if ev.keyCode == 13 and ev.ctrlKey
+      window.lsys() if ev.keyCode == 13 and ev.ctrlKey
 
     canvas.onmousedown = (ev) ->
       client.down = true
