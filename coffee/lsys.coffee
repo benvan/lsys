@@ -69,9 +69,9 @@ window.lsys = () ->
       client.start.y = ev.clientY
       client.start.x = ev.clientX
 
-    canvas.onmouseup = -> client.down = false
+    document.onmouseup = -> client.down = false
     
-    canvas.onmousemove = (ev) ->
+    document.onmousemove = (ev) ->
       client.now.x = ev.clientX
       client.now.y = ev.clientY
       if (client.down)

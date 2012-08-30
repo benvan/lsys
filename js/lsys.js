@@ -92,10 +92,10 @@
         client.start.y = ev.clientY;
         return client.start.x = ev.clientX;
       };
-      canvas.onmouseup = function() {
+      document.onmouseup = function() {
         return client.down = false;
       };
-      return canvas.onmousemove = function(ev) {
+      return document.onmousemove = function(ev) {
         var x, y;
         client.now.x = ev.clientX;
         client.now.y = ev.clientY;
