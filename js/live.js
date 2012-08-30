@@ -22,6 +22,8 @@
 */
 (function () {
 
+  if (document.location.host.indexOf("localhost") == -1) return;
+
   var headers = { "Etag": 1, "Last-Modified": 1, "Content-Length": 1, "Content-Type": 1 },
       resources = {},
       pendingRequests = {},
