@@ -1,18 +1,24 @@
 (function() {
 
   window.lsys = function() {
-    var canvas, client, clone, context, control, definitions, draw, g, init, isDrawing, iterations, log, ruleMap, setupControls, stack, stringvalue, textRules, time, value;
-    definitions = client = context = stack = textRules = ruleMap = isDrawing = iterations = {};
+    var bounding, canvas, client, clone, context, control, definitions, draw, g, init, isDrawing, iterations, log, ruleMap, setupControls, stack, stringvalue, textRules, time, value;
+    definitions = client = context = stack = textRules = ruleMap = isDrawing = bounding = iterations = {};
     init = function() {
-      var cos, exp, pi, r, sin, _i, _len, _ref, _ref1;
-      _ref = [Math.cos, Math.sin, Math.PI], cos = _ref[0], sin = _ref[1], pi = _ref[2];
+      var ang, c, cos, exp, len, max, min, pi, r, s, sin, _i, _len, _ref, _ref1;
+      _ref = [Math.cos, Math.sin, Math.PI, Math.min, Math.max], cos = _ref[0], sin = _ref[1], pi = _ref[2], min = _ref[3], max = _ref[4];
+      len = ang = s = c = 0;
       definitions = {
         "F": function(g) {
-          var ang, len;
           len = context.incLength;
           ang = ((context.angle % 360) / 180) * pi;
-          context.x = context.x + cos(ang) * len;
-          context.y = context.y + sin(ang) * len;
+          s = sin(ang);
+          c = cos(ang);
+          context.x += c * len;
+          context.y += s * len;
+          bounding.x1 = min(context.x, bounding.x);
+          bounding.x2 = max(context.x, bounding.x);
+          bounding.y1 = min(context.y, bounding.y);
+          bounding.y2 = max(context.y, bounding.y);
           return g.lineTo(context.x, context.y);
         },
         "+": function() {
@@ -146,6 +152,12 @@
       var elems, expr, start, t;
       isDrawing = true;
       stack = [];
+      bounding = {
+        x1: 0,
+        x2: 0,
+        y: 0,
+        y2: 0
+      };
       context = {
         x: canvas.width / 2,
         y: canvas.height,
@@ -159,6 +171,11 @@
       g.fillStyle = "#202020";
       g.beginPath();
       g.rect(-1, -1, 1000, 1000);
+      g.fill();
+      g.closePath();
+      g.fillStyle = '#bb0000';
+      g.beginPath();
+      g.arc(canvas.width / 2, canvas.height / 2, 15, Math.PI * 2, 0);
       g.closePath();
       g.fill();
       g.lineWidth = 0.7;
