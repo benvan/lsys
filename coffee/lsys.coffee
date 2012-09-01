@@ -6,18 +6,29 @@ window.lsys = () ->
   stack =
   textRules =
   ruleMap =
-  isDrawing = 
+  isDrawing =
+  bounding =
   iterations = {}
 #----------------------
   
   init = ->
-    [cos,sin,pi] = [Math.cos, Math.sin, Math.PI]
+    [cos,sin,pi,min,max] = [Math.cos, Math.sin, Math.PI,Math.min,Math.max]
+    len = ang = s = c = 0
     definitions = {
       "F": (g) ->
+
         len = context.incLength
         ang = ((context.angle%360) / 180) * pi
-        context.x = context.x+cos(ang)*len
-        context.y = context.y+sin(ang)*len
+        s = sin(ang)
+        c = cos(ang)
+        context.x += c*len
+        context.y += s*len
+
+        bounding.x1 = min(context.x,bounding.x)
+        bounding.x2 = max(context.x,bounding.x)
+        bounding.y1 = min(context.y,bounding.y)
+        bounding.y2 = max(context.y,bounding.y)
+
         g.lineTo(context.x,context.y)
       "+": -> context.angle += context.incAngle
       "-": -> context.angle -= context.incAngle
@@ -109,6 +120,11 @@ window.lsys = () ->
   draw = () ->
     isDrawing = true
     stack = []
+    bounding =
+      x1:0
+      x2:0
+      y:0
+      y2:0
     context = {
       x:canvas.width/2,
       y:canvas.height,
@@ -124,6 +140,11 @@ window.lsys = () ->
     g.fillStyle="#202020"
     g.beginPath()
     g.rect(-1,-1,1000,1000)
+    g.fill()
+    g.closePath()
+    g.fillStyle='#bb0000'
+    g.beginPath()
+    g.arc(canvas.width/2, canvas.height/2, 15, Math.PI*2, 0)
     g.closePath()
     g.fill()
     g.lineWidth = 0.7
