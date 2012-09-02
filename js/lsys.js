@@ -1,10 +1,10 @@
 (function() {
 
   window.lsys = function() {
-    var bounding, canvas, client, clone, context, control, definitions, draw, g, init, isDrawing, iterations, log, ruleMap, setupControls, stack, stringvalue, textRules, time, value;
-    definitions = client = context = stack = textRules = ruleMap = isDrawing = bounding = iterations = {};
+    var bounding, canvas, client, clone, context, control, definitions, draw, elems, g, init, isDrawing, iterations, log, ruleMap, setupControls, stack, stringvalue, textRules, time, value;
+    definitions = client = context = stack = elems = textRules = ruleMap = isDrawing = bounding = iterations = {};
     init = function() {
-      var ang, c, cos, exp, len, max, min, pi, r, s, sin, _i, _len, _ref, _ref1;
+      var ang, c, cos, exp, expr, i, len, max, min, pi, r, s, sin, _i, _j, _len, _ref, _ref1;
       _ref = [Math.cos, Math.sin, Math.PI, Math.min, Math.max], cos = _ref[0], sin = _ref[1], pi = _ref[2], min = _ref[3], max = _ref[4];
       len = ang = s = c = 0;
       definitions = {
@@ -15,11 +15,9 @@
           c = cos(ang);
           context.x += c * len;
           context.y += s * len;
-          bounding.x1 = min(context.x, bounding.x1);
-          bounding.x2 = max(context.x, bounding.x2);
-          bounding.y1 = min(context.y, bounding.y1);
-          bounding.y2 = max(context.y, bounding.y2);
-          return g.lineTo(context.x, context.y);
+          if (len > 0.1 || Math.random() < 0.3) {
+            return g.lineTo(context.x, context.y);
+          }
         },
         "+": function() {
           return context.angle += context.incAngle;
@@ -83,6 +81,14 @@
         _ref1 = textRules[_i], r = _ref1[0], exp = _ref1[1];
         ruleMap[r] = exp;
       }
+      expr = textRules[0][0];
+      elems = [];
+      for (i = _j = 1; 1 <= iterations ? _j <= iterations : _j >= iterations; i = 1 <= iterations ? ++_j : --_j) {
+        expr = _.reduce(expr.split(""), (function(acc, symbol) {
+          return acc + (ruleMap[symbol] || symbol);
+        }), "");
+      }
+      elems = expr.split("");
       return setupControls();
     };
     setupControls = function() {
@@ -149,7 +155,7 @@
       };
     };
     draw = function() {
-      var elems, expr, start, t;
+      var t;
       isDrawing = true;
       stack = [];
       bounding = {
@@ -165,8 +171,6 @@
         incAngle: value("angle"),
         incLength: value("length")
       };
-      start = textRules[0][0];
-      expr = start;
       g.globalAlpha = 1;
       g.fillStyle = "#202020";
       g.beginPath();
@@ -176,18 +180,12 @@
       g.lineWidth = 0.7;
       g.strokeStyle = "#fff";
       g.globalAlpha = 0.4;
-      elems = [];
       t = time(function() {
-        var i, _i;
-        for (i = _i = 1; 1 <= iterations ? _i <= iterations : _i >= iterations; i = 1 <= iterations ? ++_i : --_i) {
-          expr = _.reduce(expr.split(""), (function(acc, symbol) {
-            return acc + (ruleMap[symbol] || symbol);
-          }), "");
-        }
-        elems = expr.split("");
         g.moveTo(context.x, context.y);
         _.each(elems, function(e) {
-          return definitions[e] && definitions[e](g);
+          if (definitions[e]) {
+            return definitions[e](g);
+          }
         });
         return g.stroke();
       });
