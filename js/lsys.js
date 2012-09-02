@@ -15,10 +15,10 @@
           c = cos(ang);
           context.x += c * len;
           context.y += s * len;
-          bounding.x1 = min(context.x, bounding.x);
-          bounding.x2 = max(context.x, bounding.x);
-          bounding.y1 = min(context.y, bounding.y);
-          bounding.y2 = max(context.y, bounding.y);
+          bounding.x1 = min(context.x, bounding.x1);
+          bounding.x2 = max(context.x, bounding.x2);
+          bounding.y1 = min(context.y, bounding.y1);
+          bounding.y2 = max(context.y, bounding.y2);
           return g.lineTo(context.x, context.y);
         },
         "+": function() {
@@ -153,14 +153,14 @@
       isDrawing = true;
       stack = [];
       bounding = {
-        x1: 0,
+        x1: Infinity,
         x2: 0,
-        y: 0,
+        y1: Infinity,
         y2: 0
       };
       context = {
         x: canvas.width / 2,
-        y: canvas.height,
+        y: canvas.height / 2,
         angle: -90,
         incAngle: value("angle"),
         incLength: value("length")
@@ -170,14 +170,9 @@
       g.globalAlpha = 1;
       g.fillStyle = "#202020";
       g.beginPath();
-      g.rect(-1, -1, 1000, 1000);
+      g.rect(-1, -1, 700, 700);
       g.fill();
       g.closePath();
-      g.fillStyle = '#bb0000';
-      g.beginPath();
-      g.arc(canvas.width / 2, canvas.height / 2, 15, Math.PI * 2, 0);
-      g.closePath();
-      g.fill();
       g.lineWidth = 0.7;
       g.strokeStyle = "#fff";
       g.globalAlpha = 0.4;
