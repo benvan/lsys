@@ -4,6 +4,7 @@ window.lsys = () ->
   client =
   context =
   stack =
+  elems =
   textRules =
   ruleMap =
   isDrawing =
@@ -24,12 +25,12 @@ window.lsys = () ->
         context.x += c*len
         context.y += s*len
 
-        bounding.x1 = min(context.x,bounding.x1)
-        bounding.x2 = max(context.x,bounding.x2)
-        bounding.y1 = min(context.y,bounding.y1)
-        bounding.y2 = max(context.y,bounding.y2)
+        #bounding.x1 = min(context.x,bounding.x1)
+        #bounding.x2 = max(context.x,bounding.x2)
+        #bounding.y1 = min(context.y,bounding.y1)
+        #bounding.y2 = max(context.y,bounding.y2)
 
-        g.lineTo(context.x,context.y)
+        g.lineTo(context.x,context.y) if len > 0.1 || Math.random() < 0.3
       "+": -> context.angle += context.incAngle
       "-": -> context.angle -= context.incAngle
       "|": -> context.angle += 180
@@ -65,6 +66,14 @@ window.lsys = () ->
     iterations = value("num")
 
     ruleMap[r] = exp for [r,exp] in textRules
+
+    expr = textRules[0][0]
+
+    elems = []
+    expr = _.reduce expr.split(""), ((acc, symbol) ->
+      acc + (ruleMap[symbol] || symbol)
+    ), "" for i in [1..iterations]
+    elems = expr.split("")
 
     setupControls()
 
@@ -132,8 +141,6 @@ window.lsys = () ->
       incAngle:value("angle"),
       incLength:value("length")
     }
-    start = textRules[0][0]
-    expr = start
 
     # ------------------
     g.globalAlpha=1
@@ -147,16 +154,10 @@ window.lsys = () ->
     g.globalAlpha=0.4
     # ------------------
 
-    elems = []
     t = time ->
-      expr = _.reduce expr.split(""), ((acc, symbol) ->
-        acc + (ruleMap[symbol] || symbol)
-      ), "" for i in [1..iterations]
-      elems = expr.split("")
-
       g.moveTo(context.x, context.y)
       _.each elems, (e) ->
-        definitions[e] && definitions[e](g)
+        definitions[e](g) if definitions[e] 
       g.stroke()
 
     control("rendered").innerText = t+"ms"
