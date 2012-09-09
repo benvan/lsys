@@ -88,8 +88,11 @@ window.lsys = () ->
       client.context.angle = value("angle")
       client.start.y = ev.clientY
       client.start.x = ev.clientX
+      return false
 
-    document.onmouseup = -> client.down = false
+    document.onmouseup = ->
+      client.down = false
+      location.hash = mkurl()
 
     document.onmousemove = (ev) ->
       client.now.x = ev.clientX
@@ -97,9 +100,22 @@ window.lsys = () ->
       if (client.down)
         x = (client.now.x - client.start.x) / 10
         y = (client.start.y - client.now.y) / 100
-        control("angle").value = x + client.context.angle
-        control("length").value = y + client.context.length
-        draw() if not isDrawing
+        control("angle").value = round(x + client.context.angle, 2)
+        control("length").value = round(y + client.context.length, 2)
+        if not isDrawing
+          isDrawing = true
+          draw()
+
+    window.onhashchange = initFromUrl
+
+
+  initFromUrl = ->
+    params = readurl()
+    control("num").value = params.it
+    control("length").value = params.l
+    control("angle").value = params.a
+    control("rules").value = decodeURIComponent(params.r)
+    draw()
 
 #-----------------------------
 # helper functions
@@ -107,9 +123,32 @@ window.lsys = () ->
   control = (name) -> document.getElementById(name)
   value = (name) -> parseFloat(stringvalue(name))
   stringvalue = (name) -> control(name).value
+  round = (n,d) ->
+    pow = Math.pow(10,d)
+    Math.round(n*pow) / pow
   time = (n,f) -> 
     f = n if n instanceof Function
     s = new Date; f(); (new Date - s)
+  mkurl = ->
+    params =
+      it: value("num")
+      l:  value("length")
+      a:  value("angle")
+      r:  encodeURIComponent(stringvalue("rules"))
+
+    url = _.reduce(params,(acc,v,k) ->
+      acc+k+"="+v+"&"
+    ,"#")
+    return url.substring(0,url.length-1)
+
+  readurl = ->
+    params = {}
+    _.each(location.hash.substring(1).split("&").map( (x) -> x.split("=")), ([k,v]) ->
+      params[k] = v
+    )
+    return params
+
+
 #-----------------------------
 
   canvas = document.getElementById('c')
@@ -146,7 +185,7 @@ window.lsys = () ->
     g.globalAlpha=1
     g.fillStyle="#202020"
     g.beginPath()
-    g.rect(-1,-1,700,700)
+    g.clearRect(0,0,700,700)
     g.fill()
     g.closePath()
     g.lineWidth = 0.7
@@ -157,11 +196,12 @@ window.lsys = () ->
     t = time ->
       g.moveTo(context.x, context.y)
       _.each elems, (e) ->
-        definitions[e](g) if definitions[e] 
+        definitions[e](g) if definitions[e]
       g.stroke()
 
-    control("rendered").innerText = t+"ms"
-    control("segments").innerText = elems.length
+
+    control("rendered").innerHTML = t+"ms"
+    control("segments").innerHTML = elems.length
     isDrawing = false
 
   init()
