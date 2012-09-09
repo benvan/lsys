@@ -111,12 +111,13 @@ window.lsys = () ->
 
 
   initFromUrl = ->
-    params = readurl()
-    control("num").value = params.it
-    control("length").value = params.l
-    control("angle").value = params.a
-    control("rules").value = decodeURIComponent(params.r)
-    draw()
+    if location.hash != ""
+      params = readurl()
+      control("num").value = params.it
+      control("length").value = params.l
+      control("angle").value = params.a
+      control("rules").value = decodeURIComponent(params.r)
+      draw()
 
 #-----------------------------
 # helper functions
