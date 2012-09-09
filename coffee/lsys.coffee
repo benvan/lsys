@@ -81,7 +81,9 @@ window.lsys = () ->
 
   setupControls = ->
     document.onkeydown = (ev) ->
-      window.lsys() if ev.keyCode == 13 and ev.ctrlKey
+      if ev.keyCode == 13 and ev.ctrlKey
+        location.hash = mkurl()
+        window.lsys()
 
     canvas.onmousedown = (ev) ->
       client.down = true
