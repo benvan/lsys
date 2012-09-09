@@ -95,7 +95,7 @@ window.lsys = () ->
       client.now.x = ev.clientX
       client.now.y = ev.clientY
       if (client.down)
-        x = (client.now.x - client.start.x) / 20
+        x = (client.now.x - client.start.x) / 10
         y = (client.start.y - client.now.y) / 100
         control("angle").value = x + client.context.angle
         control("length").value = y + client.context.length
