@@ -1,10 +1,10 @@
 (function() {
 
   window.lsys = function() {
-    var bounding, canvas, client, clone, context, control, definitions, draw, elems, g, init, initFromUrl, isDrawing, iterations, log, mkurl, readurl, round, ruleMap, setupControls, stack, stringvalue, textRules, time, value;
-    definitions = client = context = stack = elems = textRules = ruleMap = isDrawing = bounding = iterations = {};
+    var activeSystem, bounding, canvas, client, clone, context, control, definitions, draw, elems, g, generate, init, initFromUrl, isDrawing, iterations, log, mkurl, readurl, round, ruleMap, setupControls, stack, stringvalue, textRules, time, value;
+    definitions = client = context = stack = elems = textRules = ruleMap = isDrawing = bounding = activeSystem = iterations = {};
     init = function() {
-      var ang, c, cos, exp, expr, i, len, max, min, pi, r, s, sin, _i, _j, _len, _ref, _ref1;
+      var ang, c, cos, len, max, min, pi, s, sin, _ref;
       _ref = [Math.cos, Math.sin, Math.PI, Math.min, Math.max], cos = _ref[0], sin = _ref[1], pi = _ref[2], min = _ref[3], max = _ref[4];
       len = ang = s = c = 0;
       definitions = {
@@ -15,9 +15,7 @@
           c = cos(ang);
           context.x += c * len;
           context.y += s * len;
-          if (len > 0.1 || Math.random() < 0.3) {
-            return g.lineTo(context.x, context.y);
-          }
+          return g.lineTo(context.x, context.y);
         },
         "+": function() {
           return context.angle += context.incAngle;
@@ -73,12 +71,19 @@
         incAngle: 0,
         incLength: 0
       };
-      textRules = stringvalue('rules').split("\n").map(function(r) {
+      generate();
+      setupControls();
+      return initFromUrl();
+    };
+    generate = function() {
+      var exp, expr, i, r, _i, _j, _len, _ref;
+      activeSystem = stringvalue('rules');
+      textRules = activeSystem.split("\n").map(function(r) {
         return (r.replace(/\ /g, '')).split(':');
       });
       iterations = value("num");
       for (_i = 0, _len = textRules.length; _i < _len; _i++) {
-        _ref1 = textRules[_i], r = _ref1[0], exp = _ref1[1];
+        _ref = textRules[_i], r = _ref[0], exp = _ref[1];
         ruleMap[r] = exp;
       }
       expr = textRules[0][0];
@@ -88,9 +93,7 @@
           return acc + (ruleMap[symbol] || symbol);
         }), "");
       }
-      elems = expr.split("");
-      setupControls();
-      return initFromUrl();
+      return elems = expr.split("");
     };
     setupControls = function() {
       document.onkeydown = function(ev) {
@@ -129,13 +132,17 @@
       return window.onhashchange = initFromUrl;
     };
     initFromUrl = function() {
-      var params;
+      var params, prevNum;
       if (location.hash !== "") {
         params = readurl();
+        prevNum = control("num").value;
         control("num").value = params.it;
         control("length").value = params.l;
         control("angle").value = params.a;
         control("rules").value = decodeURIComponent(params.r);
+        if (activeSystem !== stringvalue("rules") || prevNum !== params.it) {
+          generate();
+        }
         return draw();
       }
     };
@@ -224,9 +231,9 @@
       g.clearRect(0, 0, 700, 700);
       g.fill();
       g.closePath();
-      g.lineWidth = 0.7;
+      g.lineWidth = 1;
       g.strokeStyle = "#fff";
-      g.globalAlpha = 0.4;
+      g.globalAlpha = 0.2;
       t = time(function() {
         g.moveTo(context.x, context.y);
         _.each(elems, function(e) {
