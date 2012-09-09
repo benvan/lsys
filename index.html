@@ -17,15 +17,16 @@
 
         label{
             display: inline-block;
-            margin-bottom: 5px;
+            margin-bottom: 2px;
             width: 52px;
-            padding-left: 6px;
+            padding-left: 7px;
             font-size: 9pt;
         }
 
         input{
             width:60px;
-            padding: 12px 5px !important;
+            height:auto !important;
+            padding: 4px 5px !important;
             font-size:10pt !important;
         }
         textarea{
@@ -120,7 +121,12 @@ Y : [|F-F+)FY]+
 <script type="text/javascript" src="js/underscore.js"></script>
 <script type="text/javascript" src="js/lsys.js"></script>
 <script type="text/javascript">
-    window.lsys();
+    if (navigator.userAgent.toLowerCase().indexOf('chrom') == -1){
+      alert("sorry guv");
+    }else{
+      window.lsys();
+    }
+
 </script>
 </body>
 </html>
