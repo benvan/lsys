@@ -76,6 +76,7 @@ window.lsys = () ->
     elems = expr.split("")
 
     setupControls()
+    initFromUrl()
 
 
   setupControls = ->
