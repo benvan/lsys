@@ -1,7 +1,7 @@
 (function() {
 
   window.lsys = function() {
-    var bounding, canvas, client, clone, context, control, definitions, draw, elems, g, init, isDrawing, iterations, log, ruleMap, setupControls, stack, stringvalue, textRules, time, value;
+    var bounding, canvas, client, clone, context, control, definitions, draw, elems, g, init, initFromUrl, isDrawing, iterations, log, mkurl, readurl, round, ruleMap, setupControls, stack, stringvalue, textRules, time, value;
     definitions = client = context = stack = elems = textRules = ruleMap = isDrawing = bounding = iterations = {};
     init = function() {
       var ang, c, cos, exp, expr, i, len, max, min, pi, r, s, sin, _i, _j, _len, _ref, _ref1;
@@ -89,11 +89,13 @@
         }), "");
       }
       elems = expr.split("");
-      return setupControls();
+      setupControls();
+      return initFromUrl();
     };
     setupControls = function() {
       document.onkeydown = function(ev) {
         if (ev.keyCode === 13 && ev.ctrlKey) {
+          location.hash = mkurl();
           return window.lsys();
         }
       };
@@ -102,25 +104,40 @@
         client.context.length = value("length");
         client.context.angle = value("angle");
         client.start.y = ev.clientY;
-        return client.start.x = ev.clientX;
+        client.start.x = ev.clientX;
+        return false;
       };
       document.onmouseup = function() {
-        return client.down = false;
+        client.down = false;
+        return location.hash = mkurl();
       };
-      return document.onmousemove = function(ev) {
+      document.onmousemove = function(ev) {
         var x, y;
         client.now.x = ev.clientX;
         client.now.y = ev.clientY;
         if (client.down) {
-          x = (client.now.x - client.start.x) / 20;
+          x = (client.now.x - client.start.x) / 10;
           y = (client.start.y - client.now.y) / 100;
-          control("angle").value = x + client.context.angle;
-          control("length").value = y + client.context.length;
+          control("angle").value = round(x + client.context.angle, 2);
+          control("length").value = round(y + client.context.length, 2);
           if (!isDrawing) {
+            isDrawing = true;
             return draw();
           }
         }
       };
+      return window.onhashchange = initFromUrl;
+    };
+    initFromUrl = function() {
+      var params;
+      if (location.hash !== "") {
+        params = readurl();
+        control("num").value = params.it;
+        control("length").value = params.l;
+        control("angle").value = params.a;
+        control("rules").value = decodeURIComponent(params.r);
+        return draw();
+      }
     };
     log = function(x) {
       return console.log(x);
@@ -134,6 +151,11 @@
     stringvalue = function(name) {
       return control(name).value;
     };
+    round = function(n, d) {
+      var pow;
+      pow = Math.pow(10, d);
+      return Math.round(n * pow) / pow;
+    };
     time = function(n, f) {
       var s;
       if (n instanceof Function) {
@@ -142,6 +164,31 @@
       s = new Date;
       f();
       return new Date - s;
+    };
+    mkurl = function() {
+      var params, url;
+      params = {
+        it: value("num"),
+        l: value("length"),
+        a: value("angle"),
+        r: encodeURIComponent(stringvalue("rules"))
+      };
+      url = _.reduce(params, function(acc, v, k) {
+        return acc + k + "=" + v + "&";
+      }, "#");
+      return url.substring(0, url.length - 1);
+    };
+    readurl = function() {
+      var params;
+      params = {};
+      _.each(location.hash.substring(1).split("&").map(function(x) {
+        return x.split("=");
+      }), function(_arg) {
+        var k, v;
+        k = _arg[0], v = _arg[1];
+        return params[k] = v;
+      });
+      return params;
     };
     canvas = document.getElementById('c');
     g = canvas.getContext('2d');
@@ -174,7 +221,7 @@
       g.globalAlpha = 1;
       g.fillStyle = "#202020";
       g.beginPath();
-      g.rect(-1, -1, 700, 700);
+      g.clearRect(0, 0, 700, 700);
       g.fill();
       g.closePath();
       g.lineWidth = 0.7;
@@ -189,8 +236,8 @@
         });
         return g.stroke();
       });
-      control("rendered").innerText = t + "ms";
-      control("segments").innerText = elems.length;
+      control("rendered").innerHTML = t + "ms";
+      control("segments").innerHTML = elems.length;
       return isDrawing = false;
     };
     init();
