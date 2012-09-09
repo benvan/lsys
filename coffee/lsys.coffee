@@ -9,6 +9,7 @@ window.lsys = () ->
   ruleMap =
   isDrawing =
   bounding =
+  activeSystem =
   iterations = {}
 #----------------------
 
@@ -30,7 +31,7 @@ window.lsys = () ->
         #bounding.y1 = min(context.y,bounding.y1)
         #bounding.y2 = max(context.y,bounding.y2)
 
-        g.lineTo(context.x,context.y) if len > 0.1 || Math.random() < 0.3
+        g.lineTo(context.x,context.y)
       "+": -> context.angle += context.incAngle
       "-": -> context.angle -= context.incAngle
       "|": -> context.angle += 180
@@ -62,7 +63,13 @@ window.lsys = () ->
       incAngle:0
       incLength:0
 
-    textRules = stringvalue('rules').split("\n").map (r) -> (r.replace(/\ /g, '')).split(':')
+    generate()
+    setupControls()
+    initFromUrl()
+
+  generate = ->
+    activeSystem = stringvalue('rules')
+    textRules = activeSystem.split("\n").map (r) -> (r.replace(/\ /g, '')).split(':')
     iterations = value("num")
 
     ruleMap[r] = exp for [r,exp] in textRules
@@ -75,8 +82,7 @@ window.lsys = () ->
     ), "" for i in [1..iterations]
     elems = expr.split("")
 
-    setupControls()
-    initFromUrl()
+
 
 
   setupControls = ->
@@ -115,10 +121,13 @@ window.lsys = () ->
   initFromUrl = ->
     if location.hash != ""
       params = readurl()
+      prevNum = control("num").value
       control("num").value = params.it
       control("length").value = params.l
       control("angle").value = params.a
       control("rules").value = decodeURIComponent(params.r)
+
+      generate() if (activeSystem != stringvalue("rules") or prevNum != params.it)
       draw()
 
 #-----------------------------
@@ -192,9 +201,11 @@ window.lsys = () ->
     g.clearRect(0,0,700,700)
     g.fill()
     g.closePath()
-    g.lineWidth = 0.7
+    g.lineWidth = 1
     g.strokeStyle="#fff"
-    g.globalAlpha=0.4
+    g.globalAlpha=0.2
+
+    #g.globalCompositeOperation = "source-over"
     # ------------------
 
     t = time ->
