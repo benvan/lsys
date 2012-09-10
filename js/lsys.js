@@ -11,10 +11,8 @@
         "F": function(g) {
           len = context.incLength;
           ang = ((context.angle % 360) / 180) * pi;
-          s = sin(ang);
-          c = cos(ang);
-          context.x += c * len;
-          context.y += s * len;
+          context.x += cos(ang) * len;
+          context.y += sin(ang) * len;
           return g.lineTo(context.x, context.y);
         },
         "+": function() {
@@ -231,9 +229,9 @@
       g.clearRect(0, 0, 700, 700);
       g.fill();
       g.closePath();
-      g.lineWidth = 1;
+      g.lineWidth = 0.3;
       g.strokeStyle = "#fff";
-      g.globalAlpha = 0.2;
+      g.globalAlpha = 0.3;
       t = time(function() {
         g.moveTo(context.x, context.y);
         _.each(elems, function(e) {

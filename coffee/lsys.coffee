@@ -201,7 +201,7 @@ window.lsys = () ->
     g.clearRect(0,0,700,700)
     g.fill()
     g.closePath()
-    g.lineWidth = 1
+    g.lineWidth = 0.2
     g.strokeStyle="#fff"
     g.globalAlpha=0.2
 
