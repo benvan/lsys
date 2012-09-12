@@ -80,9 +80,7 @@ window.lsys = () ->
     expr = _.reduce expr.split(""), ((acc, symbol) ->
       acc + (ruleMap[symbol] || symbol)
     ), "" for i in [1..iterations]
-    elems = expr.split("")
-
-
+    elems = expr.split("").filter((e) -> true if (definitions[e]))
 
 
   setupControls = ->
