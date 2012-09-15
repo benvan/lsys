@@ -20,10 +20,18 @@
             .body.row { top: 60px; bottom: 150px; }
             footer.row { height: 181px; bottom: 0; }
 
+            .ellipsis {
+                white-space: nowrap;
+                overflow: hidden;
+            }
+
+            .ellipsis.multiline {
+                white-space: normal;
+            }
 
             .elems{
                 height:143px;
-                overflow-x: scroll;
+                overflow-x: auto;
                 margin:0;
                 padding:5px;
                 display:block;
@@ -36,9 +44,22 @@
                 border-radius: 2px;
                 border:1px solid #555;
                 display: inline-block;
-
-
+                width:100px;
+                font-size:8pt;
+                margin:0 3px;
             }
+
+            .elems .elem-label{
+                text-align: center;
+                border-top: 1px solid #666;
+                margin-top: 1px;
+            }
+
+            .elems a{
+                color:inherit;
+            }
+
+
 
             .ticker-bar{
                 height:25px;
@@ -94,11 +115,7 @@ Y : [|F-F+)FY]+
                 <div class="pad">
                     <canvas id="c" width="665" height="665"></canvas>
                 </div>
-
-
             </div>
-
-
         </div>
 
 
@@ -107,19 +124,48 @@ Y : [|F-F+)FY]+
             <div class="ticker-bar"></div>
             <ul class="elems">
                 <li class="elem">
+                    <a href="#">
                     <div>
                         <img src="img/100x100.gif" alt="">
-                        <div>asdf</div>
+                        <div class="ellipsis" style="">needle in a haystack</div>
                     </div>
+                    </a>
                 </li>
                 <li class="elem">
-                    <div>
+                    <div style="white-space: nowrap; overflow: hidden;">
                         <img src="img/100x100.gif" alt="">
                         <div>asdf</div>
                     </div>
                 </li>
             </ul>
         </footer>
+
+
+        <script type="text/javascript" src="js/jquery-1.8.1.js"></script>
+        <script type="text/javascript" src="js/jquery.ellipsis.js"></script>
+        <script type="text/javascript" src="js/jquery.ticker.js"></script>
+
+
+        <script type="text/javascript" src="js/underscore.js"></script>
+        <script type="text/javascript" src="js/bootstrap.js"></script>
+        <script type="text/javascript" src="js/lsys.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+
+                $(".alert").alert()
+                if (navigator.userAgent.toLowerCase().indexOf('chrom') == -1) {
+                    alert("sorry guv");
+                } else {
+                    window.lsys();
+                }
+            });
+
+
+        </script>
+
+        <script type="text/javascript">
+            $(".elems").ticker();
+        </script>
 
     </body>
 </html>
