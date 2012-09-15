@@ -1,152 +1,84 @@
 <html>
-<head>
-    <meta charset="UTF-8"/>
-    <link rel="stylesheet" href="css/bootstrap.css"/>
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="stylesheet" href="css/bootstrap.css"/>
+        <link rel="stylesheet" href="css/lsys.css"/>
+    </head>
+    <body>
 
-    <style>
 
-        body{
-            margin: 0;
-            font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-            font-size:10pt !important;
-            line-height: 22px;
-            color: #C6C6C6;
-            background-color:#2F2F2F;
-        }
-
-        label{
-            display: inline-block;
-            margin-bottom: 2px;
-            width: 52px;
-            padding-left: 7px;
-            font-size: 9pt;
-        }
-
-        input{
-            width:60px;
-            height:auto !important;
-            padding: 4px 5px !important;
-            font-size:10pt !important;
-        }
-        textarea{
-          width:100%;
-        }
-
-        .pad, textarea, input[type="text"]{
-            -webkit-border-radius: 4px;
-            -moz-border-radius: 4px;
-            -ms-border-radius: 4px;
-            -o-border-radius: 4px;
-            border-radius: 4px;
-            padding: 15px 16px;
-            background: #202020;
-            color: #ccc;
-            border-color: #131313;
-            -webkit-box-shadow: rgba(255, 255, 255, 0.1) 0 1px 0, rgba(0, 0, 0, 0.8) 0 1px 7px 0px inset;
-            -moz-box-shadow: rgba(255, 255, 255, 0.1) 0 1px 0, rgba(0, 0, 0, 0.8) 0 1px 7px 0px inset;
-            box-shadow: rgba(255, 255, 255, 0.1) 0 1px 0, rgba(0, 0, 0, 0.8) 0 1px 7px 0px inset;
-            position:relative;
-        }
-        .pad canvas{
-            background-color:#202020;
-            position:absolute
-        }
-    </style>
-
-</head>
-<body>
-
-    <div class="navbar navbar-inverse navbar-static-top">
-        <div class="navbar-inner">
-            <div class="container">
-                <a class="brand"><img src="favicon.ico" width="30" height="30"/> l-sys</a>
-
+        <div class="ui-layout-center">
+            <div class="pad">
+                <canvas id="c" style="border:1px solid white;" width="665" height="665"></canvas>
             </div>
         </div>
-    </div>
+        <div class="ui-layout-north">
 
-<div style="padding: 10px; padding-top:5px"></div>
+        </div>
+        <div class="ui-layout-south">
+            <div class="container-fluid" style="border:1px solid white; height:150px; z-index: 10000">
+                ....
+            </div>
+        </div>
+        <div class="ui-layout-west">
+            <div class="container">
 
+                <div class="row">
+                    <div class="span3">
 
-
-    <div class="container">
-
-    <div class="row" style="height:650px">
-        <div class="span3">
-
-            <form>
-                <label for="num">levels</label>
-                <label for="length">size</label>
-                <label for="angle">angle</label>
-                <div style="position:relative">
-                    <input id="num" type="text" value="100"/>
-                    <input id="length" type="text" value="9.5"/>
-                    <input id="angle" type="text" style="width:90px" value="907.8"/>
-<textarea id="rules" rows="8">
+                        <form>
+                            <label for="num">levels</label>
+                            <label for="length">size</label>
+                            <label for="angle">angle</label>
+                            <div style="position:relative">
+                                <input id="num" type="text" value="100"/>
+                                <input id="length" type="text" value="9.5"/>
+                                <input id="angle" type="text" style="width:90px" value="907.8"/>
+                                <textarea id="rules" rows="8">
 L : SYS
 S : F|+[F-Y[S]]
 Y : [|F-F+)FY]+
-</textarea>
+                                </textarea>
+                            </div>
+                        </form>
+                        <div>
+                            <button class="btn btn-primary btn-block" onclick="window.lsys(); return false">GO</button>
+                        </div>
+                        <div id="data" class="pad" style="margin-top:25px;background-color:#1a1a20">
+                            <div>segments: <span id="segments"></span></div>
+                            <div>rendered : <span id="rendered"></span></div>
+                        </div>
+
+
+                    </div>
+                    <div class="span9">
+
+                    </div>
+
                 </div>
-
-            </form>
-
-
-
-            <!--<div class="alert alert-block alert-error fade in">-->
-                <!--<button type="button" class="close" data-dismiss="alert">×</button>-->
-                <!--<h4 class="alert-heading">Watch out!</h4>-->
-                <!--<p>It looks like you're using firefox?</p>-->
-                <!--<p>This app is pretty heavy on the canvas. Unfortunately firefox's </p>-->
-                <!--<p>-->
-                    <!--<a class="btn btn-danger" href="#">I like frozen things</a>-->
-                <!--</p>-->
-            <!--</div>-->
-
-            <div>
-                <button class="btn btn-primary btn-block" onclick="window.lsys(); return false">GO (ctrl-enter)</button>
-            </div>
-
-            <div id="data" class="pad" style="margin-top:25px;background-color:#1a1a20">
-              <div>segments: <span id="segments"></span></div>
-              <div>rendered : <span id="rendered"></span></div> 
-            </div>
-
-
-
-
-        </div>
-        <div class="span9">
-
-            <div class="pad" style="height:100%">
-                <canvas id="c" width="650px" height="650px"></canvas>
             </div>
 
         </div>
 
-    </div>
+        <script type="text/javascript" src="js/underscore.js"></script>
+        <script type="text/javascript" src="js/jquery-1.8.1.min.js"></script>
+        <script type="text/javascript" src="js/jquery.layout-latest.min.js"></script>
+        <script type="text/javascript" src="js/bootstrap.js"></script>
+        <script type="text/javascript" src="js/lsys.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+
+                $('body').layout();
+
+                $(".alert").alert()
+                if (navigator.userAgent.toLowerCase().indexOf('chrom') == -1) {
+                    alert("sorry guv");
+                } else {
+                    //window.lsys();
+                }
+            });
 
 
-
-</div>
-
-
-
-<script type="text/javascript" src="js/underscore.js"></script>
-<script type="text/javascript" src="js/jquery-1.8.1.min.js"></script>
-<script type="text/javascript" src="js/bootstrap.js"></script>
-<script type="text/javascript" src="js/lsys.js"></script>
-<script type="text/javascript">
-    $(document).ready( function(){
-        $(".alert").alert()
-        if (navigator.userAgent.toLowerCase().indexOf('chrom') == -1){
-            alert("sorry guv");
-        }else{
-            window.lsys();
-        }
-    });
-
-
-</script>
-</body>
+        </script>
+    </body>
 </html>
