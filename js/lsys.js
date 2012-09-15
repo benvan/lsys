@@ -235,9 +235,9 @@
       g.clearRect(0, 0, 700, 700);
       g.fill();
       g.closePath();
-      g.lineWidth = 0.2;
+      g.lineWidth = 0.4;
       g.strokeStyle = "#fff";
-      g.globalAlpha = 0.2;
+      g.globalAlpha = 0.4;
       t = time(function() {
         g.moveTo(context.x, context.y);
         _.each(elems, function(e) {
