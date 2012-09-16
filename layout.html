@@ -123,20 +123,6 @@ Y : [|F-F+)FY]+
         <footer class="row ticker">
             <div class="ticker-bar"></div>
             <ul class="elems">
-                <li class="elem">
-                    <a href="#">
-                    <div>
-                        <img src="img/100x100.gif" alt="">
-                        <div class="ellipsis" style="">needle in a haystack</div>
-                    </div>
-                    </a>
-                </li>
-                <li class="elem">
-                    <div style="white-space: nowrap; overflow: hidden;">
-                        <img src="img/100x100.gif" alt="">
-                        <div>asdf</div>
-                    </div>
-                </li>
             </ul>
         </footer>
 
@@ -152,7 +138,8 @@ Y : [|F-F+)FY]+
         <script type="text/javascript">
             $(document).ready(function () {
 
-                $(".alert").alert()
+                $(".elems").ticker();
+                $(".alert").alert();
                 if (navigator.userAgent.toLowerCase().indexOf('chrom') == -1) {
                     alert("sorry guv");
                 } else {
@@ -164,7 +151,7 @@ Y : [|F-F+)FY]+
         </script>
 
         <script type="text/javascript">
-            $(".elems").ticker();
+
         </script>
 
     </body>
