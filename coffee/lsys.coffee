@@ -204,6 +204,7 @@ window.lsys = () ->
 
   # render method ----------------
   draw = () ->
+    d = new Date
     isDrawing = true
     stack = []
 
@@ -237,14 +238,13 @@ window.lsys = () ->
     # ------------------
 
     g.beginPath()
-    t = time ->
-      g.moveTo(context.x, context.y)
-      _.each elems, (e) ->
-        definitions[e](g) if definitions[e]
-      g.stroke()
+    g.moveTo(context.x, context.y)
+    _.each elems, (e) ->
+      definitions[e](g) if definitions[e]
+    g.stroke()
     g.closePath()
 
-    control("rendered").innerHTML = t+"ms"
+    control("rendered").innerHTML = (new Date - d) + "ms"
     control("segments").innerHTML = elems.length
     isDrawing = false
 
