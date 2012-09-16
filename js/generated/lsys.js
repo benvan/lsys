@@ -15,6 +15,16 @@
           c = cos(ang);
           context.x += c * len;
           context.y += s * len;
+          if (context.x < bounding.x1) {
+            bounding.x1 = context.x;
+          } else if (context.x > bounding.x2) {
+            bounding.x2 = context.x;
+          }
+          if (context.y < bounding.y1) {
+            bounding.y1 = context.y;
+          } else if (context.y > bounding.y2) {
+            bounding.y2 = context.y;
+          }
           return g.lineTo(context.x, context.y);
         },
         "+": function() {
@@ -100,6 +110,7 @@
       });
     };
     setupControls = function() {
+      var stretchCanvas;
       document.onkeydown = function(ev) {
         if (ev.keyCode === 13 && ev.ctrlKey) {
           location.hash = mkurl();
@@ -118,6 +129,19 @@
         client.down = false;
         return location.hash = mkurl();
       };
+      stretchCanvas = function() {
+        window.container = control("drawingContainer");
+        canvas.width = container.clientWidth;
+        return canvas.height = container.clientHeight;
+      };
+      stretchCanvas();
+      $(window).resize(function() {
+        clearTimeout(window.resizeTimer);
+        return window.resizeTimer = setTimeout(function() {
+          stretchCanvas();
+          return draw();
+        }, 300);
+      });
       document.onmousemove = function(ev) {
         var x, y;
         client.now.x = ev.clientX;
@@ -213,14 +237,18 @@
       };
     };
     draw = function() {
-      var t;
+      var b, d, p;
+      d = new Date;
       isDrawing = true;
       stack = [];
+      b = bounding;
+      p = 5;
+      g.clearRect(b.x1 - p, b.y1 - p, b.x2 - b.x1 + 2 * p, b.y2 - b.y1 + 2 * p);
       bounding = {
         x1: Infinity,
-        x2: 0,
+        x2: -Infinity,
         y1: Infinity,
-        y2: 0
+        y2: -Infinity
       };
       context = {
         x: canvas.width / 2,
@@ -229,25 +257,19 @@
         incAngle: value("angle"),
         incLength: value("length")
       };
-      g.globalAlpha = 1;
-      g.fillStyle = "#202020";
-      g.beginPath();
-      g.clearRect(0, 0, 700, 700);
-      g.fill();
-      g.closePath();
       g.lineWidth = 0.4;
       g.strokeStyle = "#fff";
       g.globalAlpha = 0.4;
-      t = time(function() {
-        g.moveTo(context.x, context.y);
-        _.each(elems, function(e) {
-          if (definitions[e]) {
-            return definitions[e](g);
-          }
-        });
-        return g.stroke();
+      g.beginPath();
+      g.moveTo(context.x, context.y);
+      _.each(elems, function(e) {
+        if (definitions[e]) {
+          return definitions[e](g);
+        }
       });
-      control("rendered").innerHTML = t + "ms";
+      g.stroke();
+      g.closePath();
+      control("rendered").innerHTML = (new Date - d) + "ms";
       control("segments").innerHTML = elems.length;
       return isDrawing = false;
     };
