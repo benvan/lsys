@@ -1,84 +1,158 @@
+<!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8"/>
+        <title>lsys</title>
         <link rel="stylesheet" href="css/bootstrap.css"/>
-        <link rel="stylesheet" href="css/lsys.css"/>
+        <link href="css/lsys.css" rel="stylesheet" type="text/css"/>
+
+
+        <style>
+            .row, .col { overflow: hidden; position: absolute; }
+            .row { left: 0; right: 0; }
+            .col { top: 0; bottom: 0; }
+            .scroll-x { overflow-x: auto; }
+            .scroll-y { overflow-y: auto; }
+
+            .left.col { width: 250px; }
+            .right.col { left: 250px; right: 0; }
+
+            header.row { height: 55px; top: 0; }
+            .body.row { top: 60px; bottom: 150px; }
+            footer.row { height: 181px; bottom: 0; }
+
+            .ellipsis {
+                white-space: nowrap;
+                overflow: hidden;
+            }
+
+            .ellipsis.multiline {
+                white-space: normal;
+            }
+
+            .elems{
+                height:143px;
+                overflow-x: auto;
+                margin:0;
+                padding:5px;
+                display:block;
+                white-space:nowrap;
+                background-color:#181818;
+            }
+
+            .elems .elem{
+                padding:2px;
+                border-radius: 2px;
+                border:1px solid #555;
+                display: inline-block;
+                width:100px;
+                font-size:8pt;
+                margin:0 3px;
+            }
+
+            .elems .elem-label{
+                text-align: center;
+                border-top: 1px solid #666;
+                margin-top: 1px;
+            }
+
+            .elems a{
+                color:inherit;
+            }
+
+
+
+            .ticker-bar{
+                height:25px;
+                border-radius: 3px 3px 0;
+                background: -webkit-gradient(linear, left bottom, left top, color-stop(10%, #222), color-stop(100%, #444));
+                border: 1px solid #111;
+                border-bottom:1px solid black;
+            }
+
+        </style>
     </head>
     <body>
 
-
-        <div class="ui-layout-center">
-            <div class="pad">
-                <canvas id="c" style="border:1px solid white;" width="665" height="665"></canvas>
+        <header class="row">
+            <div class="navbar navbar-inverse navbar-static-top">
+                <div class="navbar-inner">
+                    <div class="container">
+                        <a class="brand"><img src="favicon.ico" width="30" height="30"/> l-sys</a>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="ui-layout-north">
+        </header>
 
-        </div>
-        <div class="ui-layout-south">
-            <div class="container-fluid" style="border:1px solid white; height:150px; z-index: 10000">
-                ....
-            </div>
-        </div>
-        <div class="ui-layout-west">
-            <div class="container">
+        <div class="body row scroll-y">
 
-                <div class="row">
-                    <div class="span3">
-
-                        <form>
-                            <label for="num">levels</label>
-                            <label for="length">size</label>
-                            <label for="angle">angle</label>
-                            <div style="position:relative">
-                                <input id="num" type="text" value="100"/>
-                                <input id="length" type="text" value="9.5"/>
-                                <input id="angle" type="text" style="width:90px" value="907.8"/>
-                                <textarea id="rules" rows="8">
+            <div class="left col">
+                <div style="padding:0 8px">
+                <form>
+                    <label for="num">levels</label>
+                    <label for="length">size</label>
+                    <label for="angle">angle</label>
+                    <div>
+                        <input id="num" type="text" value="100"/>
+                        <input id="length" type="text" value="9.5"/>
+                        <input id="angle" type="text" style="width:82px" value="907.8"/>
+                        <textarea id="rules" rows="8">
 L : SYS
 S : F|+[F-Y[S]]
 Y : [|F-F+)FY]+
-                                </textarea>
-                            </div>
-                        </form>
-                        <div>
-                            <button class="btn btn-primary btn-block" onclick="window.lsys(); return false">GO</button>
-                        </div>
-                        <div id="data" class="pad" style="margin-top:25px;background-color:#1a1a20">
-                            <div>segments: <span id="segments"></span></div>
-                            <div>rendered : <span id="rendered"></span></div>
-                        </div>
-
-
+                        </textarea>
                     </div>
-                    <div class="span9">
+                </form>
 
-                    </div>
+                <button class="btn btn-primary btn-block" onclick="window.lsys(); return false">GO</button>
 
+                <div id="data" class="pad" style="margin-top:25px;background-color:#1a1a20">
+                    <div>segments: <span id="segments"></span></div>
+                    <div>rendered : <span id="rendered"></span></div>
+                </div>
                 </div>
             </div>
-
+            <div class="right col">
+                <div class="pad">
+                    <canvas id="c" width="665" height="665"></canvas>
+                </div>
+            </div>
         </div>
 
+
+
+        <footer class="row ticker">
+            <div class="ticker-bar"></div>
+            <ul class="elems">
+            </ul>
+        </footer>
+
+
+        <script type="text/javascript" src="js/jquery-1.8.1.js"></script>
+        <script type="text/javascript" src="js/jquery.ellipsis.js"></script>
+        <script type="text/javascript" src="js/jquery.ticker.js"></script>
+
+
         <script type="text/javascript" src="js/underscore.js"></script>
-        <script type="text/javascript" src="js/jquery-1.8.1.min.js"></script>
-        <script type="text/javascript" src="js/jquery.layout-latest.min.js"></script>
         <script type="text/javascript" src="js/bootstrap.js"></script>
         <script type="text/javascript" src="js/lsys.js"></script>
         <script type="text/javascript">
             $(document).ready(function () {
 
-                $('body').layout();
-
-                $(".alert").alert()
+                $(".elems").ticker();
+                $(".alert").alert();
                 if (navigator.userAgent.toLowerCase().indexOf('chrom') == -1) {
                     alert("sorry guv");
                 } else {
-                    //window.lsys();
+                    window.lsys();
                 }
             });
 
 
         </script>
+
+        <script type="text/javascript">
+
+        </script>
+
     </body>
 </html>
