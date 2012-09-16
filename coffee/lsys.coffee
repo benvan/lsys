@@ -26,7 +26,18 @@ window.lsys = () ->
         context.x += c*len
         context.y += s*len
 
-        #bounding.x1 = min(context.x,bounding.x1)
+        if (context.x < bounding.x1)
+          bounding.x1 = context.x
+        else if (context.x > bounding.x2)
+          bounding.x2 = context.x
+
+        if (context.y < bounding.y1)
+          bounding.y1 = context.y
+        else if (context.y > bounding.y2)
+          bounding.y2 = context.y
+
+
+#bounding.x1 = min(context.x,bounding.x1)
         #bounding.x2 = max(context.x,bounding.x2)
         #bounding.y1 = min(context.y,bounding.y1)
         #bounding.y2 = max(context.y,bounding.y2)
@@ -100,6 +111,22 @@ window.lsys = () ->
     document.onmouseup = ->
       client.down = false
       location.hash = mkurl()
+
+    stretchCanvas = ->
+      window.container = control("drawingContainer")
+      canvas.width = container.clientWidth
+      canvas.height = container.clientHeight
+
+    stretchCanvas()
+
+    $(window).resize( ->
+      clearTimeout(window.resizeTimer);
+      window.resizeTimer = setTimeout( ->
+        stretchCanvas()
+        draw()
+      , 300);
+    )
+
 
     document.onmousemove = (ev) ->
       client.now.x = ev.clientX
@@ -179,11 +206,17 @@ window.lsys = () ->
   draw = () ->
     isDrawing = true
     stack = []
+
+    #----- clear canvas ----
+    b = bounding
+    p = 5 #padding
+    g.clearRect(b.x1-p, b.y1-p, b.x2-b.x1+2*p, b.y2-b.y1+2*p)
+
     bounding =
       x1:Infinity
-      x2:0
+      x2:-Infinity
       y1:Infinity
-      y2:0
+      y2:-Infinity
     context = {
       x:canvas.width/2,
       y:canvas.height/2,
@@ -193,25 +226,23 @@ window.lsys = () ->
     }
 
     # ------------------
-    g.globalAlpha=1
-    g.fillStyle="#202020"
-    g.beginPath()
-    g.clearRect(0,0,700,700)
-    g.fill()
-    g.closePath()
+    #g.clearRect(0,0,canvas.width,canvas.height)
     g.lineWidth = 0.4
     g.strokeStyle="#fff"
     g.globalAlpha=0.4
 
+
+
     #g.globalCompositeOperation = "source-over"
     # ------------------
 
+    g.beginPath()
     t = time ->
       g.moveTo(context.x, context.y)
       _.each elems, (e) ->
         definitions[e](g) if definitions[e]
       g.stroke()
-
+    g.closePath()
 
     control("rendered").innerHTML = t+"ms"
     control("segments").innerHTML = elems.length
