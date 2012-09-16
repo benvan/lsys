@@ -17,7 +17,7 @@
             .right.col { left: 250px; right: 0; }
 
             header.row { height: 55px; top: 0; }
-            .body.row { top: 60px; bottom: 150px; }
+            .body.row { top: 60px; bottom: 190px; }
             footer.row { height: 181px; bottom: 0; }
 
             .ellipsis {
@@ -32,11 +32,11 @@
             .elems{
                 height:143px;
                 overflow-x: auto;
-                margin:0;
-                padding:5px;
+                margin:0 10px;
+                padding:5px 0px;
                 display:block;
                 white-space:nowrap;
-                background-color:#181818;
+
             }
 
             .elems .elem{
@@ -51,22 +51,38 @@
 
             .elems .elem-label{
                 text-align: center;
-                border-top: 1px solid #666;
+                border-top: 1px solid #222;
                 margin-top: 1px;
+                background-color: #aaa;
+                color: #111;
+                font-weight: bold;
             }
 
             .elems a{
                 color:inherit;
             }
 
+            #drawingContainer{
+                overflow: hidden;
+                height:100%;
+            }
 
+
+            footer.ticker{
+                background-color:#181818;
+            }
 
             .ticker-bar{
+                cursor: pointer;
                 height:25px;
                 border-radius: 3px 3px 0;
                 background: -webkit-gradient(linear, left bottom, left top, color-stop(10%, #222), color-stop(100%, #444));
                 border: 1px solid #111;
                 border-bottom:1px solid black;
+            }
+
+            .ticker-bar:hover{
+                background: -webkit-gradient(linear, left bottom, left top, color-stop(10%, #333), color-stop(100%, #555)) !important;
             }
 
         </style>
@@ -112,8 +128,10 @@ Y : [|F-F+)FY]+
                 </div>
             </div>
             <div class="right col">
-                <div class="pad">
-                    <canvas id="c" width="665" height="665"></canvas>
+                <div class="pad drawing-pad">
+                    <div id="drawingContainer">
+                        <canvas id="c" height="120px"></canvas>
+                    </div>
                 </div>
             </div>
         </div>
@@ -134,14 +152,14 @@ Y : [|F-F+)FY]+
 
         <script type="text/javascript" src="js/underscore.js"></script>
         <script type="text/javascript" src="js/bootstrap.js"></script>
-        <script type="text/javascript" src="js/lsys.js"></script>
+        <script type="text/javascript" src="js/generated/lsys.js"></script>
         <script type="text/javascript">
             $(document).ready(function () {
 
                 $(".elems").ticker();
                 $(".alert").alert();
                 if (navigator.userAgent.toLowerCase().indexOf('chrom') == -1) {
-                    alert("sorry guv");
+                    alert("This page runs about 10x faster in chrome.. Give it a go, but it's going to be very slow...");
                 } else {
                     window.lsys();
                 }

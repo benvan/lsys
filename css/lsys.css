@@ -22,19 +22,31 @@ input {
     font-size: 10pt !important;
 }
 
-textarea {
-    width: 200px;
-}
+
 
 .pad, textarea, input[type="text"] {
     -ms-border-radius: 4px;
     border-radius: 4px;
-    padding: 15px 16px;
+    padding:5px;
     background: #202020;
     color: #ccc;
     border-color: #131313;
     box-shadow: rgba(255, 255, 255, 0.1) 0 1px 0, rgba(0, 0, 0, 0.8) 0 1px 7px 0px inset;
     position: relative;
+}
+
+textarea {
+    width: 200px;
+    padding:15px 16px;
+}
+
+.drawing-pad{
+    margin: 0px 8px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 5px;
 }
 
 .btn-primary, .btn-primary:active{
@@ -43,5 +55,6 @@ textarea {
 
 .pad canvas {
     background-color: #202020;
+    cursor:crosshair;
 
 }
