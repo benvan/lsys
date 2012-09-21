@@ -1,7 +1,41 @@
 {
     "systems":[
 
-        {
+            {
+                "name":"ordered chaos"
+                ,"url":"#it=11&l=18.67&a=-3787.3&r=L%20%3A%20SYS%0AS%20%3A%20F-%5BF-Y%5BS%5D%5D%0AY%20%3A%20%5B%7CFF%5B-((%3E%3E%3E%3E%3E%3ES%5D%2BY%5D"
+            },
+
+            ,{
+                "name":"pulse engine"
+                ,"url":"#it=40&l=11.61&a=810&r=C%20%3A%20%5BB%5DVFC%0AB%20%3A%20A!B%0AA%20%3A%20F%2BA%7C-%0AV%20%3A%20XVY%0AX%20%3A%20%3CX%0AY%20%3A%20%3EY"
+            }
+
+            ,{
+                "name":"leviathon"
+                ,"url":"#it=30&l=12.25&a=269.8&r=C%20%3A%20%5BB%5DVBFC%0AB%20%3A%20A!B%0AA%20%3A%20F%2BA%7C-%0AV%20%3A%20XVY%0AX%20%3A%20%3CX%0AY%20%3A%20%3EY"
+                        }
+
+            ,{
+                "name":"the DNA dance"
+                ,"url":"#it=30&l=16.08&a=-660&r=C%20%3A%20B%7CVFC%0AB%20%3A%20A!B%0AA%20%3A%20F---A%7C%2B%0AV%20%3A%20XVY%0AX%20%3A%20%3CX%0AY%20%3A%20%3EY"
+            }
+
+            ,{
+                "name":"snake charmer"
+                ,"url":"#it=30&l=6.27&a=-1442.6&r=C%20%3A%20B%7CVFC%0AB%20%3A%20A!B%0AA%20%3A%20F%2B%2B%2B%7CA%7C%2BF%0AV%20%3A%20XVY%0AX%20%3A%20%3CX%0AY%20%3A%20%3EY"
+            }
+
+
+
+
+
+
+
+
+
+
+        ,{
             "url":"#it=21&l=18.97&a=-1525.9&r=L%20%3A%20SYS%0AS%20%3A%20F-%5BF-Y%5BS%5D%5D%0AY%20%3A%20%5B%7CFF%2BY%5D",
             "name":"death spiral"
         },
@@ -245,6 +279,53 @@
                 "name":"johnny lee"
                 ,"url":"#it=30&l=6.03&a=-1705.7&r=L%20%3A%20S%0AS%20%3A%20F%7C%2B%5BF-Y%5BS%5D%5DFG%0AY%20%3A--%5B%7CF-F%2B%7C%2BFY%5D%2B%0AG%3A%20FGF%5B%2BF%5DY"
             }
+
+            ,{
+                "name":"gears"
+                ,"url":"#it=31&l=13.79&a=-138.18&r=L%20%3A%20SYS%0AS%20%3A%20F%7C%2B%5BF-Y)%5B-S%5D%5DY-!Y%0AY%20%3A%20%5B%7CF-F%2B%2BY%5D"
+            }
+
+            ,{
+                "name":"jelly-crab"
+                ,"url":"#it=31&l=7.01&a=-1856.68&r=L%20%3A%20SYS%0AS%20%3A%20F%7C%2B%5BF-Y)%5B-S%5D%5DY-!Y%0AY%20%3A%20%5B%7CF-F)%2B%2B(Y%5D"
+            }
+
+            ,{
+                "name":"octosquid"
+                ,"url":"#it=31&l=15.2&a=-169.08&r=L%20%3A%20SYS%0AS%20%3A%20F%7C%2B%5BF-Y)%5B-S%5D%5DY-!Y%0AY%20%3A%20%5B%7CF-F)%2B%2B(Y%5D"
+            }
+
+            ,{
+                "name":"dream catcher"
+                ,"url":"#it=30&l=4.34&a=-3769.7&r=L%20%3A%20S%0AS%20%3A%20F%2B%5BF-Y%5BS%5D%5DF)G%0AY%20%3A--%5B%7CF-F-)-FY%5D-%0AG%3A%20FGF%5B%2BF%5D%2BY"
+            }
+
+            ,{
+                "name":"tornado"
+                ,"url":"#it=20&l=2.79&a=-117&r=L%20%3A%20SSSL%0AS%20%3A%20F(%5BF-Y%5B(FFFFFFS%5D%5D%0AY%20%3A%20%5B%7CF-F%2B(Y%5D"
+            }
+
+            ,{
+                "name":"politic"
+                ,"url":"#it=20&l=4.39&a=-13.6&r=L%20%3A%20SSFL%0AS%20%3A%20F%5BF-Y%5B(-FS%5D%5D%0AY%20%3A%20%5B!F-F%2B)Y%5D"
+            }
+
+            ,{
+                "name":"spin engine"
+                ,"url":"#it=20&l=5.94&a=378.5&r=L%20%3A%20SFFSFFL%0AS%20%3A%20F%5BF-Y%5B(-FS%5D%5D%0AY%20%3A%20F%2BY%7C"
+            }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
