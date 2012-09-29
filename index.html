@@ -85,6 +85,48 @@
                 background: -webkit-gradient(linear, left bottom, left top, color-stop(10%, #333), color-stop(100%, #555)) !important;
             }
 
+            .system-info {
+                position: absolute;
+                width: 350px;
+
+                box-shadow: rgba(255,255,255, 0.1) 0 1px 0, rgba(0, 0, 0, 0.4) 1px 1px 4px 0px inset;
+
+                background: -webkit-gradient(linear, left bottom, left top, color-stop(60%, rgba(0,0,0,0)), color-stop(0%, rgba(0,0,0,0.5)));
+
+                background-color: #5d7580;
+                border-radius: 2px 0 4px 0;
+                border-bottom:1px solid black;
+                border-right:1px solid black;
+                padding: 5px 15px 8px 10px;
+                top:1px;
+                left:1px;
+
+                text-shadow: 0 -1px 0 rgba(0,0,0, 0.25);
+
+
+
+            }
+
+            .navbar-inverse{
+                box-shadow: rgba(255,255,255, 0.1) 0 1px 0, rgba(0, 0, 0, 0.4) 1px 1px 4px 0px inset;
+
+            }
+
+            .system-info.blue{
+                background-color: #3a6980;
+                color: white;
+            }
+
+            .system-name {
+                font-size:14pt;
+                letter-spacing: 2px;
+                float:left;
+
+            }
+
+            .system-author {
+                float:right;
+            }
         </style>
     </head>
     <body>
@@ -92,9 +134,8 @@
         <header class="row">
             <div class="navbar navbar-inverse navbar-static-top">
                 <div class="navbar-inner">
-                    <div class="container">
-                        <a class="brand"><img src="favicon.ico" width="30" height="30"/> l-sys</a>
-                    </div>
+                    <a class="brand" href="http://benvan.co.uk"><img src="favicon.ico" width="30" height="30"/>l-sys</a>
+
                 </div>
             </div>
         </header>
@@ -119,7 +160,7 @@ Y : [|F-F+)Y]
                     </div>
                 </form>
 
-                <button class="btn btn-primary btn-block" onclick="window.lsys(); return false">GO</button>
+                <button class="btn btn-go btn-block" onclick="window.lsys(); return false">GO</button>
 
                 <div id="data" class="pad" style="margin-top:25px;background-color:#1a1a20">
                     <div>segments: <span id="segments"></span></div>
@@ -128,7 +169,12 @@ Y : [|F-F+)Y]
                 </div>
             </div>
             <div class="right col">
-                <div class="pad drawing-pad">
+
+                <div class="drawing-pad">
+                    <div id="systemInfo" class="system-info blue">
+                        <div id="systemName" class="system-name">click-and-drag!</div>
+                        <div class="system-author">benvan</div>
+                    </div>
                     <div id="drawingContainer">
                         <canvas id="c" height="120px"></canvas>
                     </div>
@@ -147,7 +193,7 @@ Y : [|F-F+)Y]
 
         <script type="text/javascript" src="js/jquery-1.8.1.js"></script>
         <script type="text/javascript" src="js/jquery.ellipsis.js"></script>
-        <script type="text/javascript" src="js/jquery.ticker.js"></script>
+        <script type="text/javascript" src="js/system-ticker.js"></script>
 
 
         <script type="text/javascript" src="js/underscore.js"></script>
