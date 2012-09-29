@@ -4,134 +4,7 @@
         <title>lsys</title>
         <link rel="stylesheet" href="css/bootstrap.css"/>
         <link href="css/lsys.css" rel="stylesheet" type="text/css"/>
-
-
         <style>
-            .row, .col { overflow: hidden; position: absolute; }
-            .row { left: 0; right: 0; }
-            .col { top: 0; bottom: 0; }
-            .scroll-x { overflow-x: auto; }
-            .scroll-y { overflow-y: auto; }
-
-            .left.col { width: 250px; }
-            .right.col { left: 250px; right: 0; }
-
-            header.row { height: 55px; top: 0; }
-            .body.row { top: 60px; bottom: 190px; }
-            footer.row { height: 181px; bottom: 0; }
-
-            .brand img{
-                margin-top: -5px;
-                margin-right: 7px;
-            }
-
-            .ellipsis {
-                white-space: nowrap;
-                overflow: hidden;
-            }
-
-            .ellipsis.multiline {
-                white-space: normal;
-            }
-
-            .elems{
-                height:143px;
-                overflow-x: auto;
-                margin:0 10px;
-                padding:5px 0px;
-                display:block;
-                white-space:nowrap;
-
-            }
-
-            .elems .elem{
-                padding:2px;
-                border-radius: 2px;
-                border:1px solid #555;
-                display: inline-block;
-                width:100px;
-                font-size:8pt;
-                margin:0 3px;
-            }
-
-            .elems .elem-label{
-                text-align: center;
-                border-top: 1px solid #222;
-                margin-top: 1px;
-                background-color: #aaa;
-                color: #111;
-                font-weight: bold;
-            }
-
-            .elems a{
-                color:inherit;
-            }
-
-            #drawingContainer{
-                overflow: hidden;
-                height:100%;
-            }
-
-
-            footer.ticker{
-                background-color:#181818;
-            }
-
-            .ticker-bar{
-                cursor: pointer;
-                height:25px;
-                border-radius: 3px 3px 0;
-                background: -webkit-gradient(linear, left bottom, left top, color-stop(10%, #222), color-stop(100%, #444));
-                border: 1px solid #111;
-                border-bottom:1px solid black;
-            }
-
-            .ticker-bar:hover{
-                background: -webkit-gradient(linear, left bottom, left top, color-stop(10%, #333), color-stop(100%, #555)) !important;
-            }
-
-            .system-info {
-                position: absolute;
-                width: 350px;
-
-                box-shadow: rgba(255,255,255, 0.1) 0 1px 0, rgba(0, 0, 0, 0.4) 1px 1px 4px 0px inset;
-
-                background: -webkit-gradient(linear, left bottom, left top, color-stop(60%, rgba(0,0,0,0)), color-stop(0%, rgba(0,0,0,0.5)));
-
-                background-color: #5d7580;
-                border-radius: 2px 0 4px 0;
-                border-bottom:1px solid black;
-                border-right:1px solid black;
-                padding: 5px 15px 8px 10px;
-                top:1px;
-                left:1px;
-
-                text-shadow: 0 -1px 0 rgba(0,0,0, 0.25);
-
-
-
-            }
-
-            .navbar-inverse{
-                box-shadow: rgba(255,255,255, 0.1) 0 1px 0, rgba(0, 0, 0, 0.4) 1px 1px 4px 0px inset;
-
-            }
-
-            .system-info.blue{
-                background-color: #3a6980;
-                color: white;
-            }
-
-            .system-name {
-                font-size:14pt;
-                letter-spacing: 2px;
-                float:left;
-
-            }
-
-            .system-author {
-                float:right;
-            }
         </style>
     </head>
     <body>
@@ -154,14 +27,10 @@
                     <label for="length">size</label>
                     <label for="angle">angle</label>
                     <div>
-                        <input id="num" type="text" value="12"/>
-                        <input id="length" type="text" value="14.07"/>
-                        <input id="angle" type="text" style="width:82px" value="3104.4"/>
-                        <textarea id="rules" rows="8">
-L : SS
-S : F-[F-Y[S)L]]
-Y : [|F-F+)Y]
-                        </textarea>
+                        <input id="num" type="text" value=""/>
+                        <input id="length" type="text" value=""/>
+                        <input id="angle" type="text" style="width:82px" value=""/>
+                        <textarea id="rules" rows="8"></textarea>
                     </div>
                     <button class="btn btn-inverse btn-go btn-block" onclick="window.lsys(); return false">GO</button>
                 </form>
@@ -204,6 +73,7 @@ Y : [|F-F+)Y]
 
         <script type="text/javascript" src="js/underscore.js"></script>
         <script type="text/javascript" src="js/bootstrap.js"></script>
+        <script type="text/javascript" src="js/generated/classes.js"></script>
         <script type="text/javascript" src="js/generated/lsys.js"></script>
         <script type="text/javascript">
             $(document).ready(function () {
@@ -213,7 +83,7 @@ Y : [|F-F+)Y]
                 if (navigator.userAgent.toLowerCase().indexOf('chrom') == -1) {
                     alert("This page runs about 10x faster in chrome.. Give it a go, but it's going to be very slow...");
                 } else {
-                    window.lsys();
+                    lsys.draw();
                 }
             });
 
