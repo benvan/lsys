@@ -33,7 +33,6 @@ lsys.init = ->
     client.context.angle = lsys.currentSystem.angle
     client.start.y = ev.clientY
     client.start.x = ev.clientX
-    console.log(client)
     return false
 
   document.onmouseup = ->
@@ -69,12 +68,15 @@ lsys.init = ->
       lsys.updateView()
       if not lsys.renderer.isDrawing
         t = lsys.draw()
-        lsys.util.control("rendered").html = "#{t}ms"
+        lsys.util.control("rendered").innerHTML = "#{t}ms"
 
   window.onhashchange = ->
     if location.hash != ""
-      lsys.currentSystem.readurl()
-      lsys.draw()
+      sys = lsys.LSystem.fromUrl()
+      if not sys.isIsomorphicTo(lsys.currentSystem)
+        lsys.currentSystem = sys
+        lsys.draw()
+
 
 lsys.updateView = ->
   c = lsys.util.control
