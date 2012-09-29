@@ -59,6 +59,8 @@ class window.lsys.LSystem
     _.each(location.hash.substring(1).split("&").map( (x) -> x.split("=")), ([k,v]) ->
       params[k] = v
     )
+    if params == {}
+      return null
 
     return new LSystem(
       parseFloat(params.it)
