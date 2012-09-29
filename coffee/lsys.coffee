@@ -132,6 +132,7 @@ window.lsys = () ->
       client.now.x = ev.clientX
       client.now.y = ev.clientY
       if (client.down)
+        $("#systemInfo").removeClass('blue')
         x = (client.now.x - client.start.x) / 10
         y = (client.start.y - client.now.y) / 100
         control("angle").value = round(x + client.context.angle, 2)

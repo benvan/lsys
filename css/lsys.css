@@ -41,20 +41,27 @@ textarea {
 }
 
 .drawing-pad{
+    -ms-border-radius: 4px;
+    border-radius: 4px;
+    padding:5px;
+    background: #202020;
+    color: #ccc;
+    border-color: #131313;
+    box-shadow: rgba(255, 255, 255, 0.1) 0 1px 0, rgba(0, 0, 0, 0.8) 0 1px 7px 0px inset;
     margin: 0px 8px;
     position: absolute;
-    top: 0;
+    top: 0px;
     bottom: 0;
     left: 0;
     right: 5px;
 }
 
-.btn-primary, .btn-primary:active{
-    box-shadow: -1px -1px 0 0 rgba(0, 0, 0, 0.698), 0 0 4px 2px rgba(0, 0, 0, 0.59)
+.btn-go, .btn-go:active{
+
+    /*box-shadow: -1px -1px 0 0 rgba(0, 0, 0, 0.698), 0 0 4px 2px rgba(0, 0, 0, 0.59);*/
+    box-shadow: rgba(255, 255, 255, 0.1) 0 1px 0;
 }
 
-.pad canvas {
-    background-color: #202020;
+.drawing-pad canvas {
     cursor:crosshair;
-
 }
