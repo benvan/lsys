@@ -21,8 +21,12 @@ class lsys.Bounding
   height: => (@y2-@y1)
 
 class window.lsys.LSystem
-  elements:[]
-  constructor: (@iterations, @size, @angle, @rules, @name) -> @generate()
+  constructor: (@iterations, @size, @angle, @rules, @name) ->
+  elements: =>
+    if not @generatedElements
+      @generate()
+    return @generatedElements
+
   generate: =>
     textRules = @rules.split("\n").map (r) -> (r.replace(/\ /g, '')).split(':')
 
@@ -35,7 +39,7 @@ class window.lsys.LSystem
       acc + (ruleMap[symbol] || symbol)
     ), "" for i in [1..@iterations]
 
-    @elements = expr.split("").filter((e) -> true if (lsys.renderer.definitions[e]))
+    @generatedElements = expr.split("").filter((e) -> true if (lsys.renderer.definitions[e]))
 
   toUrl: =>
     params =
@@ -50,22 +54,20 @@ class window.lsys.LSystem
 
     return url.substring(0,url.length-1)
 
-  readurl: =>
+  @fromUrl: ->
     params = {}
     _.each(location.hash.substring(1).split("&").map( (x) -> x.split("=")), ([k,v]) ->
       params[k] = v
     )
 
-    rulesFromUrl = decodeURIComponent(params.r)
-    requiresUpdate = (@rules != rulesFromUrl or @iterations != params.it)
+    return new LSystem(
+      parseFloat(params.it)
+      ,parseFloat(params.l)
+      ,parseFloat(params.a)
+      ,decodeURIComponent(params.r)
+    )
 
-    @iterations = parseFloat(params.it)
-    @size = parseFloat(params.l)
-    @angle = parseFloat(params.a)
-    @rules = rulesFromUrl
-
-    @generate() if requiresUpdate
-
+  isIsomorphicTo: (system) => @rules == system.rules and @iterations == system.iterations
 
 class window.lsys.RenderingContext
   constructor: (canvas, system) ->
@@ -111,7 +113,7 @@ class window.lsys.Renderer
     @g.beginPath()
     @g.moveTo(@context.state.x, @context.state.y)
 
-    _.each system.elements, (e) =>
+    _.each system.elements(), (e) =>
       @definitions[e](@context.state, @g, @context) if @definitions[e]
 
     @g.stroke()
