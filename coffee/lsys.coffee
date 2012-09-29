@@ -12,7 +12,7 @@ lsys.util =
 
 lsys.client = new lsys.Client
 lsys.renderer = new lsys.Renderer(lsys.util.control("c"))
-lsys.currentSystem = new lsys.LSystem(12, 14.07, 3104.4, """
+lsys.currentSystem = lsys.LSystem.fromUrl() or new lsys.LSystem(12, 14.07, 3104.4, """
 L : SS
 S : F-[F-Y[S)L]]
 Y : [|F-F+)Y]
