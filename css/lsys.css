@@ -3,8 +3,11 @@ body {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 10pt !important;
     line-height: 22px;
-    color: #C6C6C6;
     background-color: #2F2F2F;
+}
+
+a{
+    outline: none !important;
 }
 
 label {
@@ -13,6 +16,7 @@ label {
     width: 59px;
     padding-left: 7px;
     font-size: 9pt;
+    color: #C6C6C6;
 }
 
 input {
@@ -146,6 +150,11 @@ footer.ticker{
 
 .system-author {
     float:right;
+    color: inherit;
+}
+
+.system-author:hover {
+    color: #dce9f5;
 }
 
 .pad, textarea, input[type="text"] {

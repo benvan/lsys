@@ -41,6 +41,15 @@ class window.lsys.LSystem
 
     @generatedElements = expr.split("").filter((e) -> true if (lsys.renderer.definitions[e]))
 
+  merge: (system) =>
+    @angle = system.angle
+    @size = system.size
+    @angle = system.angle
+    if (!this.isIsomorphicTo(system))
+      @rules = system.rules
+      @iterations = system.iterations
+      @generate()
+
   toUrl: =>
     params =
       it: @iterations
@@ -55,12 +64,12 @@ class window.lsys.LSystem
     return url.substring(0,url.length-1)
 
   @fromUrl: ->
+    return null if location.hash == ""
+
     params = {}
     _.each(location.hash.substring(1).split("&").map( (x) -> x.split("=")), ([k,v]) ->
       params[k] = v
     )
-    if params == {}
-      return null
 
     return new LSystem(
       parseFloat(params.it)
@@ -115,13 +124,16 @@ class window.lsys.Renderer
     @g.beginPath()
     @g.moveTo(@context.state.x, @context.state.y)
 
+    #initialise lower-bounds
+    [s,b] = [@context.state, @context.bounding]
+    [b.x2,b.y2] = [s.x, s.y]
+
+    #draw
     _.each system.elements(), (e) =>
       @definitions[e](@context.state, @g, @context) if @definitions[e]
 
     @g.stroke()
     @g.closePath()
-
-    @g.beginPath()
 
     @isDrawing = false
     return (new Date - start)

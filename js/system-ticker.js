@@ -13,7 +13,7 @@
                             $('<a href="' + sys.url + '"></a>')
                                 .click(function(){
                                     $("#systemName").html(sys.name);
-                                    $("#systemInfo").addClass("blue");
+                                    $("#systemInfo").addClass("blue").slideDown();
                                 })
                                 .append( $('<div></div>')
                                     .append('<img src="img/100x100.gif" alt="">')

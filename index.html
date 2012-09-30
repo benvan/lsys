@@ -5,9 +5,23 @@
         <link rel="stylesheet" href="css/bootstrap.css"/>
         <link href="css/lsys.css" rel="stylesheet" type="text/css"/>
         <style>
+            #help{
+                color: white;
+                text-shadow: 0 1px rgba(0,0,0,0.4);
+            }
         </style>
     </head>
     <body>
+
+        <div class="modal hide fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3>Not yet! Sorry.</h3>
+            </div>
+            <div class="modal-body">
+                <p>User submission / ratings to come soon</p>
+            </div>
+        </div>
 
         <header class="row">
             <div class="navbar navbar-inverse navbar-static-top">
@@ -32,8 +46,12 @@
                         <input id="angle" type="text" style="width:82px" value=""/>
                         <textarea id="rules" rows="8"></textarea>
                     </div>
-                    <button class="btn btn-inverse btn-go btn-block" onclick="window.lsys(); return false">GO</button>
+
                 </form>
+                    <button class="btn btn-inverse btn-go btn-block" onclick="lsys.go(); return false">GO</button>
+
+
+
 
 
 
@@ -48,7 +66,7 @@
                 <div class="drawing-pad">
                     <div id="systemInfo" class="system-info blue">
                         <div id="systemName" class="system-name">click-and-drag!</div>
-                        <div class="system-author">benvan</div>
+                        <a class="system-author"  data-toggle="modal" href="#myModal" >benvan</a>
                     </div>
                     <div id="drawingContainer">
                         <canvas id="c" height="120px"></canvas>

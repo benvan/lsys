@@ -18,13 +18,27 @@ S : F-[F-Y[S)L]]
 Y : [|F-F+)Y]
 """, "click-and-drag-me!")
 
+lsys.go = ->
+  val = (n) -> parseFloat($("##{n}").val())
+  location.hash = new lsys.LSystem(
+     val("num")
+    ,val("length")
+    ,val("angle")
+    ,$("#rules").val()
+  ).toUrl()
 
-lsys.draw = -> lsys.renderer.render(lsys.currentSystem)
+
+
+lsys.draw = ->
+  t = lsys.renderer.render(lsys.currentSystem)
+  lsys.util.control("rendered").innerHTML = "#{t}ms"
+  $("#segments").html("#{lsys.currentSystem.elements().length}")
+
 lsys.init = ->
   canvas = lsys.util.control("c")
   document.onkeydown = (ev) ->
     if ev.keyCode == 13 and ev.ctrlKey
-      location.hash = lsys.currentSystem.toUrl()
+      lsys.go()
 
   canvas.onmousedown = (ev) ->
     client = lsys.client
@@ -67,23 +81,24 @@ lsys.init = ->
       system.size = lsys.util.round(y + client.context.length, 2)
       lsys.updateView()
       if not lsys.renderer.isDrawing
-        t = lsys.draw()
-        lsys.util.control("rendered").innerHTML = "#{t}ms"
+        lsys.draw()
 
   window.onhashchange = ->
     if location.hash != ""
       sys = lsys.LSystem.fromUrl()
-      if not sys.isIsomorphicTo(lsys.currentSystem)
-        lsys.currentSystem = sys
-        lsys.draw()
+#      if (lsys.currentSystem.rules != sys.rules)
+#        $("#systemInfo").slideUp();
+      lsys.currentSystem.merge(sys)
+      lsys.updateView()
+      lsys.draw()
 
 
 lsys.updateView = ->
-  c = lsys.util.control
   sys = lsys.currentSystem
-  c("num").value = sys.iterations
-  c("length").value = sys.size
-  c("angle").value = sys.angle
-  c("rules").html = sys.rules
+  $("#num").val(sys.iterations)
+  $("#length").val(sys.size)
+  $("#angle").val(sys.angle)
+  $("#rules").val(sys.rules)
 
 lsys.init()
+lsys.updateView()
