@@ -10,6 +10,22 @@
                 text-shadow: 0 1px rgba(0,0,0,0.4);
             }
         </style>
+
+        <!-- google analytics -->
+        <script type="text/javascript">
+
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-35201182-1']);
+            _gaq.push(['_trackPageview']);
+
+            (function() {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
+
+        </script>
+
     </head>
     <body>
 
@@ -52,7 +68,15 @@
 
 
 
-
+                    <!--<div id="help" class="well" style="margin-top:25px;background-color:#68717e; height:300px;">
+                        <div>Axioms</div>
+                        <div>F = Draw forward by [size]</div>
+                        <div>+/- = Rotate by [angle]</div>
+                        <div>)/( = increment [angle] +/- 5%</div>
+                        <div>&gt;/&lt; = Increment [size] +/- 1%</div>
+                        <div>| = [angle] *= -1</div>
+                        <div>! = [angle] -= 180</div>
+                    </div>-->
 
 
                 <div id="data" class="pad" style="margin-top:25px;background-color:#1a1a20">
@@ -99,10 +123,10 @@
                 $(".elems").ticker();
                 $(".alert").alert();
                 if (navigator.userAgent.toLowerCase().indexOf('chrom') == -1) {
-                    alert("This page runs about 10x faster in chrome.. Give it a go, but it's going to be very slow...");
-                } else {
-                    lsys.draw();
+                    alert("This site runs orders of magnitude faster in chrome.. Click OK to give it a go anyway, but it's going to be *extremely* slow");
                 }
+
+                lsys.draw();
             });
 
 
