@@ -12,10 +12,10 @@ lsys.util =
 
 lsys.client = new lsys.Client
 lsys.renderer = new lsys.Renderer(lsys.util.control("c"))
-lsys.currentSystem = lsys.LSystem.fromUrl() or new lsys.LSystem(12, 14.07, 3104.4, """
+lsys.currentSystem = lsys.LSystem.fromUrl() or new lsys.LSystem(12, 12.27, 4187.5, """
 L : SS
-S : F-[F-Y[S)L]]
-Y : [|F-F+)Y]
+S : F-[F-Y[S(L]]
+Y : [-|F-F+)Y]
 """, "click-and-drag-me!")
 
 lsys.go = ->
@@ -34,11 +34,44 @@ lsys.draw = ->
   lsys.util.control("rendered").innerHTML = "#{t}ms"
   $("#segments").html("#{lsys.currentSystem.elements().length}")
 
+lsys.export = ->
+  canvas = lsys.util.control("c")
+  b = lsys.renderer.context.bounding
+  console.log(b)
+  console.log(b.width(), b.height())
+  c = $('<canvas></canvas>').attr({
+  "width" : b.width()+30,
+  "height": b.height()+30
+  })[0]
+
+  r = new lsys.Renderer(c)
+  [x,y] = [canvas.width / 2 , canvas.height / 2]
+  [cx,cy] = [b.x1+(b.width() / 2), b.y1+(b.height() / 2)]
+  [offx,offy] = []
+  console.log(cx,cy, [b.x1,b.x2],[b.y1,b.y2])
+
+  r.reset = (system) ->
+    r.context.reset(system)
+    r.context.state.x = (x-b.x1+15)
+    r.context.state.y = (y-b.y1+15)
+
+  r.render(lsys.currentSystem)
+  a = document.createElement("a")
+  a.href = c.toDataURL("image/png")
+  a.download="lsys/"+$("#systemName").text().replace(/[\ \/]/g,"_")
+  evt = document.createEvent("MouseEvents")
+  evt.initMouseEvent("click", true, true,window,0,0,0,0,0,true,false,false,false,0,null)
+  a.dispatchEvent(evt)
+
 lsys.init = ->
   canvas = lsys.util.control("c")
   document.onkeydown = (ev) ->
     if ev.keyCode == 13 and ev.ctrlKey
       lsys.go()
+    if ev.keyCode == 13 and ev.shiftKey
+      lsys.export()
+
+#      window.open(c.toDataURL("image/png"), "_blank")
 
   canvas.onmousedown = (ev) ->
     client = lsys.client

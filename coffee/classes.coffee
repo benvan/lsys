@@ -81,10 +81,12 @@ class window.lsys.LSystem
   isIsomorphicTo: (system) => @rules == system.rules and @iterations == system.iterations
 
 class window.lsys.RenderingContext
-  constructor: (canvas, system) ->
+  constructor: (@canvas) ->
+  reset: (system) =>
+    @initialised = true
     @state =
-      x:canvas.width/2,
-      y:canvas.height/2,
+      x:@canvas.width/2,
+      y:@canvas.height/2,
       angle:-90,
       incAngle:system.angle
       incLength:system.size
@@ -100,16 +102,17 @@ class window.lsys.Renderer
 
   constructor: (@canvas) ->
     @g = canvas.getContext("2d")
+    @context = new lsys.RenderingContext(@canvas)
 
   clearCanvas: =>
-    if (@context)
+    if (@context.initialised)
       b = @context.bounding
       p = padding = 5
       @g.clearRect(b.x1-p, b.y1-p, b.width()+2*p, b.height()+2*p)
 
   reset: (system) =>
     this.clearCanvas()
-    @context = new lsys.RenderingContext(@canvas, system)
+    @context.reset(system)
 
   render: (system) =>
     @isDrawing = true
@@ -118,8 +121,8 @@ class window.lsys.Renderer
     this.reset(system)
 
     @g.lineWidth = 0.4
-    @g.strokeStyle="#fff"
-    @g.globalAlpha=0.4
+    @g.strokeStyle="rgba(255,255,255,0.4)"
+#    @g.globalAlpha=0.4
 
     @g.beginPath()
     @g.moveTo(@context.state.x, @context.state.y)
