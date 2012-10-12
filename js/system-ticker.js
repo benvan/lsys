@@ -16,14 +16,13 @@
                                     $("#systemInfo").addClass("blue").slideDown();
                                 })
                                 .append( $('<div></div>')
-                                    .append('<img src="img/100x100.gif" alt="">')
+                                    .append('<img src="img/'+ (sys.img ? "systems/"+sys.img : "100x100.gif")+'" alt="">')
                                     .append('<div class="elem-label ellipsis">' + sys.name + '</div>')
                             ))
                     );
                 });
                 $(".ellipsis").ellipsis();
             });
-
 
         });
     };
