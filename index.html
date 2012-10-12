@@ -111,6 +111,7 @@
         <script type="text/javascript" src="js/jquery-1.8.1.js"></script>
         <script type="text/javascript" src="js/jquery.ellipsis.js"></script>
         <script type="text/javascript" src="js/system-ticker.js"></script>
+        <script type="text/javascript" src="js/jquery.kinetic.js"></script>
 
 
         <script type="text/javascript" src="js/underscore.js"></script>
@@ -121,6 +122,7 @@
             $(document).ready(function () {
 
                 $(".elems").ticker();
+                $(".elems").kinetic();
                 $(".alert").alert();
                 if (navigator.userAgent.toLowerCase().indexOf('chrom') == -1) {
                     alert("This site runs orders of magnitude faster in chrome.. Click OK to give it a go anyway, but it's going to be *extremely* slow");
