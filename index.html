@@ -1,142 +1,188 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>lsys</title>
-        <link rel="stylesheet" href="css/bootstrap.css"/>
-        <link href="css/lsys.css" rel="stylesheet" type="text/css"/>
-        <style>
-            #help{
-                color: white;
-                text-shadow: 0 1px rgba(0,0,0,0.4);
-            }
-        </style>
+<head>
+    <title>lsys</title>
+    <link rel="stylesheet" href="css/bootstrap.css"/>
+    <link href="css/lsys.css" rel="stylesheet" type="text/css"/>
+    <style>
+        #help {
+            color: white;
+            text-shadow: 0 1px rgba(0, 0, 0, 0.4);
+        }
+    </style>
 
-        <!-- google analytics -->
-        <script type="text/javascript">
+    <!-- google analytics -->
+    <script type="text/javascript">
 
-            var _gaq = _gaq || [];
-            _gaq.push(['_setAccount', 'UA-35201182-1']);
-            _gaq.push(['_trackPageview']);
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-35201182-1']);
+        _gaq.push(['_trackPageview']);
 
-            (function() {
-                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-            })();
+        (function () {
+            var ga = document.createElement('script');
+            ga.type = 'text/javascript';
+            ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ga, s);
+        })();
 
-        </script>
+    </script>
 
-    </head>
-    <body>
+</head>
+<body>
 
-        <div class="modal hide fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h3>Not yet! Sorry.</h3>
-            </div>
-            <div class="modal-body">
-                <p>User submission / ratings to come soon</p>
+<div class="modal hide fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>Not yet! Sorry.</h3>
+    </div>
+    <div class="modal-body">
+        <p>User submission / ratings to come soon</p>
+    </div>
+</div>
+
+<header class="row">
+    <div class="navbar navbar-inverse navbar-static-top">
+        <div class="navbar-inner">
+            <a class="brand" href="http://benvan.co.uk"><img src="img/logo2.png" width="30"/>l-sys</a>
+
+        </div>
+    </div>
+</header>
+
+<div class="body row scroll-y">
+
+    <div class="left col">
+        <div style="padding:0 8px">
+            <form>
+                <label for="num">levels</label>
+                <label for="length">size</label>
+                <label for="angle">angle</label>
+
+                <div>
+                    <input id="num" type="text" value=""/>
+                    <input id="length" type="text" value=""/>
+                    <input id="angle" type="text" style="width:82px" value=""/>
+                    <textarea id="rules" rows="8"></textarea>
+                </div>
+
+            </form>
+            <button class="btn btn-inverse btn-go btn-block" onclick="lsys.go(); return false">GO</button>
+
+
+            <!--<div id="help" class="well" style="margin-top:25px;background-color:#68717e; height:300px;">
+                <div>Axioms</div>
+                <div>F = Draw forward by [size]</div>
+                <div>+/- = Rotate by [angle]</div>
+                <div>)/( = increment [angle] +/- 5%</div>
+                <div>&gt;/&lt; = Increment [size] +/- 1%</div>
+                <div>| = [angle] *= -1</div>
+                <div>! = [angle] -= 180</div>
+            </div>-->
+
+
+            <div id="data" class="pad" style="margin-top:25px;background-color:#1a1a20">
+                <div>segments: <span id="segments"></span></div>
+                <div>rendered : <span id="rendered"></span></div>
             </div>
         </div>
+    </div>
+    <div class="right col">
 
-        <header class="row">
-            <div class="navbar navbar-inverse navbar-static-top">
-                <div class="navbar-inner">
-                    <a class="brand" href="http://benvan.co.uk"><img src="img/logo2.png" width="30"/>l-sys</a>
-
-                </div>
+        <div class="drawing-pad">
+            <div id="systemInfo" class="system-info blue">
+                <div id="systemName" class="system-name">click-and-drag!</div>
+                <a class="system-author" data-toggle="modal" href="#myModal">benvan</a>
             </div>
-        </header>
-
-        <div class="body row scroll-y">
-
-            <div class="left col">
-                <div style="padding:0 8px">
-                <form>
-                    <label for="num">levels</label>
-                    <label for="length">size</label>
-                    <label for="angle">angle</label>
-                    <div>
-                        <input id="num" type="text" value=""/>
-                        <input id="length" type="text" value=""/>
-                        <input id="angle" type="text" style="width:82px" value=""/>
-                        <textarea id="rules" rows="8"></textarea>
-                    </div>
-
-                </form>
-                    <button class="btn btn-inverse btn-go btn-block" onclick="lsys.go(); return false">GO</button>
-
-
-
-                    <!--<div id="help" class="well" style="margin-top:25px;background-color:#68717e; height:300px;">
-                        <div>Axioms</div>
-                        <div>F = Draw forward by [size]</div>
-                        <div>+/- = Rotate by [angle]</div>
-                        <div>)/( = increment [angle] +/- 5%</div>
-                        <div>&gt;/&lt; = Increment [size] +/- 1%</div>
-                        <div>| = [angle] *= -1</div>
-                        <div>! = [angle] -= 180</div>
-                    </div>-->
-
-
-                <div id="data" class="pad" style="margin-top:25px;background-color:#1a1a20">
-                    <div>segments: <span id="segments"></span></div>
-                    <div>rendered : <span id="rendered"></span></div>
-                </div>
-                </div>
-            </div>
-            <div class="right col">
-
-                <div class="drawing-pad">
-                    <div id="systemInfo" class="system-info blue">
-                        <div id="systemName" class="system-name">click-and-drag!</div>
-                        <a class="system-author"  data-toggle="modal" href="#myModal" >benvan</a>
-                    </div>
-                    <div id="drawingContainer">
-                        <canvas id="c" height="120px"></canvas>
-                    </div>
-                </div>
+            <div id="drawingContainer">
+                <canvas id="c" height="120px"></canvas>
             </div>
         </div>
+    </div>
+</div>
 
 
-
-        <footer class="row ticker">
-            <div class="ticker-bar"></div>
-            <ul class="elems">
-            </ul>
-        </footer>
-
-
-        <script type="text/javascript" src="js/jquery-1.8.1.js"></script>
-        <script type="text/javascript" src="js/jquery.ellipsis.js"></script>
-        <script type="text/javascript" src="js/system-ticker.js"></script>
-        <script type="text/javascript" src="js/jquery.kinetic.js"></script>
+<footer class="row ticker">
+    <div class="ticker-bar"></div>
+    <ul class="elems">
+    </ul>
+</footer>
 
 
-        <script type="text/javascript" src="js/underscore.js"></script>
-        <script type="text/javascript" src="js/bootstrap.js"></script>
-        <script type="text/javascript" src="js/generated/classes.js"></script>
-        <script type="text/javascript" src="js/generated/lsys.js"></script>
-        <script type="text/javascript">
-            $(document).ready(function () {
+<script type="text/javascript" src="js/jquery-1.8.1.js"></script>
+<script type="text/javascript" src="js/jquery.ellipsis.js"></script>
+<script type="text/javascript" src="js/system-ticker.js"></script>
+<script type="text/javascript" src="js/jquery.kinetic.js"></script>
 
-                $(".elems").ticker();
-                $(".elems").kinetic();
-                $(".alert").alert();
-                if (navigator.userAgent.toLowerCase().indexOf('chrom') == -1) {
-                    alert("This site runs orders of magnitude faster in chrome.. Click OK to give it a go anyway, but it's going to be *extremely* slow");
+
+<script type="text/javascript" src="js/underscore.js"></script>
+<script type="text/javascript" src="js/bootstrap.js"></script>
+<script type="text/javascript" src="js/generated/classes.js"></script>
+<script type="text/javascript" src="js/generated/lsys.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        var LOG = function (data) {
+            console.log("done", data.responseText || data);
+        };
+        var FAIL = function (data) {
+            console.log("fail", data.responseText || data);
+        };
+
+
+        document.api = {
+            user: {
+                token:{},
+                login: function (username, password) {
+                    $.post("http://localhost:9000/login", {
+                        username: username,
+                        password: password
+                    },function (data) {
+                        document.api.user.token = data.token;
+                        console.log(data.token);
+                    }, "json").fail(FAIL);
                 }
+            },
+            system: {
+                all: function () {
+                    $.getJSON("http://localhost:9000/system/all").done(LOG).fail(FAIL);
+                },
+                add: function (name, author, system) {
+                    $.ajax({
+                        url: "http://localhost:9000/system",
+                        type:"post",
+                        data: {
+                            name: name,
+                            author: author,
+                            system: system
+                        },
+                        headers:{
+                            token:document.api.user.token
+                        },
+                        success:LOG
+                    }).done(LOG).fail(FAIL);
+                }
+            }
+        };
 
-                lsys.draw();
-            });
+
+        $(".elems").ticker();
+        $(".elems").kinetic();
+        $(".alert").alert();
+        if (navigator.userAgent.toLowerCase().indexOf('chrom') == -1) {
+            alert("This site runs orders of magnitude faster in chrome.. Click OK to give it a go anyway, but it's going to be *extremely* slow");
+        }
+
+        lsys.draw();
+    });
 
 
-        </script>
+</script>
 
-        <script type="text/javascript">
+<script type="text/javascript">
 
-        </script>
+</script>
 
-    </body>
+</body>
 </html>
