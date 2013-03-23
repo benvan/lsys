@@ -10,6 +10,13 @@
 
         ,
         {
+            "name": "metamorphosis",
+            "url": "#it=40&l=4.44&a=-2361.3&r=C%20%3A%20%5BB%5DC%0AB%20%3A%20!AFB)!A-%0AA%20%3A%20-AF%2B"
+
+        }
+
+        ,
+        {
             "name":"pulse engine",
             "url":"#it=40&l=11.61&a=810&r=C%20%3A%20%5BB%5DVFC%0AB%20%3A%20A!B%0AA%20%3A%20F%2BA%7C-%0AV%20%3A%20XVY%0AX%20%3A%20%3CX%0AY%20%3A%20%3EY",
             "img":"lsys_pulse_engine.png"
@@ -36,6 +43,11 @@
             "url":"#it=30&l=6.27&a=-1442.6&r=C%20%3A%20B%7CVFC%0AB%20%3A%20A!B%0AA%20%3A%20F%2B%2B%2B%7CA%7C%2BF%0AV%20%3A%20XVY%0AX%20%3A%20%3CX%0AY%20%3A%20%3EY",
             "img":"lsys_snake_charmer.png"
         }
+        ,
+        {
+            "name":"dance for me",
+            "url":"#it=40&l=8.15&a=-1255.5&r=C%20%3A%20%5BB%5DF%7CC%0AB%20%3A%20!AB)!A-F%0AA%20%3A%20-AF%2B"
+        }
 
 
         ,
@@ -58,6 +70,14 @@
             "url":"#it=12&l=16.37&a=9840.1&r=L%20%3A%20SS%0AS%20%3A%20F-%5BF-Y%5BS(L%5D%5D%0AY%20%3A%20%5B-%7CF-F%2B)Y%5D",
             "img":"lsys_trigon.png"
         }
+
+
+
+,
+{
+"name":"spirocopter",
+"url":"#it=40&l=5.31&a=-1972.4&r=C%20%3A%20CB%0AB%20%3A%20!A%5BFB%5D!A-%0AA%20%3A%20-AF%2B"
+}
 
         ,
         {
@@ -93,9 +113,11 @@
 
 
 
-
-
-
+        ,{
+            "name":"coalescence",
+            "url":"#it=200&l=199.9&a=-3276.3&r=L%20%3A%20SSSSS%0AS%20%3A%20%3E%7C%2B%5BF%5BS%5D%5D",
+            "img":"lsys_coalescence.png"
+        }
 
         ,
         {
@@ -143,6 +165,12 @@
             "url":"#it=100&l=2.28&a=-2341.8&r=L%20%3A%20SYS%0AS%20%3A%20F%7C%2B%5BF-Y%5BS%5D%5D%0AY%20%3A%20%5B--((F-F%2B)FY%5D%2B%0A",
             "name":"gemini",
             "img":"lsys_gemini.png"
+        },
+
+        {
+            "url" : "#it=40&l=9.86&a=-192.8&r=C%20%3A%20%5BB%5DF%7CC%0AB%20%3A%20!AB!A-F%0AA%20%3A%20-AF%2B",
+            "name": "clockwork coil"
+
         },
 
         {
@@ -216,6 +244,13 @@
             "name":"biohazard angel",
             "img":"lsys_biohazard_angel.png"
         },
+
+        {
+            "name":"twistmas tree"
+            ,"url":"#it=40&l=6.6&a=-480.2&r=C%20%3A%20%5BB%5DFC%0AB%20%3A%20!ABA%0AA%20%3A%20-AF-"
+        },
+
+
 
         {
             "url":"#it=80&l=7.21&a=-3185.1&r=L%20%3A%20SSS%0AS%20%3A%20%3EF%7C%2B%5BFY%5BS%5D%5D%0AY%20%3A%20F%5B-F--%7CFY%5D%2B!%0A",
