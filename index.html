@@ -32,9 +32,9 @@
 </head>
 <body>
 
-<div class="modal hide fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal hide fade" id="myModal" tabindex="-1" role="dialog" >
     <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <button type="button" class="close" data-dismiss="modal" >&times;</button>
         <h3>Not yet! Sorry.</h3>
     </div>
     <div class="modal-body">
@@ -42,19 +42,89 @@
     </div>
 </div>
 
+<div class="modal hide fade" id="loginModal" style="background-color:#2F2F2F" tabindex="-1" role="dialog">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" >&times;</button>
+        <h3>Login</h3>
+    </div>
+    <div class="modal-body">
+        <div class="form-horizontal" tabindex="-1" >
+            <fieldset>
+                <div class="control-group">
+                    <!-- Username -->
+                    <label class="control-label"  for="username">Username</label>
+                    <div class="controls">
+                        <input type="text" id="username" name="username" placeholder="" class="input-xlarge">
+                        <span class="help-inline"></span>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <!-- Password-->
+                    <label class="control-label" for="password">Password</label>
+                    <div class="controls">
+                        <input type="password" id="password" name="password" placeholder="" class="input-xlarge">
+                        <span class="help-inline"></span>
+                    </div>
+                </div>
+
+                <div id="registrationControls" class="hide">
+
+                    <div class="control-group">
+                        <!-- Password 2 -->
+                        <label class="control-label" for="password-repeat">Password</label>
+                        <div class="controls">
+                            <input type="password" id="password-repeat" name="password" placeholder="" class="input-xlarge">
+                            <span class="help-inline"></span>
+                        </div>
+                    </div>
+
+
+                    <div class="control-group">
+                        <!-- email -->
+                        <label class="control-label" for="email">Recovery email (optional)</label>
+                        <div class="controls">
+                            <input type="text" id="email" name="email" placeholder="" class="input-xlarge">
+                            <span class="help-inline"></span>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="control-group">
+                    <!-- Button -->
+                    <div class="controls" style="position:relative; height:25px;">
+                        <button id="loginSubmit" class="btn btn-success" style="position:absolute;left:0;">Login</button>
+                        <button id="register" class="btn btn-inverse" style="position:absolute; left:200px;">Register</button>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+</div>
+
 <header class="row">
     <div class="navbar navbar-inverse navbar-static-top">
         <div class="navbar-inner">
-            <a class="brand" href="http://benvan.co.uk"><img src="img/logo2.png" width="30"/>l-sys</a>
+            <a class="brand" href="http://benvan.co.uk"><img src="img/logo_tr.png" width="30"/>l-sys</a>
 
+            <ul class="nav pull-right">
+                <li><p id="userwelcome" class="navbar-text">Welcome, User!</p></li>
+                <li><a id="logout" href="#" class="hide">Logout</a></li>
+                <li><a id="login" data-toggle="modal" href="#loginModal">Login</a></li>
+            </ul>
         </div>
+
+
+
     </div>
+
 </header>
 
 <div class="body row scroll-y">
 
     <div class="left col">
-        <div style="padding:0 8px">
+        <div id="controls" style="padding:0 8px">
             <form>
                 <label for="num">levels</label>
                 <label for="length">size</label>
@@ -114,6 +184,7 @@
 <script type="text/javascript" src="js/jquery.ellipsis.js"></script>
 <script type="text/javascript" src="js/system-ticker.js"></script>
 <script type="text/javascript" src="js/jquery.kinetic.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
 
 
 <script type="text/javascript" src="js/underscore.js"></script>
@@ -122,6 +193,91 @@
 <script type="text/javascript" src="js/generated/lsys.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
+        var api;
+
+        var clearForm = function(){
+            $("#loginModal").find(".control-group").removeClass("error").find(".help-inline").empty();
+        };
+
+        var showErrors = function(errors){
+            $.each(errors, function (ctrl, msgs) {
+                $("#" + (ctrl || "password")).parents(".control-group").addClass("error").find(".help-inline").html(msgs.join("</br>"));
+            });
+        };
+
+        var login = function(){
+            $("#userwelcome").html("Welcome, " + api.user.name + "!");
+            $("#login").hide();
+            $("#logout").show();
+            $("#loginModal").modal("hide");
+        };
+
+        var logout = function(){
+            api.user.logout();
+            $("#userwelcome").empty();
+            $("#login").show();
+            $("#logout").hide();
+        };
+
+        $("#logout").click(logout);
+
+        $("#loginModal").find("input").keypress(function(e){
+            if (e.which == 13){
+                //click primary button
+                $("#loginModal").find("button").filter(function(){
+                    return $(this).data("primary");
+                }).click();
+            }
+        });
+
+        $("#loginSubmit")
+            .data("primary",true)
+            .data("primaryClick",function(){
+                clearForm();
+                var username = $("#username").val();
+                var password = $("#password").val();
+                api.user.login(username,password,login,showErrors);
+            });
+
+        $("#register").data("primaryClick",function(){
+            clearForm();
+            var username = $("#username").val();
+            var password = $("#password").val();
+
+            if (password != $("#password-repeat").val()){
+                showErrors({"password-repeat":["passwords don't match"]});
+                return;
+            }
+
+            var email = $("#email").val();
+
+            api.user.register(username,password,email,login,showErrors);
+        });
+
+        var btns = $("#loginSubmit,#register");
+        btns.click(function (e) {
+            if ($(this).data("primary")){
+                $(this).data("primaryClick")();
+            }else{
+                clearForm();
+                // swap
+                var speed = 250;
+                $("#registrationControls").slideToggle(speed);
+                btns.each(function(){
+                    var primary = $(this).data("primary");
+                    $(this).data("primary",!primary);
+                    $(this)[(primary ? "remove":"add") + "Class"]("btn-success");
+                    $(this)[(primary ? "add":"remove") + "Class"]("btn-inverse");
+                    $(this).animate({
+                        left: (primary ? 200 : 0) + "px"
+                    },speed);
+                });
+            }
+
+        });
+
+
+
 
         var LOG = function (data) {
             console.log("done", data.responseText || data);
@@ -131,17 +287,54 @@
         };
 
 
-        document.api = {
+        var toJson = function(passTo){
+            return function(response){
+                passTo(jQuery.parseJSON(response.responseText));
+            };
+        };
+
+        api = {
             user: {
                 token:{},
-                login: function (username, password) {
-                    $.post("http://localhost:9000/login", {
-                        username: username,
-                        password: password
-                    },function (data) {
-                        document.api.user.token = data.token;
-                        console.log(data.token);
-                    }, "json").fail(FAIL);
+                setToken:function(token){
+                    api.user.token = token;
+                    api.user.name = token.substring(token.indexOf("%")+1,token.length);
+                    $.cookie("token", token);
+                },
+                logout: function(){
+                    api.token = {};
+                    $.removeCookie("token");
+                },
+                login: function (username, password, success, failure) {
+                    $.ajax({
+                        type:"POST",
+                        url:"http://localhost:9000/login",
+                        data:{
+                            username: username,
+                            password: password
+                        },
+                        success:function (data) {
+                            api.user.setToken(data.token);
+                            success();
+                        },
+                        dataType:"json"
+                    }).fail(toJson(failure));
+                },
+                register: function (username, password, email, success, failure) {
+                    $.ajax({
+                        type:"POST",
+                        url:"http://localhost:9000/register",
+                        data:{
+                            username: username,
+                            password: password,
+                            email: email
+                        },
+                        success:function (data) {
+                            api.user.setToken(data.token);
+                            success();
+                        },
+                        dataType:"json"
+                    }).fail(toJson(failure));
                 }
             },
             system: {
@@ -158,13 +351,21 @@
                             system: system
                         },
                         headers:{
-                            token:document.api.user.token
+                            token:api.user.token
                         },
                         success:LOG
                     }).done(LOG).fail(FAIL);
                 }
             }
         };
+
+        var token = $.cookie("token", data.token);
+        if (token){
+            api.user.setToken(token);
+            login();
+        }else{
+            logout();
+        }
 
 
         $(".elems").ticker();
