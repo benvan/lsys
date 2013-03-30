@@ -97,6 +97,23 @@
 
         ,
         {
+            "name":"angel flight",
+            "url":"#it=44&l=2.46&a=-3224.9&r=C%20%3A%20B%7CVFC%0AB%20%3A%20A!BF%0AA%20%3A%20F%7C-A%7C%2BF%0AV%20%3A%20%3C%3C%3C%3C%2B"
+
+        }
+
+        ,
+        {
+            "name":"stargaze",
+            "url":"#it=44&l=2.23&a=-3275.2&r=C%20%3A%20B%7CVFC%0AB%20%3A%20ABF%0AA%20%3A%20F%7C-A%7C%2BF%0AV%20%3A%20%3C%3C%3C%3C%3C%2B"
+        }
+
+
+
+
+
+        ,
+        {
             "name":"mortal coil",
             "url":"#it=44&l=4.15&a=-1793.1&r=C%20%3A%20B%7CVFC%0AB%20%3A%20A!BF%0AA%20%3A%20F%7C-A%7C%2BF%0AV%20%3A%20%3E",
             "img":"lsys_mortal_coil.png"
