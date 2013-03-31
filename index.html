@@ -104,6 +104,7 @@
 
             <ul class="nav pull-right">
                 <li><p id="userwelcome" class="navbar-text">Welcome, User!</p></li>
+                <li class="divider-vertical"></li>
                 <li><a id="logout" href="#" class="hide">Logout</a></li>
                 <li><a id="login" data-toggle="modal" href="#loginModal">Login</a></li>
             </ul>
@@ -266,12 +267,6 @@
             }
 
         });
-
-        var toJson = function(passTo){
-            return function(response){
-                passTo(jQuery.parseJSON(response.responseText));
-            };
-        };
 
         var token = $.cookie("token", data.token);
         if (token){
