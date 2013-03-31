@@ -256,6 +256,12 @@ textarea {
     border-color:#222222 #222222 #000000;
 }
 
+.navbar-text{
+    color:#ddd;
+    font-weight:bold;
+    padding: 1px 15px;
+}
+
 .control-group.error > label, .control-group.error .help-block, .control-group.error .help-inline{
     color:#e94a58;
 }
