@@ -4,12 +4,6 @@
     <title>lsys</title>
     <link rel="stylesheet" href="css/bootstrap.css"/>
     <link href="css/lsys.css" rel="stylesheet" type="text/css"/>
-    <style>
-        #help {
-            color: white;
-            text-shadow: 0 1px rgba(0, 0, 0, 0.4);
-        }
-    </style>
 
     <!-- google analytics -->
     <script type="text/javascript">
@@ -114,9 +108,6 @@
                 <li><a id="login" data-toggle="modal" href="#loginModal">Login</a></li>
             </ul>
         </div>
-
-
-
     </div>
 
 </header>
@@ -189,11 +180,11 @@
 
 <script type="text/javascript" src="js/underscore.js"></script>
 <script type="text/javascript" src="js/bootstrap.js"></script>
+<script type="text/javascript" src="js/api.js"></script>
 <script type="text/javascript" src="js/generated/classes.js"></script>
 <script type="text/javascript" src="js/generated/lsys.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
-        var api;
 
         var clearForm = function(){
             $("#loginModal").find(".control-group").removeClass("error").find(".help-inline").empty();
@@ -276,87 +267,10 @@
 
         });
 
-
-
-
-        var LOG = function (data) {
-            console.log("done", data.responseText || data);
-        };
-        var FAIL = function (data) {
-            console.log("fail", data.responseText || data);
-        };
-
-
         var toJson = function(passTo){
             return function(response){
                 passTo(jQuery.parseJSON(response.responseText));
             };
-        };
-
-        api = {
-            user: {
-                token:{},
-                setToken:function(token){
-                    api.user.token = token;
-                    api.user.name = token.substring(token.indexOf("%")+1,token.length);
-                    $.cookie("token", token);
-                },
-                logout: function(){
-                    api.token = {};
-                    $.removeCookie("token");
-                },
-                login: function (username, password, success, failure) {
-                    $.ajax({
-                        type:"POST",
-                        url:"http://localhost:9000/login",
-                        data:{
-                            username: username,
-                            password: password
-                        },
-                        success:function (data) {
-                            api.user.setToken(data.token);
-                            success();
-                        },
-                        dataType:"json"
-                    }).fail(toJson(failure));
-                },
-                register: function (username, password, email, success, failure) {
-                    $.ajax({
-                        type:"POST",
-                        url:"http://localhost:9000/register",
-                        data:{
-                            username: username,
-                            password: password,
-                            email: email
-                        },
-                        success:function (data) {
-                            api.user.setToken(data.token);
-                            success();
-                        },
-                        dataType:"json"
-                    }).fail(toJson(failure));
-                }
-            },
-            system: {
-                all: function () {
-                    $.getJSON("http://localhost:9000/system/all").done(LOG).fail(FAIL);
-                },
-                add: function (name, author, system) {
-                    $.ajax({
-                        url: "http://localhost:9000/system",
-                        type:"post",
-                        data: {
-                            name: name,
-                            author: author,
-                            system: system
-                        },
-                        headers:{
-                            token:api.user.token
-                        },
-                        success:LOG
-                    }).done(LOG).fail(FAIL);
-                }
-            }
         };
 
         var token = $.cookie("token", data.token);
@@ -368,9 +282,10 @@
         }
 
 
-        $(".elems").ticker();
-        $(".elems").kinetic();
-        $(".alert").alert();
+        $(".elems")
+            .ticker()
+            .kinetic();
+
         if (navigator.userAgent.toLowerCase().indexOf('chrom') == -1) {
             alert("This site runs orders of magnitude faster in chrome.. Click OK to give it a go anyway, but it's going to be *extremely* slow");
         }
