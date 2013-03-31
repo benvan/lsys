@@ -65,27 +65,58 @@ footer.row { height: 181px; bottom: 0; }
 }
 
 .elems .elem{
+    box-shadow: #222 3px 3px inset;
     padding:2px;
-    border-radius: 2px;
+    border-radius: 4px;
     border:1px solid #555;
     display: inline-block;
-    width:100px;
+    width:110px;
+    position:relative;
     font-size:8pt;
     margin:0 3px;
     background-color:#121213;
 }
 
+.elems .elem img{
+    margin:0 auto;
+}
+
 .elems .elem-label{
+    font-size: 8pt;
+    letter-spacing: 1.8px;
+    line-height: 15px;
     text-align: center;
-    border-top: 1px solid #222;
+    border-top: 1px solid #555;
     margin-top: 1px;
-    background-color: #aaa;
-    color: #111;
-    font-weight: bold;
+    background-color: #334;
+    color: #bbb;
+    text-shadow: 1px 1px #222;
+    border-radius: 2px;
+
+}
+
+.elems .elem-author{
+    position: absolute;
+    line-height: 14px;
+    font-size: 7pt;
+    top: 0px;
+    right: 0px;
+    padding: 0px 5px;
+    border-radius: 4px;
+    background-color: #111;
+    color: #666;
+    display: inline-block;
+    border: 1px solid #333;
+    border-right: none;
+    border-top: none;
 }
 
 .elems a{
     color:inherit;
+}
+
+.elems .elem .img-holder{
+    text-align: center;
 }
 
 #drawingContainer{
