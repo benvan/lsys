@@ -1,3 +1,9 @@
+var toJson = function(passTo){
+    return function(response){
+        passTo(jQuery.parseJSON(response.responseText));
+    };
+};
+
 api = {
     user: {
         token:{},
