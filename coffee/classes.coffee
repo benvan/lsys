@@ -120,7 +120,7 @@ class window.lsys.Renderer
 
     this.reset(system)
 
-    @g.lineWidth = 0.4
+    @g.lineWidth = 0.2
     @g.strokeStyle="rgba(255,255,255,0.4)"
 #    @g.globalAlpha=0.4
 
@@ -136,7 +136,7 @@ class window.lsys.Renderer
       @definitions[e](@context.state, @g, @context) if @definitions[e]
 
     @g.stroke()
-    @g.closePath()
+    
 
     @isDrawing = false
     return (new Date - start)
