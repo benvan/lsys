@@ -40,6 +40,10 @@
         "img": "lsys_crystal_orchid.png",
         "author": "benvan"
     }, {
+        "name" : "platterstar",
+        "img" : "img/lsys_platterstar.png",
+        "url":"http://localhost:8000/#it=200&l=188.94&a=-3179.7&r=L%20%3A%20SSSSSS%0AS%20%3A%20%3E%7C%2B%5BF%5BS%5D%5D%7C"
+    }, {
         "name": "heisenberg",
         "url": "#it=12&l=11.94&a=-3259.1&r=S%20%3A%20F-%5BF-Y%5BS%5D%5D%0AY%20%3A%20S%7C%5B%7CF-F%2B)Y%5D",
         "img": "lsys_heisenberg.png",
@@ -374,5 +378,6 @@
         "img": "lsys_spin_engine.png",
         "url": "#it=20&l=5.94&a=378.5&r=L%20%3A%20SFFSFFL%0AS%20%3A%20F%5BF-Y%5B(-FS%5D%5D%0AY%20%3A%20F%2BY%7C"
     }
+
     ]
 }
