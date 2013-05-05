@@ -199,7 +199,7 @@
                 </div>
 
             </form>
-            <button class="btn btn-inverse btn-go btn-block" onclick="lsys.go(); return false">GO</button>
+            <button class="btn btn-inverse btn-go btn-block" data-toggle="tooltip" title="ctrl-enter" onclick="lsys.go(); return false">GO</button>
 
 
             <!--<div id="help" class="well" style="margin-top:25px;background-color:#68717e; height:300px;">
@@ -356,6 +356,7 @@
         if (navigator.userAgent.toLowerCase().indexOf('chrom') == -1) {
             alert("This site runs orders of magnitude faster in chrome.. Click OK to give it a go anyway, but it's going to be *extremely* slow");
         }
+        $("button").tooltip();
 
         lsys.draw();
     });
