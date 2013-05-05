@@ -1,5 +1,5 @@
 /*!
-    jQuery.kinetic v1.5
+    jQuery.kinetic v1.8.2
     Dave Taylor http://the-taylors.org/jquery.kinetic
 
     The MIT License (MIT)
@@ -9,29 +9,30 @@
 (function($){
 	'use strict';
 
-    var DEFAULT_SETTINGS    = { decelerate: true
-                              , triggerHardware: false
-                              , y: true
-                              , x: true
-                              , slowdown: 0.9
-                              , maxvelocity: 40 
-                              , throttleFPS: 60
-                              , movingClass: {
-                                  up:    'kinetic-moving-up'
-                                , down:  'kinetic-moving-down'
-                                , left:  'kinetic-moving-left'
-                                , right: 'kinetic-moving-right'
-                                }
-                              , deceleratingClass: {
-                                  up:    'kinetic-decelerating-up'
-                                , down:  'kinetic-decelerating-down'
-                                , left:  'kinetic-decelerating-left'
-                                , right: 'kinetic-decelerating-right'
-                                }
-                              },
-        SETTINGS_KEY        = 'kinetic-settings',
-        ACTIVE_CLASS        = 'kinetic-active';
-
+    var DEFAULT_SETTINGS = {
+            cursor: 'move',
+            decelerate: true,
+            triggerHardware: false,
+            y: true,
+            x: true,
+            slowdown: 0.9,
+            maxvelocity: 40,
+            throttleFPS: 60,
+            movingClass: {
+                up: 'kinetic-moving-up',
+                down: 'kinetic-moving-down',
+                left: 'kinetic-moving-left',
+                right: 'kinetic-moving-right'
+            },
+            deceleratingClass: {
+                up: 'kinetic-decelerating-up',
+                down: 'kinetic-decelerating-down',
+                left: 'kinetic-decelerating-left',
+                right: 'kinetic-decelerating-right'
+            }
+        },
+        SETTINGS_KEY = 'kinetic-settings',
+        ACTIVE_CLASS = 'kinetic-active';
     /**
      * Provides requestAnimationFrame in a cross browser way.
      * http://paulirish.com/2011/requestanimationframe-for-smart-animating/
@@ -100,10 +101,13 @@
         if (settings.velocityY < 0) {
             this.addClass(classes.up);
         }
-        
+
     };
 
     var stop = function($scroller, settings) {
+        settings.velocity = 0;
+        settings.velocityY = 0;
+        settings.decelerate = true;
         if (typeof settings.stopped === 'function') {
             settings.stopped.call($scroller, settings);
         }
@@ -111,13 +115,12 @@
 
     /** do the actual kinetic movement */
     var move = function($scroller, settings) {
-
         var scroller = $scroller[0];
         // set scrollLeft
         if (settings.x && scroller.scrollWidth > 0){
             scroller.scrollLeft = settings.scrollLeft = scroller.scrollLeft + settings.velocity;
             if (Math.abs(settings.velocity) > 0) {
-                settings.velocity = settings.decelerate ? 
+                settings.velocity = settings.decelerate ?
                     decelerateVelocity(settings.velocity, settings.slowdown) : settings.velocity;
             }
         } else {
@@ -128,7 +131,7 @@
         if (settings.y && scroller.scrollHeight > 0){
             scroller.scrollTop = settings.scrollTop = scroller.scrollTop + settings.velocityY;
             if (Math.abs(settings.velocityY) > 0) {
-                settings.velocityY = settings.decelerate ? 
+                settings.velocityY = settings.decelerate ?
                     decelerateVelocity(settings.velocityY, settings.slowdown) : settings.velocityY;
             }
         } else {
@@ -136,7 +139,7 @@
         }
 
         setMoveClasses.call($scroller, settings, settings.deceleratingClass);
-        
+
         if (typeof settings.moved === 'function') {
             settings.moved.call($scroller, settings);
         }
@@ -150,8 +153,8 @@
     };
 
     var callOption = function(method, options) {
-        var methodFn = $.kinetic.callMethods[method]
-        ,   args = Array.prototype.slice.call(arguments)
+        var methodFn = $.kinetic.callMethods[method],
+            args = Array.prototype.slice.call(arguments)
         ;
         if (methodFn) {
             this.each(function(){
@@ -165,30 +168,35 @@
     var attachListeners = function($this, settings) {
         var element = $this[0];
         if ($.support.touch) {
-            element.addEventListener('touchstart', settings.events.touchStart, false);
-            element.addEventListener('touchend', settings.events.inputEnd, false);
-            element.addEventListener('touchmove', settings.events.touchMove,false);
+            $this.bind('touchstart', settings.events.touchStart)
+                .bind('touchend', settings.events.inputEnd)
+                .bind('touchmove', settings.events.touchMove)
+            ;
         } else {
             $this
-            .mousedown(settings.events.inputDown)
-            .mouseup(settings.events.inputEnd)
-            .mousemove(settings.events.inputMove);
+                .mousedown(settings.events.inputDown)
+                .mouseup(settings.events.inputEnd)
+                .mousemove(settings.events.inputMove)
+            ;
         }
-        $this.click(settings.events.inputClick)
-        .bind("selectstart", selectStart); // prevent selection when dragging
-        $this.bind('dragstart', settings.events.dragStart);
+        $this
+            .click(settings.events.inputClick)
+            .scroll(settings.events.scroll)
+            .bind("selectstart", selectStart) // prevent selection when dragging
+            .bind('dragstart', settings.events.dragStart);
     };
     var detachListeners = function($this, settings) {
         var element = $this[0];
         if ($.support.touch) {
-            element.removeEventListener('touchstart', settings.events.touchStart, false);
-            element.removeEventListener('touchend', settings.events.inputEnd, false);
-            element.removeEventListener('touchmove', settings.events.touchMove,false);
+            $this.unbind('touchstart', settings.events.touchStart)
+                .unbind('touchend', settings.events.inputEnd)
+                .unbind('touchmove', settings.events.touchMove);
         } else {
             $this
             .unbind('mousedown', settings.events.inputDown)
             .unbind('mouseup', settings.events.inputEnd)
-            .unbind('mousemove', settings.events.inputMove);
+            .unbind('mousemove', settings.events.inputMove)
+            .unbind('scroll', settings.events.scroll);
         }
         $this.unbind('click', settings.events.inputClick)
         .unbind("selectstart", selectStart); // prevent selection when dragging
@@ -200,20 +208,24 @@
         .addClass(ACTIVE_CLASS)
         .each(function(){
 
-            var settings = $.extend({}, DEFAULT_SETTINGS, options);
-            
-            var self = this
-            ,   $this = $(this)
-            ,   xpos
-            ,   prevXPos = false
-            ,   ypos
-            ,   prevYPos = false
-            ,   mouseDown = false
-            ,   scrollLeft
-            ,   scrollTop
-            ,   throttleTimeout = 1000 / settings.throttleFPS
-            ,   lastMove
-            ,   elementFocused
+            var self = this,
+                $this = $(this);
+
+            if ($this.data(SETTINGS_KEY)){
+                return;
+            }
+
+            var settings = $.extend({}, DEFAULT_SETTINGS, options),
+                xpos,
+                prevXPos = false,
+                ypos,
+                prevYPos = false,
+                mouseDown = false,
+                scrollLeft,
+                scrollTop,
+                throttleTimeout = 1000 / settings.throttleFPS,
+                lastMove,
+                elementFocused
             ;
 
             settings.velocity = 0;
@@ -231,9 +243,10 @@
                 settings.velocity    = capVelocity(prevXPos - xpos, settings.maxvelocity);
                 settings.velocityY   = capVelocity(prevYPos - ypos, settings.maxvelocity);
             };
-            var useTarget = function(target) {
+            var useTarget = function(e) {
+                if ($(e.target).height() - e.offsetY < 16) return false;
                 if ($.isFunction(settings.filterTarget)) {
-                    return settings.filterTarget.call(self, target) !== false;
+                    return settings.filterTarget.call(self, e.target) !== false;
                 }
                 return true;
             };
@@ -284,19 +297,23 @@
             // Events
             settings.events = {
                 touchStart: function(e){
-                    if (useTarget(e.target)) {
-                        start(e.touches[0].clientX, e.touches[0].clientY);
+                    var touch;
+                    if (useTarget(e)) {
+                        touch = e.originalEvent.touches[0];
+                        start(touch.clientX, touch.clientY);
                         e.stopPropagation();
                     }
                 },
                 touchMove: function(e){
+                    var touch;
                     if (mouseDown) {
-                        inputmove(e.touches[0].clientX, e.touches[0].clientY);
+                        touch = e.originalEvent.touches[0];
+                        inputmove(touch.clientX, touch.clientY);
                         if (e.preventDefault) {e.preventDefault();}
                     }
                 },
                 inputDown: function(e){
-                    if (useTarget(e.target)) {
+                    if (useTarget(e)) {
                         start(e.clientX, e.clientY);
                         elementFocused = e.target;
                         if (e.target.nodeName === 'IMG'){
@@ -316,6 +333,12 @@
                         if (e.preventDefault) {e.preventDefault();}
                     }
                 },
+                scroll: function(e) {
+                    if (typeof settings.moved === 'function') {
+                        settings.moved.call($this, settings);
+                    }
+                    if (e.preventDefault) {e.preventDefault();}
+                },
                 inputClick: function(e){
                     if (Math.abs(settings.velocity) > 0) {
                         e.preventDefault();
@@ -329,12 +352,17 @@
                     }
                 }
             };
-            
+
             attachListeners($this, settings);
-            $this.data(SETTINGS_KEY, settings).css("cursor", "move");
+            $this.data(SETTINGS_KEY, settings)
+                .css("cursor", settings.cursor);
 
             if (settings.triggerHardware) {
-                $this.css('-webkit-transform', 'translate3d(0,0,0)');
+                $this.css({
+                    '-webkit-transform': 'translate3d(0,0,0)',
+                    '-webkit-perspective': '1000',
+                    '-webkit-backface-visibility': 'hidden'
+                });
             }
         });
     };
@@ -344,7 +372,7 @@
         callMethods: {
             start: function(settings, options){
                 var $this = $(this);
-                    settings = $.extend(settings, options);
+                settings = $.extend(settings, options);
                 if (settings) {
                     settings.decelerate = false;
                     move($this, settings);
@@ -357,9 +385,8 @@
                 }
             },
             stop: function(settings, options){
-                settings.velocity = 0;
-                settings.velocityY = 0;
-                settings.decelerate = true;
+                var $this = $(this);
+                stop($this, settings);
             },
             detach: function(settings, options) {
                 var $this = $(this);
