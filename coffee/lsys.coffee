@@ -65,6 +65,9 @@ lsys.export = ->
 
 lsys.init = ->
   canvas = lsys.util.control("c")
+  $('a.export').click () ->
+    lsys.export()
+    false
   document.onkeydown = (ev) ->
     if ev.keyCode == 13 and ev.ctrlKey
       lsys.go()
