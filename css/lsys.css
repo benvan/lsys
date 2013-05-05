@@ -56,9 +56,9 @@ footer.row { height: 181px; bottom: 0; }
 
 .elems{
     height:143px;
-    overflow-x: auto;
-    margin:0 10px;
-    padding:5px 0px;
+    overflow-x: scroll;
+    margin:6px 10px;
+    padding:0px;
     display:block;
     white-space:nowrap;
 
@@ -130,6 +130,8 @@ footer.ticker{
 }
 
 .ticker-bar{
+    font-size:9pt;
+    padding-left: 20px;
     cursor: pointer;
     height:25px;
     border-radius: 3px 3px 0;
@@ -140,6 +142,25 @@ footer.ticker{
 
 .ticker-bar:hover{
     background: -webkit-gradient(linear, left bottom, left top, color-stop(10%, #333), color-stop(100%, #555)) !important;
+}
+
+.actions{
+    position: absolute;
+    width: 42px;
+
+    box-shadow: rgba(255,255,255, 0.1) 0 1px 0, rgba(0, 0, 0, 0.4) 1px 1px 4px 0px inset;
+
+    background: -webkit-gradient(linear, left bottom, left top, color-stop(60%, rgba(0,0,0,0)), color-stop(0%, rgba(0,0,0,0.5)));
+
+    background-color: #555;
+    border-radius: 0 2px 0 4px;
+    border-bottom:1px solid black;
+    border-left:1px solid black;
+    padding: 5px 3px 8px 10px;
+    top:1px;
+    right:1px;
+
+    text-shadow: 0 -1px 0 rgba(0,0,0, 0.25);
 }
 
 .system-info {

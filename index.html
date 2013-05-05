@@ -33,6 +33,7 @@
     </div>
     <div class="modal-body">
         <p>User submission / ratings to come soon</p>
+        <p>In the meantime, you can copy / paste the current url if you want to share your system</p>
     </div>
 </div>
 
@@ -102,7 +103,7 @@
         <div class="navbar-inner">
             <a class="brand" href="http://benvan.co.uk"><img src="img/logo_tr.png" width="30"/>l-sys</a>
 
-            <ul class="nav pull-right">
+            <ul class="nav pull-right" style="display:none">
                 <li><p id="userwelcome" class="navbar-text">Welcome, User!</p></li>
                 <li class="divider-vertical"></li>
                 <li><a id="logout" href="#" class="hide">Logout</a></li>
@@ -156,6 +157,9 @@
             <div id="systemInfo" class="system-info blue">
                 <div id="systemName" class="system-name">click-and-drag!</div>
                 <a class="system-author" data-toggle="modal" href="#myModal">benvan</a>
+            </div>
+            <div class="actions">
+                <a class="export" style="color:#ddd; font-size:8pt;"  href="#"><i class="icon icon-white icon-download-alt"></i> png</a>
             </div>
             <div id="drawingContainer">
                 <canvas id="c" height="120px"></canvas>
