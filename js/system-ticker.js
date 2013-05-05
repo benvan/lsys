@@ -3,7 +3,7 @@
         return this.each(function () {
             var el = $(this);
 
-            $.getJSON("ticker.json", "", function (data) {
+            $.getJSON("ticker_min.json", "", function (data) {
                 el.html("");
                 $(data.systems).each(function (i, sys) {
                     el.append(
