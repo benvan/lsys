@@ -7,6 +7,7 @@
     }, {
         "name": "metamorphosis",
         "url": "#it=40&l=4.44&a=-2361.3&r=C%20%3A%20%5BB%5DC%0AB%20%3A%20!AFB)!A-%0AA%20%3A%20-AF%2B",
+        "img": "lsys_metamorphosis.png",
         "author": "benvan"
     }, {
         "name": "pulse engine",
@@ -31,6 +32,7 @@
     }, {
         "name": "dance for me",
         "url": "#it=40&l=8.15&a=-1255.5&r=C%20%3A%20%5BB%5DF%7CC%0AB%20%3A%20!AB)!A-F%0AA%20%3A%20-AF%2B",
+        "img": "lsys_dance_for_me.png",
         "author": "benvan"
     }, {
         "name": "crystal orchid",
@@ -50,6 +52,7 @@
     }, {
         "name": "spirocopter",
         "url": "#it=40&l=5.31&a=-1972.4&r=C%20%3A%20CB%0AB%20%3A%20!A%5BFB%5D!A-%0AA%20%3A%20-AF%2B",
+        "img": "lsys_spirocopter.png",
         "author": "benvan"
     }, {
         "name": "kinetica",
@@ -64,10 +67,12 @@
     }, {
         "name": "angel flight",
         "url": "#it=44&l=2.46&a=-3224.9&r=C%20%3A%20B%7CVFC%0AB%20%3A%20A!BF%0AA%20%3A%20F%7C-A%7C%2BF%0AV%20%3A%20%3C%3C%3C%3C%2B",
+        "img": "lsys_angel_flight.png",
         "author": "benvan"
     }, {
         "name": "stargaze",
         "url": "#it=44&l=2.23&a=-3275.2&r=C%20%3A%20B%7CVFC%0AB%20%3A%20ABF%0AA%20%3A%20F%7C-A%7C%2BF%0AV%20%3A%20%3C%3C%3C%3C%3C%2B",
+        "img": "lsys_stargaze.png",        
         "author": "benvan"
     }, {
         "name": "mortal coil",
@@ -127,6 +132,7 @@
     }, {
         "url": "#it=40&l=9.86&a=-192.8&r=C%20%3A%20%5BB%5DF%7CC%0AB%20%3A%20!AB!A-F%0AA%20%3A%20-AF%2B",
         "name": "clockwork coil",
+        "img": "lsys_clockwork_coil.png",        
         "author": "benvan"
     }, {
         "url": "#it=31&l=20.38&a=95.4&r=L%20%3A%20SYS%0AS%20%3A%20-%7C%5BF-Y%5BS%5D%5D%2B%0AY%20%3A%20%5B%7CFFF-F%2B)Y%5D",
@@ -191,6 +197,7 @@
     }, {
         "name": "twistmas tree",
         "url": "#it=40&l=6.6&a=-480.2&r=C%20%3A%20%5BB%5DFC%0AB%20%3A%20!ABA%0AA%20%3A%20-AF-",
+        "img": "lsys_twistmas_tree.png",        
         "author": "benvan"
     }, {
         "url": "#it=80&l=7.21&a=-3185.1&r=L%20%3A%20SSS%0AS%20%3A%20%3EF%7C%2B%5BFY%5BS%5D%5D%0AY%20%3A%20F%5B-F--%7CFY%5D%2B!%0A",
