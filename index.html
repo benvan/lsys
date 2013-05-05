@@ -98,16 +98,84 @@
     </div>
 </div>
 
+<div class="modal hide fade" id="syntaxModal" style="background-color:#2F2F2F" tabindex="-1" role="dialog">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" >&times;</button>
+        <h3>Syntax</h3>
+    </div>
+    <div class="modal-body">
+        <p>The system initialises itself to the first symbol in your ruleset</p>
+        <table class="table " >
+            <thead>
+                <tr>
+                    <th class="span1-5">symbol</th>
+                    <th>meaning</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>F</td>
+                    <td>draw forwards by [size]</td>
+                </tr>
+                <tr>
+                    <td>+ / -</td>
+                    <td>rotate clockwise/anticlockwise by [angle]</td>
+                </tr>
+                <tr>
+                    <td>&gt; / &lt;</td>
+                    <td>increase/decrease [size] by 1%</td>
+                </tr>
+                <tr>
+                    <td>) / (</td>
+                    <td>increase / decrease [angle] by 5%</td>
+                </tr>
+                <tr>
+                    <td>[ , ]</td>
+                    <td>push / pop stack</br>push saves the current position of the turtle - pop will return the turtle to that state
+                    </td>
+                </tr>
+                <tr>
+                    <td>!</td>
+                    <td>flip [angle] through x-axis (kind of. actually it's angle *= -1)</td>
+                </tr>
+                <tr>
+                    <td>|</td>
+                    <td>reverse current direction (adds 180 to angle)</td>
+                </tr>
+                
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+<div class="modal hide fade" id="helpModal" style="background-color:#2F2F2F" tabindex="-1" role="dialog">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" >&times;</button>
+        <h3>What the hell is this?</h3>
+    </div>
+    <div class="modal-body">
+        <p>Welcome to lsys - the brainchild of a <a href="http://benvan.co.uk">bored programmer</a> with very poor taste in design.</p>
+        <p>
+        The white pattern you see drawn on your screen is an <a href="https://en.wikipedia.org/wiki/L-system">l-system</a>. An l-system comprises a set of atoms (each of which is assigned some meaning) and a set of production rules which expand individual atoms into  sequences of atoms. Some atoms are defined by me - the rules are entirely up to you. You write them in the box on the left, and they take the following form:
+        </p>
+        <p>[AtomToExpand] : [Sequence of atoms]</p>
+        <p>The system initialises itself to your first atom, and the follows the production rules you've defined, [levels] times, mutating itself along the way. When expansion has finished, the atoms are then interpreted as a sequence of turtle-graphics instructions. In this stage, only the special characters F,+,-,[,],&gt;,&lt;,| and ! are given any meaning - all others are ignored.</p>
+    </div>
+</div>
+
 <header class="row">
     <div class="navbar navbar-inverse navbar-static-top">
         <div class="navbar-inner">
             <a class="brand" href="http://benvan.co.uk"><img src="img/logo_tr.png" width="30"/>l-sys</a>
 
-            <ul class="nav pull-right" style="display:none">
-                <li><p id="userwelcome" class="navbar-text">Welcome, User!</p></li>
+            <ul class="nav pull-right">
+                <li><a id="help" href="#helpModal" data-toggle="modal" class="hide"><i class="icon icon-white icon-question-sign"></i> help</a></li>
+                <li><a id="syntax" href="#syntaxModal" data-toggle="modal" class="hide"><i class="icon icon-white icon-info-sign"></i> syntax</a></li>
+                <!-- <li><p id="userwelcome" class="navbar-text">Welcome, User!</p></li>
                 <li class="divider-vertical"></li>
                 <li><a id="logout" href="#" class="hide">Logout</a></li>
-                <li><a id="login" data-toggle="modal" href="#loginModal">Login</a></li>
+                <li><a id="login" data-toggle="modal" href="#loginModal">Login</a></li> -->
             </ul>
         </div>
     </div>

@@ -291,3 +291,7 @@ textarea {
 .drawing-pad canvas {
     cursor:crosshair;
 }
+
+#syntaxModal table th, #syntaxModal table td{
+    border-color:#3a3a3a;
+}
