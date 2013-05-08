@@ -1,3 +1,18 @@
+
+#stores client mouse data
+class Client
+
+  down:false
+  start:
+    x:0
+    y:0
+  now:
+    x:0
+    y:0
+  context:
+    angle:0
+    length:0
+
 lsys.util =
   log:(x) -> console.log(x)
   control:(name) -> document.getElementById(name)
