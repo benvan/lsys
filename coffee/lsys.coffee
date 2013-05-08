@@ -10,9 +10,9 @@ lsys.util =
     f = n if n instanceof Function
     s = new Date; f(); (new Date - s)
 
-lsys.client = new lsys.Client
-lsys.renderer = new lsys.Renderer(lsys.util.control("c"))
-lsys.currentSystem = lsys.LSystem.fromUrl() or new lsys.LSystem(12, 12.27, 4187.5, """
+lsys.client = new Client
+lsys.renderer = new Renderer(lsys.util.control("c"))
+lsys.currentSystem = LSystem.fromUrl() or new LSystem(12, 12.27, 4187.5, """
 L : SS
 S : F-[F-Y[S(L]]
 Y : [-|F-F+)Y]
@@ -20,7 +20,7 @@ Y : [-|F-F+)Y]
 
 lsys.go = ->
   val = (n) -> parseFloat($("##{n}").val())
-  location.hash = new lsys.LSystem(
+  location.hash = new LSystem(
      val("num")
     ,val("length")
     ,val("angle")
@@ -44,7 +44,7 @@ lsys.export = ->
   "height": b.height()+30
   })[0]
 
-  r = new lsys.Renderer(c)
+  r = new Renderer(c)
   [x,y] = [canvas.width / 2 , canvas.height / 2]
   [cx,cy] = [b.x1+(b.width() / 2), b.y1+(b.height() / 2)]
   [offx,offy] = []
@@ -121,9 +121,7 @@ lsys.init = ->
 
   window.onhashchange = ->
     if location.hash != ""
-      sys = lsys.LSystem.fromUrl()
-#      if (lsys.currentSystem.rules != sys.rules)
-#        $("#systemInfo").slideUp();
+      sys = LSystem.fromUrl()
       lsys.currentSystem.merge(sys)
       lsys.updateView()
       lsys.draw()
