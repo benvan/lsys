@@ -199,7 +199,7 @@
                 </div>
 
             </form>
-            <button class="btn btn-inverse btn-go btn-block" data-toggle="tooltip" title="ctrl-enter" onclick="lsys.go(); return false">GO</button>
+            <button class="btn btn-inverse btn-go btn-block" data-toggle="tooltip" title="ctrl-enter">GO</button>
 
 
             <!--<div id="help" class="well" style="margin-top:25px;background-color:#68717e; height:300px;">
@@ -360,7 +360,38 @@
         }
         $("button").tooltip();
 
-        lsys.draw();
+        var manager = new SystemManager(
+            Util.control("c"),
+            {}
+        );
+
+        $('a.export').click(function(){
+            manager.exportToPng();
+            return false;
+        });
+
+        $('button.btn-go').click(function() {
+            manager.syncLocation();
+            return false;
+        });
+
+        var stretchCanvas = function(){
+            var canvas = Util.control("c");
+            window.container = Util.control("drawingContainer");
+            canvas.width = container.clientWidth;
+            canvas.height = container.clientHeight;
+        };
+
+        stretchCanvas();
+        $(window).resize(function(){
+            clearTimeout(window.resizeTimer);
+            window.resizeTimer = setTimeout(function(){
+                stretchCanvas();
+                manager.draw()
+            },300);
+        });
+
+        manager.draw();
     });
 
 

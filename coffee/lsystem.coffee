@@ -17,7 +17,7 @@ class LSystem
       acc + (ruleMap[symbol] || symbol)
     ), "" for i in [1..@iterations]
 
-    @generatedElements = expr.split("").filter((e) -> true if (lsys.renderer.definitions[e]))
+    @generatedElements = expr.split("").filter((e) -> true if (Renderer.prototype.definitions[e]))
 
   merge: (system) =>
     @angle = system.angle
