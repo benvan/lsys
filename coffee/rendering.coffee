@@ -1,5 +1,10 @@
 class RenderingContext
+  initialised:false
+  state:null
+  bounding:null
+  stack:[]
   constructor: (@canvas) ->
+
   reset: (system) =>
     @initialised = true
     @state =
@@ -24,14 +29,13 @@ class Bounding
 #================================================================
 
 class Renderer
-  isDrawing:false
-  context:undefined
+  context:null
+  g:null
   stack:[]
-  g: undefined #canvas context
-
+  isDrawing:false
   constructor: (@canvas) ->
+    @context = new RenderingContext(canvas)
     @g = canvas.getContext("2d")
-    @context = new RenderingContext(@canvas)
 
   clearCanvas: =>
     if (@context.initialised)
@@ -62,7 +66,8 @@ class Renderer
 
     #draw
     _.each system.elements(), (e) =>
-      @definitions[e](@context.state, @g, @context) if @definitions[e]
+      #todo - surely don't need this now - they should be filtered
+      @definitions[e](@context.state, @g, @context)
 
     @g.stroke()
 
