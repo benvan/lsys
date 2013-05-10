@@ -42,11 +42,11 @@ class LSystem
 
     return url.substring(0,url.length-1)
 
-  @fromUrl: ->
-    return null if location.hash == ""
+  @fromUrl: (url = location.hash) ->
+    return null if url == ""
 
     params = {}
-    _.each(location.hash.substring(1).split("&").map( (x) -> x.split("=")), ([k,v]) ->
+    _.each(url.substring(1).split("&").map( (x) -> x.split("=")), ([k,v]) ->
       params[k] = v
     )
 
