@@ -355,8 +355,8 @@
             .ticker()
             .kinetic();
 
-        if (navigator.userAgent.toLowerCase().indexOf('chrom') == -1) {
-            alert("This site runs orders of magnitude faster in chrome.. Click OK to give it a go anyway, but it's going to be *extremely* slow");
+        if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
+            alert("This site runs orders of magnitude faster in chrome.. \n\nClick OK to give it a go anyway, but it's going to be *extremely* slow, it will look crap and may also explode your computer");
         }
         $("button").tooltip();
 
