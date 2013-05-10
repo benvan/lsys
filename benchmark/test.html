@@ -1,0 +1,49 @@
+<html>
+<head>
+</head>
+<body>
+  <canvas style="background-color:black" id="c" width="1000" height="800"></canvas>
+
+  <script type="text/javascript" src="../js/jquery-1.8.1.js"></script>
+  <script type="text/javascript" src="../js/jquery.ellipsis.js"></script>
+  <script type="text/javascript" src="../js/system-ticker.js"></script>
+  <script type="text/javascript" src="../js/jquery.kinetic.js"></script>
+  <script type="text/javascript" src="../js/jquery.cookie.js"></script>
+
+
+  <script type="text/javascript" src="../js/underscore.js"></script>
+  <script type="text/javascript" src="../js/bootstrap.js"></script>
+  <script type="text/javascript" src="../js/api.js"></script>
+  <script type="text/javascript" src="../js/generated/classes.js"></script>
+  <script type="text/javascript" src="../js/generated/lsystem.js"></script>
+  <script type="text/javascript" src="../js/generated/rendering.js"></script>
+  <script type="text/javascript" src="../js/generated/lsys.js"></script>
+   
+  <script>
+
+    var systems = [
+      "#it=11&l=18.67&a=-3787.3&r=L%20%3A%20SYS%0AS%20%3A%20F-%5BF-Y%5BS%5D%5D%0AY%20%3A%20%5B%7CFF%5B-((%3E%3E%3E%3E%3E%3ES%5D%2BY%5D",
+      "#it=40&l=4.44&a=-2361.3&r=C%20%3A%20%5BB%5DC%0AB%20%3A%20!AFB)!A-%0AA%20%3A%20-AF%2B",
+      "#it=41&l=3.28&a=-2756.2&r=L%20%3A%20SYL%0AS%20%3A%20F-%5BF-Y%5BS%2B%2BFFF%5B%2BF%2BF%5D%5D%0AY%20%3A%20F%5B%7CF!F%2BY%5D-F",
+      "#it=10&l=9.72&a=-1194.3&r=A%20%3A%20FFFS%5B%2BA%5D%5B-A%5DFA%0AS%20%3A%20%3ES))"
+    ];
+
+    var renderer = new Renderer(Util.control('c'));
+
+    var iter = 5;
+    
+    systems.forEach(function(systemText){
+      var total = 0;
+      var system = LSystem.fromUrl(systemText);
+      system.generate();
+      for (var i = 0; i < iter; i++){
+        var t = renderer.render(system);
+        total += t;
+      }
+      console.log(total / iter, "ms");
+    });
+
+    console.log('done');
+  </script>
+</body>
+</html>
