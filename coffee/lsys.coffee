@@ -68,6 +68,11 @@ class SystemManager
     @createBindings()
     @syncControls()
 
+  run: ->
+    if @client.down and not @renderer.isDrawing
+      @draw()
+    setTimeout((() => @run()), 10)
+
   draw: ->
     t = @renderer.render(@currentSystem)
     #todo: get from bindings
@@ -103,8 +108,6 @@ class SystemManager
         @currentSystem.angle = Util.round(x + @client.context.angle, 2)
         @currentSystem.size = Util.round(y + @client.context.length, 2)
         @syncControls()
-        if not @renderer.isDrawing
-          @draw()
 
     window.onhashchange = =>
       if location.hash != ""
