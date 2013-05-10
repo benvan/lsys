@@ -1,4 +1,5 @@
 class LSystem
+  generatedElements:null #cache
   constructor: (@iterations, @size, @angle, @rules, @name) ->
   elements: =>
     if not @generatedElements
