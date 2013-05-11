@@ -12,7 +12,7 @@ class Joystick
   active:false
   start: new Point(0,0)
   now: new Point(0,0)
-  sensitivity: new Point(500,1000000)
+  sensitivity: new Point(200,1000000)
 
   constructor: (@canvas) ->
     @g = canvas.getContext('2d')
