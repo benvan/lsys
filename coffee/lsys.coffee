@@ -5,18 +5,37 @@ DefaultSystem = new LSystem(12, 12.27, 4187.5, """
  Y : [-|F-F+)Y]
  """, "click-and-drag-me!")
 
-#stores client mouse data
-class Client
-  down:false
-  start:
-    x:0
-    y:0
-  now:
-    x:0
-    y:0
-  context:
-    angle:0
-    length:0
+class Point
+  constructor: (@x, @y) ->
+
+class Joystick
+  active:false
+  start: new Point(0,0)
+  now: new Point(0,0)
+  sensitivity: new Point(500,1000000)
+
+  constructor: (@canvas) ->
+    @g = canvas.getContext('2d')
+    @createBindings()
+
+  release: ->
+    @active = false
+
+  dx: -> (@now.x - @start.x)/@sensitivity.x
+  dy: -> (@now.y - @start.y)/@sensitivity.y
+
+  clear: -> #noop for now
+  draw: ->  #noop for now
+
+  createBindings: ->
+    @canvas.onmousedown = (ev) =>
+      @active = true
+      @start = new Point(ev.offsetX, ev.offsetY)
+      return false #disable text-selection of canvas / other elements
+
+    document.onmousemove = (ev) =>
+      @now.x = ev.offsetX
+      @now.y = ev.offsetY
 
 #yes this is an outrageous name for a .. system ... manager. buh.
 class SystemManager
@@ -24,7 +43,7 @@ class SystemManager
   renderer:null
   currentSystem:null
   constructor: (@canvas, @controls) ->
-    @client = new Client
+    @client = new Joystick(canvas)
     @renderer = new Renderer(canvas)
     @currentSystem = LSystem.fromUrl() or DefaultSystem
     @init()
@@ -69,12 +88,19 @@ class SystemManager
     @syncControls()
 
   run: ->
-    if @client.down and not @renderer.isDrawing
-      @draw()
+    if @client.active
+      @currentSystem.angle = Util.round(@currentSystem.angle + @client.dx(), 2)
+      @currentSystem.incAngle = @currentSystem.incAngle + @client.dy()
+      $("#systemInfo").removeClass('blue')
+      if not @renderer.isDrawing
+        @draw()
+      @syncControls()
     setTimeout((() => @run()), 10)
 
   draw: ->
+    @client.clear();
     t = @renderer.render(@currentSystem)
+    @client.draw();
     #todo: get from bindings
     Util.control("rendered").innerHTML = "#{t}ms"
     $("#segments").html("#{@currentSystem.elements().length}")
@@ -86,28 +112,9 @@ class SystemManager
       if ev.keyCode == 13 and ev.shiftKey
         @exportToPng()
 
-    @canvas.onmousedown = (ev) =>
-      @client.down = true
-      @client.context.length = @currentSystem.size
-      @client.context.angle = @currentSystem.angle
-      @client.start.y = ev.clientY
-      @client.start.x = ev.clientX
-      return false
-
     document.onmouseup = =>
-      @client.down = false
+      @client.release()
       location.hash = @currentSystem.toUrl()
-
-    document.onmousemove = (ev) =>
-      @client.now.x = ev.clientX
-      @client.now.y = ev.clientY
-      if (@client.down)
-        $("#systemInfo").removeClass('blue')
-        x = (@client.now.x - @client.start.x) / 10
-        y = (@client.start.y - @client.now.y) / 100
-        @currentSystem.angle = Util.round(x + @client.context.angle, 2)
-        @currentSystem.size = Util.round(y + @client.context.length, 2)
-        @syncControls()
 
     window.onhashchange = =>
       if location.hash != ""

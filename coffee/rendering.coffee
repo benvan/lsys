@@ -67,7 +67,7 @@ class Renderer
     #draw
     _.each system.elements(), (e) =>
       #todo - surely don't need this now - they should be filtered
-      @definitions[e](@context.state, @g, @context)
+      @definitions[e](@context.state, @g, @context, system)
 
     @g.stroke()
 
@@ -118,11 +118,11 @@ class Renderer
     "|": (state) -> state.angle += 180
     #todo: push stack changes into RenderingContext class
     "[": (state,g, context) -> context.stack.push(cloneState state)
-    "]": (state,g, context) -> context.state = state= context.stack.pop(); g.moveTo(state.x,state.y)
+    "]": (state,g, context) -> context.state = state = context.stack.pop(); g.moveTo(state.x,state.y)
     "!": (state) -> state.incAngle *= -1
-    "(": (state) -> state.incAngle *= 0.95
-    ")": (state) -> state.incAngle *= 1.05
-    "<": (state) -> state.incLength *= 1.01
-    ">": (state) -> state.incLength *= 0.99
+    "(": (state, a, b, system) -> state.incAngle *= (1 - system.incAngle)
+    ")": (state, a, b, system) -> state.incAngle *= (1 + system.incAngle)
+    "<": (state, a, b, system) -> state.incLength *= (1 + system.incLength)
+    ">": (state, a, b, system) -> state.incLength *= (1 - system.incLength)
     }
   )()
