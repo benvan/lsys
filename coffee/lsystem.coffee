@@ -1,5 +1,8 @@
 class LSystem
   generatedElements:null #cache
+  incAngle: 0.05
+  incLength: 0.01
+  rotAngle:180
   constructor: (@iterations, @size, @angle, @rules, @name) ->
   elements: =>
     if not @generatedElements
