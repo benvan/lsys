@@ -1,0 +1,9 @@
+#!/bin/bash
+node_modules/json-minify/index.js ticker.json > out; cat out | sed 's/,"author":"benvan"//g' > ticker_min.json; rm out
+tar -cf lsys.tar css/*.css favicon.ico img index.html js ticker.json ticker_min.json
+rm -rf target/lsys
+mkdir -p target/lsys
+tar -xf lsys.tar -C target/lsys
+rm lsys.tar
+tar -cf lsys.tar -C target lsys
+
