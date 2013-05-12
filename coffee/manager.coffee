@@ -1,22 +1,24 @@
 
-DefaultSystem = new LSystem(12, 12.27, 4187.5, """
- L : SS
- S : F-[F-Y[S(L]]
- Y : [-|F-F+)Y]
- """, "click-and-drag-me!")
+DefaultSystem = new LSystem({
+    iterations: 12
+    size: 12.27
+    angle: 4187.5
+  }
+  ,"L : SS\nS : F-[F-Y[S(L]]\nY : [-|F-F+)Y]\n"
+  ,"click-and-drag-me!"
+)
 
 class InputHandler
-  snapshot: null # lsystem as it was when joystick activated
+  snapshot: null # lsystem params as they were was when joystick activated
   constructor: (@keystate, @joystick) ->
-  update: (lsystem) =>
+  update: (params) =>
     return if not @joystick.active
     if (@keystate.ctrl)
-      lsystem.angle = Util.round(@snapshot.angle + @joystick.dx(), 2)
-      console.log(lsystem.incAngle, @snapshot.incAngle)
-      lsystem.incAngle = @snapshot.incAngle + @joystick.dy()
+      params.angle = Util.round(@snapshot.angle + @joystick.dx(50), 2)
+      params.angleGrowth = @snapshot.angleGrowth + @joystick.dy()
     else
-      lsystem.angle = Util.round(lsystem.angle + @joystick.dx(), 2)
-      lsystem.incAngle += @joystick.dy()
+      params.angle = Util.round(params.angle + @joystick.dx(), 2)
+      params.angleGrowth += @joystick.dy()
 
 
 #yes this is an outrageous name for a .. system ... manager. buh.
@@ -32,27 +34,33 @@ class SystemManager
     @inputHandler = new InputHandler(@keystate, @joystick)
 
     @joystick.onRelease = => location.hash = @currentSystem.toUrl()
-    @joystick.onActivate = => @inputHandler.snapshot = @currentSystem.clone()
+    @joystick.onActivate = => @inputHandler.snapshot = _.clone(@currentSystem.params)
 
     @renderer = new Renderer(canvas)
     @currentSystem = LSystem.fromUrl() or DefaultSystem
     @init()
 
-  syncLocation: ->
+  syncLocation: -> location.hash = @currentSystem.toUrl()
+
+  updateFromControls: ->
     val = (n) -> parseFloat($("##{n}").val())
-    location.hash = new LSystem(
-       val("num")
-      ,val("length")
-      ,val("angle")
+    @currentSystem = new LSystem(
+      {
+        iterations: val("num")
+        size:       val("length")
+        sizeGrowth: @currentSystem.params.sizeGrowth
+        angle:      val("angle")
+        angleGrowth:@currentSystem.params.angleGrowth
+      }
       ,$("#rules").val()
-    ).toUrl()
+    )
 
   syncControls: ->
-    sys = @currentSystem
-    $("#num").val(sys.iterations)
-    $("#length").val(sys.size)
-    $("#angle").val(sys.angle)
-    $("#rules").val(sys.rules)
+    params = @currentSystem.params
+    $("#num").val(params.iterations)
+    $("#length").val(params.size)
+    $("#angle").val(params.angle)
+    $("#rules").val(@currentSystem.rules)
 
   exportToPng: ->
     canvas = Util.control("c")
@@ -78,7 +86,7 @@ class SystemManager
     @syncControls()
 
   run: ->
-    @inputHandler.update(@currentSystem)
+    @inputHandler.update(@currentSystem.params)
     if @joystick.active and not @renderer.isDrawing
       @draw()
       @syncControls()
@@ -93,6 +101,7 @@ class SystemManager
   createBindings: ->
     document.onkeydown = (ev) =>
       if ev.keyCode == 13 and ev.ctrlKey
+        @updateFromControls()
         @syncLocation()
       if ev.keyCode == 13 and ev.shiftKey
         @exportToPng()

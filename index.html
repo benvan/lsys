@@ -260,6 +260,7 @@
 <script type="text/javascript" src="js/generated/rendering.js"></script>
 <script type="text/javascript" src="js/generated/manager.js"></script>
 <script type="text/javascript">
+    var manager; // Don't judge. I want to get ahold of it in the console!
     $(document).ready(function () {
 
         var clearForm = function(){
@@ -361,7 +362,7 @@
         }
         $("button").tooltip();
 
-        var manager = new SystemManager(
+        manager = new SystemManager(
             Util.control("c"),
             {}
         );
@@ -374,6 +375,7 @@
         });
 
         $('button.btn-go').click(function() {
+            manager.updateFromControls();
             manager.syncLocation();
             return false;
         });
