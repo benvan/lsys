@@ -56,7 +56,7 @@ class Joystick
     @canvas.onmousedown = (ev) =>
       @active = true
       @start = new Point(ev.offsetX, ev.offsetY)
-    return false #disable text-selection of canvas / other elements
+      return false #disable text-selection of canvas / other elements
 
     document.onmousemove = (ev) =>
       @now.x = ev.offsetX
