@@ -8,6 +8,32 @@ DefaultSystem = new LSystem(12, 12.27, 4187.5, """
 class Point
   constructor: (@x, @y) ->
 
+class Key
+  @ctrl: 17
+  @shift: 16
+  @alt: 18
+  @space: 32
+  @enter: 13
+
+class KeyState
+  keys:{}
+  codeToKey: [] #maps int -> keyname for reverse lookup
+  constructor: ->
+    for key of Key then do =>
+      @[key] = false
+      @codeToKey[Key[key]] = key
+    @createBindings()
+
+  createBindings: ->
+    setDown = (val) => (ev) =>
+      keyname = @codeToKey[ev.keyCode]
+      console.log(keyname)
+      @[keyname] = true if keyname
+      for key of KeyState then do -> console.log(key)
+
+    document.addEventListener("keydown", setDown(true))
+    document.addEventListener("keyup", setDown(false))
+
 class Joystick
   active:false
   start: new Point(0,0)
@@ -40,10 +66,12 @@ class Joystick
 #yes this is an outrageous name for a .. system ... manager. buh.
 class SystemManager
   client:null
+  keystate: null
   renderer:null
   currentSystem:null
   constructor: (@canvas, @controls) ->
     @client = new Joystick(canvas)
+    @keystate = new KeyState
     @renderer = new Renderer(canvas)
     @currentSystem = LSystem.fromUrl() or DefaultSystem
     @init()
