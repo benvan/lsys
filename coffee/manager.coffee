@@ -5,15 +5,27 @@ DefaultSystem = new LSystem(12, 12.27, 4187.5, """
  Y : [-|F-F+)Y]
  """, "click-and-drag-me!")
 
+class InputHandler
+  snapshot: null # lsystem as it was when joystick activated
+  constructor: (@keystate, @joystick) ->
+  update: (lsystem) =>
+    if (@joystick.active)
+      lsystem.angle = Util.round(lsystem.angle + @joystick.dx(), 2)
+      lsystem.incAngle += @joystick.dy()
+
+
 #yes this is an outrageous name for a .. system ... manager. buh.
 class SystemManager
-  client:null
+  joystick:null
   keystate: null
+  inputHandler: null
   renderer:null
   currentSystem:null
   constructor: (@canvas, @controls) ->
-    @client = new Joystick(canvas)
+    @joystick = new Joystick(canvas)
+    @joystick.onRelease = => location.hash = @currentSystem.toUrl()
     @keystate = new KeyState
+    @inputHandler = new InputHandler(@keystate, @joystick)
     @renderer = new Renderer(canvas)
     @currentSystem = LSystem.fromUrl() or DefaultSystem
     @init()
@@ -58,18 +70,14 @@ class SystemManager
     @syncControls()
 
   run: ->
-    if @client.active
-      @currentSystem.angle = Util.round(@currentSystem.angle + @client.dx(), 2)
-      @currentSystem.incAngle = @currentSystem.incAngle + @client.dy()
-      if not @renderer.isDrawing
-        @draw()
+    @inputHandler.update(@currentSystem)
+    if @joystick.active and not @renderer.isDrawing
+      @draw()
       @syncControls()
     setTimeout((() => @run()), 10)
 
   draw: ->
-    @client.clear();
     t = @renderer.render(@currentSystem)
-    @client.draw();
     #todo: get from bindings
     Util.control("rendered").innerHTML = "#{t}ms"
     $("#segments").html("#{@currentSystem.elements().length}")
@@ -80,10 +88,6 @@ class SystemManager
         @syncLocation()
       if ev.keyCode == 13 and ev.shiftKey
         @exportToPng()
-
-    document.onmouseup = =>
-      @client.release()
-      location.hash = @currentSystem.toUrl()
 
     window.onhashchange = =>
       if location.hash != ""

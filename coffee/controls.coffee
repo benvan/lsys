@@ -43,8 +43,7 @@ class Joystick
     @g = canvas.getContext('2d')
     @createBindings()
 
-  release: ->
-    @active = false
+  onRelease: -> # noop unless overriden
 
   dx: -> (@now.x - @start.x)/@sensitivity.x
   dy: -> (@now.y - @start.y)/@sensitivity.y
@@ -56,7 +55,11 @@ class Joystick
     @canvas.onmousedown = (ev) =>
       @active = true
       @start = new Point(ev.pageX, ev.pageY)
-      return false #disable text-selection of canvas / other elements
+      return false # disable text-selection of canvas / other elements
+
+    document.onmouseup = =>
+      @active = false
+      @onRelease()
 
     document.onmousemove = (ev) =>
       @now.x = ev.pageX
