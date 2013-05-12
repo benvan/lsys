@@ -9,7 +9,12 @@ class InputHandler
   snapshot: null # lsystem as it was when joystick activated
   constructor: (@keystate, @joystick) ->
   update: (lsystem) =>
-    if (@joystick.active)
+    return if not @joystick.active
+    if (@keystate.ctrl)
+      lsystem.angle = Util.round(@snapshot.angle + @joystick.dx(), 2)
+      console.log(lsystem.incAngle, @snapshot.incAngle)
+      lsystem.incAngle = @snapshot.incAngle + @joystick.dy()
+    else
       lsystem.angle = Util.round(lsystem.angle + @joystick.dx(), 2)
       lsystem.incAngle += @joystick.dy()
 
@@ -23,9 +28,12 @@ class SystemManager
   currentSystem:null
   constructor: (@canvas, @controls) ->
     @joystick = new Joystick(canvas)
-    @joystick.onRelease = => location.hash = @currentSystem.toUrl()
     @keystate = new KeyState
     @inputHandler = new InputHandler(@keystate, @joystick)
+
+    @joystick.onRelease = => location.hash = @currentSystem.toUrl()
+    @joystick.onActivate = => @inputHandler.snapshot = @currentSystem.clone()
+
     @renderer = new Renderer(canvas)
     @currentSystem = LSystem.fromUrl() or DefaultSystem
     @init()

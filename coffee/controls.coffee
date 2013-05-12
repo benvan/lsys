@@ -24,9 +24,7 @@ class KeyState
   createBindings: ->
     setDown = (val) => (ev) =>
       keyname = @codeToKey[ev.keyCode]
-      console.log(keyname)
-      @[keyname] = true if keyname
-      for key of KeyState then do -> console.log(key)
+      @[keyname] = val if keyname
 
     document.addEventListener("keydown", setDown(true))
     document.addEventListener("keyup", setDown(false))
@@ -43,6 +41,7 @@ class Joystick
     @g = canvas.getContext('2d')
     @createBindings()
 
+  onActivate: -> # noop unless overriden
   onRelease: -> # noop unless overriden
 
   dx: -> (@now.x - @start.x)/@sensitivity.x
@@ -53,6 +52,7 @@ class Joystick
 
   createBindings: ->
     @canvas.onmousedown = (ev) =>
+      @onActivate()
       @active = true
       @start = new Point(ev.pageX, ev.pageY)
       return false # disable text-selection of canvas / other elements

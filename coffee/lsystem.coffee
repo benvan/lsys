@@ -32,6 +32,9 @@ class LSystem
       @iterations = system.iterations
       @generate()
 
+  # this is not the most efficient of methods... (it's also currently broken - inc{Angle,Length} omitted)
+  clone: -> return new LSystem.fromUrl(@toUrl())
+
   toUrl: =>
     params =
       it: @iterations
