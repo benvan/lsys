@@ -8,11 +8,11 @@ class RenderingContext
   reset: (system) =>
     @initialised = true
     @state =
-      x:@canvas.width/2,
-      y:@canvas.height/2,
-      angle:-90,
-      incAngle:system.angle
-      incLength:system.size
+      x:              @canvas.width/2,
+      y:              @canvas.height/2,
+      orientation:    -90,
+      stepAngle:      system.params.angle
+      stepSize:       system.params.size
     @bounding = new Bounding
     @stack = []
 
@@ -67,7 +67,7 @@ class Renderer
     #draw
     _.each system.elements(), (e) =>
       #todo - surely don't need this now - they should be filtered
-      @definitions[e](@context.state, @g, @context, system)
+      @definitions[e](@context.state, system.params, @g, @context)
 
     @g.stroke()
 
@@ -83,17 +83,17 @@ class Renderer
     len = ang = s = c = 0
     # expanded (explicit) for efficiency
     cloneState = (c) -> {
-      x:c.x,
-      y:c.y,
-      angle:c.angle,
-      incAngle:c.incAngle,
-      incLength:c.incLength
+      x:              c.x,
+      y:              c.y,
+      orientation:    c.orientation,
+      stepAngle:      c.stepAngle,
+      stepSize:       c.stepSize
     }
     return {
-    "F": (state, g, context) ->
+    "F": (state, params, g, context) ->
 
-      len = state.incLength
-      ang = ((state.angle%360) / 180) * pi
+      len = state.stepSize
+      ang = ((state.orientation%360) / 180) * pi #todo - stop storing degrees?!
       s = sin(ang)
       c = cos(ang)
       state.x += c*len
@@ -113,16 +113,16 @@ class Renderer
 
       g.lineTo(state.x,state.y)
 
-    "+": (state) -> state.angle += state.incAngle
-    "-": (state) -> state.angle -= state.incAngle
-    "|": (state) -> state.angle += 180
+    "+": (state) -> state.orientation += state.stepAngle
+    "-": (state) -> state.orientation -= state.stepAngle
+    "|": (state) -> state.orientation += 180
     #todo: push stack changes into RenderingContext class
-    "[": (state,g, context) -> context.stack.push(cloneState state)
-    "]": (state,g, context) -> context.state = state = context.stack.pop(); g.moveTo(state.x,state.y)
-    "!": (state) -> state.incAngle *= -1
-    "(": (state, a, b, system) -> state.incAngle *= (1 - system.incAngle)
-    ")": (state, a, b, system) -> state.incAngle *= (1 + system.incAngle)
-    "<": (state, a, b, system) -> state.incLength *= (1 + system.incLength)
-    ">": (state, a, b, system) -> state.incLength *= (1 - system.incLength)
+    "[": (state, params, g, context) -> context.stack.push(cloneState state)
+    "]": (state, params, g, context) -> context.state = state = context.stack.pop(); g.moveTo(state.x,state.y)
+    "!": (state) -> state.stepAngle *= -1
+    "(": (state, params) -> state.stepAngle *= (1 - params.angleGrowth)
+    ")": (state, params) -> state.stepAngle *= (1 + params.angleGrowth)
+    "<": (state, params) -> state.stepSize *= (1 + params.sizeGrowth)
+    ">": (state, params) -> state.stepSize *= (1 - params.sizeGrowth)
     }
   )()
