@@ -55,11 +55,11 @@ class Joystick
   createBindings: ->
     @canvas.onmousedown = (ev) =>
       @active = true
-      @start = new Point(ev.offsetX, ev.offsetY)
+      @start = new Point(ev.pageX, ev.pageY)
       return false #disable text-selection of canvas / other elements
 
     document.onmousemove = (ev) =>
-      @now.x = ev.offsetX
-      @now.y = ev.offsetY
+      @now.x = ev.pageX
+      @now.y = ev.pageY
 
 # ===============================
