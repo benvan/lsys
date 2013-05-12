@@ -91,7 +91,6 @@ class SystemManager
     if @client.active
       @currentSystem.angle = Util.round(@currentSystem.angle + @client.dx(), 2)
       @currentSystem.incAngle = @currentSystem.incAngle + @client.dy()
-      $("#systemInfo").removeClass('blue')
       if not @renderer.isDrawing
         @draw()
       @syncControls()
