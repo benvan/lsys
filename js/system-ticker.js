@@ -1,9 +1,9 @@
 (function ($) {
-    $.fn.ticker = function () {
+    $.fn.ticker = function (location) {
         return this.each(function () {
             var el = $(this);
 
-            $.getJSON("ticker_min.json", "", function (data) {
+            $.getJSON(location, "", function (data) {
                 el.html("");
                 $(data.systems).each(function (i, sys) {
                     el.append(
