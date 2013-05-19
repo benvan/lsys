@@ -1,5 +1,15 @@
 {
     "systems": [{
+        "name": "re-coil",
+        "url": "#it=30&l=4.34&sg=0.01&a=-3832.29&ag=0.08145300000000245&r=L%20%3A%20S%0AS%20%3A%20F%2B%5BF-Y%5BS%5D%5DF)G%0AY%20%3A--%5B%7CF-F--FY%5D-%0AG%3A%20FGF%5B%2BF%5D%2BY",
+        "img": "lsys_re-coil.png",
+        "author": "benvan"
+    }, {
+        "name": "flyweight",
+        "url": "#it=30&l=4.34&sg=0.01&a=-3869.97&ag=0.11540900000000301&r=L%20%3A%20S%0AS%20%3A%20F%2B%5BF-Y%5BS%5D%5DF)G%0AY%20%3A--%5B%7CF-F--FY%5D-%0AG%3A%20FGF%5B%2BF%5D%2BY",
+        "img": "lsys_flyweight.png",
+        "author": "benvan"
+    }, {
         "name": "ordered chaos",
         "url": "#it=11&l=18.67&a=-3787.3&r=L%20%3A%20SYS%0AS%20%3A%20F-%5BF-Y%5BS%5D%5D%0AY%20%3A%20%5B%7CFF%5B-((%3E%3E%3E%3E%3E%3ES%5D%2BY%5D",
         "img": "lsys_ordered_chaos.png",
@@ -133,6 +143,11 @@
         "name": "dragon spirograph",
         "img": "lsys_dragon_spirograph.png",
         "author": "benvan"
+    }, {
+        "url" : "#it=15&l=5&sg=0.071&a=-270&ag=0.006439999999999308&r=Z%20%3A%20%2BS.T.A.R.T.%3E%3EZ%0AS%20%3A%20%5B4-2-4%2B2%2B4%5D%0AT%20%3A%20%5B2-4%5B-2%5D%5B%2B2%5D%5D%0AA%20%3A%20%5B-4%2B4%2B2%5B%2B4%5D2%5D%0AR%20%3A%20%5B-4%2B4%2B2%2BF%5B-2%5D3%5D%0A.%20%3A%204F2%0A4%20%3A%20FFFF%0A3%20%3A%20FFF%0A2%20%3A%20FF",
+        "name" : "S.T.A.R.T",
+        "img" : "lsys_start.png",
+        "author" : "benvan"
     }, {
         "url": "#it=100&l=2.28&a=-2341.8&r=L%20%3A%20SYS%0AS%20%3A%20F%7C%2B%5BF-Y%5BS%5D%5D%0AY%20%3A%20%5B--((F-F%2B)FY%5D%2B%0A",
         "name": "gemini",
