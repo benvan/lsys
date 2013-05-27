@@ -1,0 +1,12 @@
+#!/bin/bash
+
+npm install
+mkdir -p js/generated
+
+echo running on http://localhost:8000
+echo
+
+(node_modules/http-server/bin/http-server . -p 8000 &> /dev/null)
+
+(node_modules/jitter/bin/jitter -b coffee js/generated)
+
