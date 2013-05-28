@@ -6,7 +6,20 @@ mkdir -p js/generated
 echo running on http://localhost:8000
 echo
 
-(node_modules/http-server/bin/http-server . -p 8000 &> /dev/null)
+function handle_sigint()
+{
+    echo Shutting down...
+    for proc in `jobs -p`
+    do
+        kill $proc
+    done
+}
 
-(node_modules/jitter/bin/jitter -b coffee js/generated)
+trap handle_sigint SIGINT
+
+(node_modules/http-server/bin/http-server . -p 8000 &> /dev/null) &
+
+(node_modules/jitter/bin/jitter -b coffee js/generated) &
+
+wait
 
