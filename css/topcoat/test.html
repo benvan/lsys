@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1"> <!-- Google Chrome Frame -->
+    <title>lsys</title>
+    <link href="http://topcoat.io/topcoat/doc/css/normalize.css" rel="stylesheet" type="text/css"/>
+    <link href="css/topcoat-desktop.css" rel="stylesheet" type="text/css"/>
+    <style>
+        .bg-dark{
+            background-color:#353535;
+        }
+
+        textarea.text-field, input.text-field{
+            width:100%;
+            min-width:30px;
+        }
+
+        textarea.text-field{
+            height:auto;
+        }
+        tr td:first-child{
+            width:38px;
+        }
+        td:first-child{
+            vertical-align: top;
+            padding-top:4px;
+        }
+        td.split{
+            height: 1px;
+            margin: 0;
+            padding: 0;
+        }
+        td.split div{
+            border-bottom: 1px solid #595959;
+            border-top: 1px solid #353B3B;
+            margin-top:2px;
+            margin-bottom:3px;
+        }
+
+        ul{
+            list-style-type: none;
+            padding:0;
+            margin:0;
+        }
+        li{
+            display:inline-block;
+            padding: 0 12px;
+            height:150px;
+        }
+
+        .left{
+            bottom: 161px;
+            cursor: default;
+            left: 0;
+            overflow-y: auto;
+            padding: 10px 10px 0;
+            position: absolute;
+            border-right:1px solid #333;
+            border-bottom:1px solid #333;
+            top: 0;
+            width: 199px;
+        }
+
+        .right{
+            bottom: 161px;
+            left: 220px;
+            margin: 0;
+            padding: 0 100px 60px 40px;
+            position: absolute;
+            right: 0;
+            top: 0;
+            border-left:1px solid #555;
+            background-color: #252828;
+        }
+        .bottom{
+            position:absolute;
+            padding:0;
+            bottom:0;
+            left:0;
+            right:0;
+            height:160px;
+            border-top:1px solid #666;
+        }
+
+        .controls{
+            padding:4px 10px;
+        }
+
+    </style>
+</head>
+<body class="bg-slategray">
+
+<div class="left">
+
+    <table>
+        <thead>
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr class="small">
+            <td>size</td>
+            <td><input type="text" class="text-field dark" value="4.35"></td>
+            <td><input type="text" class="text-field dark" value="0.005"></td>
+        </tr>
+        <tr class="small">
+            <td>angle</td>
+            <td><input type="text" class="text-field dark" value="-3832.29"></td>
+            <td><input type="text" class="text-field dark" value="0.05"></td>
+
+        </tr>
+        <tr><td colspan="3" class="split">
+            <div></div>
+        </td>
+        <tr>
+            <td>levels</td>
+            <td colspan="2"><input type="text" class="text-field dark" value="30"></td>
+        </tr>
+        <tr>
+            <td>rules</td>
+            <td colspan="2">
+                <textarea class="text-field dark" rows="6"></textarea>
+
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+<div class="bottom bg-slategray">
+    <div class="controls">
+        <ul>
+            <li>
+                <table>
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr>
+                        <td>levels</td>
+                        <td ><input type="text" class="text-field dark" value="30"></td>
+                    </tr>
+                    <tr>
+                        <td>rules</td>
+                        <td >
+                            <textarea class="text-field dark" rows="6"></textarea>
+
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </li>
+            <li>
+                <table>
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr class="small">
+                        <td>size</td>
+                        <td><input type="text" class="text-field dark" value="4.35"></td>
+                        <td><input type="text" class="text-field dark" value="0.005"></td>
+                    </tr>
+                    <tr class="small">
+                        <td>angle</td>
+                        <td><input type="text" class="text-field dark" value="-3832.29"></td>
+                        <td><input type="text" class="text-field dark" value="0.05"></td>
+
+                    </tr>
+                    </tbody>
+                </table>
+            </li>
+        </ul>
+    </div>
+
+
+</div>
+<div class="right">
+
+</div>
+
+</body>
+</html>
