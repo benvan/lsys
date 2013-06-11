@@ -5,99 +5,60 @@
     <title>lsys</title>
     <link href="css/topcoat/css/normalize.css" rel="stylesheet" type="text/css"/>
     <link href="sass/test.css" rel="stylesheet" type="text/css"/>
-    <style>
-
-        body{
-            font:Helvetica;
-            font-size:8pt;
-        }
-
-        textarea.text-field, input.text-field{
-            width:100%;
-            min-width:30px;
-        }
-
-        tr.small td{
-            width:50px;
-            padding-right:11px;
-        }
-
-        textarea.text-field{
-            height:auto;
-        }
-        tr td:first-child{
-            width:38px;
-        }
-        td:first-child{
-            vertical-align: top;
-            padding-top:4px;
-        }
-        td.split{
-            height: 1px;
-            margin: 0;
-            padding: 0;
-        }
-        td.split div{
-            border-bottom: 1px solid #595959;
-            border-top: 1px solid #353B3B;
-            margin-top:2px;
-            margin-bottom:3px;
-        }
-
-        .left{
-            bottom: 161px;
-            cursor: default;
-            left: 0;
-            overflow-y: auto;
-            padding: 10px 10px 0;
-            position: absolute;
-            border-right:1px solid #333;
-            border-bottom:1px solid #333;
-            top: 0;
-            width: 199px;
-        }
-
-        .right{
-            bottom: 161px;
-            left: 220px;
-            margin: 0;
-            padding: 0 100px 60px 40px;
-            position: absolute;
-            right: 0;
-            top: 0;
-            border-left:1px solid #555;
-            background-color: #252828;
-        }
-        .bottom{
-            position:absolute;
-            padding:0;
-            bottom:0;
-            left:0;
-            right:0;
-            height:160px;
-            border-top:1px solid #666;
-        }
-
-
-    </style>
 </head>
 <body class="bg-slategray">
+
+<div class="top">hello</div>
 
 <div class="left">
 
     <ul class="controls">
+
+        <li class="label">sensitivity</li>
+
+        <li>
+            <ul class="control-row single">
+                <li>x</li><!--
+             --><li><input type="text" value="4.35"></li>
+            </ul>
+            <ul class="control-row single">
+                <li>y</li><!--
+             --><li><input type="text" value="4.35"></li>
+            </ul>
+        </li>
+
+        <li class="label">variables</li>
+
         <li>
             <ul class="control-row">
-                <li>size</li>
-                <li><input type="text" value="4.35"></li>
-                <li><input type="text" value="4.35"></li>
+                <li>size</li><!--
+             --><li><input type="text" value="4.35"></li><!--
+             --><li><input type="text" value="4.35"></li>
             </ul>
         </li>
         <li>
             <ul class="control-row">
-                <li>angle</li>
-                <li><input type="text" value="4.35"></li>
-                <li><input type="text" value="4.35"></li>
+                <li>angle</li><!--
+             --><li><input type="text" value="4.35"></li><!--
+             --><li><input type="text" value="4.35"></li>
+            </ul>
+        </li>
+
+        <li class="label">system</li>
+
+        <li>
+            <ul class="control-row single">
+                <li>levels</li><!--
+             --><li><input type="text" value="4.35"></li>
+            </ul>
+            <ul class="control-row">
+                <li>rules</li><!--
+             --><li>
+                    <textarea rows="12">
+L : SS
+S : F-[F-Y[S(L]]
+Y : [-|F-F+)Y]</textarea>
+                </li>
             </ul>
         </li>
     </ul>
