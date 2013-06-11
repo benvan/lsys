@@ -3,9 +3,15 @@
 <head>
     <meta charset="utf-8">
     <title>lsys</title>
-    <link href="http://topcoat.io/topcoat/doc/css/normalize.css" rel="stylesheet" type="text/css"/>
-    <link href="css/topcoat/css/topcoat-desktop.css" rel="stylesheet" type="text/css"/>
+    <link href="css/topcoat/css/normalize.css" rel="stylesheet" type="text/css"/>
+    <link href="sass/test.css" rel="stylesheet" type="text/css"/>
     <style>
+
+        body{
+            font:Helvetica;
+            font-size:8pt;
+        }
+
         textarea.text-field, input.text-field{
             width:100%;
             min-width:30px;
@@ -13,6 +19,7 @@
 
         tr.small td{
             width:50px;
+            padding-right:11px;
         }
 
         textarea.text-field{
@@ -35,17 +42,6 @@
             border-top: 1px solid #353B3B;
             margin-top:2px;
             margin-bottom:3px;
-        }
-
-        ul{
-            list-style-type: none;
-            padding:0;
-            margin:0;
-        }
-        li{
-            display:inline-block;
-            padding: 0 12px;
-            height:150px;
         }
 
         .left{
@@ -82,12 +78,6 @@
             border-top:1px solid #666;
         }
 
-        .controls{
-            padding:4px 10px;
-            overflow-x:scroll;
-            display:block;
-            white-space:nowrap;
-        }
 
     </style>
 </head>
@@ -95,101 +85,25 @@
 
 <div class="left">
 
-    <table>
-        <thead>
-        <tr>
-            <th>value</th>
-            <th>growth</th>
-            <th>sensitivity</th>
-        </tr>
-        </thead>
-        <tbody>
-
-        <tr class="small">
-            <td>size</td>
-            <td><input type="text" class="text-field dark" value="4.35"></td>
-            <td><input type="text" class="text-field dark" value="0.005"></td>
-        </tr>
-        <tr class="small">
-            <td>angle</td>
-            <td><input type="text" class="text-field dark" value="-3832.29"></td>
-            <td><input type="text" class="text-field dark" value="0.05"></td>
-
-        </tr>
-        <tr><td colspan="3" class="split">
-            <div></div>
-        </td>
-        <tr>
-            <td>levels</td>
-            <td colspan="2"><input type="text" class="text-field dark" value="30"></td>
-        </tr>
-        <tr>
-            <td>rules</td>
-            <td colspan="2">
-                <textarea class="text-field dark" rows="6"></textarea>
-
-            </td>
-        </tr>
-        </tbody>
-    </table>
+    <ul class="controls">
+        <li>
+            <ul class="control-row">
+                <li>size</li>
+                <li><input type="text" value="4.35"></li>
+                <li><input type="text" value="4.35"></li>
+            </ul>
+        </li>
+        <li>
+            <ul class="control-row">
+                <li>angle</li>
+                <li><input type="text" value="4.35"></li>
+                <li><input type="text" value="4.35"></li>
+            </ul>
+        </li>
+    </ul>
 
 </div>
 <div class="bottom bg-slategray">
-    <div class="controls">
-        <ul>
-            <li>
-                <table>
-                    <thead>
-                    <tr>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-
-                    <tr>
-                        <td>levels</td>
-                        <td ><input type="text" class="text-field dark" value="30"></td>
-                    </tr>
-                    <tr>
-                        <td>rules</td>
-                        <td >
-                            <textarea class="text-field dark" rows="6"></textarea>
-
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </li>
-            <li>
-                <table>
-                    <thead>
-                    <tr>
-                        <th></th>
-                        <th>value</th>
-                        <th>growth</th>
-                        <th>sensitivity</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr class="small">
-                        <td>size</td>
-                        <td><input type="text" class="text-field dark" value="4.35"></td>
-                        <td><input type="text" class="text-field dark" value="0.005"></td>
-                        <td><input type="text" class="text-field dark" value="0.005"></td>
-                    </tr>
-                    <tr class="small">
-                        <td>angle</td>
-                        <td><input type="text" class="text-field dark" value="-3832.29"></td>
-                        <td><input type="text" class="text-field dark" value="0.05"></td>
-                        <td><input type="text" class="text-field dark" value="0.005"></td>
-
-                    </tr>
-                    </tbody>
-                </table>
-            </li>
-        </ul>
-    </div>
 
 
 </div>

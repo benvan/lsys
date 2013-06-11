@@ -1,0 +1,42 @@
+body{
+  font-family:verdana;
+  font-weight:bold;
+  color:#888;
+  text-shadow: 0.1em 0.1em #222;
+}
+
+ul{
+  list-style-type: none;
+  padding:0;
+  margin:0;
+}
+li{
+  display:inline-block;
+  padding: 0;
+}
+input[type=text]{
+  border:1px solid #222;
+  background-color:#444;
+  font-size:8pt;
+  padding:2px 5px;
+}
+
+.left{
+  background-color:#333;
+}
+
+
+ul.controls{
+  li{
+    display:inline-block;
+  }
+  ul.control-row{
+    padding:5px;
+    input[type=text]{
+      width:50px;
+    }
+    li:first-child {
+      width:50px;
+    }
+  }
+}
