@@ -1,8 +1,12 @@
+$menu-color: #333;
+$top:25px;
+
 body{
-  font-family:verdana;
-  font-weight:bold;
-  color:#888;
+  font-family:helvetica;
+  color:#aaa;
   text-shadow: 0.1em 0.1em #222;
+  letter-spacing: 1px;
+  font-size:8pt;
 }
 
 ul{
@@ -14,29 +18,109 @@ li{
   display:inline-block;
   padding: 0;
 }
-input[type=text]{
-  border:1px solid #222;
-  background-color:#444;
-  font-size:8pt;
-  padding:2px 5px;
-}
 
 .left{
-  background-color:#333;
+  bottom: 161px;
+  cursor: default;
+  left: 0;
+  overflow-y: auto;
+  padding: 0 0 0 0px;
+  position: absolute;
+  border-right:1px solid #333;
+  border-bottom:1px solid #333;
+  top: $top;
+  width: 206px;
 }
 
+.right{
+  bottom: 161px;
+  left: 207px;
+  margin: 0;
+  padding: 0 100px 60px 40px;
+  position: absolute;
+  right: 0;
+  top: $top;
+  border-left:1px solid #555;
+  background-color: #252828;
+}
+.bottom{
+  position:absolute;
+  padding:0;
+  bottom:0;
+  left:0;
+  right:0;
+  height:160px;
+  border-top:1px solid #666;
+}
+.top{
+  position:absolute;
+  top:0;
+  right:0;
+  left:0;
+  height:$top - 1;
+  background-color: #111115;
+  border-bottom:1px solid #3f3f3f;
+}
+
+input[type=text], textarea{
+  font-family:monospace;
+  color:#bbb;
+  border-radius:2px;
+  border:1px solid #1d1d1d;
+  background-color: #42474a;
+  font-size:7.5pt;
+  padding:3px 5px;
+}
+input[type=text]{
+  text-align: right;
+}
+
+
+.bottom{
+  background-color:#222;
+}
+.left{
+  background-color:$menu-color;
+}
 
 ul.controls{
   li{
     display:inline-block;
+    &.label{
+      background-color: #27292c;
+      width:100%;
+      padding:4px 0px;
+      margin-top:6px;
+      margin-bottom:5px;
+      border-bottom:1px solid #464646;
+      border-top:1px solid #191919;
+      text-align: center;
+    }
+    &.split{
+      display:block;
+      width:100%;
+      border-bottom: 1px solid #464646;
+      border-top: 1px solid #202626;
+      margin-top:5px;
+      margin-bottom:5px;
+    }
   }
   ul.control-row{
-    padding:5px;
+    padding:1px 5px;
+
     input[type=text]{
-      width:50px;
+      width:55px;
+      margin:0px 1px 0px 0px;
+    }
+    textarea{
+      width:123px;
+    }
+    &.single input{
+      width:123px;
     }
     li:first-child {
       width:50px;
+      margin-left:8px;
     }
   }
 }
