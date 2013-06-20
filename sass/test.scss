@@ -12,6 +12,13 @@ body{
   font-size:8pt;
 }
 
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+  outline: none;
+}
+
 ul{
   list-style-type: none;
   padding:0;
@@ -26,7 +33,6 @@ li{
   height:50px;
   font-family:monospace;
   background-color: #1b1b1b;
-  border-radius:0 0 4px 0;
   border-bottom:1px solid #545454;
   background-image:-webkit-linear-gradient(top, #222222, #111111);
   box-shadow:inset 0 -1px 0 rgba(0, 0, 0, 0.1), 0 1px 10px rgba(0, 0, 0, 0.1);
@@ -110,6 +116,7 @@ input[type=text]{
 
 
 .controls{
+  font-size:9pt;
   position:absolute;
   top:51px;
   bottom:0;
@@ -144,21 +151,21 @@ input[type=text]{
     }
   }
   ul.control-row{
-    padding:1px 5px;
+    padding:1px 0px 1px 5px;
 
     input[type=text]{
-      width:55px;
+      width:60px;
       margin:0px 1px 0px 0px;
     }
     textarea{
-      width:123px;
+      width:134px;
     }
     &.single.half input{
-      width: 55px;
-      margin-left:68px;
+      width: 62px;
+      margin-left:72px;
     }
     &.single input{
-      width:123px;
+      width:134px;
     }
     li:first-child {
       width:50px;
@@ -168,11 +175,16 @@ input[type=text]{
 }
 
 .system-info {
-
+  position: absolute;
+  top:7px;
+  left:0;
+  right:0;
   text-align: center;
+  background-color:rgba(0,0,0,0.3);
 
   color: #d6d6d6;
   border-bottom:1px solid #2c2c2c;
+  border-top:1px solid #2c2c2c;
   padding-top: 5px;
   padding-bottom:10px;
 
@@ -181,6 +193,7 @@ input[type=text]{
     letter-spacing: 2px;
   }
   .system-author {
+    display:none;
     margin:0 auto;
     color: inherit;
     &:hover{
