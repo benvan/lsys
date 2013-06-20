@@ -95,7 +95,7 @@ class SystemManager
   draw: ->
     t = @renderer.render(@currentSystem)
     #todo: get from bindings
-    Util.control("rendered").innerHTML = "#{t}ms"
+    $("#rendered").html("#{t}ms")
     $("#segments").html("#{@currentSystem.elements().length}")
 
   createBindings: ->
