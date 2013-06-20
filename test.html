@@ -59,9 +59,9 @@
                     <li>rules</li><!--
              --><li>
                     <textarea rows="12">
-                        L : SS
-                        S : F-[F-Y[S(L]]
-                        Y : [-|F-F+)Y]</textarea>
+L : SS
+S : F-[F-Y[S(L]]
+Y : [-|F-F+)Y]</textarea>
                 </li>
                 </ul>
             </li>
@@ -71,13 +71,76 @@
 </div>
 <div class="bottom bg-slategray">
 
-
 </div>
 <div class="right">
 
-        <img style="margin:auto 50%;padding:50% 0; width:100px;" src="img/systems/lsys_trigon.png"/>
+    <div class="drawing-pad">
+        <div id="systemInfo" class="system-info blue">
+            <div id="systemName" class="system-name">click-and-drag!</div>
+            <a class="system-author" data-toggle="modal" href="#myModal">benvan</a>
+        </div>
+        <div class="actions">
+            <a class="export" style="color:#ddd; font-size:8pt;"  href="#"><i class="icon icon-white icon-download-alt"></i> png</a>
+        </div>
+        <div id="drawingContainer">
+            <canvas id="c"></canvas>
+        </div>
+    </div>
 
 </div>
+
+<script type="text/javascript" src="js/jquery-1.8.1.js"></script>
+<script type="text/javascript" src="js/jquery.ellipsis.js"></script>
+<script type="text/javascript" src="js/system-ticker.js"></script>
+<script type="text/javascript" src="js/jquery.kinetic.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
+
+
+<script type="text/javascript" src="js/underscore.js"></script>
+<script type="text/javascript" src="js/bootstrap.js"></script>
+<script type="text/javascript" src="js/api.js"></script>
+<script type="text/javascript" src="js/generated/controls.js"></script>
+<script type="text/javascript" src="js/generated/classes.js"></script>
+<script type="text/javascript" src="js/generated/lsystem.js"></script>
+<script type="text/javascript" src="js/generated/rendering.js"></script>
+<script type="text/javascript" src="js/generated/manager.js"></script>
+<script type="text/javascript">
+    var manager; // Don't judge. I want to get ahold of it in the console!
+    $(document).ready(function () {
+
+        $(".elems")
+                .ticker("ticker.json")
+                .kinetic();
+
+        manager = new SystemManager(
+                Util.control("c"),
+                {}
+        );
+
+        manager.run();
+
+        var stretchCanvas = function(){
+            var canvas = Util.control("c");
+            window.container = Util.control("drawingContainer");
+            canvas.width = container.clientWidth;
+            canvas.height = container.clientHeight;
+        };
+
+        stretchCanvas();
+        $(window).resize(function(){
+            clearTimeout(window.resizeTimer);
+            window.resizeTimer = setTimeout(function(){
+                stretchCanvas();
+                manager.draw()
+            },300);
+        });
+
+        manager.draw();
+    });
+
+
+</script>
+
 
 </body>
 </html>
