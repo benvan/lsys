@@ -68,12 +68,12 @@ li{
   bottom: 161px;
   left: $left;
   margin: 0;
-  padding: 0 100px 60px 40px;
+  padding: 0;
   position: absolute;
   right: 0;
   top: $top;
   border-left:1px solid #555;
-  background-color: #252828;
+  background-color: #1d1f20;
 }
 .bottom{
   position:absolute;
@@ -101,7 +101,7 @@ input[type=text], textarea{
   border-radius:2px;
   border:1px solid #1d1d1d;
   background-color: #42474a;
-  font-size:7.5pt;
+  font-size:9pt;
   padding:3px 5px;
 }
 input[type=text]{
@@ -166,3 +166,49 @@ input[type=text]{
     }
   }
 }
+
+.system-info {
+
+  text-align: center;
+
+  color: #d6d6d6;
+  border-bottom:1px solid #2c2c2c;
+  padding-top: 5px;
+  padding-bottom:10px;
+
+  .system-name{
+    font-size:14pt;
+    letter-spacing: 2px;
+  }
+  .system-author {
+    margin:0 auto;
+    color: inherit;
+    &:hover{
+      color: #dce9f5;
+    }
+  }
+}
+
+.actions{
+  display:none;
+}
+
+
+.drawing-pad{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  #drawingContainer{
+    overflow: hidden;
+    height:100%;
+  }
+  canvas {
+    cursor:crosshair;
+  }
+}
+
+
+
+
