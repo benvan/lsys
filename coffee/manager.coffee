@@ -13,9 +13,9 @@ class InputHandler
   constructor: (@keystate, @joystick) ->
   update: (params) =>
     return if not @joystick.active
-    if (@keystate.ctrl)
-      params.angle = Util.round(@snapshot.angle + @joystick.dx(50), 2)
-      params.angleGrowth = @snapshot.angleGrowth + @joystick.dy()
+    if (@keystate.alt)
+      params.size = Util.round(params.size + @joystick.dy(200), 2)
+      params.sizeGrowth += @joystick.dx(1000000)
     else
       params.angle = Util.round(params.angle + @joystick.dx(), 2)
       params.angleGrowth += @joystick.dy()
@@ -43,24 +43,30 @@ class SystemManager
   syncLocation: -> location.hash = @currentSystem.toUrl()
 
   updateFromControls: ->
-    val = (n) -> parseFloat($("##{n}").val())
+    val = (n) -> parseFloat(n.val())
     @currentSystem = new LSystem(
       {
-        iterations: val("num")
-        size:       val("length")
-        sizeGrowth: @currentSystem.params.sizeGrowth
-        angle:      val("angle")
-        angleGrowth:@currentSystem.params.angleGrowth
+        iterations: val(@controls.iterations)
+        size:       val(@controls.size.value)
+        sizeGrowth: val(@controls.size.growth)
+        angle:      val(@controls.angle.value)
+        angleGrowth:val(@controls.angle.growth)
+        sensitivity:{
+          x: val(@controls.sensitivity.x)
+          y: val(@controls.sensitivity.y)
+        }
       }
-      ,$("#rules").val()
+      ,$(@controls.rules).val()
     )
 
   syncControls: ->
     params = @currentSystem.params
-    $("#num").val(params.iterations)
-    $("#length").val(params.size)
-    $("#angle").val(params.angle)
-    $("#rules").val(@currentSystem.rules)
+    $(@controls.iterations).val(params.iterations)
+    $(@controls.rules).val(@currentSystem.rules)
+    $(@controls.size.value).val(params.size)
+    $(@controls.size.growth).val(params.sizeGrowth)
+    $(@controls.angle.value).val(params.angle)
+    $(@controls.angle.growth).val(params.angleGrowth)
 
   exportToPng: ->
     canvas = Util.control("c")

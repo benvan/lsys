@@ -23,11 +23,11 @@
             <li>
                 <ul class="control-row single">
                     <li>x</li><!--
-             --><li><input type="text" value="4.35"></li>
+             --><li><input id="xSensitivity" type="text" ></li>
                 </ul>
                 <ul class="control-row single">
                     <li>y</li><!--
-             --><li><input type="text" value="4.35"></li>
+             --><li><input id="ySensitivity" type="text" ></li>
                 </ul>
             </li>
 
@@ -36,15 +36,15 @@
             <li>
                 <ul class="control-row">
                     <li>size</li><!--
-             --><li><input type="text" value="4.35"></li><!--
-             --><li><input type="text" value="4.35"></li>
+             --><li><input id="size" type="text" ></li><!--
+             --><li><input id="sizeGrowth" type="text" ></li>
                 </ul>
             </li>
             <li>
                 <ul class="control-row">
                     <li>angle</li><!--
-             --><li><input type="text" value="4.35"></li><!--
-             --><li><input type="text" value="4.35"></li>
+             --><li><input id="angle" type="text" ></li><!--
+             --><li><input id="angleGrowth" type="text" ></li>
                 </ul>
             </li>
 
@@ -53,12 +53,12 @@
             <li>
                 <ul class="control-row single half">
                     <li>levels</li><!--
-             --><li><input type="text" value="4.35"></li>
+             --><li><input id="iterations" type="text" ></li>
                 </ul>
                 <ul class="control-row">
                     <li>rules</li><!--
              --><li>
-                    <textarea rows="12">
+                    <textarea id="rules" rows="12">
 L : SS
 S : F-[F-Y[S(L]]
 Y : [-|F-F+)Y]</textarea>
@@ -114,7 +114,22 @@ Y : [-|F-F+)Y]</textarea>
 
         manager = new SystemManager(
                 Util.control("c"),
-                {}
+                {
+                    iterations: Util.control('iterations'),
+                    rules: Util.control('rules'),
+                    angle: {
+                        value: Util.control('angle'),
+                        growth: Util.control('angleGrowth')
+                    },
+                    size: {
+                        value: Util.control('size'),
+                        growth: Util.control('sizeGrowth')
+                    },
+                    sensitivity: {
+                        x: Util.control('xSensitivity'),
+                        y: Util.control('ySensitivity')
+                    }
+                }
         );
 
         manager.run();
