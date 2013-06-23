@@ -11,14 +11,17 @@ DefaultSystem = new LSystem({
 class InputHandler
   snapshot: null # lsystem params as they were was when joystick activated
   constructor: (@keystate, @joystick) ->
-  update: (params) =>
+  update: (system) =>
     return if not @joystick.active
     if (@keystate.alt)
-      params.size.value = Util.round(params.size.value + @joystick.dy(200), 2)
-      params.size.growth += @joystick.dx(1000000)
+      system.params.size.value = Util.round(params.size.value + @joystick.dy(200), 2)
+      system.params.size.growth += @joystick.dx(1000000)
+    else if (@keystate.cmd or @keystate.ctrl)
+      system.offsets.x = @snapshot.offsets.x + @joystick.dx(1)
+      system.offsets.y = @snapshot.offsets.y + @joystick.dy(1)
     else
-      params.angle.value = Util.round(params.angle.value + @joystick.dx(), 2)
-      params.angle.growth += @joystick.dy()
+      system.params.angle.value = Util.round(system.params.angle.value + @joystick.dx(), 2)
+      system.params.angle.growth += @joystick.dy()
 
 
 #yes this is an outrageous name for a .. system ... manager. buh.
@@ -34,7 +37,7 @@ class SystemManager
     @inputHandler = new InputHandler(@keystate, @joystick)
 
     @joystick.onRelease = => location.hash = @currentSystem.toUrl()
-    @joystick.onActivate = => @inputHandler.snapshot = _.clone(@currentSystem.params)
+    @joystick.onActivate = => @inputHandler.snapshot = @currentSystem.clone()
 
     @renderer = new Renderer(canvas)
     @currentSystem = LSystem.fromUrl() or DefaultSystem
@@ -43,7 +46,6 @@ class SystemManager
   syncLocation: -> location.hash = @currentSystem.toUrl()
 
   updateFromControls: ->
-
     @currentSystem = new LSystem(
       @uiControls.toJson(),
       $(@controls.rules).val(),
@@ -51,8 +53,7 @@ class SystemManager
     )
 
   exportToPng: ->
-    canvas = Util.control("c")
-    [x,y] = [canvas.width / 2 , canvas.height / 2]
+    [x,y] = [@canvas.width / 2 , @canvas.height / 2]
 
     b = @renderer.context.bounding
     c = $('<canvas></canvas>').attr({
@@ -75,7 +76,7 @@ class SystemManager
     @syncControls()
 
   run: ->
-    @inputHandler.update(@currentSystem.params)
+    @inputHandler.update(@currentSystem)
     if @joystick.active and not @renderer.isDrawing
       @draw()
       @syncControls()
@@ -98,11 +99,18 @@ class SystemManager
 
   createBindings: ->
     document.onkeydown = (ev) =>
+      console.log(ev)
       if ev.keyCode == 13 and ev.ctrlKey
         @updateFromControls()
         @syncLocation()
       if ev.keyCode == 13 and ev.shiftKey
         @exportToPng()
+      if (ev.metaKey or ev.ctrlKey)
+        $(@canvas).addClass('moving')
+
+    document.onkeyup = (ev) =>
+      if not (ev.metaKey or ev.ctrlKey)
+        $(@canvas).removeClass('moving')
 
     window.onhashchange = =>
       if location.hash != ""

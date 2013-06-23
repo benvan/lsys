@@ -13,6 +13,7 @@ class Param
     value: @value
     growth: @growth
   }
+  clone: -> Param.fromJson(@.toJson())
 
 class LSystem
   generatedElements:null #cache
@@ -22,10 +23,15 @@ class LSystem
     angle: {value:1, growth: 0.05}
     , (p,k) -> _.extend(p, {name:k})
   )
+  @defaultOffsets: () ->
+    x: 0
+    y: 0
+    rot: 0
 
-  constructor: (params, @rules, @iterations, @name) ->
+  constructor: (params, @rules, @iterations, @name, offsets) ->
     settings = Util.merge(LSystem.defaultParams(), params)
     @params = Util.map(settings, (c) -> Param.fromJson(c))
+    @offsets = Util.merge(LSystem.defaultOffsets(), offsets)
 
   elements: =>
     @generatedElements || @generate()
@@ -58,7 +64,11 @@ class LSystem
   # this is not the most efficient of methods... (it's also currently broken - inc{Angle,Length} omitted)
   clone: -> return new LSystem.fromUrl(@toUrl())
 
-  toUrl: -> "#i=#{@iterations}&r=#{encodeURIComponent(@rules)}" + _.reduce(@params, ((acc,v) -> "#{acc}&#{v.toUrlComponent()}"), "")
+  toUrl: ->
+    base = "#i=#{@iterations}&r=#{encodeURIComponent(@rules)}"
+    params = _.reduce(@params, ((acc,v) -> "#{acc}&#{v.toUrlComponent()}"), "")
+    offsets = "&offsets=#{@offsets.x},#{@offsets.y},#{@offsets.rot}"
+    return base+params+offsets
 
   @fromUrl: (url = location.hash) ->
     return null if url == ""
@@ -70,8 +80,15 @@ class LSystem
         if param then params[param.name] = param.toJson()
         else config[k] = v or (parseInt(v) if k == 'i')
     )
+    offsets = undefined
+    if (config.offsets)
+      o = config.offsets.split(',')
+      offsets =
+        x: parseFloat(o[0])
+        y: parseFloat(o[1])
+        rot: parseFloat(o[2])
 
-    return new LSystem(params, decodeURIComponent(config.r), config.i, "unnamed")
+    return new LSystem(params, decodeURIComponent(config.r), config.i, "unnamed", offsets)
 
   isIsomorphicTo: (system) => @rules == system.rules and @iterations == system.iterations
 

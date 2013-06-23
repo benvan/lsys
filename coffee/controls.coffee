@@ -5,6 +5,7 @@ class Point
 
 class Key
   @ctrl: 17
+  @cmd: 91
   @shift: 16
   @alt: 18
   @space: 32
