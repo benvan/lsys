@@ -1,6 +1,7 @@
 $menu-color: #333;
 $top:0;
 $left:216px;
+$bottom:240px;
 html{
   overflow:hidden;
 }
@@ -58,38 +59,37 @@ li{
 }
 
 .left{
-  bottom: 161px;
+  bottom: 0;
   cursor: default;
   background-color:$menu-color;
   left: 0;
   padding: 0 0 0 0px;
   position: absolute;
-  border-right:1px solid #333;
-  border-bottom:1px solid #333;
+  border-right:1px solid #555;
   top: $top;
   width: $left;
 }
 
 .right{
-  bottom: 161px;
-  left: $left;
+  bottom: $bottom;
+  left: $left+1;
   margin: 0;
   padding: 0;
   position: absolute;
   right: 0;
   top: $top;
-  border-left:1px solid #555;
   background-color: #1d1f20;
 }
 .bottom{
   position:absolute;
   padding:0;
   bottom:0;
-  left:0;
+  left:$left+1;
   right:0;
-  height:160px;
+  height:$bottom - 1;
   border-top:1px solid #666;
   background-color:#222;
+  overflow-y:scroll;
 }
 .top{
   position:absolute;
@@ -183,8 +183,9 @@ input[type=text]{
   background-color:rgba(0,0,0,0.3);
 
   color: #d6d6d6;
-  border-bottom:1px solid #2c2c2c;
-  border-top:1px solid #2c2c2c;
+  border:1px solid #363636;
+  border-left:none;
+  border-right:none;
   padding-top: 5px;
   padding-bottom:10px;
 
@@ -222,6 +223,55 @@ input[type=text]{
   }
 }
 
+.ticker{
+  overflow-y: scroll;
+  margin:1px;
+  padding:0px;
+  text-align:center;
+  .elem{
+    border:1px solid #6f6f6f;
+    padding:2px;
+    margin:1px;
+    border-radius:1px;
+    position:relative;
+    background-color: #313338;
+
+    width:130px;
+    height:125px;
+    //position:relative;
+    font-size:8pt;
+
+    &:hover{
+      background-color: #454a50;
+    }
+    .img-holder{
+      text-align: center;
+      img{
+        margin:0 auto;
+      }
+    }
+    .elem-author{
+      display:none;
+    }
+    .elem-label{
+      display:block;
+      position:absolute;
+      left:0;
+      right:0;
+      bottom:5px;
+
+      background-color:rgba(0,0,0,0.3);
+
+      color: #d6d6d6;
+
+      border:1px solid #737373;
+      border-left:none;
+      border-right:none;
+      padding:2px 0;
+      text-overflow: ellipsis;
+    }
+  }
+}
 
 
 
