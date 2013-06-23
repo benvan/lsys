@@ -234,7 +234,7 @@ input[type=text]{
     margin:1px;
     border-radius:1px;
     position:relative;
-    background-color: #313338;
+    background-color: #2c2e33;
 
     width:130px;
     height:125px;
@@ -242,7 +242,7 @@ input[type=text]{
     font-size:8pt;
 
     &:hover{
-      background-color: #454a50;
+      background-color: #3f444a;
     }
     .img-holder{
       text-align: center;
@@ -264,7 +264,7 @@ input[type=text]{
 
       color: #d6d6d6;
 
-      border:1px solid #737373;
+      border:1px solid #555555;
       border-left:none;
       border-right:none;
       padding:2px 0;
