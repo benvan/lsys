@@ -8,9 +8,9 @@ class RenderingContext
   reset: (system) =>
     @initialised = true
     @state =
-      x:              @canvas.width/2,
-      y:              @canvas.height/2,
-      orientation:    -90,
+      x:              (@canvas.width/2)+system.offsets.x
+      y:              (@canvas.height/2)+system.offsets.y
+      orientation:    -90 + system.offsets.rot
       stepAngle:      system.params.angle.value
       stepSize:       system.params.size.value
     @bounding = new Bounding
