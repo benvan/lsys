@@ -52,9 +52,10 @@ class Joystick
 
   createBindings: ->
     @canvas.onmousedown = (ev) =>
-      @onActivate()
-      @active = true
-      @start = new Point(ev.pageX, ev.pageY)
+      if ev.button == 0
+        @onActivate()
+        @active = true
+        @start = new Point(ev.pageX, ev.pageY)
       return false # disable text-selection of canvas / other elements
 
     document.onmouseup = =>
