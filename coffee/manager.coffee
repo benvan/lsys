@@ -1,10 +1,10 @@
 
 DefaultSystem = new LSystem({
-    iterations: 12
-    size: 12.27
-    angle: 4187.5
+    size: {value:12.27}
+    angle: {value:4187.5}
   }
   ,"L : SS\nS : F-[F-Y[S(L]]\nY : [-|F-F+)Y]\n"
+  ,12
   ,"click-and-drag-me!"
 )
 
@@ -14,11 +14,11 @@ class InputHandler
   update: (params) =>
     return if not @joystick.active
     if (@keystate.alt)
-      params.size = Util.round(params.size + @joystick.dy(200), 2)
-      params.sizeGrowth += @joystick.dx(1000000)
+      params.size.value = Util.round(params.size.value + @joystick.dy(200), 2)
+      params.size.growth += @joystick.dx(1000000)
     else
-      params.angle = Util.round(params.angle + @joystick.dx(), 2)
-      params.angleGrowth += @joystick.dy()
+      params.angle.value = Util.round(params.angle.value + @joystick.dx(), 2)
+      params.angle.growth += @joystick.dy()
 
 
 #yes this is an outrageous name for a .. system ... manager. buh.
@@ -43,30 +43,12 @@ class SystemManager
   syncLocation: -> location.hash = @currentSystem.toUrl()
 
   updateFromControls: ->
-    val = (n) -> parseFloat(n.val())
-    @currentSystem = new LSystem(
-      {
-        iterations: val(@controls.iterations)
-        size:       val(@controls.size.value)
-        sizeGrowth: val(@controls.size.growth)
-        angle:      val(@controls.angle.value)
-        angleGrowth:val(@controls.angle.growth)
-        sensitivity:{
-          x: val(@controls.sensitivity.x)
-          y: val(@controls.sensitivity.y)
-        }
-      }
-      ,$(@controls.rules).val()
-    )
 
-  syncControls: ->
-    params = @currentSystem.params
-    $(@controls.iterations).val(params.iterations)
-    $(@controls.rules).val(@currentSystem.rules)
-    $(@controls.size.value).val(params.size)
-    $(@controls.size.growth).val(params.sizeGrowth)
-    $(@controls.angle.value).val(params.angle)
-    $(@controls.angle.growth).val(params.angleGrowth)
+    @currentSystem = new LSystem(
+      @uiControls.toJson(),
+      $(@controls.rules).val(),
+      parseInt($(@controls.iterations).val())
+    )
 
   exportToPng: ->
     canvas = Util.control("c")
@@ -89,6 +71,7 @@ class SystemManager
 
   init: ->
     @createBindings()
+    @createControls()
     @syncControls()
 
   run: ->
@@ -103,6 +86,15 @@ class SystemManager
     #todo: get from bindings
     $("#rendered").html("#{t}ms")
     $("#segments").html("#{@currentSystem.elements().length}")
+
+  createControls: ->
+    @uiControls = new Controls(LSystem.defaultParams())
+    @uiControls.create(@controls.container)
+
+  syncControls: ->
+    $(@controls.iterations).val(@currentSystem.iterations)
+    $(@controls.rules).val(@currentSystem.rules)
+    @uiControls.sync(@currentSystem.params)
 
   createBindings: ->
     document.onkeydown = (ev) =>
@@ -120,22 +112,3 @@ class SystemManager
         @draw()
 
 #===========================================
-
-Util =
-  log:(x) -> console.log(x)
-  control:(name) -> document.getElementById(name)
-  value: (name) => parseFloat(Util.stringvalue(name))
-  stringvalue: (name) -> Util.control(name).value
-  round: (n,d) ->
-    pow = Math.pow(10,d)
-    Math.round(n*pow) / pow
-  time: (n,f) ->
-    f = n if n instanceof Function
-    s = new Date; f(); (new Date - s)
-  openDataUrl: (data) ->
-    a = document.createElement("a")
-    a.href = data
-    a.download="lsys/"+$("#systemName").text().replace(/[\ \/]/g,"_")
-    evt = document.createEvent("MouseEvents")
-    evt.initMouseEvent("click", true, true,window,0,0,0,0,0,true,false,false,false,0,null)
-    a.dispatchEvent(evt)

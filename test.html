@@ -8,6 +8,9 @@
 </head>
 <body class="bg-slategray">
 
+<script type="template" id="control-row">
+    #{value}
+</script>
 
 <div class="left">
 
@@ -33,19 +36,8 @@
 
             <li class="label">variables</li>
 
-            <li>
-                <ul class="control-row">
-                    <li>size</li><!--
-             --><li><input id="size" type="text" ></li><!--
-             --><li><input id="sizeGrowth" type="text" ></li>
-                </ul>
-            </li>
-            <li>
-                <ul class="control-row">
-                    <li>angle</li><!--
-             --><li><input id="angle" type="text" ></li><!--
-             --><li><input id="angleGrowth" type="text" ></li>
-                </ul>
+            <li id="control-container">
+                <!-- controls be here! -->
             </li>
 
             <li class="label">system</li>
@@ -58,10 +50,7 @@
                 <ul class="control-row">
                     <li>rules</li><!--
              --><li>
-                    <textarea id="rules" rows="12">
-L : SS
-S : F-[F-Y[S(L]]
-Y : [-|F-F+)Y]</textarea>
+                    <textarea id="rules" rows="12"></textarea>
                 </li>
                 </ul>
             </li>
@@ -89,16 +78,12 @@ Y : [-|F-F+)Y]</textarea>
 
 </div>
 
-<script type="text/javascript" src="js/jquery-1.8.1.js"></script>
-<script type="text/javascript" src="js/jquery.ellipsis.js"></script>
-<script type="text/javascript" src="js/system-ticker.js"></script>
-<script type="text/javascript" src="js/jquery.kinetic.js"></script>
-<script type="text/javascript" src="js/jquery.cookie.js"></script>
-
-
 <script type="text/javascript" src="js/underscore.js"></script>
-<script type="text/javascript" src="js/bootstrap.js"></script>
-<script type="text/javascript" src="js/api.js"></script>
+<script type="text/javascript" src="js/jquery-1.8.1.js"></script>
+
+<script type="text/javascript" src="js/system-ticker.js"></script>
+
+<script type="text/javascript" src="js/generated/util.js"></script>
 <script type="text/javascript" src="js/generated/controls.js"></script>
 <script type="text/javascript" src="js/generated/classes.js"></script>
 <script type="text/javascript" src="js/generated/lsystem.js"></script>
@@ -108,27 +93,14 @@ Y : [-|F-F+)Y]</textarea>
     var manager; // Don't judge. I want to get ahold of it in the console!
     $(document).ready(function () {
 
-        $(".elems")
-                .ticker("ticker.json")
-                .kinetic();
+        $(".elems").ticker("ticker.json");
 
         manager = new SystemManager(
                 Util.control("c"),
                 {
+                    container: Util.control('control-container'),
                     iterations: Util.control('iterations'),
-                    rules: Util.control('rules'),
-                    angle: {
-                        value: Util.control('angle'),
-                        growth: Util.control('angleGrowth')
-                    },
-                    size: {
-                        value: Util.control('size'),
-                        growth: Util.control('sizeGrowth')
-                    },
-                    sensitivity: {
-                        x: Util.control('xSensitivity'),
-                        y: Util.control('ySensitivity')
-                    }
+                    rules: Util.control('rules')
                 }
         );
 
