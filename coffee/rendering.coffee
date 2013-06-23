@@ -11,8 +11,8 @@ class RenderingContext
       x:              @canvas.width/2,
       y:              @canvas.height/2,
       orientation:    -90,
-      stepAngle:      system.params.angle
-      stepSize:       system.params.size
+      stepAngle:      system.params.angle.value
+      stepSize:       system.params.size.value
     @bounding = new Bounding
     @stack = []
 
@@ -120,9 +120,9 @@ class Renderer
     "[": (state, params, g, context) -> context.stack.push(cloneState state)
     "]": (state, params, g, context) -> context.state = state = context.stack.pop(); g.moveTo(state.x,state.y)
     "!": (state) -> state.stepAngle *= -1
-    "(": (state, params) -> state.stepAngle *= (1 - params.angleGrowth)
-    ")": (state, params) -> state.stepAngle *= (1 + params.angleGrowth)
-    "<": (state, params) -> state.stepSize *= (1 + params.sizeGrowth)
-    ">": (state, params) -> state.stepSize *= (1 - params.sizeGrowth)
+    "(": (state, params) -> state.stepAngle *= (1 - params.angle.growth)
+    ")": (state, params) -> state.stepAngle *= (1 + params.angle.growth)
+    "<": (state, params) -> state.stepSize *= (1 + params.size.growth)
+    ">": (state, params) -> state.stepSize *= (1 - params.size.growth)
     }
   )()

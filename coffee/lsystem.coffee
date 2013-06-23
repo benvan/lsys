@@ -1,22 +1,34 @@
+class Param
+  constructor:(@name,@value,@growth) ->
+  toUrlComponent: -> "p.#{@name}=#{@value},#{@growth}"
+  @fromUrlComponent: (x) ->
+    if (x||"").indexOf("p.") != 0 then return undefined
+    parts = x.split('=')
+    name = parts[0].substring(2)
+    vars = parts[1].split(',').map((v) -> parseFloat(v))
+    return new Param(name,vars[0],vars[1])
+  @fromJson: (json) -> new Param(json.name, json.value, json.growth)
+  toJson: -> {
+    name: @name
+    value: @value
+    growth: @growth
+  }
+
 class LSystem
   generatedElements:null #cache
   params: null
-  defaultParams: {
-    iterations: 1
-    size: 1
-    sizeGrowth: 0.01
-    angle: 1
-    angleGrowth: 0.05
-  }
-  constructor: (params, @rules, @name) ->
-    @params = _.clone(@defaultParams)
-    for key of params then do =>
-      @params[key] = params[key] || @params[key]
+  @defaultParams: () -> Util.map(
+    size: {value:1, growth: 0.01}
+    angle: {value:1, growth: 0.05}
+    , (p,k) -> _.extend(p, {name:k})
+  )
+
+  constructor: (params, @rules, @iterations, @name) ->
+    settings = Util.merge(LSystem.defaultParams(), params)
+    @params = Util.map(settings, (c) -> Param.fromJson(c))
 
   elements: =>
-    if not @generatedElements
-      @generate()
-    return @generatedElements
+    @generatedElements || @generate()
 
   generate: =>
     textRules = @rules.split("\n").map (r) -> (r.replace(/\ /g, '')).split(':')
@@ -24,11 +36,11 @@ class LSystem
     ruleMap = {}
     ruleMap[r] = exp for [r,exp] in textRules
 
-    expr = textRules[0][0]
+    expr = textRules[0][0] #choose first rule as system initialiser
 
     expr = _.reduce expr.split(""), ((acc, symbol) ->
       acc + (ruleMap[symbol] || symbol)
-    ), "" for i in [1..@params.iterations]
+    ), "" for i in [1..@iterations]
 
     @generatedElements = expr.split("").filter((e) -> true if (Renderer.prototype.definitions[e]))
 
@@ -37,6 +49,7 @@ class LSystem
     wasIsomorphic = @isIsomorphicTo(system)
     _.extend(@, {
       rules: system.rules,
+      iterations: system.iterations,
       params: system.params
     })
     @generate() if not wasIsomorphic
@@ -45,38 +58,20 @@ class LSystem
   # this is not the most efficient of methods... (it's also currently broken - inc{Angle,Length} omitted)
   clone: -> return new LSystem.fromUrl(@toUrl())
 
-  toUrl: =>
-    params =
-      it: @params.iterations
-      l:  @params.size #todo: make consistent
-      sg: @params.sizeGrowth
-      a:  @params.angle
-      ag: @params.angleGrowth
-      r:  encodeURIComponent(@rules)
-
-    url = _.reduce(params,(acc,v,k) ->
-      acc+k+"="+v+"&"
-    ,"#")
-
-    return url.substring(0,url.length-1)
+  toUrl: -> "#i=#{@iterations}&r=#{encodeURIComponent(@rules)}" + _.reduce(@params, ((acc,v) -> "#{acc}&#{v.toUrlComponent()}"), "")
 
   @fromUrl: (url = location.hash) ->
     return null if url == ""
 
     params = {}
+    config = {}
     _.each(url.substring(1).split("&").map( (x) -> x.split("=")), ([k,v]) ->
-      params[k] = v
-      params[k] = (parseFloat(v) || undefined) if not (k == "r") # r = rules, which is not a float...
+        param = Param.fromUrlComponent("#{k}=#{v}")
+        if param then params[param.name] = param.toJson()
+        else config[k] = v or (parseInt(v) if k == 'i')
     )
 
-    return new LSystem({
-        iterations :  params.it
-        size:         params.l
-        sizeGrowth:   params.sg
-        angle:        params.a
-        angleGrowth:  params.ag
-      } ,decodeURIComponent(params.r)
-      "unnamed"
-    )
+    return new LSystem(params, decodeURIComponent(config.r), config.i, "unnamed")
 
-  isIsomorphicTo: (system) => @rules == system.rules and @params.iterations == system.params.iterations
+  isIsomorphicTo: (system) => @rules == system.rules and @iterations == system.iterations
+
