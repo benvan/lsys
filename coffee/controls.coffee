@@ -116,6 +116,11 @@ class ParamControl extends Control
     dummy = new Param(@controlkey, 0 , 0)
     return @update(dummy).toJson()
 
+class SensitivityControl extends ParamControl
+  toJson: ->
+    dummy = new Sensitivity(@controlkey, 0, 0)
+    return @update(dummy).toJson()
+
 # container class for all system variables
 class Controls
   constructor: (params, ControlType) ->
