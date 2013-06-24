@@ -92,12 +92,9 @@ class Renderer
     return {
     "F": (state, params, g, context) ->
 
-      len = state.stepSize
       ang = ((state.orientation%360) / 180) * pi #todo - stop storing degrees?!
-      s = sin(ang)
-      c = cos(ang)
-      state.x += c*len
-      state.y += s*len
+      state.x += cos(ang)*state.stepSize
+      state.y += sin(ang)*state.stepSize
 
       bounding = context.bounding
 

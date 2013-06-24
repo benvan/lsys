@@ -2,8 +2,9 @@
 DefaultSystem = new LSystem({
     size: {value:12.27}
     angle: {value:4187.5}
-  },
-  {}
+  }
+  ,{}
+  ,{}
   ,"L : SS\nS : F-[F-Y[S(L]]\nY : [-|F-F+)Y]\n"
   ,12
   ,"click-and-drag-me!"
@@ -15,14 +16,14 @@ class InputHandler
   update: (system) =>
     return if not @joystick.active
     if (@keystate.alt)
-      system.params.size.value = Util.round(system.params.size.value + @joystick.dy(200), 2)
-      system.params.size.growth += @joystick.dx(1000000)
+      system.params.size.value = @snapshot.params.size.value * (1+(@joystick.dy(system.sensitivities.size.value)))
+      system.params.size.growth += @joystick.dx(system.sensitivities.size.growth)
     else if (@keystate.cmd or @keystate.ctrl)
       system.offsets.x = @snapshot.offsets.x + @joystick.dx(1)
       system.offsets.y = @snapshot.offsets.y + @joystick.dy(1)
     else
-      system.params.angle.value = Util.round(system.params.angle.value + @joystick.dx(), 2)
-      system.params.angle.growth += @joystick.dy()
+      system.params.angle.value = Util.round(system.params.angle.value + @joystick.dx(system.sensitivities.angle.value), 2)
+      system.params.angle.growth += @joystick.dy(system.sensitivities.angle.growth)
 
 
 #yes this is an outrageous name for a .. system ... manager. buh.
@@ -50,6 +51,7 @@ class SystemManager
     @currentSystem = new LSystem(
       @paramControls.toJson(),
       @offsetControls.toJson(),
+      @sensitivityControls.toJson(),
       $(@controls.rules).val(),
       parseInt($(@controls.iterations).val()),
       @currentSystem.name
@@ -92,21 +94,20 @@ class SystemManager
     $("#segments").html("#{@currentSystem.elements().length}")
 
   createControls: ->
-    @paramControls = new Controls(LSystem.defaultParams(), ParamControl)
-    @offsetControls = new OffsetControl(LSystem.defaultOffsets())
+    @paramControls = new Controls(Defaults.params(), ParamControl)
+    @offsetControls = new OffsetControl(Defaults.offsets())
+    @sensitivityControls = new Controls(Defaults.sensitivities(), SensitivityControl)
 
     @paramControls.create(@controls.params)
     @offsetControls.create(@controls.offsets)
+    @sensitivityControls.create(@controls.sensitivities)
 
   syncControls: ->
     $(@controls.iterations).val(@currentSystem.iterations)
     $(@controls.rules).val(@currentSystem.rules)
     @paramControls.sync(@currentSystem.params)
     @offsetControls.sync(@currentSystem.offsets)
-    $(@controls.offsets.x).val(@currentSystem.offsets.x)
-    $(@controls.offsets.y).val(@currentSystem.offsets.y)
-    $(@controls.offsets.rot).val(@currentSystem.offsets.rot)
-
+    @sensitivityControls.sync(@currentSystem.sensitivities)
 
   createBindings: ->
     document.onkeydown = (ev) =>
