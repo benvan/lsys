@@ -83,10 +83,10 @@ class Renderer
     len = ang = s = c = 0
     # expanded (explicit) for efficiency
     cloneState = (c) -> {
-      x:              c.x,
-      y:              c.y,
-      orientation:    c.orientation,
-      stepAngle:      c.stepAngle,
+      x:              c.x
+      y:              c.y
+      orientation:    c.orientation
+      stepAngle:      c.stepAngle
       stepSize:       c.stepSize
     }
     return {
