@@ -82,18 +82,16 @@ class Control
   getVal: (param) -> parseFloat(@getInput(param).val())
   setVal: (param, value) -> @getInput(param).val(value)
 
-  toJson: ->
-    dummy = @update({})
-    return _.reduce(dummy, ((acc,v) -> "#{acc}&#{v}"), "").substring(1)
+  toJson: -> return @update({})
 
   sync: (setting) ->
     _.each(setting, (v,k) => @setVal(k, v))
     return setting
 
   update: (setting) ->
-    _.each(setting, (v,k) =>
-      val = @getVal(k)
-      setting[k] = val if not val is undefined
+    _.each(@el.find("[data-param]"), (el) =>
+      key = $(el).data("param")
+      setting[key] = @getVal(key)
     )
     return setting
 
