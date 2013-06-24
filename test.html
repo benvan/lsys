@@ -8,10 +8,6 @@
 </head>
 <body class="bg-slategray">
 
-<script type="template" id="control-row">
-    #{value}
-</script>
-
 <div class="left">
 
     <div class="header">
@@ -20,42 +16,39 @@
     </div>
     <div class="controls">
         <ul>
-            <li class="label">sensitivity</li>
+            <li class="section">offsets</li>
 
-            <li>
-                <ul class="control-row single">
-                    <li>x</li><!--
-             --><li><input id="xSensitivity" type="text" ></li>
+            <li class="group">
+                <ul class="labels">
+                    <li>x</li><li>y</li><li>rotation</li>
                 </ul>
-                <ul class="control-row single">
-                    <li>y</li><!--
-             --><li><input id="ySensitivity" type="text" ></li>
+                <ul class="control-row">
+                    <li><input id="x" type="text"></li><!--
+                 --><li><input id="y" type="text"></li><!--
+                 --><li><input id="rot" type="text"></li>
                 </ul>
             </li>
 
-            <li class="label">variables</li>
-            <li>
-                <ul class="label-pair">
-                    <li>value</li>
-                    <li>growth</li>
+            <li class="section">variables</li>
+
+            <li class="group" id="control-container">
+                <ul class="labels pair">
+                    <li>value</li><!--
+                 --><li>growth</li>
                 </ul>
-            </li>
-            <li id="control-container">
                 <!-- controls be here! -->
             </li>
 
-            <li class="label">system</li>
+            <li class="section">system</li>
 
-            <li>
-                <ul class="control-row single half">
-                    <li>levels</li><!--
-             --><li><input id="iterations" type="text" ></li>
+            <li class="group">
+                <ul class="control-row half">
+                    <li class="label">levels</li><!--
+                 --><li><input id="iterations" type="text" ></li>
                 </ul>
                 <ul class="control-row">
-                    <li>rules</li><!--
-             --><li>
-                    <textarea id="rules" rows="12"></textarea>
-                </li>
+                    <li class="label">rules</li><!--
+                 --><li><textarea id="rules" rows="12"></textarea></li>
                 </ul>
             </li>
         </ul>
