@@ -193,6 +193,26 @@ input[type=text]{
       margin-right:0px;
     }
   }
+  .recalculate{
+    text-align: center;
+    button{
+      border:1px solid #787878;
+      background-color: #2f3639;
+      color: #ececec;
+      font-size:11pt;
+      text-shadow: 0.1em 0.1em #222;
+      box-shadow:inset 0px 15px 0 rgba(255, 255, 255, 0.1);
+      padding:8px;
+      width:100%;
+      margin:6px 0px;
+      &:hover{
+        background-color: #3b4346;
+      }
+      &:active{
+        background-color: #1a2023;
+      }
+    }
+  }
 }
 
 .system-info {
