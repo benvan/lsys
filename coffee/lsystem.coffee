@@ -57,6 +57,7 @@ class LSystem
       rules: system.rules,
       iterations: system.iterations,
       params: system.params
+      offsets: system.offsets
     })
     @generate() if not wasIsomorphic
 
