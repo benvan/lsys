@@ -1,6 +1,6 @@
 $menu-color: #333;
 $top:0;
-$left:216px;
+$left:228px;
 $bottom:240px;
 html{
   overflow:hidden;
@@ -131,7 +131,7 @@ input[type=text]{
   &::-webkit-scrollbar-thumb:horizontal{ width:5px;background-color:#999;-webkit-border-radius:4px; }
   li{
     display:inline-block;
-    &.label{
+    &.section{
       background-color: #27292c;
       width:100%;
       padding:4px 0px;
@@ -149,27 +149,48 @@ input[type=text]{
       margin-top:5px;
       margin-bottom:5px;
     }
+    &.group{
+      margin-left:4px;
+    }
   }
   ul.control-row{
-    padding:1px 0px 1px 5px;
+    padding:1px 0px 0px 0px;
 
     input[type=text]{
       width:60px;
-      margin:0px 1px 0px 0px;
+      margin:0;
     }
     textarea{
-      width:134px;
+      width:132px;
     }
-    &.single.half input{
-      width: 62px;
+    &.half input{
       margin-left:72px;
     }
     &.single input{
       width:134px;
     }
-    li:first-child {
-      width:50px;
-      margin-left:8px;
+    li.label {
+      width:64px;
+      padding-left:8px;
+    }
+  }
+  ul.labels{
+    li{
+      border:1px solid #222222;
+      border-bottom:none;
+      border-radius:4px 4px 0px 0;
+      width:65px;
+      text-align:right;
+      font-size:7.5pt;
+      padding-bottom:4px;
+      padding-top:1px;
+      padding-right:5px;
+      background-color: #6d6e70;
+      color: #d7d7d7;
+    }
+    &.pair li:first-child{
+      margin-left:72px;
+      margin-right:0px;
     }
   }
 }

@@ -75,7 +75,7 @@ class Control
   create: ->
     @el = $("""
            <ul class="control-row">
-             <li>#{@controlkey}</li><!--
+             <li class="label">#{@controlkey}</li><!--
           --><li><input type="text" type="text" class="value"></li><!--
           --><li><input type="text" type="text" class="growth"></li>
            </ul>
@@ -104,7 +104,7 @@ class Controls
     @controls = Util.map(params, (p,k) -> new Control(k))
 
   create: (container) ->
-    $(container).html( _.values(Util.map(@controls, (c) -> c.create())) )
+    $(container).append( _.values(Util.map(@controls, (c) -> c.create())) )
 
   sync: (params) ->
     Util.map(params, (p) => @controls[p.name].sync(p) )
