@@ -49,7 +49,13 @@ class SystemManager
     @currentSystem = new LSystem(
       @uiControls.toJson(),
       $(@controls.rules).val(),
-      parseInt($(@controls.iterations).val())
+      parseInt($(@controls.iterations).val()),
+      @currentSystem.name,
+      Util.map({
+        x: @controls.offsets.x
+        y: @controls.offsets.y
+        rot: @controls.offsets.rot
+      }, (v) -> parseFloat($(v).val()))
     )
 
   exportToPng: ->
@@ -96,6 +102,10 @@ class SystemManager
     $(@controls.iterations).val(@currentSystem.iterations)
     $(@controls.rules).val(@currentSystem.rules)
     @uiControls.sync(@currentSystem.params)
+    $(@controls.offsets.x).val(@currentSystem.offsets.x)
+    $(@controls.offsets.y).val(@currentSystem.offsets.y)
+    $(@controls.offsets.rot).val(@currentSystem.offsets.rot)
+
 
   createBindings: ->
     document.onkeydown = (ev) =>
