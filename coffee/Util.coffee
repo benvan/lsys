@@ -9,7 +9,7 @@ class Util
     for key of obj then do ->
       result[key] = fn(obj[key], key)
     return result
-  @merge: (a,b) -> $.extend(true, a,b)
+  @merge: (a,b,c) -> $.extend(true, a,b,c)
   @round: (n,d) ->
     pow = Math.pow(10,d)
     Math.round(n*pow) / pow
