@@ -14,7 +14,7 @@ class InputHandler
   update: (system) =>
     return if not @joystick.active
     if (@keystate.alt)
-      system.params.size.value = Util.round(params.size.value + @joystick.dy(200), 2)
+      system.params.size.value = Util.round(system.params.size.value + @joystick.dy(200), 2)
       system.params.size.growth += @joystick.dx(1000000)
     else if (@keystate.cmd or @keystate.ctrl)
       system.offsets.x = @snapshot.offsets.x + @joystick.dx(1)
