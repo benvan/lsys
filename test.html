@@ -16,6 +16,20 @@
     </div>
     <div class="controls">
         <ul>
+
+            <li class="section">system</li>
+
+            <li class="group">
+                <ul class="control-row half">
+                    <li class="label">levels</li><!--
+                 --><li><input id="iterations" type="text" ></li>
+                </ul>
+                <ul class="control-row">
+                    <li class="label">rules</li><!--
+                 --><li><textarea id="rules" rows="12"></textarea></li>
+                </ul>
+            </li>
+
             <li class="section">offsets</li>
 
             <li class="group" id="offsets-container">
@@ -35,18 +49,17 @@
                 <!-- controls be here! -->
             </li>
 
-            <li class="section">system</li>
+            <li class="section">sensitivities</li>
 
-            <li class="group">
-                <ul class="control-row half">
-                    <li class="label">levels</li><!--
-                 --><li><input id="iterations" type="text" ></li>
+            <li class="group" id="sensitivities-container">
+                <ul class="labels pair">
+                    <li>value</li><!--
+                 --><li>growth</li>
                 </ul>
-                <ul class="control-row">
-                    <li class="label">rules</li><!--
-                 --><li><textarea id="rules" rows="12"></textarea></li>
-                </ul>
+                <!-- sensitivities be here! -->
             </li>
+
+
         </ul>
     </div>
 
@@ -93,13 +106,14 @@
         $(".elems").ticker("ticker.json");
 
         manager = new SystemManager(
-                Util.control("c"),
-                {
-                    params: Util.control('controls-container'),
-                    offsets: Util.control('offsets-container'),
-                    iterations: Util.control('iterations'),
-                    rules: Util.control('rules')
-                }
+            Util.control("c"),
+            Util.map({
+                params: 'controls-container',
+                offsets: 'offsets-container',
+                sensitivities: 'sensitivities-container',
+                iterations: 'iterations',
+                rules: 'rules'
+            }, Util.control)
         );
 
         manager.run();
@@ -118,6 +132,16 @@
                 stretchCanvas();
                 manager.draw()
             },300);
+        });
+
+        //this is kinda naughty... but I'd rather refactor Controls first than fudge this in otherwise
+        $("#controls-container,#offsets-container").find("[data-param]").on("input", _.debounce(function(){
+            manager.updateFromControls();
+            manager.draw();
+        }, 250));
+
+        $("#sensitivities-container").find("[data-param]").on("input", function(){
+            manager.updateFromControls();
         });
 
         manager.draw();
