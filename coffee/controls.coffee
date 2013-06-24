@@ -72,39 +72,59 @@ class Joystick
 # ui binding for a single system variable
 class Control
   constructor: (@controlkey) ->
-  create: ->
-    @el = $("""
-           <ul class="control-row">
-             <li class="label">#{@controlkey}</li><!--
-          --><li><input type="text" type="text" class="value"></li><!--
-          --><li><input type="text" type="text" class="growth"></li>
-           </ul>
-           """)
+  tpl: -> "you need to override this"
+  create: (container) ->
+    @el = $(@tpl())
+    $(container).append(@el)
     return @el
 
+  getInput: (param) -> @el.find("[data-param=#{param}]")
+  getVal: (param) -> parseFloat(@getInput(param).val())
+  setVal: (param, value) -> @getInput(param).val(value)
+
+  toJson: ->
+    dummy = @update({})
+    return _.reduce(dummy, ((acc,v) -> "#{acc}&#{v}"), "").substring(1)
+
+  sync: (setting) ->
+    _.each(setting, (v,k) => @setVal(k, v))
+    return setting
+
+  update: (setting) ->
+    _.each(setting, (v,k) =>
+      val = @getVal(k)
+      setting[k] = val if not val is undefined
+    )
+    return setting
+
+class OffsetControl extends Control
+  tpl: -> """
+          <ul class="control-row">
+          <li><input data-param="x" type="text"></li><!--
+          --><li><input data-param="y" type="text"></li><!--
+          --><li><input data-param="rot" type="text"></li>
+          </ul>
+          """
+
+class ParamControl extends Control
+  tpl: -> """
+          <ul class="control-row">
+          <li class="label">#{@controlkey}</li><!--
+          --><li><input type="text" type="text" data-param="value"></li><!--
+          --><li><input type="text" type="text" data-param="growth"></li>
+          </ul>
+          """
   toJson: ->
     dummy = new Param(@controlkey, 0 , 0)
     return @update(dummy).toJson()
 
-  sync: (setting) ->
-    val = (c, v) => @el.find(c).val(v)
-    val('.value', setting.value)
-    val('.growth', setting.growth)
-    return setting
-
-  update: (setting) ->
-    val = (c) => parseFloat(@el.find(c).val())
-    setting.value = val('.value')
-    setting.growth = val('.growth')
-    return setting
-
 # container class for all system variables
 class Controls
-  constructor: (params) ->
-    @controls = Util.map(params, (p,k) -> new Control(k))
+  constructor: (params, ControlType) ->
+    @controls = Util.map(params, (p,k) -> new ControlType(k))
 
   create: (container) ->
-    $(container).append( _.values(Util.map(@controls, (c) -> c.create())) )
+    _.each(@controls, (c) -> c.create(container) )
 
   sync: (params) ->
     Util.map(params, (p) => @controls[p.name].sync(p) )

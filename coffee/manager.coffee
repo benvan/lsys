@@ -2,7 +2,8 @@
 DefaultSystem = new LSystem({
     size: {value:12.27}
     angle: {value:4187.5}
-  }
+  },
+  {}
   ,"L : SS\nS : F-[F-Y[S(L]]\nY : [-|F-F+)Y]\n"
   ,12
   ,"click-and-drag-me!"
@@ -47,15 +48,11 @@ class SystemManager
 
   updateFromControls: ->
     @currentSystem = new LSystem(
-      @uiControls.toJson(),
+      @paramControls.toJson(),
+      @offsetControls.toJson(),
       $(@controls.rules).val(),
       parseInt($(@controls.iterations).val()),
-      @currentSystem.name,
-      Util.map({
-        x: @controls.offsets.x
-        y: @controls.offsets.y
-        rot: @controls.offsets.rot
-      }, (v) -> parseFloat($(v).val()))
+      @currentSystem.name
     )
 
   exportToPng: ->
@@ -95,13 +92,17 @@ class SystemManager
     $("#segments").html("#{@currentSystem.elements().length}")
 
   createControls: ->
-    @uiControls = new Controls(LSystem.defaultParams())
-    @uiControls.create(@controls.container)
+    @paramControls = new Controls(LSystem.defaultParams(), ParamControl)
+    @offsetControls = new OffsetControl(LSystem.defaultOffsets())
+
+    @paramControls.create(@controls.params)
+    @offsetControls.create(@controls.offsets)
 
   syncControls: ->
     $(@controls.iterations).val(@currentSystem.iterations)
     $(@controls.rules).val(@currentSystem.rules)
-    @uiControls.sync(@currentSystem.params)
+    @paramControls.sync(@currentSystem.params)
+    @offsetControls.sync(@currentSystem.offsets)
     $(@controls.offsets.x).val(@currentSystem.offsets.x)
     $(@controls.offsets.y).val(@currentSystem.offsets.y)
     $(@controls.offsets.rot).val(@currentSystem.offsets.rot)
@@ -109,7 +110,6 @@ class SystemManager
 
   createBindings: ->
     document.onkeydown = (ev) =>
-      console.log(ev)
       if ev.keyCode == 13 and ev.ctrlKey
         @updateFromControls()
         @syncLocation()

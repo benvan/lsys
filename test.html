@@ -18,20 +18,16 @@
         <ul>
             <li class="section">offsets</li>
 
-            <li class="group">
+            <li class="group" id="offsets-container">
                 <ul class="labels">
                     <li>x</li><li>y</li><li>rotation</li>
                 </ul>
-                <ul class="control-row">
-                    <li><input id="x" type="text"></li><!--
-                 --><li><input id="y" type="text"></li><!--
-                 --><li><input id="rot" type="text"></li>
-                </ul>
+                <!-- offsets be here! -->
             </li>
 
             <li class="section">variables</li>
 
-            <li class="group" id="control-container">
+            <li class="group" id="controls-container">
                 <ul class="labels pair">
                     <li>value</li><!--
                  --><li>growth</li>
@@ -99,14 +95,10 @@
         manager = new SystemManager(
                 Util.control("c"),
                 {
-                    container: Util.control('control-container'),
+                    params: Util.control('controls-container'),
+                    offsets: Util.control('offsets-container'),
                     iterations: Util.control('iterations'),
-                    rules: Util.control('rules'),
-                    offsets: {
-                        x: Util.control('x'),
-                        y: Util.control('y'),
-                        rot: Util.control('rot')
-                    }
+                    rules: Util.control('rules')
                 }
         );
 

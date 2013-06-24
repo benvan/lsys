@@ -28,7 +28,7 @@ class LSystem
     y: 0
     rot: 0
 
-  constructor: (params, @rules, @iterations, @name, offsets) ->
+  constructor: (params, offsets, @rules, @iterations, @name) ->
     settings = Util.merge(LSystem.defaultParams(), params)
     @params = Util.map(settings, (c) -> Param.fromJson(c))
     @offsets = Util.merge(LSystem.defaultOffsets(), offsets)
@@ -63,7 +63,7 @@ class LSystem
 
 
   # this is not the most efficient of methods... (it's also currently broken - inc{Angle,Length} omitted)
-  clone: -> return new LSystem.fromUrl(@toUrl())
+  clone: -> return LSystem.fromUrl(@toUrl())
 
   toUrl: ->
     base = "#i=#{@iterations}&r=#{encodeURIComponent(@rules)}"
@@ -89,7 +89,7 @@ class LSystem
         y: parseFloat(o[1])
         rot: parseFloat(o[2])
 
-    return new LSystem(params, decodeURIComponent(config.r), config.i, "unnamed", offsets)
+    return new LSystem(params, offsets, decodeURIComponent(config.r), config.i, "unnamed")
 
   isIsomorphicTo: (system) => @rules == system.rules and @iterations == system.iterations
 
