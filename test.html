@@ -16,23 +16,6 @@
     </div>
     <div class="controls">
         <ul>
-
-            <li class="section">system</li>
-
-            <li class="group">
-                <ul class="control-row half">
-                    <li class="label">levels</li><!--
-                 --><li><input id="iterations" type="text" ></li>
-                </ul>
-                <ul class="control-row">
-                    <li class="label">rules</li><!--
-                 --><li><textarea id="rules" rows="12"></textarea></li>
-                </ul>
-                <div class="recalculate">
-                    <button>recalculate</button>
-                </div>
-            </li>
-
             <li class="section">offsets</li>
 
             <li class="group" id="offsets-container">
@@ -60,6 +43,22 @@
                  --><li>growth</li>
                 </ul>
                 <!-- sensitivities be here! -->
+            </li>
+
+            <li class="section">system</li>
+
+            <li class="group">
+                <ul class="control-row half">
+                    <li class="label">levels</li><!--
+                 --><li><input id="iterations" type="text" ></li>
+                </ul>
+                <ul class="control-row">
+                    <li class="label">rules</li><!--
+                 --><li><textarea id="rules" rows="12"></textarea></li>
+                </ul>
+                <div class="recalculate">
+                    <button>recalculate</button>
+                </div>
             </li>
 
 
@@ -137,15 +136,22 @@
             },300);
         });
 
-        //this is kinda naughty... but I'd rather refactor Controls first than fudge this in otherwise
-        $("#controls-container,#offsets-container").find("[data-param]").on("input", _.debounce(function(){
+        var update = function(){
             manager.updateFromControls();
             manager.draw();
-        }, 250));
+        };
+
+        //this is kinda naughty... but I'd rather refactor Controls first than fudge this in otherwise
+        $("#controls-container,#offsets-container").find("[data-param]").on("input", _.debounce(update, 250));
 
         $("#sensitivities-container").find("[data-param]").on("input", function(){
             manager.updateFromControls();
         });
+
+        $('#rules,#iterations').on('input', function(){
+            $('.recalculate button').fadeIn(100);
+        });
+        $('.recalculate button').click(update).click(function(){$(this).fadeOut(100)});
 
         manager.draw();
     });
