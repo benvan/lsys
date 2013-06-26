@@ -5,6 +5,7 @@
     <title>lsys</title>
     <link href="css/topcoat/css/normalize.css" rel="stylesheet" type="text/css"/>
     <link href="css/forkme.css" rel="stylesheet" type="text/css"/>
+    <link href="css/fontello.css" rel="stylesheet" type="text/css"/>
     <link href="sass/test.css" rel="stylesheet" type="text/css"/>
 
     <!-- google analytics -->
@@ -94,10 +95,11 @@
     <div class="drawing-pad">
         <div id="systemInfo" class="system-info blue">
             <div id="systemName" class="system-name">click-and-drag!</div>
-            <a class="system-author" data-toggle="modal" href="#myModal">benvan</a>
-        </div>
-        <div class="actions">
-            <a class="export" style="color:#ddd; font-size:8pt;"  href="#"><i class="icon icon-white icon-download-alt"></i> png</a>
+            <div class="actions">
+                <a class="export" href="#">
+                    <i class="icon-download"></i>
+                </a>
+            </div>
         </div>
         <div id="drawingContainer">
             <canvas id="c"></canvas>
@@ -162,6 +164,11 @@
             manager.updateFromControls();
             manager.draw();
         };
+
+        $('a.export').click(function(){
+            manager.exportToPng();
+            return false;
+        });
 
         //this is kinda naughty... but I'd rather refactor Controls first than fudge this in otherwise
         $("#controls-container,#offsets-container").find("[data-param]").on("input", _.debounce(update, 250));
