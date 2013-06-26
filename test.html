@@ -4,7 +4,24 @@
     <meta charset="utf-8">
     <title>lsys</title>
     <link href="css/topcoat/css/normalize.css" rel="stylesheet" type="text/css"/>
+    <link href="css/forkme.css" rel="stylesheet" type="text/css"/>
+    <link href="css/fontello.css" rel="stylesheet" type="text/css"/>
     <link href="sass/test.css" rel="stylesheet" type="text/css"/>
+
+    <!-- google analytics -->
+    <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-35201182-1']);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+    </script>
 </head>
 <body class="bg-slategray">
 
@@ -78,13 +95,20 @@
     <div class="drawing-pad">
         <div id="systemInfo" class="system-info blue">
             <div id="systemName" class="system-name">click-and-drag!</div>
-            <a class="system-author" data-toggle="modal" href="#myModal">benvan</a>
-        </div>
-        <div class="actions">
-            <a class="export" style="color:#ddd; font-size:8pt;"  href="#"><i class="icon icon-white icon-download-alt"></i> png</a>
+            <div class="actions">
+                <a class="export" href="#">
+                    <i class="icon-download"></i>
+                </a>
+            </div>
         </div>
         <div id="drawingContainer">
             <canvas id="c"></canvas>
+        </div>
+    </div>
+
+    <div class="github-fork-ribbon-wrapper fm-left">
+        <div class="github-fork-ribbon">
+            <a href="https://github.com/benvan/lsys">Fork me on GitHub</a>
         </div>
     </div>
 
@@ -141,6 +165,11 @@
             manager.draw();
         };
 
+        $('a.export').click(function(){
+            manager.exportToPng();
+            return false;
+        });
+
         //this is kinda naughty... but I'd rather refactor Controls first than fudge this in otherwise
         $("#controls-container,#offsets-container").find("[data-param]").on("input", _.debounce(update, 250));
 
@@ -151,7 +180,12 @@
         $('#rules,#iterations').on('input', function(){
             $('.recalculate button').fadeIn(100);
         });
-        $('.recalculate button').click(update).click(function(){$(this).fadeOut(100)});
+        $('.recalculate button')
+                .hide()
+                .click(update)
+                .click(function(){
+                    $(this).fadeOut(100)
+                });
 
         manager.draw();
     });

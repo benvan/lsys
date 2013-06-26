@@ -232,6 +232,7 @@ input[type=text]{
   padding-bottom:10px;
 
   .system-name{
+    display:inline;
     font-size:14pt;
     letter-spacing: 2px;
   }
@@ -246,7 +247,29 @@ input[type=text]{
 }
 
 .actions{
-  display:none;
+  position:absolute;
+  right:0;
+  top:0;
+  height:100%;
+  padding-right:15px;
+  padding-top:7px;
+
+  a{
+    font-size:12px;
+    text-decoration: none;
+    line-height:20px;
+    width:20px;
+    color: #808080;
+    display:block;
+    border:1px solid #797979;
+    vertical-align: middle;
+    border-radius:2px;
+    cursor:pointer;
+    &:hover{
+      border-color: #aeaeae;
+      color: #cecece;
+    }
+  }
 }
 
 
