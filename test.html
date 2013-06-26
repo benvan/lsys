@@ -173,7 +173,12 @@
         $('#rules,#iterations').on('input', function(){
             $('.recalculate button').fadeIn(100);
         });
-        $('.recalculate button').click(update).click(function(){$(this).fadeOut(100)});
+        $('.recalculate button')
+                .hide()
+                .click(update)
+                .click(function(){
+                    $(this).fadeOut(100)
+                });
 
         manager.draw();
     });
