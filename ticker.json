@@ -55,6 +55,21 @@
         "img": "lsys_dance_for_me.png",
         "author": "benvan"
     }, {
+        "name" : "bubble trouble",
+        "url" : "#i=40&p.size=6.6,0.01&p.angle=285.22,0.05096499999999985&r=C%20%3A%20%5BB%5DFC%0AB%20%3A%20!A)BA%0AA%20%3A%20AF-",
+        "img": "lsys_bubble_trouble.png",
+        "author" : "benvan"
+    }, {
+        "name" : "wormly",
+        "url" : "#i=44&p.size=1,0.01&p.angle=-1429.08,0.055765000000000085&r=C%20%3A%20B%7CVFC%0AB%20%3A%20A!BF!%0AA%20%3A%20F%7C-A%7C%2BF%0AV%20%3A%20!%3C%3C-",
+        "img": "lsys_wormly.png",
+        "author" : "benvan"
+    }, {
+        "name" : "slamurai",
+        "url" : "#i=100&p.size=11.97,0.01&p.angle=659.72,0.050256999999999906&r=L%20%3A%20SYS%0AS%20%3A%20F%7C%2B%5BF-Y%5BS%5D%5D%0AY%20%3A%20%5B%7CF-F%2B(%2BFY%5D%2B%3C",
+        "img": "lsys_slamurai.png",
+        "author" : "benvan"
+    }, {
         "name": "crystal orchid",
         "url": "#i=31&p.size=71.19&p.angle=13&r=L%20%3A%20SYS%0AS%20%3A%20%3E-%7C%5BF%3E-Y%5B%3ES%5D%5D!%0AY%20%3A%20%5B%7CF%3EFF-F%2B)Y%5D",
         "img": "lsys_crystal_orchid.png",
