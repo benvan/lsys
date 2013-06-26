@@ -19,6 +19,8 @@ trap handle_sigint SIGINT
 
 (node_modules/http-server/bin/http-server . -p 8000 &> /dev/null) &
 
+(node_modules/node-sass/bin/node-sass sass/test.scss sass/test.css) &
+
 (node_modules/jitter/bin/jitter -b coffee js/generated) &
 
 wait
