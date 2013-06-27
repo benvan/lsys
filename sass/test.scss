@@ -2,6 +2,15 @@ $menu-color: #333;
 $top:0;
 $left:228px;
 $bottom:240px;
+
+@mixin scrollbar{
+&::-webkit-scrollbar{width:4px;height:4px;}
+&::-webkit-scrollbar-button:start:decrement, &::-webkit-scrollbar-button:end:increment{ display:block;height:2px;background-color: #232323; }
+&::-webkit-scrollbar-track-piece{ background-color: #282828;-webkit-border-radius:0;-webkit-border-bottom-right-radius:4px;-webkit-border-bottom-left-radius:4px; }
+&::-webkit-scrollbar-thumb:vertical{ height:5px;background-color: #6d6d6d;-webkit-border-radius:4px; }
+&::-webkit-scrollbar-thumb:horizontal{ width:5px;background-color:#999;-webkit-border-radius:4px; }
+}
+
 html{
   overflow:hidden;
 }
@@ -89,7 +98,12 @@ li{
   height:$bottom - 1;
   border-top:1px solid #666;
   background-color:#222;
-  overflow-y:scroll;
+  .fade{
+    position:absolute;
+    right:0; bottom:0; left:0;
+    height:30px; /* adjust it to your needs */
+    background: linear-gradient(to bottom, rgba(34, 34, 34, 0) 0%, rgb(34,34,34) 70%)
+  }
 }
 .top{
   position:absolute;
@@ -116,6 +130,7 @@ input[type=text]{
 
 
 .controls{
+  @include scrollbar;
   font-size:9pt;
   position:absolute;
   top:51px;
@@ -124,11 +139,6 @@ input[type=text]{
   overflow:hidden;
   overflow-y:auto;
 
-  &::-webkit-scrollbar{width:4px;height:4px;}
-  &::-webkit-scrollbar-button:start:decrement, &::-webkit-scrollbar-button:end:increment{ display:block;height:2px;background-color: #232323; }
-  &::-webkit-scrollbar-track-piece{ background-color: #282828;-webkit-border-radius:0;-webkit-border-bottom-right-radius:4px;-webkit-border-bottom-left-radius:4px; }
-  &::-webkit-scrollbar-thumb:vertical{ height:5px;background-color: #6d6d6d;-webkit-border-radius:4px; }
-  &::-webkit-scrollbar-thumb:horizontal{ width:5px;background-color:#999;-webkit-border-radius:4px; }
   li{
     display:inline-block;
     &.section{
@@ -290,7 +300,10 @@ input[type=text]{
 }
 
 .ticker{
+  @include scrollbar;
   overflow-y: scroll;
+  position:absolute;
+  top:0; bottom:0;left:0;right:0;
   margin:1px;
   padding:0px;
   text-align:center;
