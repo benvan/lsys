@@ -45,10 +45,12 @@
  
   /* you can be more comfortable with increased icons size */
   /* font-size: 120%; */
- 
+
   /* Uncomment for 3D effect */
   /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
 }
- 
-.icon-picture:before { content: '\e800'; } /* '' */
+
+.icon-help-circled:before { content: '\e800'; } /* '' */
+.icon-trash:before { content: '\e803'; } /* '' */
+.icon-help:before { content: '\e802'; } /* '' */
 .icon-download:before { content: '\e801'; } /* '' */
