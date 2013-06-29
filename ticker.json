@@ -5,6 +5,11 @@
         "img": "lsys_re-coil.png",
         "author": "benvan"
     }, {
+        "name": "the triffids",
+        "url": "#i=11&r=L%20%3A%20SSS%0AS%20%3A%20%5BF%5BFF-YS%5DF)G%5D%2B%0AY%20%3A--%5BF-)F-FG%5D-%0AG%3A%20FGF%5BY%2BF%5D%2BY&p.size=10.3943,0.010104&p.angle=-3731.69,0.05244601300000046&s.size=200,1000000&s.angle=200,1000000&offsets=18,23,0",
+        "img": "lsys_the_triffids.png",
+        "author": "benvan"
+    }, {
         "name": "flyweight",
         "url": "#i=30&p.size=4.34,0.01&p.angle=-3869.97,0.11540900000000301&r=L%20%3A%20S%0AS%20%3A%20F%2B%5BF-Y%5BS%5D%5DF)G%0AY%20%3A--%5B%7CF-F--FY%5D-%0AG%3A%20FGF%5B%2BF%5D%2BY",
         "img": "lsys_flyweight.png",
