@@ -41,13 +41,17 @@ li{
 
 .header{
   height:50px;
-  font-family:monospace;
   background-color: #1b1b1b;
   border-bottom:1px solid #545454;
   background-image:-webkit-linear-gradient(top, #222222, #111111);
   box-shadow:inset 0 -1px 0 rgba(0, 0, 0, 0.1), 0 1px 10px rgba(0, 0, 0, 0.1);
   -webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.1), 0 1px 10px rgba(0, 0, 0, 0.1);
-  a{
+  .actions{
+    padding-top:13px;
+    padding-right:11px;
+  }
+  a.site{
+    font-family:monospace;
     padding-left:10px;
     padding-top:4px;
     color: #dbdbdb;
@@ -150,6 +154,14 @@ input[type=text]{
       border-bottom:1px solid #464646;
       border-top:1px solid #191919;
       text-align: center;
+      i{
+        position:absolute;
+        right:0;
+        &:hover{
+          border-color: #aeaeae;
+          color: #cecece;
+        }
+      }
     }
     &.split{
       display:block;

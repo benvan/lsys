@@ -28,8 +28,12 @@
 <div class="left">
 
     <div class="header">
-        <a href="http://benvan.co.uk/lsys"><img src="img/logo_tr.png"><span>lsys</span></a>
-
+        <a class="site" href="http://benvan.co.uk/lsys"><img src="img/logo_tr.png"><span>lsys</span></a>
+        <div class="actions">
+            <a id="help" href="#">
+                <i class="icon-help"></i>
+            </a>
+        </div>
     </div>
     <div class="controls">
         <ul>
@@ -120,7 +124,6 @@
 
 <script type="text/javascript" src="js/generated/util.js"></script>
 <script type="text/javascript" src="js/generated/controls.js"></script>
-<script type="text/javascript" src="js/generated/classes.js"></script>
 <script type="text/javascript" src="js/generated/lsystem.js"></script>
 <script type="text/javascript" src="js/generated/rendering.js"></script>
 <script type="text/javascript" src="js/generated/manager.js"></script>
@@ -166,6 +169,11 @@
 
         $('a.export').click(function(){
             manager.exportToPng();
+            return false;
+        });
+
+        $('#help').click(function(){
+            $('#helpDialog').toggle();
             return false;
         });
 
