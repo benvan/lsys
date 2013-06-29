@@ -1,9 +1,12 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
+    <meta charset="utf-8">
     <title>lsys</title>
-    <link rel="stylesheet" href="css/bootstrap.css"/>
-    <link href="css/lsys.css" rel="stylesheet" type="text/css"/>
+    <link href="css/topcoat/css/normalize.css" rel="stylesheet" type="text/css"/>
+    <link href="css/forkme.css" rel="stylesheet" type="text/css"/>
+    <link href="css/fontello.css" rel="stylesheet" type="text/css"/>
+    <link href="sass/test.css" rel="stylesheet" type="text/css"/>
 
     <!-- google analytics -->
     <script type="text/javascript">
@@ -12,248 +15,110 @@
         _gaq.push(['_setAccount', 'UA-35201182-1']);
         _gaq.push(['_trackPageview']);
 
-        (function () {
-            var ga = document.createElement('script');
-            ga.type = 'text/javascript';
-            ga.async = true;
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
             ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(ga, s);
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
         })();
 
     </script>
-
 </head>
-<body>
+<body class="bg-slategray">
 
-<div class="modal hide fade" id="myModal" tabindex="-1" role="dialog" >
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" >&times;</button>
-        <h3>Not yet! Sorry.</h3>
+<div class="left">
+
+    <div class="header">
+        <a href="http://benvan.co.uk/lsys"><img src="img/logo_tr.png"><span>lsys</span></a>
+
     </div>
-    <div class="modal-body">
-        <p>User submission / ratings to come soon</p>
-        <p>In the meantime, you can copy / paste the current url if you want to share your system</p>
+    <div class="controls">
+        <ul>
+            <li class="section">offsets</li>
+
+            <li class="group" id="offsets-container">
+                <ul class="labels">
+                    <li>x</li><li>y</li><li>rotation</li>
+                </ul>
+                <!-- offsets be here! -->
+            </li>
+
+            <li class="section">variables</li>
+
+            <li class="group" id="controls-container">
+                <ul class="labels pair">
+                    <li>value</li><!--
+                 --><li>growth</li>
+                </ul>
+                <!-- controls be here! -->
+            </li>
+
+            <li class="section">sensitivities</li>
+
+            <li class="group" id="sensitivities-container">
+                <ul class="labels pair">
+                    <li>value</li><!--
+                 --><li>growth</li>
+                </ul>
+                <!-- sensitivities be here! -->
+            </li>
+
+            <li class="section">system</li>
+
+            <li class="group">
+                <ul class="control-row half">
+                    <li class="label">levels</li><!--
+                 --><li><input id="iterations" type="text" ></li>
+                </ul>
+                <ul class="control-row">
+                    <li class="label">rules</li><!--
+                 --><li><textarea id="rules" rows="12"></textarea></li>
+                </ul>
+                <div class="recalculate">
+                    <button>recalculate</button>
+                </div>
+            </li>
+
+
+        </ul>
     </div>
+
 </div>
-
-<div class="modal hide fade" id="loginModal" style="background-color:#2F2F2F" tabindex="-1" role="dialog">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" >&times;</button>
-        <h3>Login</h3>
-    </div>
-    <div class="modal-body">
-        <div class="form-horizontal" tabindex="-1" >
-            <fieldset>
-                <div class="control-group">
-                    <!-- Username -->
-                    <label class="control-label"  for="username">Username</label>
-                    <div class="controls">
-                        <input type="text" id="username" name="username" placeholder="" class="input-xlarge">
-                        <span class="help-inline"></span>
-                    </div>
-                </div>
-
-                <div class="control-group">
-                    <!-- Password-->
-                    <label class="control-label" for="password">Password</label>
-                    <div class="controls">
-                        <input type="password" id="password" name="password" placeholder="" class="input-xlarge">
-                        <span class="help-inline"></span>
-                    </div>
-                </div>
-
-                <div id="registrationControls" class="hide">
-
-                    <div class="control-group">
-                        <!-- Password 2 -->
-                        <label class="control-label" for="password-repeat">Password</label>
-                        <div class="controls">
-                            <input type="password" id="password-repeat" name="password" placeholder="" class="input-xlarge">
-                            <span class="help-inline"></span>
-                        </div>
-                    </div>
-
-
-                    <div class="control-group">
-                        <!-- email -->
-                        <label class="control-label" for="email">Recovery email (optional)</label>
-                        <div class="controls">
-                            <input type="text" id="email" name="email" placeholder="" class="input-xlarge">
-                            <span class="help-inline"></span>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="control-group">
-                    <!-- Button -->
-                    <div class="controls" style="position:relative; height:25px;">
-                        <button id="loginSubmit" class="btn btn-success" style="position:absolute;left:0;">Login</button>
-                        <button id="register" class="btn btn-inverse" style="position:absolute; left:200px;">Register</button>
-                    </div>
-                </div>
-            </fieldset>
-        </div>
-    </div>
+<div class="bottom bg-slategray">
+    <footer class="ticker">
+        <ul class="elems"></ul>
+    </footer>
+    <div class="fade"></div>
 </div>
+<div class="right">
 
-<div class="modal hide fade" id="syntaxModal" style="background-color:#2F2F2F" tabindex="-1" role="dialog">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" >&times;</button>
-        <h3>Syntax</h3>
-    </div>
-    <div class="modal-body">
-        <p>The system initialises itself to the first symbol in your ruleset</p>
-        <table class="table " >
-            <thead>
-                <tr>
-                    <th class="span1-5">symbol</th>
-                    <th>meaning</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>F</td>
-                    <td>draw forwards by [size]</td>
-                </tr>
-                <tr>
-                    <td>+ / -</td>
-                    <td>rotate clockwise/anticlockwise by [angle]</td>
-                </tr>
-                <tr>
-                    <td>&gt; / &lt;</td>
-                    <td>increase/decrease [size] by 1%</td>
-                </tr>
-                <tr>
-                    <td>) / (</td>
-                    <td>increase / decrease [angle] by 5%</td>
-                </tr>
-                <tr>
-                    <td>[ , ]</td>
-                    <td>push / pop stack</br>push saves the current position of the turtle - pop will return the turtle to that state
-                    </td>
-                </tr>
-                <tr>
-                    <td>!</td>
-                    <td>flip [angle] through x-axis (kind of. actually it's angle *= -1)</td>
-                </tr>
-                <tr>
-                    <td>|</td>
-                    <td>reverse current direction (adds 180 to angle)</td>
-                </tr>
-                
-            </tbody>
-        </table>
-
-    </div>
-</div>
-
-<div class="modal hide fade" id="helpModal" style="background-color:#2F2F2F" tabindex="-1" role="dialog">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" >&times;</button>
-        <h3>What the hell is this?</h3>
-    </div>
-    <div class="modal-body">
-        <p>Welcome to lsys - the brainchild of a <a href="http://benvan.co.uk">bored programmer</a> with very poor taste in design.</p>
-        <p>
-        The white pattern you see drawn on your screen is an <a href="https://en.wikipedia.org/wiki/L-system">l-system</a>. An l-system comprises a set of atoms (each of which is assigned some meaning) and a set of production rules which expand individual atoms into  sequences of atoms. Some atoms are defined by me - the rules are entirely up to you. You write them in the box on the left, and they take the following form:
-        </p>
-        <p>[AtomToExpand] : [Sequence of atoms]</p>
-        <p>The system initialises itself to your first atom, and the follows the production rules you've defined, [levels] times, mutating itself along the way. When expansion has finished, the atoms are then interpreted as a sequence of turtle-graphics instructions. In this stage, only the special characters F,+,-,[,],&gt;,&lt;,| and ! are given any meaning - all others are ignored.</p>
-    </div>
-</div>
-
-<header class="row">
-    <div class="navbar navbar-inverse navbar-static-top">
-        <div class="navbar-inner">
-            <a class="brand" href="http://benvan.co.uk"><img src="img/logo_tr.png" width="30"/>l-sys</a>
-
-            <ul class="nav pull-right">
-                <li><a id="help" href="#helpModal" data-toggle="modal" class="hide"><i class="icon icon-white icon-question-sign"></i> wat?</a></li>
-                <li><a id="syntax" href="#syntaxModal" data-toggle="modal" class="hide"><i class="icon icon-white icon-info-sign"></i> syntax</a></li>
-                <!-- <li><p id="userwelcome" class="navbar-text">Welcome, User!</p></li>
-                <li class="divider-vertical"></li>
-                <li><a id="logout" href="#" class="hide">Logout</a></li>
-                <li><a id="login" data-toggle="modal" href="#loginModal">Login</a></li> -->
-            </ul>
-        </div>
-    </div>
-
-</header>
-
-<div class="body row scroll-y">
-
-    <div class="left col">
-        <div id="controls" style="padding:0 8px">
-            <form>
-                <label for="num">levels</label>
-                <label for="length">size</label>
-                <label for="angle">angle</label>
-
-                <div>
-                    <input id="num" type="text" value=""/>
-                    <input id="length" type="text" value=""/>
-                    <input id="angle" type="text" style="width:82px" value=""/>
-                    <textarea id="rules" rows="8"></textarea>
-                </div>
-
-            </form>
-            <button class="btn btn-inverse btn-go btn-block" data-toggle="tooltip" title="ctrl-enter">GO</button>
-
-
-            <!--<div id="help" class="well" style="margin-top:25px;background-color:#68717e; height:300px;">
-                <div>Axioms</div>
-                <div>F = Draw forward by [size]</div>
-                <div>+/- = Rotate by [angle]</div>
-                <div>)/( = increment [angle] +/- 5%</div>
-                <div>&gt;/&lt; = Increment [size] +/- 1%</div>
-                <div>| = [angle] *= -1</div>
-                <div>! = [angle] -= 180</div>
-            </div>-->
-
-
-            <div id="data" class="pad" style="margin-top:25px;background-color:#1a1a20">
-                <div>segments: <span id="segments"></span></div>
-                <div>rendered : <span id="rendered"></span></div>
-            </div>
-        </div>
-    </div>
-    <div class="right col">
-
-        <div class="drawing-pad">
-            <div id="systemInfo" class="system-info blue">
-                <div id="systemName" class="system-name">click-and-drag!</div>
-                <a class="system-author" data-toggle="modal" href="#myModal">benvan</a>
-            </div>
+    <div class="drawing-pad">
+        <div id="systemInfo" class="system-info blue">
+            <div id="systemName" class="system-name">click-and-drag!</div>
             <div class="actions">
-                <a class="export" style="color:#ddd; font-size:8pt;"  href="#"><i class="icon icon-white icon-download-alt"></i> png</a>
-            </div>
-            <div id="drawingContainer">
-                <canvas id="c" height="120px"></canvas>
+                <a class="export" href="#">
+                    <i class="icon-download"></i>
+                </a>
             </div>
         </div>
+        <div id="drawingContainer">
+            <canvas id="c"></canvas>
+        </div>
     </div>
+
+    <div class="github-fork-ribbon-wrapper fm-left">
+        <div class="github-fork-ribbon">
+            <a href="https://github.com/benvan/lsys">Fork me on GitHub</a>
+        </div>
+    </div>
+
 </div>
-
-
-<footer class="row ticker">
-    <div class="ticker-bar"></div>
-    <ul class="elems">
-    </ul>
-</footer>
-
-
-<script type="text/javascript" src="js/jquery-1.8.1.js"></script>
-<script type="text/javascript" src="js/jquery.ellipsis.js"></script>
-<script type="text/javascript" src="js/system-ticker.js"></script>
-<script type="text/javascript" src="js/jquery.kinetic.js"></script>
-<script type="text/javascript" src="js/jquery.cookie.js"></script>
-
 
 <script type="text/javascript" src="js/underscore.js"></script>
-<script type="text/javascript" src="js/bootstrap.js"></script>
-<script type="text/javascript" src="js/api.js"></script>
+<script type="text/javascript" src="js/jquery-1.8.1.js"></script>
+
+<script type="text/javascript" src="js/system-ticker.js"></script>
+
+<script type="text/javascript" src="js/generated/util.js"></script>
 <script type="text/javascript" src="js/generated/controls.js"></script>
 <script type="text/javascript" src="js/generated/classes.js"></script>
 <script type="text/javascript" src="js/generated/lsystem.js"></script>
@@ -263,122 +128,20 @@
     var manager; // Don't judge. I want to get ahold of it in the console!
     $(document).ready(function () {
 
-        var clearForm = function(){
-            $("#loginModal").find(".control-group").removeClass("error").find(".help-inline").empty();
-        };
-
-        var showErrors = function(errors){
-            $.each(errors, function (ctrl, msgs) {
-                $("#" + (ctrl || "password")).parents(".control-group").addClass("error").find(".help-inline").html(msgs.join("</br>"));
-            });
-        };
-
-        var login = function(){
-            $("#userwelcome").html("Welcome, " + api.user.name + "!");
-            $("#login").hide();
-            $("#logout").show();
-            $("#loginModal").modal("hide");
-        };
-
-        var logout = function(){
-            api.user.logout();
-            $("#userwelcome").empty();
-            $("#login").show();
-            $("#logout").hide();
-        };
-
-        $("#logout").click(logout);
-
-        $("#loginModal").find("input").keypress(function(e){
-            if (e.which == 13){
-                //click primary button
-                $("#loginModal").find("button").filter(function(){
-                    return $(this).data("primary");
-                }).click();
-            }
-        });
-
-        $("#loginSubmit")
-            .data("primary",true)
-            .data("primaryClick",function(){
-                clearForm();
-                var username = $("#username").val();
-                var password = $("#password").val();
-                api.user.login(username,password,login,showErrors);
-            });
-
-        $("#register").data("primaryClick",function(){
-            clearForm();
-            var username = $("#username").val();
-            var password = $("#password").val();
-
-            if (password != $("#password-repeat").val()){
-                showErrors({"password-repeat":["passwords don't match"]});
-                return;
-            }
-
-            var email = $("#email").val();
-
-            api.user.register(username,password,email,login,showErrors);
-        });
-
-        var btns = $("#loginSubmit,#register");
-        btns.click(function (e) {
-            if ($(this).data("primary")){
-                $(this).data("primaryClick")();
-            }else{
-                clearForm();
-                // swap
-                var speed = 250;
-                $("#registrationControls").slideToggle(speed);
-                btns.each(function(){
-                    var primary = $(this).data("primary");
-                    $(this).data("primary",!primary);
-                    $(this)[(primary ? "remove":"add") + "Class"]("btn-success");
-                    $(this)[(primary ? "add":"remove") + "Class"]("btn-inverse");
-                    $(this).animate({
-                        left: (primary ? 200 : 0) + "px"
-                    },speed);
-                });
-            }
-
-        });
-
-        var token = $.cookie("token", data.token);
-        if (token){
-            api.user.setToken(token);
-            login();
-        }else{
-            logout();
-        }
-
-
-        $(".elems")
-            .ticker("ticker.json")
-            .kinetic();
-
-        if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
-            alert("This site runs orders of magnitude faster in chrome.. \n\nClick OK to give it a go anyway, but it's going to be *extremely* slow, it will look crap and may also explode your computer");
-        }
-        $("button").tooltip();
+        $(".elems").ticker("ticker.json");
 
         manager = new SystemManager(
             Util.control("c"),
-            {}
+            Util.map({
+                params: 'controls-container',
+                offsets: 'offsets-container',
+                sensitivities: 'sensitivities-container',
+                iterations: 'iterations',
+                rules: 'rules'
+            }, Util.control)
         );
 
         manager.run();
-
-        $('a.export').click(function(){
-            manager.exportToPng();
-            return false;
-        });
-
-        $('button.btn-go').click(function() {
-            manager.updateFromControls();
-            manager.syncLocation();
-            return false;
-        });
 
         var stretchCanvas = function(){
             var canvas = Util.control("c");
@@ -396,15 +159,39 @@
             },300);
         });
 
+        var update = function(){
+            manager.updateFromControls();
+            manager.draw();
+        };
+
+        $('a.export').click(function(){
+            manager.exportToPng();
+            return false;
+        });
+
+        //this is kinda naughty... but I'd rather refactor Controls first than fudge this in otherwise
+        $("#controls-container,#offsets-container").find("[data-param]").on("input", _.debounce(update, 250));
+
+        $("#sensitivities-container").find("[data-param]").on("input", function(){
+            manager.updateFromControls();
+        });
+
+        $('#rules,#iterations').on('input', function(){
+            $('.recalculate button').fadeIn(100);
+        });
+        $('.recalculate button')
+                .hide()
+                .click(update)
+                .click(function(){
+                    $(this).fadeOut(100)
+                });
+
         manager.draw();
     });
 
 
 </script>
 
-<script type="text/javascript">
-
-</script>
 
 </body>
 </html>
