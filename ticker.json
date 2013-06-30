@@ -40,6 +40,11 @@
         "img": "lsys_leviathon.png",
         "author": "benvan"
     }, {
+        "name": "spindlethrift",
+        "url": "#i=30&r=S%20%3A%20CCC%0AC%20%3A%20!%5B)B%7CVFC%5D%0AB%20%3A%20A%7CBF!%0AA%20%3A%20F%7C-A%7C%2BF%0AV%20%3A%20%2B&p.size=2.23,0.01&p.angle=-3197.02,0.05999061329999905&s.size=200,1000000&s.angle=200,10000000000&offsets=0,0,0",
+        "img": "lsys_spindlethrift.png",
+        "author":"benvan"
+    }, {
         "name": "the DNA dance",
         "url": "#i=30&p.size=16.08&p.angle=-660&r=C%20%3A%20B%7CVFC%0AB%20%3A%20A!B%0AA%20%3A%20F---A%7C%2B%0AV%20%3A%20XVY%0AX%20%3A%20%3CX%0AY%20%3A%20%3EY",
         "img": "lsys_the_DNA_dance.png",
@@ -84,6 +89,11 @@
         "img" : "lsys_platterstar.png",
         "url":"#i=200&p.size=188.94&p.angle=-3179.7&r=L%20%3A%20SSSSSS%0AS%20%3A%20%3E%7C%2B%5BF%5BS%5D%5D%7C"
     }, {
+        "name": "close encounters",
+        "url": "#i=30&r=S%20%3A%20CCC%0AC%20%3A%20!%5BB%7CVFC%5D%0AB%20%3A%20A%7CBF!%0AA%20%3A%20F%7C-A%7C%2BF%0AV%20%3A%20%2B&p.size=2.23,0.01&p.angle=-3079.65,0.046088999999999804&s.size=200,1000000&s.angle=200,1000000&offsets=0,0,0",
+        "author": "benvan",
+        "img": "lsys_close_encounters.png"
+    }, {
         "name": "heisenberg",
         "url": "#i=12&p.size=11.94&p.angle=-3259.1&r=S%20%3A%20F-%5BF-Y%5BS%5D%5D%0AY%20%3A%20S%7C%5B%7CF-F%2B)Y%5D",
         "img": "lsys_heisenberg.png",
@@ -122,6 +132,11 @@
         "name": "mortal coil",
         "url": "#i=44&p.size=4.15&p.angle=-1793.1&r=C%20%3A%20B%7CVFC%0AB%20%3A%20A!BF%0AA%20%3A%20F%7C-A%7C%2BF%0AV%20%3A%20%3E",
         "img": "lsys_mortal_coil.png",
+        "author": "benvan"
+    }, {
+        "name": "house rules",
+        "url": "#i=30&r=S%20%3A%20C%7CCC%7CC%0AC%20%3A%20!%5B(B%7CVFC%5D%0AB%20%3A%20A%7CBF!%0AA%20%3A%20F%7C-A%7C%2BF%0AV%20%3A%20%2B&p.size=2.23,0.01&p.angle=-5535.03,0.2526636383000048&s.size=200,1000000&s.angle=200,1000000&offsets=0,0,0",
+        "img": "lsys_house_rules.png",
         "author": "benvan"
     }, {
         "name": "flagella",
