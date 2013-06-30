@@ -6,6 +6,7 @@
     <link href="css/normalize.css" rel="stylesheet" type="text/css"/>
     <link href="css/forkme.css" rel="stylesheet" type="text/css"/>
     <link href="css/fontello.css" rel="stylesheet" type="text/css"/>
+    <link href="css/introjs.min.css" rel=" stylesheet" type="text/css"/>
     <link href="sass/test.css" rel="stylesheet" type="text/css"/>
 
     <!-- google analytics -->
@@ -25,18 +26,60 @@
 </head>
 <body class="bg-slategray">
 
-<div class="left">
+<ol id="tour">
+    <li data-element=".header">
+        <p>Welcome to lsys - the brainchild of a <a href="http://benvan.co.uk">curious programmer</a> with questionable taste in design.</p>
+        <p>The pattern on the right is an <a href="https://en.wikipedia.org/wiki/L-system">l-system</a>, and it's interactive</p>
+    </li>
+    <li data-element=".drawing-pad" data-position="bottom">
+        <p>Click and drag!</p>
+    </li>
+    <li data-element=".drawing-pad" data-position="bottom">
+        <p>As you drag your mouse, you change the parameters of the system, which then gets redrawn.</p>
+    </li>
+    <li data-element="#control-set">
+        <p>This set of controls describes (entirely) what you will see on the right</p>
+    </li>
+    <li data-element="#rules-row">
+        <p>This is the most important part: The set of rules that defines the shape of the system</p>
+        <p>The rules are used to generate a sequence of drawing instructions. For example, 'F' means 'draw forwards', and '+' means rotate right.</p>
+        <p>By generating long strings of instructions, we can make some pretty crazy patterns</p>
+    </li>
+    <li data-element="#rules-row" data-after="square">
+        <p>Let's try something super simple: a square</p>
+    </li>
+    <li data-element="#rules-row" data-after="square-recursive">
+        <p>We've defined a rule, called S, for "square". It really doesn't matter what we call it, but it must be precisely one character</p>
+        <p>After the colon, we've defined what 'S' means - it means draw forwards, then rotate right, four times in a row</p>
+        <p>But we could describe this another way:</p>
+    </li>
+    <li data-element="#rules-container" data-after="spirograph">
+        <p>Instead, let's make the S rule recursive. Now, we draw forwards, rotate right, then do 'S' again.</p>
+        <p>We do this 4 times, since that's the value of the 'levels' input field</p>
+    </li>
+    <li data-element="#rules-container">
+        <p>Let's get more interesting:</p>
+        <p>We define a new rule A, which does a S(quare), then rotates right, and does an A again. The [brackets] surrounding the S mean "remember where you are, do an S, return to where you were".</p>
+        <p>We've also bumped up the levels to 50. Try dragging around and see what happens! Notice that you're changing the value of 'angle' up above, which is what we rotate by when we see a '+' instruction.</p>
+    </li>
+    <li data-element="#rules-container">
+        <p>The system's parameters are also sync'd automatically with the url - meaning you can share systems by pasting the url somewhere.</p>
+        <p>Also - since systems are just urls, your browsers back button works the way you would expect it to :)</p>
+    </li>
+</ol>
+
+<div class="container-left">
 
     <div class="header">
         <a class="site" href="http://benvan.co.uk/lsys"><img src="img/logo_tr.png"><span>lsys</span></a>
         <div class="actions">
-            <a id="help" href="#">
+            <a id="helpTrigger" href="#">
                 <i class="icon-help"></i>
             </a>
         </div>
     </div>
     <div class="controls">
-        <ul>
+        <ul id="control-set">
             <li class="section">offsets</li>
 
             <li class="group" id="offsets-container">
@@ -66,14 +109,17 @@
                 <!-- sensitivities be here! -->
             </li>
 
-            <li class="section">system</li>
+            <li class="section">
+                system
+                <i class="icon-help-circled"></i>
+            </li>
 
-            <li class="group">
+            <li class="group" id="rules-container">
                 <ul class="control-row half">
                     <li class="label">levels</li><!--
                  --><li><input id="iterations" type="text" ></li>
                 </ul>
-                <ul class="control-row">
+                <ul class="control-row" id="rules-row">
                     <li class="label">rules</li><!--
                  --><li><textarea id="rules" rows="12"></textarea></li>
                 </ul>
@@ -87,13 +133,13 @@
     </div>
 
 </div>
-<div class="bottom bg-slategray">
+<div class="container-bottom bg-slategray">
     <footer class="ticker">
         <ul class="elems"></ul>
     </footer>
     <div class="fade"></div>
 </div>
-<div class="right">
+<div class="container-right">
 
     <div class="drawing-pad">
         <div id="systemInfo" class="system-info blue">
@@ -172,11 +218,6 @@
             return false;
         });
 
-        $('#help').click(function(){
-            $('#helpDialog').toggle();
-            return false;
-        });
-
         //this is kinda naughty... but I'd rather refactor Controls first than fudge this in otherwise
         $("#controls-container,#offsets-container").find("[data-param]").on("input", _.debounce(update, 250));
 
@@ -194,12 +235,49 @@
                     $(this).fadeOut(100)
                 });
 
+        $('#helpTrigger').click(function(){
+            var examples = {
+                "square" : "#i=1&r=S%20%3A%20F%2BF%2BF%2BF&p.size=100,0.01&p.angle=90,0&s.size=200,1000000&s.angle=200,1000000&offsets=-0,0,0",
+                "square-recursive" : "#i=4&r=S%20%3A%20F%2BS&p.size=100,0.01&p.angle=90,0&s.size=200,1000000&s.angle=200,1000000&offsets=-0,0,0",
+                "spirograph" : "#i=50&r=A%20%3A%20%5BS%5D%2BA%0AS%20%3A%20F%2BS&p.size=100,0.01&p.angle=90,0.015257000000000027&s.size=200,1000000&s.angle=200,1000000&offsets=-0,0,0",
+                "serpinski" : "#i=8&r=A%20%3A%20BF-AF-B%0AB%20%3A%20AF%2BBF%2BA&p.size=1.0352999999999999,0.010817999999999967&p.angle=60,0&s.size=200,1000000&s.angle=200,1000000&offsets=-124,87,30"
+            };
+            var example = function(which){
+                if (which) window.location.hash = examples[which];
+            };
+            var steps = $('#tour li').map(function(){
+                var step = $(this);
+
+                return {
+                    "element" : step.data('element'),
+                    "intro" : step.html(),
+                    "position" : step.data('position') || "right",
+                    "after" : step.data('after')
+                }
+            });
+            var intro = introJs();
+            intro
+                .onbeforechange(function(){
+                        var item = intro._introItems[intro._currentStep || 0];
+                        if (item.after) example(item.after);
+                })
+                .setOptions({
+                    exitOnOverlayClick: false,
+                    tooltipPosition:'right',
+                    showStepNumbers: false,
+                    steps: steps
+                })
+                .start();
+            return false;
+        });
+
+
         manager.draw();
     });
 
 
 </script>
-
+<script src="js/intro.min.js"></script>
 
 </body>
 </html>

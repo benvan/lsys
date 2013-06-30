@@ -11,6 +11,22 @@ $bottom:240px;
 &::-webkit-scrollbar-thumb:horizontal{ width:5px;background-color:#999;-webkit-border-radius:4px; }
 }
 
+.introjs-tooltip, .introjs-helperLayer{
+  color: #e8e8e8;
+  background-color: rgb(70, 71, 77);
+  border: 1px solid #b2b2b2;
+  p a{
+    color:rgb(92, 190, 228);
+  }
+}
+.introjs-helperLayer{
+  color: #e8e8e8;
+  background-color: rgba(94, 97, 111, 0.51)
+}
+.introjs-overlay{
+  display:none;
+}
+
 html{
   overflow:hidden;
 }
@@ -71,7 +87,7 @@ li{
   }
 }
 
-.left{
+.container-left{
   bottom: 0;
   cursor: default;
   background-color:$menu-color;
@@ -83,7 +99,7 @@ li{
   width: $left;
 }
 
-.right{
+.container-right{
   bottom: $bottom;
   left: $left+1;
   margin: 0;
@@ -93,7 +109,7 @@ li{
   top: $top;
   background-color: #1d1f20;
 }
-.bottom{
+.container-bottom{
   position:absolute;
   padding:0;
   bottom:0;
