@@ -26,12 +26,20 @@
 </head>
 <body class="bg-slategray">
 
-<ol id="tour">
-    <li data-element=".header">
+<ol id="tour" style="display:none">
+    <li data-element="#helpTrigger">loading<!-- hidden step, to allow me to hook into callbacks - there aren't any useful ones on the first step... --></li>
+    <li data-element="#helpTrigger">
         <p>Welcome to lsys - the brainchild of a <a href="http://benvan.co.uk">curious programmer</a> with questionable taste in design.</p>
-        <p>The pattern on the right is an <a href="https://en.wikipedia.org/wiki/L-system">l-system</a>, and it's interactive</p>
+        <p>The pattern on the right is an <a href="https://en.wikipedia.org/wiki/L-system">l-system</a>, and it's interactive.</p>
+        <a onclick="window.goToStep(3);" href="javascript:void(0);" data-trigger="tour" class="introjs-button wide">
+            Er.. Ok. What the hell?
+        </a>
+        <a onclick="window.goToStep(13);" href="javascript:void(0);" data-trigger="syntax" class="introjs-button wide">
+            Yeah, yeah, yeah.<br/>Just show me the syntax.
+        </a>
     </li>
-    <li data-element=".drawing-pad" data-position="bottom">
+    <!-- tour bit -->
+    <li data-element=".drawing-pad" data-position="bottom" data-overlay="off">
         <p>Click and drag!</p>
     </li>
     <li data-element=".drawing-pad" data-position="bottom">
@@ -45,19 +53,19 @@
         <p>The rules are used to generate a sequence of drawing instructions. For example, 'F' means 'draw forwards', and '+' means rotate right.</p>
         <p>By generating long strings of instructions, we can make some pretty crazy patterns</p>
     </li>
-    <li data-element="#rules-row" data-after="square">
+    <li data-element="#rules-row">
         <p>Let's try something super simple: a square</p>
     </li>
-    <li data-element="#rules-row" data-after="square-recursive">
+    <li data-element="#rules-row" data-example="square">
         <p>We've defined a rule, called S, for "square". It really doesn't matter what we call it, but it must be precisely one character</p>
         <p>After the colon, we've defined what 'S' means - it means draw forwards, then rotate right, four times in a row</p>
         <p>But we could describe this another way:</p>
     </li>
-    <li data-element="#rules-container" data-after="spirograph">
+    <li data-element="#rules-container" data-example="square-recursive">
         <p>Instead, let's make the S rule recursive. Now, we draw forwards, rotate right, then do 'S' again.</p>
         <p>We do this 4 times, since that's the value of the 'levels' input field</p>
     </li>
-    <li data-element="#rules-container">
+    <li data-element="#rules-container" data-example="spirograph">
         <p>Let's get more interesting:</p>
         <p>We define a new rule A, which does a S(quare), then rotates right, and does an A again. The [brackets] surrounding the S mean "remember where you are, do an S, return to where you were".</p>
         <p>We've also bumped up the levels to 50. Try dragging around and see what happens! Notice that you're changing the value of 'angle' up above, which is what we rotate by when we see a '+' instruction.</p>
@@ -66,6 +74,69 @@
         <p>The system's parameters are also sync'd automatically with the url - meaning you can share systems by pasting the url somewhere.</p>
         <p>Also - since systems are just urls, your browsers back button works the way you would expect it to :)</p>
     </li>
+    <li data-element=".elem" data-position="left">
+        <p>Take a look at some of the examples here (you can scroll down!)</p>
+    </li>
+    <!-- syntax bit -->
+    <li data-element=".icon-help-circled" data-overlay='on'>
+        <p>Here's the list of available symbols (so far)</p>
+        <table class="table" >
+            <thead>
+            <tr>
+                <th style="width:70px;">symbol</th>
+                <th>meaning</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>F</td>
+                <td>draw forwards by [size]</td>
+            </tr>
+            <tr>
+                <td>+ / -</td>
+                <td>rotate by +/-[angle]</td>
+            </tr>
+            <tr>
+                <td>&gt; / &lt;</td>
+                <td>increase/decrease [size] by [size-growth]</td>
+            </tr>
+            <tr>
+                <td>) / (</td>
+                <td>increase / decrease [angle] by [angle-growth]</td>
+            </tr>
+            <tr>
+                <td>[ , ]</td>
+                <td>push / pop state
+                </td>
+            </tr>
+            <tr>
+                <td>!</td>
+                <td>negate [angle]</td>
+            </tr>
+            <tr>
+                <td>|</td>
+                <td>increment [angle] by 180&deg;</td>
+            </tr>
+
+            </tbody>
+        </table>
+        <p>Other than that, it's worth mentioning the mouse controls:</p>
+    </li>
+    <li data-element="#offsets-container">
+        <p>Ctrl-click (or cmd-click) will translate (move) the system around</p>
+        <p>Rotation is done manually, using the input field on the right</p>
+    </li>
+    <li data-element="#controls-container ul.control-row:nth-child(3)">
+        <p>Dragging left-right affects angle values, up-down affects angle growth</p>
+    </li>
+    <li data-element="#controls-container ul.control-row:nth-child(2)">
+        <p>Hold alt and drag to adjust size parameters</p>
+        <p>Here, up-down adjusts scale, and left-right adjusts size growth</p>
+    </li>
+    <li data-element="#helpTrigger">
+        That's it! Whew!
+    </li>
+
 </ol>
 
 <div class="container-left">
@@ -111,7 +182,7 @@
 
             <li class="section">
                 system
-                <i class="icon-help-circled"></i>
+                <i id="syntaxTrigger" class="icon-help-circled"></i>
             </li>
 
             <li class="group" id="rules-container">
@@ -235,42 +306,65 @@
                     $(this).fadeOut(100)
                 });
 
-        $('#helpTrigger').click(function(){
+        <!-- tour guide -->
+        var intro;
+        // gaaaah. no nice way to hook into buttons on step 1 of tour.
+        // there's no callback which fires after the template's been rendered.
+        window.goToStep = function(i){
+            intro.goToStep(i);
+        };
+        function mkIntro(){
+            if (intro && !intro.hasQuit) intro.exit();
+            intro = introJs().onexit(function(){
+                intro.hasQuit = true;
+            });
             var examples = {
                 "square" : "#i=1&r=S%20%3A%20F%2BF%2BF%2BF&p.size=100,0.01&p.angle=90,0&s.size=200,1000000&s.angle=200,1000000&offsets=-0,0,0",
                 "square-recursive" : "#i=4&r=S%20%3A%20F%2BS&p.size=100,0.01&p.angle=90,0&s.size=200,1000000&s.angle=200,1000000&offsets=-0,0,0",
                 "spirograph" : "#i=50&r=A%20%3A%20%5BS%5D%2BA%0AS%20%3A%20F%2BS&p.size=100,0.01&p.angle=90,0.015257000000000027&s.size=200,1000000&s.angle=200,1000000&offsets=-0,0,0",
                 "serpinski" : "#i=8&r=A%20%3A%20BF-AF-B%0AB%20%3A%20AF%2BBF%2BA&p.size=1.0352999999999999,0.010817999999999967&p.angle=60,0&s.size=200,1000000&s.angle=200,1000000&offsets=-124,87,30"
             };
-            var example = function(which){
-                if (which) window.location.hash = examples[which];
-            };
             var steps = $('#tour li').map(function(){
                 var step = $(this);
-
                 return {
                     "element" : step.data('element'),
                     "intro" : step.html(),
                     "position" : step.data('position') || "right",
-                    "after" : step.data('after')
+                    "data" : step.data()
                 }
             });
-            var intro = introJs();
-            intro
-                .onbeforechange(function(){
-                        var item = intro._introItems[intro._currentStep || 0];
-                        if (item.after) example(item.after);
-                })
-                .setOptions({
-                    exitOnOverlayClick: false,
-                    tooltipPosition:'right',
-                    showStepNumbers: false,
-                    steps: steps
-                })
-                .start();
+
+            return intro.onbeforechange(function(){
+                if (intro._currentStep == undefined){
+                    intro.goToStep(1);
+                    $('.introjs-tooltipbuttons').hide();
+                }else{
+                    $('.introjs-tooltipbuttons').show();
+                }
+            }).onchange(function(){
+                var item = intro._introItems[intro._currentStep];
+                var data = item.data;
+                if (data.example) window.location.hash = examples[data.example];
+                if (data.overlay == 'on') $('.introjs-overlay').show();
+                if (data.overlay == 'off') $('.introjs-overlay').hide();
+            }).setOptions({
+                exitOnOverlayClick: true,
+                tooltipPosition:'right',
+                showStepNumbers: false,
+                steps: steps
+            });
+        }
+
+
+        $('#helpTrigger').click(function(){
+            mkIntro().start();
             return false;
         });
 
+        $('#syntaxTrigger').click(function(){
+            mkIntro().start().goToStep(13);
+            return false;
+        });
 
         manager.draw();
     });
