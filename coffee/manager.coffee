@@ -16,14 +16,14 @@ class InputHandler
   update: (system) =>
     return if not @joystick.active
     if (@keystate.alt)
-      system.params.size.value = @snapshot.params.size.value * (1+(@joystick.dy(system.sensitivities.size.value)))
-      system.params.size.growth += @joystick.dx(system.sensitivities.size.growth)
+      system.params.size.value = Util.round(@snapshot.params.size.value + (@joystick.dy(system.sensitivities.size.value)), 2)
+      system.params.size.growth = Util.round(@snapshot.params.size.growth + @joystick.dx(system.sensitivities.size.growth),6)
     else if (@keystate.cmd or @keystate.ctrl)
       system.offsets.x = @snapshot.offsets.x + @joystick.dx(1)
       system.offsets.y = @snapshot.offsets.y + @joystick.dy(1)
     else
       system.params.angle.value = Util.round(system.params.angle.value + @joystick.dx(system.sensitivities.angle.value), 2)
-      system.params.angle.growth += @joystick.dy(system.sensitivities.angle.growth)
+      system.params.angle.growth = Util.round(system.params.angle.growth + @joystick.dy(system.sensitivities.angle.growth),6)
 
 
 #yes this is an outrageous name for a .. system ... manager. buh.
@@ -84,6 +84,7 @@ class SystemManager
     @inputHandler.update(@currentSystem)
     if @joystick.active and not @renderer.isDrawing
       @draw()
+      @joystick.draw()
       @syncControls()
     setTimeout((() => @run()), 10)
 
@@ -114,6 +115,7 @@ class SystemManager
       if ev.keyCode == 13 and ev.ctrlKey
         @updateFromControls()
         @syncLocation()
+        return false
       if ev.keyCode == 13 and ev.shiftKey
         @exportToPng()
       if (ev.metaKey or ev.ctrlKey)
