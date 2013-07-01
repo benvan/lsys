@@ -24,8 +24,8 @@ $bottom:240px;
   color: #e8e8e8;
   background-color: rgba(94, 97, 111, 0.51)
 }
-.introjs-overlay.tour{
-  display:none;
+.introjs-overlay{
+  opacity: 0.3 !important;
 }
 .introjs-button.wide{
   text-align: center;
