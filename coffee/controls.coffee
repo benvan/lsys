@@ -36,7 +36,6 @@ class Joystick
   active:false
   start: new Point(0,0)
   now: new Point(0,0)
-  sensitivity: new Point(200,1000000)
 
   constructor: (@canvas) ->
     @g = canvas.getContext('2d')
@@ -45,8 +44,8 @@ class Joystick
   onActivate: -> # noop unless overriden
   onRelease: -> # noop unless overriden
 
-  dx: (sensitivity) -> (@now.x - @start.x) / (sensitivity || @sensitivity.x)
-  dy: (sensitivity) -> (@now.y - @start.y) / (sensitivity || @sensitivity.y)
+  dx: (sensitivity) -> (@now.x - @start.x) / if (sensitivity) then Math.pow(10,sensitivity) else 1
+  dy: (sensitivity) -> (@now.y - @start.y) / if (sensitivity) then Math.pow(10,sensitivity) else 1
 
   clear: -> #noop for now
   draw: ->  #noop for now
