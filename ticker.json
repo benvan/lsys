@@ -1,42 +1,42 @@
 {
     "systems": [{
         "name": "re-coil",
-        "url": "#i=30&r=L%20%3A%20S%0AS%20%3A%20F%3E%2B%5BF-Y%5BS%5D%5DF)G%0AY%20%3A--%5B%7CF-F--FY%5D-%0AG%3A%20FGF%5B%2BF%5D%2BY&p.size=4.46,0.003334&p.angle=-3832.29,0.08145300000000245&s.size=20,300&s.angle=200,1000000",
+        "url": "#i=30&r=L%20%3A%20S%0AS%20%3A%20F%3E%2B%5BF-Y%5BS%5D%5DF)G%0AY%20%3A--%5B%7CF-F--FY%5D-%0AG%3A%20FGF%5B%2BF%5D%2BY&p.size=4.46,0.003334&p.angle=-3832.29,0.08145300000000245&s.size=1.3,2.47&s.angle=2.3,6",
         "img": "lsys_re-coil.png",
         "author": "benvan"
     }, {
         "name": "the triffids",
-        "url": "#i=11&r=L%20%3A%20SSS%0AS%20%3A%20%5BF%3E%5BFF-YS%5DF)G%5D%2B%0AY%20%3A--%5BF-)F-FG%5D-%0AG%3A%20FGF%5BY%2BF%5D%2BY&p.size=10.3943,0.010104&p.angle=-3731.69,0.05244601300000046&s.size=20,300&s.angle=200,1000000&offsets=18,23,0",
+        "url": "#i=11&r=L%20%3A%20SSS%0AS%20%3A%20%5BF%3E%5BFF-YS%5DF)G%5D%2B%0AY%20%3A--%5BF-)F-FG%5D-%0AG%3A%20FGF%5BY%2BF%5D%2BY&p.size=10.3943,0.010104&p.angle=-3731.69,0.05244601300000046&s.size=1.3,2.47&s.angle=2.3,6&offsets=18,23,0",
         "img": "lsys_the_triffids.png",
         "author": "benvan"
     }, {
         "name": "flyweight",
-        "url": "#i=30&r=L%20%3A%20S%0AS%20%3A%20F%2B%5BF%3E-Y%5BS%5D%5DF)G%0AY%20%3A--%5B%7CF-F--FY%5D-%0AG%3A%20FGF%5B%2BF%5D%2BY&p.size=4.34,0.01&p.angle=-3869.97,0.11540900000000301&s.size=20,300&s.angle=200,1000000",
+        "url": "#i=30&r=L%20%3A%20S%0AS%20%3A%20F%2B%5BF%3E-Y%5BS%5D%5DF)G%0AY%20%3A--%5B%7CF-F--FY%5D-%0AG%3A%20FGF%5B%2BF%5D%2BY&p.size=4.34,0.01&p.angle=-3869.97,0.11540900000000301&s.size=1.3,2.47&s.angle=2.3,6",
         "img": "lsys_flyweight.png",
         "author": "benvan"
     }, {
         "name": "ordered chaos",
-        "url": "#i=11&r=L%20%3A%20SYS%0AS%20%3A%20F-%5BF-Y%5BS%5D%5D%0AY%20%3A%20%5B%7CFF%5B-((%3ES%5D%2BY%5D&p.size=18.65,0.143333&p.angle=-3787.3,0.05&s.size=200,300&s.angle=200,1000000&offsets=0,0,0",
+        "url": "#i=11&r=L%20%3A%20SYS%0AS%20%3A%20F-%5BF-Y%5BS%5D%5D%0AY%20%3A%20%5B%7CFF%5B-((%3ES%5D%2BY%5D&p.size=18.65,0.143333&p.angle=-3787.3,0.05&s.size=2.3,2.47&s.angle=2.3,6",
         "img": "lsys_ordered_chaos.png",
         "author": "benvan"
     }, {
         "name": "try force",
-        "url": "#i=11&r=L%20%3A%20SSS%0AS%20%3A%20%5BF%5BFF-YS%5DF)G%5D%2B%0AY%20%3A--%5BF-)%3CF-FG%5D-%0AG%3A%20FGF%5BY%2B%3EF%5D%2BY&p.size=10.807343505535698,-1.583229333333331&p.angle=-3479.67,-0.120579&s.size=20,400&s.angle=200,1000000&offsets=18,23,0",
+        "url": "#i=11&r=L%20%3A%20SSS%0AS%20%3A%20%5BF%5BFF-YS%5DF)G%5D%2B%0AY%20%3A--%5BF-)%3CF-FG%5D-%0AG%3A%20FGF%5BY%2B%3EF%5D%2BY&p.size=10.807343505535698,-1.583229333333331&p.angle=-3479.67,-0.120579&s.size=1.3,2.6&s.angle=2.3,6&offsets=18,23,0",
         "author": "benvan",
         "img": "lsys_try_force.png"
     }, {
         "name": "metamorphosis",
-        "url": "#i=40&r=C%20%3A%20%5BB%5DC%0AB%20%3A%20!AFB)!A-%0AA%20%3A%20-AF%2B&p.size=4.44,0.01&p.angle=-2361.3,0.05&s.size=10,1000000&s.angle=500,100000000&offsets=0,0,0",
+        "url": "#i=40&r=C%20%3A%20%5BB%5DC%0AB%20%3A%20!AFB)!A-%0AA%20%3A%20-AF%2B&p.size=4.44,0.01&p.angle=-2361.3,0.05&s.size=1,6&s.angle=2.69,8",
         "img": "lsys_metamorphosis.png",
         "author": "benvan"
     }, {
         "name": "pulse engine",
-        "url": "#i=40&p.size=11.61&p.angle=810&r=C%20%3A%20%5BB%5DVFC%0AB%20%3A%20A!B%0AA%20%3A%20F%2BA%7C-%0AV%20%3A%20XVY%0AX%20%3A%20%3CX%0AY%20%3A%20%3EY&s.size=200,3000",
+        "url": "#i=40&p.size=11.61&p.angle=810&r=C%20%3A%20%5BB%5DVFC%0AB%20%3A%20A!B%0AA%20%3A%20F%2BA%7C-%0AV%20%3A%20XVY%0AX%20%3A%20%3CX%0AY%20%3A%20%3EY&s.size=2.3,3.47",
         "img": "lsys_pulse_engine.png",
         "author": "benvan"
     }, {
         "name": "pollenate",
-        "url": "#i=30&p.size=9,0.01&p.angle=-3669.39,-0.05531299999999828&r=L%20%3A%20S%0AS%20%3A%20F%2B%5BF-Y%5BS%5D%5DF)G%0AY%20%3A--%5B%7CF-F-FY%5D%0AG%3A%20FGY%5B%2BF%5D%2BY",
+        "url": "#i=30&r=L%20%3A%20S%0AS%20%3A%20F%2B%3E%5BF-Y%5BS%5D%5DF)G%0AY%20%3A--%5B%7CF-F-FY%5D%0AG%3A%20FGY%5B%2BF%5D%2BY&p.size=9,0.0001&p.angle=-3669.39,-0.05531299999999828&s.size=2.3,2.47&s.angle=2.4,6",
         "img": "lsys_pollenate.png",
         "author": "benvan"
     }, {
@@ -46,7 +46,7 @@
         "author": "benvan"
     }, {
         "name": "spindlethrift",
-        "url": "#i=30&r=S%20%3A%20CCC%0AC%20%3A%20!%3C%5B)B%7CVFC%5D%0AB%20%3A%20A%7CBF!%0AA%20%3A%20F%7C-A%7C%2BF%0AV%20%3A%20%2B&p.size=2.23,0.01&p.angle=-3197.02,0.05999061329999905&s.size=200,3000&s.angle=200,10000000000&offsets=0,0,0",
+        "url": "#i=30&r=S%20%3A%20CCC%0AC%20%3A%20!%3C%5B)B%7CVFC%5D%0AB%20%3A%20A%7CBF!%0AA%20%3A%20F%7C-A%7C%2BF%0AV%20%3A%20%2B&p.size=2.23,0.01&p.angle=-3197.02,0.05999061329999905&s.size=2.3,3.47&s.angle=2.3,10",
         "img": "lsys_spindlethrift.png",
         "author":"benvan"
     }, {
@@ -92,10 +92,10 @@
     }, {
         "name" : "platterstar",
         "img" : "lsys_platterstar.png",
-        "url":"#i=200&p.size=188.94&p.angle=-3179.7&r=L%20%3A%20SSSSSS%0AS%20%3A%20%3E%7C%2B%5BF%5BS%5D%5D%7C"
+        "url":"#i=2.3&p.size=188.94&p.angle=-3179.7&r=L%20%3A%20SSSSSS%0AS%20%3A%20%3E%7C%2B%5BF%5BS%5D%5D%7C"
     }, {
         "name": "close encounters",
-        "url": "#i=30&r=S%20%3A%20CCC%0AC%20%3A%20!%5BB%7CVFC%5D%0AB%20%3A%20A%7CBF!%0AA%20%3A%20F%7C-A%7C%2BF%0AV%20%3A%20%2B&p.size=2.23,0.01&p.angle=-3079.65,0.046088999999999804&s.angle=200,1000000&offsets=0,0,0",
+        "url": "#i=30&r=S%20%3A%20CCC%0AC%20%3A%20!%5BB%7CVFC%5D%0AB%20%3A%20A%7CBF!%0AA%20%3A%20F%7C-A%7C%2BF%0AV%20%3A%20%2B&p.size=2.23,0.01&p.angle=-3079.65,0.046088999999999804&s.angle=2.3,6",
         "author": "benvan",
         "img": "lsys_close_encounters.png"
     }, {
@@ -140,7 +140,7 @@
         "author": "benvan"
     }, {
         "name": "house rules",
-        "url": "#i=30&r=S%20%3A%20C%7CCC%7CC%0AC%20%3A%20!%5B(B%7CVFC%5D%0AB%20%3A%20A%7CBF!%0AA%20%3A%20F%7C-A%7C%2BF%0AV%20%3A%20%2B&p.size=2.23,0.01&p.angle=-5535.03,0.2526636383000048&s.angle=200,1000000&offsets=0,0,0",
+        "url": "#i=30&r=S%20%3A%20C%7CCC%7CC%0AC%20%3A%20!%5B(B%7CVFC%5D%0AB%20%3A%20A%7CBF!%0AA%20%3A%20F%7C-A%7C%2BF%0AV%20%3A%20%2B&p.size=2.23,0.01&p.angle=-5535.03,0.2526636383000048&s.angle=2.3,6",
         "img": "lsys_house_rules.png",
         "author": "benvan"
     }, {
@@ -155,7 +155,7 @@
         "author": "benvan"
     }, {
         "name": "coalescence",
-        "url": "#i=200&p.size=199.9&p.angle=-3276.3&r=L%20%3A%20SSSSS%0AS%20%3A%20%3E%7C%2B%5BF%5BS%5D%5D",
+        "url": "#i=2.3&p.size=199.9&p.angle=-3276.3&r=L%20%3A%20SSSSS%0AS%20%3A%20%3E%7C%2B%5BF%5BS%5D%5D",
         "img": "lsys_coalescence.png",
         "author": "benvan"
     }, {
