@@ -51,9 +51,13 @@ class Joystick
   clear: -> #noop for now
   draw: ->  #noop for now
 
+  center: ->
+    @start.x = @now.x; @start.y = @now.y
+
   createBindings: ->
     @canvas.onmousedown = (ev) =>
       if ev.button == 0
+        @constrained = ev.shiftKey
         @onActivate()
         @active = true
         @start = new Point(ev.pageX, ev.pageY)
@@ -66,6 +70,11 @@ class Joystick
     document.onmousemove = (ev) =>
       @now.x = ev.pageX
       @now.y = ev.pageY
+
+    document.addEventListener("keydown", () =>
+      @center()
+      @onActivate()
+    )
 
 # ===============================
 
