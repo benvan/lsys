@@ -32,8 +32,8 @@ class Defaults
     angle: {value:1, growth: 0.05}
   @sensitivities: (input) -> Util.map(Util.merge(Util.merge(Defaults.params(), Defaults._sensitivites()), input), (p,k) -> _.extend(p, {name:k}))
   @_sensitivites: ->
-    size: {value: 200, growth:300}
-    angle: {value: 200, growth:1000000}
+    size: {value: 2.3, growth:2.47}
+    angle: {value: 2.4, growth:6}
 # =========================================
 
 
