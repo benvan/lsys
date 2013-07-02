@@ -40,7 +40,7 @@ class SystemManager
     @keystate = new KeyState
     @inputHandler = new InputHandler(@keystate, @joystick)
 
-    @joystick.onRelease = => location.hash = @currentSystem.toUrl()
+    @joystick.onRelease = => @syncLocation()
     @joystick.onActivate = => @inputHandler.snapshot = @currentSystem.clone()
 
     @renderer = new Renderer(canvas)
