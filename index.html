@@ -279,9 +279,16 @@
             },300);
         });
 
-        var update = function(){
-            manager.updateFromControls();
-            manager.syncLocation();
+        var sync = function(quiet){
+            var syncMethod = 'syncLocation'+(quiet?'Quiet':'');
+            return _.debounce(function(){
+                manager.updateFromControls();
+                manager[syncMethod]();
+            }, 300);
+        };
+        var update = {
+            loud: sync(false),
+            quiet: sync(true)
         };
 
         $('a.export').click(function(){
@@ -290,15 +297,12 @@
         });
 
         //this is kinda naughty... but I'd rather refactor Controls first than fudge this in otherwise
-        $("#controls-container,#offsets-container").find("[data-param]").on("input", _.debounce(update, 250));
-
-        $("#sensitivities-container").find("[data-param]").on("input", function(){
-            manager.updateFromControls();
-        });
+        $("#controls-container,#offsets-container").find("[data-param]").on("input", update.loud );
+        $("#sensitivities-container").find("[data-param]").on("input", update.quiet );
 
         var $recalculateButton = $('.recalculate button');
         $recalculateButton.hide().click(function(){
-            update();
+            update.loud();
             $(this).fadeOut(100)
         });
 
@@ -307,7 +311,7 @@
         }).on('keydown', function(evt){
             // enter key + any modifier -> update system
             if (evt.keyCode == 13 && (evt.shiftKey || evt.metaKey || evt.ctrlKey || evt.altKey)){
-                update();
+                update.loud();
                 $recalculateButton.fadeOut(100);
                 return false;
             }
