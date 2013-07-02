@@ -60,7 +60,6 @@ class Joystick
         @onActivate()
         @active = true
         @start = new Point(ev.pageX, ev.pageY)
-      return false # disable text-selection of canvas / other elements
 
     document.onmouseup = =>
       @active = false
