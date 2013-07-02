@@ -26,22 +26,22 @@
         "img": "lsys_try_force.png"
     }, {
         "name": "metamorphosis",
-        "url": "#i=40&r=C%20%3A%20%5BB%5DC%0AB%20%3A%20!AFB)!A-%0AA%20%3A%20-AF%2B&p.size=4.44,0.01&p.angle=-2361.3,0.05&s.size=1,6&s.angle=2.69,8",
+        "url": "#i=40&r=C%20%3A%20%5BB%5DC%0AB%20%3A%20!A%3EFB)!A-%0AA%20%3A%20-AF%2B&p.size=4.44,0&p.angle=-2361.3,0.05&s.size=1,3&s.angle=2.69,8&offsets=0,100,0",
         "img": "lsys_metamorphosis.png",
         "author": "benvan"
     }, {
         "name": "pulse engine",
-        "url": "#i=40&p.size=11.61&p.angle=810&r=C%20%3A%20%5BB%5DVFC%0AB%20%3A%20A!B%0AA%20%3A%20F%2BA%7C-%0AV%20%3A%20XVY%0AX%20%3A%20%3CX%0AY%20%3A%20%3EY&s.size=2.3,3.47",
+        "url": "#i=40&r=C%20%3A%20%5BB%5DVFC%0AB%20%3A%20A!B%0AA%20%3A%20F%2BA%7C-%0AV%20%3A%20XVY%0AX%20%3A%20%3CX%0AY%20%3A%20%3EY&p.size=11.61,0.01&p.angle=810,0.05&s.size=1,4.2&s.angle=2.4,6&offsets=0,0,0",
         "img": "lsys_pulse_engine.png",
         "author": "benvan"
     }, {
         "name": "pollenate",
-        "url": "#i=30&r=L%20%3A%20S%0AS%20%3A%20F%2B%3E%5BF-Y%5BS%5D%5DF)G%0AY%20%3A--%5B%7CF-F-FY%5D%0AG%3A%20FGY%5B%2BF%5D%2BY&p.size=9,0.0001&p.angle=-3669.39,-0.05531299999999828&s.size=2.3,2.47&s.angle=2.4,6",
+        "url": "#i=30&r=L%20%3A%20S%0AS%20%3A%20F%2B%3E%5BF-Y%5BS%5D%5DF)G%0AY%20%3A--%5B%7CF-F-FY%5D%0AG%3A%20FGY%5B%2BF%5D%2BY&p.size=9,0.0001&p.angle=-3669.39,-0.05531299999999828&s.size=1.2,3.5&s.angle=2.4,6&offsets=0,0,0",
         "img": "lsys_pollenate.png",
         "author": "benvan"
     }, {
         "name": "leviathon",
-        "url": "#i=33&p.size=6.19&p.angle=-4055.8&r=C%20%3A%20S!%7CVFFC%0AS%20%3A%20F!%2B%2B%5BF-YAS%5D%0AA%20%3A%20F-%7CA!%0AV%20%3A%20XVY%0AX%20%3A%20-%0AY%20%3A%20!-",
+        "url": "#i=33&r=C%20%3A%20S!%7CVFFC%0AS%20%3A%20F!%2B%2B%5BF-YAS%5D%0AA%20%3A%20F-%3E%7CA!%0AV%20%3A%20XVY%0AX%20%3A%20-%0AY%20%3A%20!-&p.size=6.19,0&p.angle=-4055.8,0.05&s.size=1.7,4&s.angle=2.4,6&offsets=0,0,0",
         "img": "lsys_leviathon.png",
         "author": "benvan"
     }, {
@@ -51,7 +51,7 @@
         "author":"benvan"
     }, {
         "name": "the DNA dance",
-        "url": "#i=30&p.size=16.08&p.angle=-660&r=C%20%3A%20B%7CVFC%0AB%20%3A%20A!B%0AA%20%3A%20F---A%7C%2B%0AV%20%3A%20XVY%0AX%20%3A%20%3CX%0AY%20%3A%20%3EY",
+        "url": "#i=30&r=C%20%3A%20B%7CVFC%0AB%20%3A%20A!%3CB%0AA%20%3A%20F---A%7C%2B&p.size=16.08,0&p.angle=-660,0.05&s.size=1.3,5&s.angle=2.4,6&offsets=37,65,0",
         "img": "lsys_the_DNA_dance.png",
         "author": "benvan"
     }, {
