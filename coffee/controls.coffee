@@ -67,16 +67,18 @@ class Joystick
         @start = new Point(ev.pageX, ev.pageY)
 
     document.onmouseup = =>
+      wasActive = @active
       @active = false
-      @onRelease()
+      @onRelease() if wasActive
 
     document.onmousemove = (ev) =>
       @now.x = ev.pageX
       @now.y = ev.pageY
 
     document.addEventListener("keydown", () =>
-      @center()
-      @onActivate()
+      if (@active)
+        @center()
+        @onActivate()
     )
 
 # ===============================
