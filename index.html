@@ -296,15 +296,23 @@
             manager.updateFromControls();
         });
 
-        $('#rules,#iterations').on('input', function(){
-            $('.recalculate button').fadeIn(100);
+        var $recalculateButton = $('.recalculate button');
+        $recalculateButton.hide().click(function(){
+            update();
+            $(this).fadeOut(100)
         });
-        $('.recalculate button')
-                .hide()
-                .click(update)
-                .click(function(){
-                    $(this).fadeOut(100)
-                });
+
+        $('#rules,#iterations').on('input', function(){
+            $recalculateButton.fadeIn(100);
+        }).on('keydown', function(evt){
+            // enter key + any modifier -> update system
+            if (evt.keyCode == 13 && (evt.shiftKey || evt.metaKey || evt.ctrlKey || evt.altKey)){
+                update();
+                $recalculateButton.fadeOut(100);
+                return false;
+            }
+        });
+
 
         manager.draw();
     });
