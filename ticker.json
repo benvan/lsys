@@ -56,12 +56,12 @@
         "author": "benvan"
     }, {
         "name": "synchronised swarming",
-        "url": "#i=33&p.size=6.19,0.01&p.angle=-3965.57,0.03788399999999987&r=C%20%3A%20S!%7CVFFC%0AS%20%3A%20F!%2B(%2B%5BF-YAS%5D%0AA%20%3A%20F-%7CA!%0AV%20%3A%20XVY%0AX%20%3A%20-%0AY%20%3A%20!-",
+        "url": "#i=33&r=C%20%3A%20S!%7CVFFC%0AS%20%3A%20F!%2B(%2B%5BF-Y%3EAS%5D%0AA%20%3A%20F-%7CA!%0AV%20%3A%20XVY%0AX%20%3A%20-%0AY%20%3A%20!-&p.size=6.19,0&p.angle=-3965.57,0.03788399999999987&s.size=2.3,3.3&s.angle=2.5,7&offsets=0,0,0",
         "img": "lsys_conswarmity.png",
         "author": "benvan"
     }, {
         "name": "snake charmer",
-        "url": "#i=30&p.size=6.27&p.angle=-1442.6&r=C%20%3A%20B%7CVFC%0AB%20%3A%20A!B%0AA%20%3A%20F%2B%2B%2B%7CA%7C%2BF%0AV%20%3A%20XVY%0AX%20%3A%20%3CX%0AY%20%3A%20%3EY",
+        "url": "#i=30&r=C%20%3A%20B%7C%3EFC%0AB%20%3A%20A!B%0AA%20%3A%20F%2B%2B%2B%7CA%7C%2BF&p.size=6.27,0.01876&p.angle=-1442.6,0.05&s.size=1.2,3&s.angle=2.4,6&offsets=0,0,0",
         "img": "lsys_snake_charmer.png",
         "author": "benvan"
     }, {
