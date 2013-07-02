@@ -94,7 +94,9 @@ class Control
 
   getInput: (param) -> @el.find("[data-param=#{param}]")
   getVal: (param) -> parseFloat(@getInput(param).val())
-  setVal: (param, value) -> @getInput(param).val(value)
+  setVal: (param, value) ->
+    input = @getInput(param)
+    if (parseFloat(input.val()) != value) then input.val(value)
 
   toJson: -> return @update({})
 
