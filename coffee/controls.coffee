@@ -5,7 +5,7 @@ class Point
 
 class Key
   @ctrl: 17
-  @cmd: 91
+  @meta: 91
   @shift: 16
   @alt: 18
   @space: 32
@@ -29,6 +29,11 @@ class KeyState
 
     document.addEventListener("keydown", setDown(true))
     document.addEventListener("keyup", setDown(false))
+    document.addEventListener("mousedown", (evt) =>
+      for key of Key then do =>
+        pressed = evt[key+"Key"]
+        @[key] = pressed if pressed?
+    )
 
 # ===============================
 

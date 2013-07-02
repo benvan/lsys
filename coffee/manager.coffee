@@ -20,7 +20,7 @@ class InputHandler
     if (@keystate.alt)
       system.params.size.value = Util.round(@snapshot.params.size.value + (@joystick.dy(system.sensitivities.size.value)), 2)
       system.params.size.growth = Util.round(@snapshot.params.size.growth + @joystick.dx(system.sensitivities.size.growth),6)
-    else if (@keystate.cmd or @keystate.ctrl)
+    else if (@keystate.meta or @keystate.ctrl)
       system.offsets.x = @snapshot.offsets.x + @joystick.dx()
       system.offsets.y = @snapshot.offsets.y + @joystick.dy()
     else
