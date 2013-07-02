@@ -66,51 +66,51 @@
         "author": "benvan"
     }, {
         "name": "dance for me",
-        "url": "#i=40&p.size=8.15&p.angle=-1255.5&r=C%20%3A%20%5BB%5DF%7CC%0AB%20%3A%20!AB)!A-F%0AA%20%3A%20-AF%2B",
+        "url": "#i=40&r=C%20%3A%20%5BB%5DF%7CC%0AB%20%3A%20!AB)!A-F%0AA%20%3A%20-A%3EF%2B&p.size=8.15,0&p.angle=-1255.5,0.05&s.size=1.3,4.5&s.angle=2.4,6&offsets=0,0,0",
         "img": "lsys_dance_for_me.png",
         "author": "benvan"
     }, {
         "name" : "bubble trouble",
-        "url" : "#i=40&p.size=6.6,0.01&p.angle=285.22,0.05096499999999985&r=C%20%3A%20%5BB%5DFC%0AB%20%3A%20!A)BA%0AA%20%3A%20AF-",
+        "url" : "#i=40&r=C%20%3A%20%5BB%5DFC%0AB%20%3A%20!A%3E)BA%0AA%20%3A%20AF-&p.size=6.6,0&p.angle=285.22,0.05096499999999985&s.size=1.7,4&s.angle=2.4,6&offsets=0,0,0",
         "img": "lsys_bubble_trouble.png",
         "author" : "benvan"
     }, {
         "name" : "wormly",
-        "url" : "#i=44&p.size=1,0.01&p.angle=-1429.08,0.055765000000000085&r=C%20%3A%20B%7CVFC%0AB%20%3A%20A!BF!%0AA%20%3A%20F%7C-A%7C%2BF%0AV%20%3A%20!%3C%3C-",
+        "url" : "#i=44&r=C%20%3A%20B%7CVFC%0AB%20%3A%20A!BF!%0AA%20%3A%20F%7C-A%7C%2BF%0AV%20%3A%20!%3C%3C-&p.size=1,0.01&p.angle=-1429.08,0.055765000000000085&s.size=2.3,4&s.angle=2.4,6&offsets=0,0,0",
         "img": "lsys_wormly.png",
         "author" : "benvan"
     }, {
         "name" : "slamurai",
-        "url" : "#i=100&p.size=11.97,0.01&p.angle=659.72,0.050256999999999906&r=L%20%3A%20SYS%0AS%20%3A%20F%7C%2B%5BF-Y%5BS%5D%5D%0AY%20%3A%20%5B%7CF-F%2B(%2BFY%5D%2B%3C",
+        "url" : "#i=100&r=L%20%3A%20SYS%0AS%20%3A%20F%7C%2B%5BF-Y%5BS%5D%5D%0AY%20%3A%20%5B%7CF-F%2B(%2BFY%5D%2B%3C&p.size=11.97,0.01&p.angle=659.72,0.050256999999999906&s.size=1.3,4&s.angle=2.4,6&offsets=0,0,0",
         "img": "lsys_slamurai.png",
         "author" : "benvan"
     }, {
         "name": "crystal orchid",
-        "url": "#i=31&p.size=71.19&p.angle=13&r=L%20%3A%20SYS%0AS%20%3A%20%3E-%7C%5BF%3E-Y%5B%3ES%5D%5D!%0AY%20%3A%20%5B%7CF%3EFF-F%2B)Y%5D",
+        "url": "#i=31&r=L%20%3A%20SYS%0AS%20%3A%20%3E-%7C%5BF%3E-Y%5B%3ES%5D%5D!%0AY%20%3A%20%5B%7CF%3EFF-F%2B)Y%5D&p.size=71.19,0.01&p.angle=13,0.05&s.size=0.6,4&s.angle=2.4,6&offsets=0,0,0",
         "img": "lsys_crystal_orchid.png",
         "author": "benvan"
     }, {
         "name" : "platterstar",
         "img" : "lsys_platterstar.png",
-        "url":"#i=2.3&p.size=188.94&p.angle=-3179.7&r=L%20%3A%20SSSSSS%0AS%20%3A%20%3E%7C%2B%5BF%5BS%5D%5D%7C"
+        "url":"#i=200&r=L%20%3A%20SSSSSS%0AS%20%3A%20%3E%7C%2B%5BF%5BS%5D%5D%7C&p.size=188.94,0.01&p.angle=-3179.7,0.05&s.size=0.2,4.4&s.angle=2.4,6&offsets=0,0,0"
     }, {
         "name": "close encounters",
-        "url": "#i=30&r=S%20%3A%20CCC%0AC%20%3A%20!%5BB%7CVFC%5D%0AB%20%3A%20A%7CBF!%0AA%20%3A%20F%7C-A%7C%2BF%0AV%20%3A%20%2B&p.size=2.23,0.01&p.angle=-3079.65,0.046088999999999804&s.angle=2.3,6",
+        "url": "#i=30&r=S%20%3A%20CCC%0AC%20%3A%20!%5BB%3E%7CVFC%5D%0AB%20%3A%20A%7CBF!%0AA%20%3A%20F%7C-A%7C%2BF%0AV%20%3A%20%2B&p.size=2.23,0&p.angle=-3079.65,0.046088999999999804&s.size=2.3,4&s.angle=2.3,6&offsets=0,0,0",
         "author": "benvan",
         "img": "lsys_close_encounters.png"
     }, {
         "name": "heisenberg",
-        "url": "#i=12&p.size=11.94&p.angle=-3259.1&r=S%20%3A%20F-%5BF-Y%5BS%5D%5D%0AY%20%3A%20S%7C%5B%7CF-F%2B)Y%5D",
+        "url": "#i=12&r=S%20%3A%20F-%5BF-Y%5BS%5D%5D%0AY%20%3A%20S%7C%5B%7CF%3E-F%2B)Y%5D&p.size=14.46,0&p.angle=-3259.1,0.05&s.size=1,2.47&s.angle=2.4,6&offsets=0,0,0",
         "img": "lsys_heisenberg.png",
         "author": "benvan"
     }, {
         "name": "trigon",
-        "url": "#i=12&p.size=16.37&p.angle=9840.1&r=L%20%3A%20SS%0AS%20%3A%20F-%5BF-Y%5BS(L%5D%5D%0AY%20%3A%20%5B-%7CF-F%2B)Y%5D",
+        "url": "#i=12&r=L%20%3A%20SS%0AS%20%3A%20F-%5BF-Y%5BS%3E(L%5D%5D%0AY%20%3A%20%5B-%7CF-F%2B)Y%5D&p.size=16.37,0.01&p.angle=9840.1,0.05&s.size=1,2.47&s.angle=2.4,6&offsets=0,0,0",
         "img": "lsys_trigon.png",
         "author": "benvan"
     }, {
         "name": "spirocopter",
-        "url": "#i=40&p.size=5.31&p.angle=-1972.4&r=C%20%3A%20CB%0AB%20%3A%20!A%5BFB%5D!A-%0AA%20%3A%20-AF%2B",
+        "url": "#i=40&r=C%20%3A%20CB%0AB%20%3A%20!A%5BF%3EB%5D!A-%0AA%20%3A%20-AF%2B&p.size=5.31,0&p.angle=-1972.4,0.05&s.size=1.6,3.6&s.angle=2.4,6&offsets=0,0,0",
         "img": "lsys_spirocopter.png",
         "author": "benvan"
     }, {
