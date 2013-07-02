@@ -25,6 +25,11 @@ class Bounding
   y2: -Infinity
   width: => (@x2-@x1)
   height: => (@y2-@y1)
+  constrain: (x,y) ->
+    @x1 = Math.max(@x1, 0)
+    @y1 = Math.max(@y1, 0)
+    @x2 = Math.min(@x2, x)
+    @y2 = Math.min(@y2, y)
 
 #================================================================
 
@@ -41,10 +46,11 @@ class Renderer
     if (@context.initialised)
       b = @context.bounding
       p = padding = 5
+      b.constrain(@canvas.width, @canvas.height)
       @g.clearRect(b.x1-p, b.y1-p, b.width()+2*p, b.height()+2*p)
 
   reset: (system) =>
-    this.clearCanvas()
+    @clearCanvas()
     @context.reset(system)
 
   render: (system) =>
