@@ -48,6 +48,7 @@ class SystemManager
     @init()
 
   syncLocation: -> location.hash = @currentSystem.toUrl()
+  syncLocationQuiet: -> location.quietSync = true; @syncLocation()
 
   updateFromControls: ->
     @currentSystem = new LSystem(
@@ -135,6 +136,7 @@ class SystemManager
         sys = LSystem.fromUrl()
         @currentSystem.merge(sys)
         @syncControls()
-        @draw()
+        @draw() if not location.quietSync
+        location.quietSync = false
 
 #===========================================
