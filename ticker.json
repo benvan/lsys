@@ -115,42 +115,42 @@
         "author": "benvan"
     }, {
         "name": "kinetica",
-        "url": "#i=33&p.size=23.82&p.angle=-2040&r=C%20%3A%20S!%7CVFFC%0AS%20%3A%20F!%2B%2B%5BF-YS%5D%0AY%20%3A%20%5BF-FA%2BY%5D%0AA%20%3A%20F---A%7C%2B%0AV%20%3A%20XVY%0AX%20%3A%20-%0AY%20%3A%20!",
+        "url": "#i=33&r=C%20%3A%20S!%7CVFFC%0AS%20%3A%20F!%2B%2B%5BF-YS%5D%0AY%20%3A%20%5BF-FA%2BY%5D%0AA%20%3A%20F---A%7C%2B%0AV%20%3A%20XVY%0AX%20%3A%20-%0AY%20%3A%20!&p.size=23.82,0.01&p.angle=-2040,0.05&s.size=0.7,2.47&s.angle=2.4,6&offsets=0,0,0",
         "img": "lsys_kinetica.png",
         "author": "benvan"
     }, {
         "name": "johnny lee",
-        "url": "#i=30&p.size=6.03&p.angle=-1705.7&r=L%20%3A%20S%0AS%20%3A%20F%7C%2B%5BF-Y%5BS%5D%5DFG%0AY%20%3A--%5B%7CF-F%2B%7C%2BFY%5D%2B%0AG%3A%20FGF%5B%2BF%5DY",
+        "url": "#i=30&r=L%20%3A%20S%0AS%20%3A%20F%7C%2B%5BF-Y%5BS%5D%5DFG%0AY%20%3A--%5B%7CF-F%2B%7C%2BFY%5D%2B%0AG%3A%20FGF%3E%5B%2BF%5DY&p.size=6.03,0.01&p.angle=-1705.7,0.05&s.size=1.5,3.5&s.angle=2.4,6&offsets=0,0,0",
         "img": "lsys_johnny_lee.png",
         "author": "benvan"
     }, {
         "name": "angel flight",
-        "url": "#i=44&p.size=2.46&p.angle=-3224.9&r=C%20%3A%20B%7CVFC%0AB%20%3A%20A!BF%0AA%20%3A%20F%7C-A%7C%2BF%0AV%20%3A%20%3C%3C%3C%3C%2B",
+        "url": "#i=44&r=C%20%3A%20B%7CVFC%0AB%20%3A%20A!BF%0AA%20%3A%20F%7C-A%7C%2BF%0AV%20%3A%20%3C%3C%3C%3C%2B&p.size=2.46,0.01&p.angle=-3224.9,0.05&s.size=1.8,4&s.angle=2.4,6&offsets=0,0,0",
         "img": "lsys_angel_flight.png",
         "author": "benvan"
     }, {
         "name": "stargaze",
-        "url": "#i=44&p.size=2.23&p.angle=-3275.2&r=C%20%3A%20B%7CVFC%0AB%20%3A%20ABF%0AA%20%3A%20F%7C-A%7C%2BF%0AV%20%3A%20%3C%3C%3C%3C%3C%2B",
+        "url": "#i=44&r=C%20%3A%20B%7CVFC%0AB%20%3A%20ABF%0AA%20%3A%20F%7C-A%7C%2BF%0AV%20%3A%20%3C%3C%3C%3C%3C%2B&p.size=2.23,0.01&p.angle=-3275.2,0.05&s.size=2,4.5&s.angle=2.4,6&offsets=0,86,0",
         "img": "lsys_stargaze.png",        
         "author": "benvan"
     }, {
         "name": "mortal coil",
-        "url": "#i=44&p.size=4.15&p.angle=-1793.1&r=C%20%3A%20B%7CVFC%0AB%20%3A%20A!BF%0AA%20%3A%20F%7C-A%7C%2BF%0AV%20%3A%20%3E",
+        "url": "#i=44&r=C%20%3A%20B%7CVFC%0AB%20%3A%20A!BF%0AA%20%3A%20F%7C-A%7C%2BF%0AV%20%3A%20%3E&p.size=4.15,0.01&p.angle=-1793.1,0.05&s.size=2,3.5&s.angle=2.4,6&offsets=0,134,0",
         "img": "lsys_mortal_coil.png",
         "author": "benvan"
     }, {
         "name": "house rules",
-        "url": "#i=30&r=S%20%3A%20C%7CCC%7CC%0AC%20%3A%20!%5B(B%7CVFC%5D%0AB%20%3A%20A%7CBF!%0AA%20%3A%20F%7C-A%7C%2BF%0AV%20%3A%20%2B&p.size=2.23,0.01&p.angle=-5535.03,0.2526636383000048&s.angle=2.3,6",
+        "url": "#i=30&r=S%20%3A%20C%7CCC%7CC%0AC%20%3A%20!%5B%3E(B%7CVFC%5D%0AB%20%3A%20A%7CBF!%0AA%20%3A%20F%7C-A%7C%2BF%0AV%20%3A%20%2B&p.size=2.23,0.01&p.angle=-5535.03,0.2526636383000048&s.size=2.1,3.7&s.angle=2.3,6&offsets=0,0,0",
         "img": "lsys_house_rules.png",
         "author": "benvan"
     }, {
         "name": "flagella",
-        "url": "#i=80&r=L%20%3A%20SSS%0AS%20%3A%20%3EF%7C%2B%5BF)Y%5BS%5D%5D%0AY%20%3A%20F%5B-F--%7CFY%5D%2B!%0A&p.size=7.21,0.01&p.angle=-1746.6,0.00034700000000011826",
+        "url": "#i=80&r=L%20%3A%20SSS%0AS%20%3A%20%3EF%7C%2B%5BF)Y%5BS%5D%5D%0AY%20%3A%20F%5B-F--%7CFY%5D%2B!%0A&p.size=7.21,0.01&p.angle=-1746.6,0.00034700000000011826&s.size=1.6,4&s.angle=2.4,6&offsets=0,0,0",
         "img": "lsys_flagella.png",
         "author": "benvan"
     }, {
         "name": "jamiroquai | rippletwist",
-        "url": "#i=33&p.size=6.39&p.angle=-2340.6&r=C%20%3A%20S!%7CVFFC%0AS%20%3A%20F!%2B%2B%5BF-YAS%5D%0AA%20%3A%20F-A%7C%2B%0AV%20%3A%20XVY%0AX%20%3A%20-%0AY%20%3A%20!-",
+        "url": "#i=33&r=C%20%3A%20S!%7CVFFC%0AS%20%3A%20F!%2B%3E%2B%5BF-YAS%5D%0AA%20%3A%20F-A%7C%2B%0AV%20%3A%20XVY%0AX%20%3A%20-%0AY%20%3A%20!-&p.size=6.39,0.01&p.angle=-2340.6,0.05&s.size=1.2,3.5&s.angle=2.4,6&offsets=0,0,0",
         "img": "lsys_jamiroquai_-_rippletwist.png",
         "author": "benvan"
     }, {
