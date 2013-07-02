@@ -4,8 +4,10 @@ DefaultSystem = new LSystem({
     angle: {value:4187.5}
   }
   ,{}
-  ,{}
-  ,"L : SS\nS : F-[F-Y[S(L]]\nY : [-|F-F+)Y]\n"
+  ,{
+    size: {value:1}
+  }
+  ,"L : SS\nS : F->[F-Y[S(L]]\nY : [-|F-F+)Y]\n"
   ,12
   ,"click-and-drag-me!"
 )
