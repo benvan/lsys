@@ -9,10 +9,12 @@ window.goToStep = function(i){
     intro.goToStep(i);
 };
 function mkIntro(){
+    var startingLocation = location.hash;
     if (intro && !intro.hasQuit) intro.exit();
-    intro = introJs().onexit(function(){
-        intro.hasQuit = true;
-    });
+    var killItWithFire = function(){ intro.hasQuit = true; location.hash = startingLocation; }
+    intro = introJs()
+        .oncomplete(killItWithFire)
+        .onexit(killItWithFire);
     var examples = {
         "square" : "#i=1&r=S%20%3A%20F%2BF%2BF%2BF&p.size=100,0.01&p.angle=90,0&s.size=200,1000000&s.angle=200,1000000&offsets=-0,0,0",
         "square-recursive" : "#i=4&r=S%20%3A%20F%2BS&p.size=100,0.01&p.angle=90,0&s.size=200,1000000&s.angle=200,1000000&offsets=-0,0,0",
