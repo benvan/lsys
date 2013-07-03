@@ -16,9 +16,9 @@ function mkIntro(){
         .oncomplete(killItWithFire)
         .onexit(killItWithFire);
     var examples = {
-        "square" : "#i=1&r=S%20%3A%20F%2BF%2BF%2BF&p.size=100,0.01&p.angle=90,0&s.size=200,1000000&s.angle=200,1000000&offsets=-0,0,0",
-        "square-recursive" : "#i=4&r=S%20%3A%20F%2BS&p.size=100,0.01&p.angle=90,0&s.size=200,1000000&s.angle=200,1000000&offsets=-0,0,0",
-        "spirograph" : "#i=50&r=A%20%3A%20%5BS%5D%2BA%0AS%20%3A%20F%2BS&p.size=100,0.01&p.angle=90,0.015257000000000027&s.size=200,1000000&s.angle=200,1000000&offsets=-0,0,0",
+        "square" : "#i=1&r=S%20%3A%20F%2BF%2BF%2BF&p.size=100,0&p.angle=90,0&s.size=0.8,1&s.angle=2,1&offsets=0,0,0",
+        "square-recursive" : "#i=4&r=S%20%3A%20F%2BS&p.size=100,0&p.angle=90,0&s.size=0.6,1&s.angle=2.8,1&offsets=0,0,0",
+        "spirograph" : "#i=50&r=A%20%3A%20%5BS%5D%2BA%0AS%20%3A%20F%2BS&p.size=100,0&p.angle=90,0&s.size=0.6,1&s.angle=2.8,1&offsets=0,0,0",
         "serpinski" : "#i=8&r=A%20%3A%20BF-AF-B%0AB%20%3A%20AF%2BBF%2BA&p.size=1.0352999999999999,0.010817999999999967&p.angle=60,0&s.size=200,1000000&s.angle=200,1000000&offsets=-124,87,30"
     };
     var steps = $('#tour li').map(function(){
