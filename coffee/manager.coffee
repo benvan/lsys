@@ -40,7 +40,8 @@ class SystemManager
     @keystate = new KeyState
     @inputHandler = new InputHandler(@keystate, @joystick)
 
-    @joystick.onRelease = => @syncLocation()
+    @joystick.onRelease = =>
+      @inputHandler.snapshot.sensitivites = @currentSystem.sensitivites; @currentSystem = @inputHandler.snapshot; @syncLocation(); @syncControls(); @draw();
     @joystick.onActivate = => @inputHandler.snapshot = @currentSystem.clone()
 
     @renderer = new Renderer(canvas)
