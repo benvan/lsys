@@ -114,22 +114,26 @@ class SystemManager
     @sensitivityControls.sync(@currentSystem.sensitivities)
 
   createBindings: ->
-    setMoving = (ev) =>
-      method = if (ev.metaKey or ev.ctrlKey) then 'add' else 'remove'
-      $(@canvas)["#{method}Class"]('moving')
+    setClassIf = (onOff, className) =>
+      method = if (onOff) then 'add' else 'remove'
+      $(@canvas)["#{method}Class"](className)
+
+    updateCursorType = (ev) =>
+      setClassIf(ev.ctrlKey or ev.metaKey, "moving")
+      setClassIf(ev.altKey, "resizing")
 
     document.addEventListener("keydown", (ev) =>
+      updateCursorType(ev)
       if ev.keyCode == Key.enter and ev.ctrlKey
         @updateFromControls()
         @syncLocation()
         return false
       if ev.keyCode == Key.enter and ev.shiftKey
         @exportToPng()
-      setMoving(ev)
     )
 
-    document.addEventListener("keyup", setMoving)
-    document.addEventListener("mousedown", setMoving)
+    document.addEventListener("keyup", updateCursorType)
+    document.addEventListener("mousedown", updateCursorType)
 
     window.onhashchange = =>
       if location.hash != ""
