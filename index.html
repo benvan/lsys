@@ -216,12 +216,13 @@
         <div id="systemInfo" class="system-info blue">
             <div id="systemName" class="system-name">click-and-drag!</div>
             <div class="actions">
-                <a class="share" href="#">
-                    <i class="icon-export-alt"></i>share
-                </a>
-                <a class="export" href="#">
-                    <i class="icon-download"></i>png
-                </a>
+                <a class="export tooltip" href="#" title="download png"><i class="icon-download"></i></a>
+                <a href="#" class="tooltip" id="link" title="copy link" onclick="return false;"><i class="icon icon-link"></i><input readonly /></a>
+
+                <a href="#" title="share on facebook" data-params="width=626,height=436" data-base="https://www.facebook.com/sharer/sharer.php?u="><i class="icon icon-facebook"></i></a>
+                <a href="#" title="share on twitter" data-base="http://twitter.com/share?url="><i class="icon icon-twitter"></i></a>
+                <a href="#" title="share on googdle+" data-base="https://plus.google.com/share?url="><i class="icon icon-gplus"></i></a>
+
             </div>
         </div>
         <div id="drawingContainer">
@@ -320,6 +321,18 @@
             }
         });
 
+        $('#link').click(function(){
+            $(this).toggleClass('open');
+            $(this).find('input').val(location.href).select();
+            return false;
+        }).mouseleave(function(){
+            $(this).removeClass('open');
+        });
+
+        $('[data-base]').click(function(){
+            window.open($(this).data('base') + encodeURIComponent(location.href), 'share', $(this).data('params') || 'height=300,width=550,resizable=1');
+            return false;
+        });
 
         manager.draw();
     });

@@ -323,6 +323,21 @@ input[type=text]{
     padding:2px 0px 1px 1px;
     margin-right:2px;
     display:inline-block;
+    position: relative;
+    &.open input{
+      width:100px;
+    }
+    input{
+      background:transparent;
+      color: #dfdfdf;
+      border:none;
+      width:0px;
+      margin:0px;
+      padding:0px;
+      transition: width .25s ease-in-out;
+      -moz-transition: width .25s ease-in-out;
+      -webkit-transition: width .25s ease-in-out;
+    }
     span{
       margin-left:2px;
       margin-right:4px;
@@ -341,6 +356,20 @@ input[type=text]{
     &:hover{
       border-color: #aeaeae;
       color: #cecece;
+      &.tooltip:after{
+        background: #333;
+        background: rgba(0,0,0,.8);
+        border-radius: 5px;
+        top: 26px;
+        color: #fff;
+        border-color:white;
+        content: attr(title);
+        left: 0;
+        padding: 5px 15px;
+        position: absolute;
+        z-index: 98;
+        white-space: nowrap;
+      }
     }
   }
 }
