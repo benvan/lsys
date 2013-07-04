@@ -52,5 +52,10 @@
 
 .icon-help-circled:before { content: '\e800'; } /* '' */
 .icon-trash:before { content: '\e803'; } /* '' */
+.icon-gplus-squared:before { content: '\e807'; } /* '' */
 .icon-help:before { content: '\e802'; } /* '' */
+.icon-export-alt:before { content: '\e804'; } /* '' */
+.icon-twitter-squared:before { content: '\e805'; } /* '' */
+.icon-facebook-squared:before { content: '\e806'; } /* '' */
 .icon-download:before { content: '\e801'; } /* '' */
+.icon-link:before { content: '\e808'; } /* '' */
