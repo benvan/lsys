@@ -321,6 +321,8 @@
             }
         });
 
+
+        // open/close link button
         $('#link').click(function(){
             $(this).toggleClass('open');
             $(this).find('input').val(location.href).select();
@@ -329,8 +331,9 @@
             $(this).removeClass('open');
         });
 
+        //bind sharing icons
         $('[data-base]').click(function(){
-            window.open($(this).data('base') + encodeURIComponent(location.href), 'share', $(this).data('params') || 'height=300,width=550,resizable=1');
+            window.open($(this).data('base') + encodeURIComponent(location.href), 'share on ' + $(this).attr('title'), $(this).data('params') || 'height=300,width=550,resizable=1');
             return false;
         });
 
