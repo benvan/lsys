@@ -79,7 +79,7 @@ class LSystem
   clone: -> return LSystem.fromUrl(@toUrl())
 
   toUrl: ->
-    base = "#i=#{@iterations}&r=#{encodeURIComponent(@rules)}"
+    base = "#?i=#{@iterations}&r=#{encodeURIComponent(@rules)}"
     mkQueryString = (params) -> _.reduce(params, ((acc,v) -> "#{acc}&#{v.toUrlComponent()}"), "")
     params = mkQueryString(@params)
     sensitivities = mkQueryString(@sensitivities)
@@ -92,7 +92,7 @@ class LSystem
     params = {}
     sensitivities = {}
     config = {}
-    _.each(url.substring(1).split("&").map( (x) -> x.split("=")), ([k,v]) ->
+    _.each(url.substring(2).split("&").map( (x) -> x.split("=")), ([k,v]) ->
         param = Param.fromUrlComponent("#{k}=#{v}")
         sensitivity = Sensitivity.fromUrlComponent("#{k}=#{v}")
         if param then params[param.name] = param.toJson()
