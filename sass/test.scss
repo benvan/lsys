@@ -315,16 +315,16 @@ input[type=text]{
   position:absolute;
   right:0;
   top:0;
-  height:100%;
   padding-right:6px;
   padding-top:7px;
-
+  height:30px;
   a{
     font-size:8pt;
     padding:2px 0px 1px 1px;
-    margin-right:2px;
+    margin-right:5px;
     display:inline-block;
     position: relative;
+    background-color: #1f1f20;
     &.open input{
       width:100px;
     }
