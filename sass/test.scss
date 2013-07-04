@@ -315,19 +315,24 @@ input[type=text]{
   right:0;
   top:0;
   height:100%;
-  padding-right:15px;
+  padding-right:6px;
   padding-top:7px;
 
   a{
     font-size:8pt;
-    padding:3px 3px;
-    margin-right:6px;
+    padding:2px 0px 1px 1px;
+    margin-right:2px;
+    display:inline-block;
+    span{
+      margin-left:2px;
+      margin-right:4px;
+    }
     i{
       font-size:12px;
-      padding:0px 1px 0px 3px;
+      padding:0px 0px 0px 0px;
     }
     text-decoration: none;
-    line-height:20px;
+    line-height:14px;
     color: #808080;
     border:1px solid #797979;
     vertical-align: middle;
@@ -354,6 +359,7 @@ input[type=text]{
   canvas {
     cursor:crosshair;
     &.moving{ cursor: move; }
+    &.resizing{ cursor: ne-resize; }
   }
 }
 
