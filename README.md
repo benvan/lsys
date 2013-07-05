@@ -6,6 +6,8 @@ INSTALLING / RUNNING
 
 ./run - this script requires npm
 
-If you'd rather do things manually, you'll need to compile coffee/* into js/generated/*.js
+If you'd rather do things manually, you'll need to:
+ - compile coffee/* into js/generated/*.js
+ - compile sass/*.scss into sass/*.css
 
 Currently, the classes are not namespaced - so ./run uses the -b flag when invoking coffee-script / jitter.
