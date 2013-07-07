@@ -4,6 +4,10 @@ class Util
   @value: (name) => parseFloat(Util.stringvalue(name))
   @stringvalue: (name) -> Util.control(name).value
   @clone:(x) -> JSON.parse(JSON.stringify(x))
+  @toObj:(kvPairs) ->
+    obj = {}
+    obj[k] = v for [k,v] in kvPairs
+    return obj
   @map: (obj, fn) ->
     result = {}
     for key of obj then do ->
