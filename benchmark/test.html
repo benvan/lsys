@@ -36,12 +36,14 @@
     systems.forEach(function(systemText){
       var total = 0;
       var system = LSystem.fromUrl(systemText);
-      system.generate();
-      for (var i = 0; i < iter; i++){
-        var t = renderer.render(system);
-        total += t;
-      }
-      console.log(total / iter, "ms");
+      var compiler = new SystemCompiler
+      compiler.whenCompiled(system, function(){
+        for (var i = 0; i < iter; i++){
+          var t = renderer.render(system);
+          total += t;
+        }
+        console.log(total / iter, "ms");
+      })
     });
 
     console.log('done');

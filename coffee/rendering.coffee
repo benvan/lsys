@@ -53,7 +53,7 @@ class Renderer
     @clearCanvas()
     @context.reset(system)
 
-  render: (system) =>
+  render: (elems, system) =>
     @isDrawing = true
     start = new Date
 
@@ -71,8 +71,7 @@ class Renderer
     [b.x2,b.y2] = [s.x, s.y]
 
     #draw
-    _.each system.elements(), (e) =>
-      #todo - surely don't need this now - they should be filtered
+    _.each elems, (e) =>
       @definitions[e](@context.state, system.params, @g, @context)
 
     @g.stroke()

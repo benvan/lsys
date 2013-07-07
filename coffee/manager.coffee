@@ -35,6 +35,7 @@ class SystemManager
   inputHandler: null
   renderer:null
   currentSystem:null
+  compiler: new SystemCompiler
   constructor: (@canvas, @controls) ->
     @joystick = new Joystick(canvas)
     @keystate = new KeyState
@@ -75,8 +76,7 @@ class SystemManager
       r.context.state.x = (x-b.x1+15)
       r.context.state.y = (y-b.y1+15)
 
-    r.render(@currentSystem)
-    Util.openDataUrl(c.toDataURL("image/png"))
+    @draw(r, () -> Util.openDataUrl(c.toDataURL("image/png")) )
 
   init: ->
     @createBindings()
@@ -91,11 +91,8 @@ class SystemManager
       @syncControls()
     setTimeout((() => @run()), 10)
 
-  draw: ->
-    t = @renderer.render(@currentSystem)
-    #todo: get from bindings
-    $("#rendered").html("#{t}ms")
-    $("#segments").html("#{@currentSystem.elements().length}")
+  draw: (renderer = @renderer, callback) ->
+    @compiler.whenCompiled(@currentSystem, (elems) => renderer.render(elems, @currentSystem); callback?())
 
   createControls: ->
     @paramControls = new Controls(Defaults.params(), ParamControl)
@@ -137,8 +134,7 @@ class SystemManager
 
     window.onhashchange = =>
       if location.hash != ""
-        sys = LSystem.fromUrl()
-        @currentSystem.merge(sys)
+        @currentSystem = LSystem.fromUrl()
         @syncControls()
         @draw() if not location.quietSync
         location.quietSync = false
