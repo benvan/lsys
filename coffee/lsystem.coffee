@@ -86,14 +86,15 @@ class CompiledSystem
 # =========================================
 class SystemCompiler
   _halt: false
-  promise: null
-
-  reset: -> delete @promise
+  compilationPromise: null
+  lastCompiledSystem: null
+  reset: -> @compilationPromise = null;
+  initialise: (system) -> @reset() if not system.isIsomorphicTo(@lastCompiledSystem)
   compile: (system) ->
-    if (@promise) then return @promise
-    CHUNK_SIZE = 10000
+    if (@compilationPromise) then return @compilationPromise
+    CHUNK_SIZE = 100000
     def = $.Deferred().progress(Util.log)
-    @promise = def.promise()
+    @compilationPromise = def.promise().done( => @lastCompiledSystem = system)
     @_halt = false
 
     textRules = system.rules.split("\n").map (r) -> (r.replace(/\ /g, '')).split(':')
@@ -103,26 +104,41 @@ class SystemCompiler
 
     removeNonInstructions = (expr) -> expr.split('').filter((e) -> true if (Renderer.prototype.definitions[e]))
 
-    expandChunk = (levelNum,levelExpr, acc, start) ->
-      if (@halt || (levelNum == 0))
-        def.resolve(removeNonInstructions(levelExpr))
-      else
-        end = Math.min(start+CHUNK_SIZE, levelExpr.length)
+    # todo: this is absolutely horrifying. Sort it out.
+    # note to any bypassers - this used to be a single reduce operation,
+    # then I decided to make compilation interruptible (or I'll be crashing people's browsers...)
+    # Sigh.
+    halted = => @._halt
+    expandChunk = (levelNum,levelExpr, acc, start, processed, count) ->
+      console.log(0)
+      while( processed < count )
+        if (halted())
+          return
+        else if (levelNum == 0)
+          def.resolve(removeNonInstructions(levelExpr))
+          return
+        remaining = count - processed
+        reachesEndOfLevel = remaining >= (levelExpr.length - start)
+        if (reachesEndOfLevel) then remaining = levelExpr.length - start
         i = start
-        while( i < end )
-          symbol = levelExpr[i++]
+        end = start + remaining
+        while ( i < end)
+          symbol = levelExpr[i]
           acc += ruleMap[symbol] || symbol
-        if(end >= levelExpr.length)
-          def.notify('level' + levelNum)
-          setTimeout( -> expandChunk(levelNum-1,acc,'',0))
-        else
-          chunks = levelExpr.length % CHUNK_SIZE
-          def.notify((start/levelExpr.length) * chunks, chunks)
-          setTimeout( -> expandChunk(levelNum,levelExpr,acc,end))
+          i++
+        processed += remaining
+        start += remaining
+        if (reachesEndOfLevel)
+          levelNum--
+          levelExpr = acc
+          acc = ''
+          start = 0
 
-    expandChunk(system.iterations, seed, '', 0)
-    return @promise
+      setTimeout(( -> expandChunk(levelNum,levelExpr,acc,start,0,count)),0)
 
-  halt: -> @_halt = true;
+    expandChunk(system.iterations, seed, '', 0,0,CHUNK_SIZE)
+    return @compilationPromise
+
+  halt: -> @_halt = true; console.log('halted')
 
 # =========================================

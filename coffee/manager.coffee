@@ -137,9 +137,8 @@ class SystemManager
 
     window.onhashchange = =>
       if location.hash != ""
-        newSystem = LSystem.fromUrl()
-        if (!@currentSystem.isIsomorphicTo(newSystem)) then @compiler.reset()
-        @currentSystem = newSystem
+        @currentSystem = LSystem.fromUrl()
+        @compiler.initialise(@currentSystem)
         @syncControls()
         @draw() if not location.quietSync
         location.quietSync = false
