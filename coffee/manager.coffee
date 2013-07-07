@@ -76,23 +76,26 @@ class SystemManager
       r.context.state.x = (x-b.x1+15)
       r.context.state.y = (y-b.y1+15)
 
-    @draw(r, () -> Util.openDataUrl(c.toDataURL("image/png")) )
+    @draw(r).then( -> Util.openDataUrl(c.toDataURL("image/png")) )
 
   init: ->
     @createBindings()
     @createControls()
     @syncControls()
 
-  run: ->
+  run: =>
+    setTimeout(@run, 10)
     @inputHandler.update(@currentSystem)
     if @joystick.active and not @renderer.isDrawing
       @draw()
       @joystick.draw()
       @syncControls()
-    setTimeout((() => @run()), 10)
 
-  draw: (renderer = @renderer, callback) ->
-    @compiler.whenCompiled(@currentSystem, (elems) => renderer.render(elems, @currentSystem); callback?())
+
+  draw: (renderer = @renderer) ->
+    @compiler.compile(@currentSystem).then( (elems) =>
+      renderer.render(elems, @currentSystem)
+    )
 
   createControls: ->
     @paramControls = new Controls(Defaults.params(), ParamControl)
@@ -134,7 +137,9 @@ class SystemManager
 
     window.onhashchange = =>
       if location.hash != ""
-        @currentSystem = LSystem.fromUrl()
+        newSystem = LSystem.fromUrl()
+        if (!@currentSystem.isIsomorphicTo(newSystem)) then @compiler.reset()
+        @currentSystem = newSystem
         @syncControls()
         @draw() if not location.quietSync
         location.quietSync = false

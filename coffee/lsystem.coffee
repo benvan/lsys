@@ -86,18 +86,15 @@ class CompiledSystem
 # =========================================
 class SystemCompiler
   _halt: false
-  cache:
-    system: null
-    elements: null
+  promise: null
 
-  whenCompiled: (system, callback) ->
-    if (system.isIsomorphicTo(@cache.system))
-      callback(@cache.elements)
-    else @compile(system, callback)
-
-  compile: (system, callback) ->
+  reset: -> delete @promise
+  compile: (system) ->
+    if (@promise) then return @promise
+    CHUNK_SIZE = 10000
+    def = $.Deferred().progress(Util.log)
+    @promise = def.promise()
     @_halt = false
-    @cache.system = system.clone()
 
     textRules = system.rules.split("\n").map (r) -> (r.replace(/\ /g, '')).split(':')
 
@@ -106,33 +103,25 @@ class SystemCompiler
 
     removeNonInstructions = (expr) -> expr.split('').filter((e) -> true if (Renderer.prototype.definitions[e]))
 
-    expandChunk = (elems, acc, start, end) ->
-      i = start
-      while (i < end)
-        symbol = elems[i++]
-        acc += ruleMap[symbol] || symbol
-      acc
-
-    expandLevel = (expr) =>
-      acc = ''
-      es = expr.split('')
-      at = 0
-      while (at < es.length)
-        chunkSize = Math.min(1000, es.length - at)
-        acc = expandChunk(es,acc,at,at+chunkSize)
-        at += chunkSize
-      acc
-
-
-    expandN = (i,expr) =>
-      console.log(i);
-      if (@_halt or i==0)
-        @cache.elements = removeNonInstructions(expr)
-        callback(@cache.elements)
+    expandChunk = (levelNum,levelExpr, acc, start) ->
+      if (@halt || (levelNum == 0))
+        def.resolve(removeNonInstructions(levelExpr))
       else
-        setTimeout( ( -> expandN(i-1,expandLevel(expr))), 0)
+        end = Math.min(start+CHUNK_SIZE, levelExpr.length)
+        i = start
+        while( i < end )
+          symbol = levelExpr[i++]
+          acc += ruleMap[symbol] || symbol
+        if(end >= levelExpr.length)
+          def.notify('level' + levelNum)
+          setTimeout( -> expandChunk(levelNum-1,acc,'',0))
+        else
+          chunks = levelExpr.length % CHUNK_SIZE
+          def.notify((start/levelExpr.length) * chunks, chunks)
+          setTimeout( -> expandChunk(levelNum,levelExpr,acc,end))
 
-    expandN(system.iterations, seed)
+    expandChunk(system.iterations, seed, '', 0)
+    return @promise
 
   halt: -> @_halt = true;
 
