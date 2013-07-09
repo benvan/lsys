@@ -1,4 +1,3 @@
-
 DefaultSystem = new LSystem({
     size: {value:12.27}
     angle: {value:4187.5}
@@ -35,14 +34,16 @@ class SystemManager
   inputHandler: null
   renderer:null
   currentSystem:null
-  compiler: new SystemCompiler
+  compiler: null
   constructor: (@canvas, @controls) ->
     @joystick = new Joystick(canvas)
     @keystate = new KeyState
     @inputHandler = new InputHandler(@keystate, @joystick)
 
-    @joystick.onRelease = => @syncLocation()
+    @joystick.onRelease = => @syncLocationQuiet()
     @joystick.onActivate = => @inputHandler.snapshot = @currentSystem.clone()
+
+    @compiler = new SystemCompiler
 
     @renderer = new Renderer(canvas)
     @currentSystem = LSystem.fromUrl() or DefaultSystem
@@ -51,14 +52,25 @@ class SystemManager
   syncLocation: -> location.hash = @currentSystem.toUrl()
   syncLocationQuiet: -> location.quietSync = true; @syncLocation()
 
-  updateFromControls: ->
-    @currentSystem = new LSystem(
+  # initialises a new system from the controls
+  recalculate: ->
+    Util.log('update from controls')
+    newSystem = new LSystem(
       @paramControls.toJson(),
       @offsetControls.toJson(),
       @sensitivityControls.toJson(),
       $(@controls.rules).val(),
       parseInt($(@controls.iterations).val()),
       @currentSystem.name
+    )
+    Util.log('calling compile from updateContorls')
+    @compiler.compile(newSystem).done( =>
+      Util.log('i set new system')
+      @currentSystem = newSystem
+      @syncLocationQuiet()
+    ).fail( =>
+      Util.log('nope, no dice. Resetting back to original')
+      @currentSystem = @compiler.lastCompiledSystem
     )
 
   exportToPng: ->
@@ -81,7 +93,7 @@ class SystemManager
   init: ->
     @createBindings()
     @createControls()
-    @syncControls()
+    @syncAll()
 
   run: =>
     setTimeout(@run, 10)
@@ -106,9 +118,15 @@ class SystemManager
     @offsetControls.create(@controls.offsets)
     @sensitivityControls.create(@controls.sensitivities)
 
-  syncControls: ->
+  syncAll: ->
+    @syncControls()
+    @syncRulesAndIterations()
+
+  syncRulesAndIterations: ->
     $(@controls.iterations).val(@currentSystem.iterations)
     $(@controls.rules).val(@currentSystem.rules)
+
+  syncControls: ->
     @paramControls.sync(@currentSystem.params)
     @offsetControls.sync(@currentSystem.offsets)
     @sensitivityControls.sync(@currentSystem.sensitivities)
@@ -125,7 +143,7 @@ class SystemManager
     document.addEventListener("keydown", (ev) =>
       updateCursorType(ev)
       if ev.keyCode == Key.enter and ev.ctrlKey
-        @updateFromControls()
+        @recalculate()
         @syncLocation()
         return false
       if ev.keyCode == Key.enter and ev.shiftKey
@@ -137,9 +155,18 @@ class SystemManager
 
     window.onhashchange = =>
       if location.hash != ""
-        @currentSystem = LSystem.fromUrl()
-        @compiler.initialise(@currentSystem)
-        @syncControls()
+        newSystem = LSystem.fromUrl()
+        console.log('seeing', newSystem.iterations)
+        if (@compiler.lastCompiledSystem?.isIsomorphicTo(newSystem))
+          @compiler.halt()
+          console.log('isomorphic - merging')
+          @currentSystem.merge(newSystem)
+          @syncControls()
+        else
+          Util.log('initialising new system')
+          @compiler.initialise(newSystem)
+          @currentSystem = newSystem
+          @syncAll()
         @draw() if not location.quietSync
         location.quietSync = false
 

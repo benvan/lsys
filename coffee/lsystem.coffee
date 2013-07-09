@@ -53,6 +53,9 @@ class LSystem
     offsets = "&offsets=#{@offsets.x},#{@offsets.y},#{@offsets.rot}"
     return base+params+sensitivities+offsets
 
+  merge: (system) ->
+    _.extend(@, _.pick(system, 'params', 'offsets', 'sensitivities')) if system
+
   @fromUrl: (url = location.hash) ->
     return null if url == ""
 
@@ -88,13 +91,21 @@ class SystemCompiler
   _halt: false
   compilationPromise: null
   lastCompiledSystem: null
-  reset: -> @compilationPromise = null;
+  beforeCompile: ->
+  afterCompile: ->
+  reset: -> @compilationPromise = null; @halt()
   initialise: (system) -> @reset() if not system.isIsomorphicTo(@lastCompiledSystem)
   compile: (system) ->
     if (@compilationPromise) then return @compilationPromise
+    Util.log('compiling')
+    @beforeCompile()
     CHUNK_SIZE = 100000
-    def = $.Deferred().progress(Util.log)
-    @compilationPromise = def.promise().done( => @lastCompiledSystem = system)
+    def = $.Deferred().progress(Util.log).done( =>
+      Util.log( 'setting lastCompiledSystem to ' + system.iterations)
+      @lastCompiledSystem = system
+      @afterCompile()
+    )
+    @compilationPromise = def.promise()
     @_halt = false
 
     textRules = system.rules.split("\n").map (r) -> (r.replace(/\ /g, '')).split(':')
@@ -108,11 +119,11 @@ class SystemCompiler
     # note to any bypassers - this used to be a single reduce operation,
     # then I decided to make compilation interruptible (or I'll be crashing people's browsers...)
     # Sigh.
-    halted = => @._halt
-    expandChunk = (levelNum,levelExpr, acc, start, processed, count) ->
-      console.log(0)
+    expandChunk = (levelNum,levelExpr, acc, start, processed, count) =>
       while( processed < count )
-        if (halted())
+        if (@._halt)
+          Util.log('rejected')
+          def.reject(@lastCompiledSystem)
           return
         else if (levelNum == 0)
           def.resolve(removeNonInstructions(levelExpr))
@@ -139,6 +150,6 @@ class SystemCompiler
     expandChunk(system.iterations, seed, '', 0,0,CHUNK_SIZE)
     return @compilationPromise
 
-  halt: -> @_halt = true; console.log('halted')
+  halt: -> @_halt = true;
 
 # =========================================

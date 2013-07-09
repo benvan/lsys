@@ -244,7 +244,6 @@
 
 <script type="text/javascript" src="js/underscore.js"></script>
 <script type="text/javascript" src="js/jquery-1.8.1.js"></script>
-<script type="text/javascript" src="js/q.min.js"></script>
 
 <script type="text/javascript" src="js/system-ticker.js"></script>
 
@@ -291,7 +290,7 @@
         var sync = function(quiet){
             var syncMethod = 'syncLocation'+(quiet?'Quiet':'');
             return _.debounce(function(){
-                manager.updateFromControls();
+                manager.recalculate();
                 manager[syncMethod]();
             }, 300);
         };
