@@ -32,7 +32,12 @@ class AppManager
     @renderer = new Renderer(canvas)
 
     @systemManager = new SystemManager
-    @initialised = @systemManager.activate(LSystem.fromUrl() or DefaultSystem).pipe(@init)
+
+    startingSystem = LSystem.fromUrl() or DefaultSystem
+    @initialised = @systemManager
+      .activate(startingSystem)
+      .always(@init)
+      .pipe( ( => @syncAll()), (=> @syncAll(startingSystem)))
 
   syncLocation: -> location.hash = @systemManager.activeSystem.toUrl()
   syncLocationQuiet: -> location.quietSync = true; @syncLocation()
@@ -70,7 +75,6 @@ class AppManager
   init: =>
     @createBindings()
     @createControls()
-    @syncAll()
 
   start: -> @initialised.pipe(@draw).pipe(@run)
   run: =>
@@ -95,18 +99,18 @@ class AppManager
     @offsetControls.create(@controls.offsets)
     @sensitivityControls.create(@controls.sensitivities)
 
-  syncAll: ->
-    @syncControls()
-    @syncRulesAndIterations()
+  syncAll: (system = @systemManager.activeSystem) ->
+    @syncControls(system)
+    @syncRulesAndIterations(system)
 
-  syncRulesAndIterations: ->
-    $(@controls.iterations).val(@systemManager.activeSystem.iterations)
-    $(@controls.rules).val(@systemManager.activeSystem.rules)
+  syncRulesAndIterations: (system = @systemManager.activeSystem) ->
+    $(@controls.iterations).val(system.iterations)
+    $(@controls.rules).val(system.rules)
 
-  syncControls: ->
-    @paramControls.sync(@systemManager.activeSystem.params)
-    @offsetControls.sync(@systemManager.activeSystem.offsets)
-    @sensitivityControls.sync(@systemManager.activeSystem.sensitivities)
+  syncControls: (system = @systemManager.activeSystem) ->
+    @paramControls.sync(system.params)
+    @offsetControls.sync(system.offsets)
+    @sensitivityControls.sync(system.sensitivities)
 
   createBindings: ->
     setClassIf = (onOff, className) =>
@@ -131,6 +135,7 @@ class AppManager
     document.addEventListener("mousedown", updateCursorType)
 
     window.onhashchange = =>
+      Util.log('changed')
       quiet = location.quietSync
       location.quietSync = false
       if location.hash != "" && !quiet

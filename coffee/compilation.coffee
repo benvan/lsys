@@ -73,7 +73,7 @@ class SystemManager
       @promise
     else if (@promise?.state() == 'pending')
       @compiler.halt()
-      @promise.fail( => @recompile(system))
+      @promise.fail( => @_recompile(system))
     else @_recompile(system)
 
 
