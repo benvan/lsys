@@ -1,16 +1,3 @@
-DefaultSystem = new LSystem({
-    size: {value:12.27}
-    angle: {value:4187.5}
-  }
-  ,{}
-  ,{
-    size: {value:1}
-  }
-  ,"L : SS\nS : F->[F-Y[S(L]]\nY : [-|F-F+)Y]\n"
-  ,12
-  ,"click-and-drag-me!"
-)
-
 class InputHandler
   snapshot: null # lsystem params as they were was when joystick activated
   constructor: (@keystate, @joystick) ->
@@ -27,50 +14,40 @@ class InputHandler
       system.params.angle.growth = Util.round(system.params.angle.growth + @joystick.dy(system.sensitivities.angle.growth),9)
 
 
-#yes this is an outrageous name for a .. system ... manager. buh.
-class SystemManager
+class AppManager
   joystick:null
   keystate: null
   inputHandler: null
   renderer:null
-  currentSystem:null
-  compiler: null
+  systemManager: null
+
   constructor: (@canvas, @controls) ->
     @joystick = new Joystick(canvas)
     @keystate = new KeyState
     @inputHandler = new InputHandler(@keystate, @joystick)
 
     @joystick.onRelease = => @syncLocationQuiet()
-    @joystick.onActivate = => @inputHandler.snapshot = @currentSystem.clone()
-
-    @compiler = new SystemCompiler
+    @joystick.onActivate = => @inputHandler.snapshot = @systemManager.activeSystem.clone()
 
     @renderer = new Renderer(canvas)
-    @currentSystem = LSystem.fromUrl() or DefaultSystem
-    @init()
 
-  syncLocation: -> location.hash = @currentSystem.toUrl()
+    @systemManager = new SystemManager
+    @initialised = @systemManager.activate(LSystem.fromUrl() or DefaultSystem).pipe(@init)
+
+  syncLocation: -> location.hash = @systemManager.activeSystem.toUrl()
   syncLocationQuiet: -> location.quietSync = true; @syncLocation()
 
-  # initialises a new system from the controls
-  recalculate: ->
-    Util.log('update from controls')
-    newSystem = new LSystem(
+  recalculate: (system = @lsystemFromControls()) ->
+    @systemManager.activate(system).done( => @syncAll(); @draw() )
+
+  lsystemFromControls: ->
+    return new LSystem(
       @paramControls.toJson(),
       @offsetControls.toJson(),
       @sensitivityControls.toJson(),
       $(@controls.rules).val(),
       parseInt($(@controls.iterations).val()),
-      @currentSystem.name
-    )
-    Util.log('calling compile from updateContorls')
-    @compiler.compile(newSystem).done( =>
-      Util.log('i set new system')
-      @currentSystem = newSystem
-      @syncLocationQuiet()
-    ).fail( =>
-      Util.log('nope, no dice. Resetting back to original')
-      @currentSystem = @compiler.lastCompiledSystem
+      @systemManager.activeSystem.name
     )
 
   exportToPng: ->
@@ -90,23 +67,23 @@ class SystemManager
 
     @draw(r).then( -> Util.openDataUrl(c.toDataURL("image/png")) )
 
-  init: ->
+  init: =>
     @createBindings()
     @createControls()
     @syncAll()
 
+  start: -> @initialised.pipe(@draw).pipe(@run)
   run: =>
     setTimeout(@run, 10)
-    @inputHandler.update(@currentSystem)
+    @inputHandler.update(@systemManager.activeSystem)
     if @joystick.active and not @renderer.isDrawing
       @draw()
       @joystick.draw()
       @syncControls()
 
-
-  draw: (renderer = @renderer) ->
-    @compiler.compile(@currentSystem).then( (elems) =>
-      renderer.render(elems, @currentSystem)
+  draw: (renderer = @renderer) =>
+    @systemManager.getInstructions().pipe( (elements) =>
+      @renderer.render(elements, @systemManager.activeSystem)
     )
 
   createControls: ->
@@ -123,13 +100,13 @@ class SystemManager
     @syncRulesAndIterations()
 
   syncRulesAndIterations: ->
-    $(@controls.iterations).val(@currentSystem.iterations)
-    $(@controls.rules).val(@currentSystem.rules)
+    $(@controls.iterations).val(@systemManager.activeSystem.iterations)
+    $(@controls.rules).val(@systemManager.activeSystem.rules)
 
   syncControls: ->
-    @paramControls.sync(@currentSystem.params)
-    @offsetControls.sync(@currentSystem.offsets)
-    @sensitivityControls.sync(@currentSystem.sensitivities)
+    @paramControls.sync(@systemManager.activeSystem.params)
+    @offsetControls.sync(@systemManager.activeSystem.offsets)
+    @sensitivityControls.sync(@systemManager.activeSystem.sensitivities)
 
   createBindings: ->
     setClassIf = (onOff, className) =>
@@ -154,20 +131,10 @@ class SystemManager
     document.addEventListener("mousedown", updateCursorType)
 
     window.onhashchange = =>
-      if location.hash != ""
-        newSystem = LSystem.fromUrl()
-        console.log('seeing', newSystem.iterations)
-        if (@compiler.lastCompiledSystem?.isIsomorphicTo(newSystem))
-          @compiler.halt()
-          console.log('isomorphic - merging')
-          @currentSystem.merge(newSystem)
-          @syncControls()
-        else
-          Util.log('initialising new system')
-          @compiler.initialise(newSystem)
-          @currentSystem = newSystem
-          @syncAll()
-        @draw() if not location.quietSync
-        location.quietSync = false
+      quiet = location.quietSync
+      location.quietSync = false
+      if location.hash != "" && !quiet
+        @recalculate(LSystem.fromUrl())
+
 
 #===========================================

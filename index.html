@@ -250,6 +250,7 @@
 <script type="text/javascript" src="js/generated/util.js"></script>
 <script type="text/javascript" src="js/generated/controls.js"></script>
 <script type="text/javascript" src="js/generated/lsystem.js"></script>
+<script type="text/javascript" src="js/generated/compilation.js"></script>
 <script type="text/javascript" src="js/generated/rendering.js"></script>
 <script type="text/javascript" src="js/generated/manager.js"></script>
 <script type="text/javascript">
@@ -258,7 +259,7 @@
 
         $(".elems").ticker("ticker.json");
 
-        manager = new SystemManager(
+        manager = new AppManager(
             Util.control("c"),
             Util.map({
                 params: 'controls-container',
@@ -268,8 +269,6 @@
                 rules: 'rules'
             }, Util.control)
         );
-
-        manager.run();
 
         var stretchCanvas = function(){
             var canvas = Util.control("c");
@@ -314,7 +313,7 @@
         });
         var $cancel = $('#cancel');
         $cancel.click(function(){
-            manager.compiler.halt();
+            manager.systemManager.compiler.halt();
         });
 
         $('#rules,#iterations').on('input', function(){
@@ -344,7 +343,8 @@
             return false;
         });
 
-        manager.draw();
+        manager.start();
+
     });
 
 
