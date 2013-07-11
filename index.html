@@ -286,65 +286,67 @@
             },300);
         });
 
-        var sync = function(quiet){
-            var syncMethod = 'syncLocation'+(quiet?'Quiet':'');
-            return _.debounce(function(){
-                manager.recalculate();
-                manager[syncMethod]();
-            }, 300);
-        };
-        var update = {
-            loud: sync(false),
-            quiet: sync(true)
-        };
-
-        $('a.export').click(function(){
-            manager.exportToPng();
-            return false;
-        });
-
-        //this is kinda naughty... but I'd rather refactor Controls first than fudge this in otherwise
-        $("#controls-container,#offsets-container").find("[data-param]").on("input", update.loud );
-        $("#sensitivities-container").find("[data-param]").on("input", update.quiet );
-
-        var $recalculateButton = $('#recalculate');
-        $recalculateButton.click(function(){
-            update.loud();
-        });
-        var $cancel = $('#cancel');
-        $cancel.click(function(){
-            manager.systemManager.compiler.halt();
-        });
-
-        $('#rules,#iterations').on('input', function(){
-            $recalculateButton.fadeIn(100);
-        }).on('keydown', function(evt){
-            // enter key + any modifier -> update system
-            if (evt.keyCode == 13 && (evt.shiftKey || evt.metaKey || evt.ctrlKey || evt.altKey)){
-                update.loud();
-                $recalculateButton.fadeOut(100);
-                return false;
-            }
-        });
-
-
-        // open/close link button
-        $('#link').click(function(){
-            $(this).toggleClass('open');
-            $(this).find('input').val(location.href).select();
-            return false;
-        }).mouseleave(function(){
-            $(this).removeClass('open');
-        });
-
-        //bind sharing icons
-        $('[data-base]').click(function(){
-            window.open($(this).data('base') + encodeURIComponent(location.href), 'share on ' + $(this).attr('title'), $(this).data('params') || 'height=300,width=550,resizable=1');
-            return false;
-        });
-
         setTimeout(function(){
-            manager.start();
+            manager.start().pipe(function(){
+
+                var sync = function(quiet){
+                    var syncMethod = 'syncLocation'+(quiet?'Quiet':'');
+                    return _.debounce(function(){
+                        manager.recalculate().pipe(function(){
+                            manager[syncMethod]();
+                        });
+                    }, 300);
+                };
+                var update = {
+                    loud: sync(false),
+                    quiet: sync(true)
+                };
+
+                $('a.export').click(function(){
+                    manager.exportToPng();
+                    return false;
+                });
+
+                var $recalculateButton = $('#recalculate');
+                $recalculateButton.click(function(){
+                    update.loud();
+                });
+                var $cancel = $('#cancel');
+                $cancel.click(function(){
+                    manager.systemManager.compiler.halt();
+                });
+
+                $('#rules,#iterations').on('input', function(){
+                    $recalculateButton.fadeIn(100);
+                }).on('keydown', function(evt){
+                            // enter key + any modifier -> update system
+                            if (evt.keyCode == 13 && (evt.shiftKey || evt.metaKey || evt.ctrlKey || evt.altKey)){
+                                update.loud();
+                                $recalculateButton.fadeOut(100);
+                                return false;
+                            }
+                        });
+
+                //this is kinda naughty... but I'd rather refactor Controls first than fudge this in otherwise
+                $("#controls-container,#offsets-container").find("[data-param]").on("input", update.loud );
+                $("#sensitivities-container").find("[data-param]").on("input", update.loud );
+
+                // open/close link button
+                $('#link').click(function(){
+                    $(this).toggleClass('open');
+                    $(this).find('input').val(location.href).select();
+                    return false;
+                }).mouseleave(function(){
+                            $(this).removeClass('open');
+                        });
+
+                //bind sharing icons
+                $('[data-base]').click(function(){
+                    window.open($(this).data('base') + encodeURIComponent(location.href), 'share on ' + $(this).attr('title'), $(this).data('params') || 'height=300,width=550,resizable=1');
+                    return false;
+                });
+
+            });
         },0);
 
     });
