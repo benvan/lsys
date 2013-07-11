@@ -10,7 +10,7 @@ class InputHandler
       system.offsets.x = @snapshot.offsets.x + @joystick.dx()
       system.offsets.y = @snapshot.offsets.y + @joystick.dy()
     else
-      system.params.angle.value = Util.round(system.params.angle.value + @joystick.dx(system.sensitivities.angle.value), 2)
+      system.params.angle.value = Util.round(system.params.angle.value + @joystick.dx(system.sensitivities.angle.value), 4)
       system.params.angle.growth = Util.round(system.params.angle.growth + @joystick.dy(system.sensitivities.angle.growth),9)
 
 
