@@ -1,3 +1,4 @@
+NullSystem = new LSystem({},{},{},"",1,"no system")
 DefaultSystem = new LSystem({
   size: {value:12.27}
   angle: {value:4187.5}
@@ -64,8 +65,9 @@ class SystemCompiler
 # =========================================
 class SystemManager
   compiler: new SystemCompiler
-  stagedSystem: null
-  activeSystem: null
+  stagedSystem: null # system pending compilation (replaces active when compiled)
+  activeSystem: NullSystem
+  compiledElements: null
 
   activate: (system) ->
     if (@promise and @stagedSystem?.isIsomorphicTo(system))
@@ -81,8 +83,9 @@ class SystemManager
     @stagedSystem = system
     @promise = @compiler.compile(system).pipe( (elements)  =>
       @activeSystem = system
+      @compiledElements = elements
       return elements
     )
 
-  getInstructions: -> @activate(@activeSystem)
+  getInstructions: -> @compiledElements
 

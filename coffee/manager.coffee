@@ -76,7 +76,7 @@ class AppManager
     @createBindings()
     @createControls()
 
-  start: -> @initialised.pipe(@draw).pipe(@run)
+  start: -> @initialised.pipe(=> @draw()).pipe(@run)
   run: =>
     setTimeout(@run, 10)
     @inputHandler.update(@systemManager.activeSystem)
@@ -86,9 +86,8 @@ class AppManager
       @syncControls()
 
   draw: (renderer = @renderer) =>
-    @systemManager.getInstructions().pipe( (elements) =>
-      @renderer.render(elements, @systemManager.activeSystem)
-    )
+      elems = @systemManager.getInstructions()
+      renderer.render(elems, @systemManager.activeSystem) if elems
 
   createControls: ->
     @paramControls = new Controls(Defaults.params(), ParamControl)
