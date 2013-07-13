@@ -267,18 +267,26 @@ input[type=text]{
       color: #ececec;
       font-size:11pt;
       text-shadow: 0.1em 0.1em #222;
-      box-shadow:inset 0px 15px 0 rgba(255, 255, 255, 0.1);
       padding:8px;
       width:100%;
       margin:6px 0px;
+      position:relative;
       &:hover{ background-color: #3b4346; }
       &:active{ background-color: #1a2023; }
 
-      .text-cancel { display:none; }
-      .text-recalculate{ display:block; }
+      .layer{
+        position: absolute;
+        top:0;bottom:0;right:0;left:0;
+      }
+      .sheen{ box-shadow:inset 0px 15px 0 rgba(255, 255, 255, 0.1); }
+      .progress{ display:none; background-color: rgba(102, 155, 230, 0.39); }
+
+      .text-cancel { position:relative; display:none; }
+      .text-recalculate{ position:relative; display:block; }
       &.recalculating {
         .text-cancel { display:block; }
         .text-recalculate{ display:none; }
+        .progress{ display: block; }
       }
     }
   }

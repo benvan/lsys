@@ -46,11 +46,12 @@ class AppManager
   beforeRecalculate: ->
   afterRecalculate: ->
   onRecalculateFail: ->
+  onRecalculateProgress: ->
 
   isRecalculating: -> not @recalculationPromise or @recalculationPromise?.state() == 'pending'
   recalculate: (system = @lsystemFromControls()) ->
     @beforeRecalculate()
-    @recalculationPromise = @systemManager.activate(system)
+    @recalculationPromise = @systemManager.activate(system).progress(@onRecalculateProgress)
     @recalculationPromise.done( =>
       @joystick.enable()
       @syncAll();
@@ -91,7 +92,7 @@ class AppManager
     startingSystem = LSystem.fromUrl() or DefaultSystem
     @recalculate(startingSystem)
       .fail( => @syncAll(startingSystem) )
-      .pipe(=> @draw())
+      .pipe( => @draw())
       .always(@run)
 
   run: =>

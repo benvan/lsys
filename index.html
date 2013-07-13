@@ -198,8 +198,12 @@
                 </ul>
                 <div class="recalculate">
                     <button class='recalculating'>
+                        <span class="layer progress"></span>
+
                         <span class="text-recalculate">recalculate</span>
                         <span class="text-cancel">cancel <i class="icon-spin4"></i></span>
+
+                        <span class="layer sheen"></span>
                     </button>
                 </div>
             </li>
@@ -283,6 +287,7 @@
             if (manager.isRecalculating()) manager.systemManager.compiler.halt(); else sync();
         });
 
+        // perhaps I should just make the promise available at this point.. gah.
         manager.beforeRecalculate = function(){
             $recalculateButton.addClass("recalculating");
             $recalculateButton.fadeIn(100);
@@ -294,6 +299,9 @@
         };
         manager.onRecalculateFail = function(){
             $recalculateButton.removeClass("recalculating");
+        };
+        manager.onRecalculateProgress = function(progress){
+            $recalculateButton.find(".progress").width(progress*100+"%")
         };
 
         var stretchCanvas = function(){
