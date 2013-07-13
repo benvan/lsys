@@ -290,7 +290,10 @@
         // perhaps I should just make the promise available at this point.. gah.
         manager.beforeRecalculate = function(){
             $recalculateButton.addClass("recalculating");
-            $recalculateButton.fadeIn(100);
+            setTimeout(function(){
+                if(manager.isRecalculating()) $recalculateButton.fadeIn(100);
+            },200)
+
         };
         manager.afterRecalculate = function(){
             $recalculateButton.fadeOut(100, function(){
