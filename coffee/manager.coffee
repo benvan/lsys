@@ -47,7 +47,7 @@ class AppManager
   afterRecalculate: ->
   onRecalculateFail: ->
 
-  isRecalculating: -> @recalculationPromise?.state() == 'pending'
+  isRecalculating: -> not @recalculationPromise or @recalculationPromise?.state() == 'pending'
   recalculate: (system = @lsystemFromControls()) ->
     @beforeRecalculate()
     @recalculationPromise = @systemManager.activate(system)
