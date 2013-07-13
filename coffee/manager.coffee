@@ -151,7 +151,6 @@ class AppManager
     document.addEventListener("mousedown", updateCursorType)
 
     window.onhashchange = =>
-      Util.log('changed')
       quiet = location.quietSync
       location.quietSync = false
       if location.hash != "" && !quiet

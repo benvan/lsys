@@ -33,10 +33,8 @@ class SystemCompiler
     expandChunk = (levelNum,levelExpr, acc, start, processed, count) =>
       while( processed < count )
         if (@._halt)
-          console.log('halting')
           def.reject()
           return
-          console.log('resolving')
         else if (levelNum == 0)
           def.resolve(removeNonInstructions(levelExpr))
           return
