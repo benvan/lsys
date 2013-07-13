@@ -101,12 +101,12 @@ class Control
   getVal: (param) -> parseFloat(@getInput(param).val())
   setVal: (param, value) ->
     input = @getInput(param)
-    if (parseFloat(input.val()) != value) then input.val(value)
+    if (parseFloat(input.val()) != value and not isNaN(parseFloat(value))) then input.val(value)
 
   toJson: -> return @update({})
 
   sync: (setting) ->
-    _.each(setting, (v,k) => @setVal(k, v))
+    _.chain(setting).omit("name").each( (v,k) => @setVal(k, v))
     return setting
 
   update: (setting) ->
