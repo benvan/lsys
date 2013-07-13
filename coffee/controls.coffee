@@ -119,9 +119,9 @@ class Control
 class OffsetControl extends Control
   tpl: -> """
           <ul class="control-row">
-          <li><input data-param="x" type="text"></li><!--
-          --><li><input data-param="y" type="text"></li><!--
-          --><li><input data-param="rot" type="text"></li>
+          <li><input required data-param="x" type="text"></li><!--
+          --><li><input required data-param="y" type="text"></li><!--
+          --><li><input required data-param="rot" type="text"></li>
           </ul>
           """
 
@@ -129,8 +129,8 @@ class ParamControl extends Control
   tpl: -> """
           <ul class="control-row">
           <li class="label">#{@controlkey}</li><!--
-          --><li><input type="text" type="text" data-param="value"></li><!--
-          --><li><input type="text" type="text" data-param="growth"></li>
+          --><li><input required type="text" data-param="value"></li><!--
+          --><li><input required type="text" data-param="growth"></li>
           </ul>
           """
   toJson: ->

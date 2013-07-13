@@ -186,6 +186,14 @@ input[type=text]{
   overflow:hidden;
   overflow-y:auto;
 
+  &.validation-enabled{
+    input:invalid{
+      border-color:rgb(219, 43, 43);
+      background-color:rgb(207, 169, 176);
+      color:black;
+    }
+  }
+
   li{
     display:inline-block;
     &.section{
@@ -221,7 +229,7 @@ input[type=text]{
   ul.control-row{
     padding:1px 0px 0px 0px;
 
-    input[type=text]{
+    input{
       width:60px;
       margin:0;
     }

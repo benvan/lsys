@@ -68,7 +68,7 @@ class LSystem
         if param then params[param.name] = param.toJson()
         else if sensitivity then sensitivities[sensitivity.name] = sensitivity.toJson()
         else config[k] = v
-        config[k] = parseInt(v) if k == 'i'
+        config[k] = (parseInt(v) or 0) if k == 'i'
     )
     offsets = undefined
     if (config.offsets)

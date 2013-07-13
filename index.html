@@ -190,7 +190,7 @@
             <li class="group" id="rules-container">
                 <ul class="control-row half">
                     <li class="label">levels</li><!--
-                 --><li><input id="iterations" type="text" ></li>
+                 --><li><input id="iterations" type="text" required ></li>
                 </ul>
                 <ul class="control-row" id="rules-row">
                     <li class="label">rules</li><!--
@@ -358,6 +358,7 @@
                 //this is kinda naughty... but I'd rather refactor Controls first than fudge this in otherwise
                 $("#controls-container,#offsets-container").find("[data-param]").on("input", sync );
                 $("#sensitivities-container").find("[data-param]").on("input", sync );
+                $(".controls").addClass('validation-enabled');
             });
         },0);
 
