@@ -81,7 +81,9 @@ class SystemManager
 
   _recompile: (system) ->
     @stagedSystem = system
-    @promise = @compiler.compile(system).pipe( (elements)  =>
+    @promise = @compiler.compile(system)
+    @promise.fail( => @stagedSystem = @activeSystem )
+    @promise.pipe( (elements)  =>
       @activeSystem = system
       @compiledElements = elements
       return elements

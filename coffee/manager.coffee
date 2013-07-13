@@ -33,17 +33,32 @@ class AppManager
 
     @systemManager = new SystemManager
 
-    startingSystem = LSystem.fromUrl() or DefaultSystem
-    @initialised = @systemManager
-      .activate(startingSystem)
-      .always(@init)
-      .pipe( ( => @syncAll()), (=> @syncAll(startingSystem)))
+    @initControls()
+    @joystick.disable()
+
+  initControls: ->
+    @createBindings()
+    @createControls()
 
   syncLocation: -> location.hash = @systemManager.activeSystem.toUrl()
   syncLocationQuiet: -> location.quietSync = true; @syncLocation()
 
+  beforeRecalculate: ->
+  afterRecalculate: ->
+  onRecalculateFail: ->
+
+  isRecalculating: -> @recalculationPromise?.state() == 'pending'
   recalculate: (system = @lsystemFromControls()) ->
-    @systemManager.activate(system).done( => @syncAll(); @draw() )
+    @beforeRecalculate()
+    @recalculationPromise = @systemManager.activate(system)
+    @recalculationPromise.done( =>
+      @joystick.enable()
+      @syncAll();
+      @draw()
+      @afterRecalculate()
+    )
+    @recalculationPromise.fail(@onRecalculateFail)
+    @recalculationPromise
 
   lsystemFromControls: ->
     return new LSystem(
@@ -72,11 +87,13 @@ class AppManager
 
     @draw(r).then( -> Util.openDataUrl(c.toDataURL("image/png")) )
 
-  init: =>
-    @createBindings()
-    @createControls()
+  start: ->
+    startingSystem = LSystem.fromUrl() or DefaultSystem
+    @recalculate(startingSystem)
+      .fail( => @syncAll(startingSystem) )
+      .pipe(=> @draw())
+      .always(@run)
 
-  start: -> @initialised.pipe(=> @draw()).pipe(@run)
   run: =>
     setTimeout(@run, 10)
     @inputHandler.update(@systemManager.activeSystem)
