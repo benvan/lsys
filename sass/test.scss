@@ -271,11 +271,14 @@ input[type=text]{
       padding:8px;
       width:100%;
       margin:6px 0px;
-      &:hover{
-        background-color: #3b4346;
-      }
-      &:active{
-        background-color: #1a2023;
+      &:hover{ background-color: #3b4346; }
+      &:active{ background-color: #1a2023; }
+
+      .text-cancel { display:none; }
+      .text-recalculate{ display:block; }
+      &.recalculating {
+        .text-cancel { display:block; }
+        .text-recalculate{ display:none; }
       }
     }
   }
