@@ -354,7 +354,7 @@
         });
 
         setTimeout(function(){
-            manager.start().pipe(function(){
+            manager.start().always(function(){
                 //this is kinda naughty... but I'd rather refactor Controls first than fudge this in otherwise
                 $("#controls-container,#offsets-container").find("[data-param]").on("input", sync );
                 $("#sensitivities-container").find("[data-param]").on("input", sync );
