@@ -59,7 +59,7 @@ class Renderer
 
     this.reset(system)
 
-    @g.lineWidth = 0.2
+    @g.lineWidth = 0.118
     @g.strokeStyle="#fff"
 
     @g.beginPath()
