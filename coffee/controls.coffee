@@ -38,6 +38,7 @@ class KeyState
 # ===============================
 
 class Joystick
+  enabled:true
   active:false
   start: new Point(0,0)
   now: new Point(0,0)
@@ -45,6 +46,9 @@ class Joystick
   constructor: (@canvas) ->
     @g = canvas.getContext('2d')
     @createBindings()
+
+  enable: -> @enabled = true ;
+  disable: -> @enabled = false;
 
   onActivate: -> # noop unless overriden
   onRelease: -> # noop unless overriden
@@ -60,23 +64,24 @@ class Joystick
 
   createBindings: ->
     @canvas.onmousedown = (ev) =>
-      if ev.button == 0
-        @constrained = ev.shiftKey
+      if ev.button == 0 and @enabled
         @onActivate()
         @active = true
         @start = new Point(ev.pageX, ev.pageY)
 
     document.onmouseup = =>
-      wasActive = @active
-      @active = false
-      @onRelease() if wasActive
+      if @enabled
+        wasActive = @active
+        @active = false
+        @onRelease() if wasActive
 
     document.onmousemove = (ev) =>
-      @now.x = ev.pageX
-      @now.y = ev.pageY
+      if @enabled
+        @now.x = ev.pageX
+        @now.y = ev.pageY
 
     document.addEventListener("keydown", () =>
-      if (@active)
+      if (@enabled and @active)
         @center()
         @onActivate()
     )
