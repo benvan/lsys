@@ -356,8 +356,11 @@
         setTimeout(function(){
             manager.start().always(function(){
                 //this is kinda naughty... but I'd rather refactor Controls first than fudge this in otherwise
-                $("#controls-container,#offsets-container").find("[data-param]").on("input", sync );
-                $("#sensitivities-container").find("[data-param]").on("input", sync );
+                var syncIfNotEmpty = function(ev){
+                    if (ev.target.value) sync()
+                };
+                $("#controls-container,#offsets-container").find("[data-param]").on("input", syncIfNotEmpty );
+                $("#sensitivities-container").find("[data-param]").on("input", syncIfNotEmpty );
                 $(".controls").addClass('validation-enabled');
             });
         },0);
