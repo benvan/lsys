@@ -131,7 +131,7 @@
     }, {
         "name": "stargaze",
         "url": "#?i=44&r=C%20%3A%20B%7CVFC%0AB%20%3A%20ABF%0AA%20%3A%20F%7C-A%7C%2BF%0AV%20%3A%20%3C%3C%3C%3C%3C%2B&p.size=2.23,0.01&p.angle=-3275.2,0.05&s.size=2,4.5&s.angle=2.4,6&offsets=0,86,0",
-        "img": "lsys_stargaze.png",        
+        "img": "lsys_stargaze.png",
         "author": "benvan"
     }, {
         "name": "mortal coil",
@@ -159,118 +159,118 @@
         "img": "lsys_coalescence.png",
         "author": "benvan"
     }, {
-        "url": "#?i=31&r=L%20%3A%20SYS%0AS%20%3A%20F-%5BF-%3EY%5BS%5D%5D%0AY%20%3A%20%5B%7CF-F%2B)Y%5D&p.size=16.34,0.01&p.angle=-3243.4,0.05&s.size=1.2,3&s.angle=2.4,6&offsets=0,0,0",
         "name": "3d tusk / gearspin",
+        "url": "#?i=31&r=L%20%3A%20SYS%0AS%20%3A%20F-%5BF-%3EY%5BS%5D%5D%0AY%20%3A%20%5B%7CF-F%2B)Y%5D&p.size=16.34,0.01&p.angle=-3243.4,0.05&s.size=1.2,3&s.angle=2.4,6&offsets=0,0,0",
         "img": "lsys_3d_tusk___gearspin.png",
         "author": "benvan"
     }, {
-        "url": "#?i=31&r=L%20%3A%20S%0AS%20%3A%20F%3C%2B%5BF-Y%5BS%5D%5D%0AY%20%3A%20%5B%7CF-F%2B)Y%5D&p.size=5.62,0.01&p.angle=-2519.1,0.05&s.size=1.4,2.47&s.angle=2.4,6&offsets=0,0,0",
         "name": "single 3d blade",
+        "url": "#?i=31&r=L%20%3A%20S%0AS%20%3A%20F%3C%2B%5BF-Y%5BS%5D%5D%0AY%20%3A%20%5B%7CF-F%2B)Y%5D&p.size=5.62,0.01&p.angle=-2519.1,0.05&s.size=1.4,2.47&s.angle=2.4,6&offsets=0,0,0",
         "img": "lsys_single_3d_blade.png",
         "author": "benvan"
     }, {
-        "url": "#?i=20&r=L%20%3A%20S%0AS%20%3A%20%3EF%7C%2B%5BF-Y%5BS%5D%5D%0AY%20%3A%20%5B%7CF-F)%2BY%5D&p.size=91.21,0.01&p.angle=-137.8,0.05&s.size=0.2,3.2&s.angle=2.4,6&offsets=0,0,0",
         "name": "3d rollers 2",
+        "url": "#?i=20&r=L%20%3A%20S%0AS%20%3A%20%3EF%7C%2B%5BF-Y%5BS%5D%5D%0AY%20%3A%20%5B%7CF-F)%2BY%5D&p.size=91.21,0.01&p.angle=-137.8,0.05&s.size=0.2,3.2&s.angle=2.4,6&offsets=0,0,0",
         "img": "lsys_3d_rollers_2.png",
         "author": "benvan"
     }, {
-        "url": "#?i=31&r=L%20%3A%20S)S)S)S)S%0AS%20%3A%20F%2B%5BF-Y%5B%2BS%5D%5D%0AY%20%3A%20%5B%7CF%3C-F%2B)Y%5D&p.size=11.61,0.01&p.angle=-901.4,0.05&s.size=1.3,3.4&s.angle=2.4,6&offsets=0,0,0",
         "name": "battling dragon tails",
+        "url": "#?i=31&r=L%20%3A%20S)S)S)S)S%0AS%20%3A%20F%2B%5BF-Y%5B%2BS%5D%5D%0AY%20%3A%20%5B%7CF%3C-F%2B)Y%5D&p.size=11.61,0.01&p.angle=-901.4,0.05&s.size=1.3,3.4&s.angle=2.4,6&offsets=0,0,0",
         "img": "lsys_battling_dragon_tails.png",
         "author": "benvan"
     }, {
-        "url": "#?i=31&r=L%20%3A%20SYS%0AS%20%3A%20F%7C%2B%5BF-Y%5BS%5D%5D%0AY%20%3A%20%5B%7CF-F%2B)F%3EY%5D%2B&p.size=11.74,0.01&p.angle=-1251.1,0.05&s.size=1.2,3.2&s.angle=2.4,6&offsets=0,0,0",
         "name": "snapdragon",
+        "url": "#?i=31&r=L%20%3A%20SYS%0AS%20%3A%20F%7C%2B%5BF-Y%5BS%5D%5D%0AY%20%3A%20%5B%7CF-F%2B)F%3EY%5D%2B&p.size=11.74,0.01&p.angle=-1251.1,0.05&s.size=1.2,3.2&s.angle=2.4,6&offsets=0,0,0",
         "img": "lsys_snapdragon.png",
         "author": "benvan"
     }, {
-        "url": "#?i=100&r=L%20%3A%20SYS%0AS%20%3A%20F%7C%2B%5BF-Y%5BS%5D%5D%0AY%20%3A%20%5B-F-F%2B)FY%5D%3E%2B%0A&p.size=7.66,0&p.angle=-2107.9,0.05&s.size=1,4&s.angle=2.4,6&offsets=0,0,0",
         "name": "dragon spirograph",
+        "url": "#?i=100&r=L%20%3A%20SYS%0AS%20%3A%20F%7C%2B%5BF-Y%5BS%5D%5D%0AY%20%3A%20%5B-F-F%2B)FY%5D%3E%2B%0A&p.size=7.66,0&p.angle=-2107.9,0.05&s.size=1,4&s.angle=2.4,6&offsets=0,0,0",
         "img": "lsys_dragon_spirograph.png",
         "author": "benvan"
     }, {
-        "url" : "#?i=15&r=Z%20%3A%20%2BS.T.A.R.T.%3E%3EZ%0AS%20%3A%20%5B4-2-4%2B2%2B4%5D%0AT%20%3A%20%5B2-4%5B-2%5D%5B%2B2%5D%5D%0AA%20%3A%20%5B-4%2B4%2B2%5B%2B4%5D2%5D%0AR%20%3A%20%5B-4%2B4%2B2%2BF%5B-2%5D3%5D%0A.%20%3A%204F2%0A4%20%3A%20FFFF%0A3%20%3A%20FFF%0A2%20%3A%20FF&p.size=5,0.071&p.angle=-270,0.006439999999999308&s.size=1.6,3.5&s.angle=2.4,6&offsets=0,0,0",
         "name" : "S.T.A.R.T",
+        "url" : "#?i=15&r=Z%20%3A%20%2BS.T.A.R.T.%3E%3EZ%0AS%20%3A%20%5B4-2-4%2B2%2B4%5D%0AT%20%3A%20%5B2-4%5B-2%5D%5B%2B2%5D%5D%0AA%20%3A%20%5B-4%2B4%2B2%5B%2B4%5D2%5D%0AR%20%3A%20%5B-4%2B4%2B2%2BF%5B-2%5D3%5D%0A.%20%3A%204F2%0A4%20%3A%20FFFF%0A3%20%3A%20FFF%0A2%20%3A%20FF&p.size=5,0.071&p.angle=-270,0.006439999999999308&s.size=1.6,3.5&s.angle=2.4,6&offsets=0,0,0",
         "img" : "lsys_start.png",
         "author" : "benvan"
     }, {
-        "url": "#?i=100&r=L%20%3A%20SYS%0AS%20%3A%20F%7C%2B%5BF-%3EY%5BS%5D%5D%0AY%20%3A%20%5B--((F-F%2B)FY%5D%2B%0A&p.size=2.28,0&p.angle=-2341.8,0.05&s.size=2,3.5&s.angle=2.4,6&offsets=0,0,0",
         "name": "gemini",
+        "url": "#?i=100&r=L%20%3A%20SYS%0AS%20%3A%20F%7C%2B%5BF-%3EY%5BS%5D%5D%0AY%20%3A%20%5B--((F-F%2B)FY%5D%2B%0A&p.size=2.28,0&p.angle=-2341.8,0.05&s.size=2,3.5&s.angle=2.4,6&offsets=0,0,0",
         "img": "lsys_gemini.png",
         "author": "benvan"
     }, {
-        "url": "#?i=40&r=C%20%3A%20%5BB%5D%3CF%7CC%0AB%20%3A%20!AB!A-F%0AA%20%3A%20-AF%2B&p.size=9.86,0.01&p.angle=-192.8,0.05&s.size=1.6,3.2&s.angle=2.4,6&offsets=0,0,0",
         "name": "clockwork coil",
-        "img": "lsys_clockwork_coil.png",        
+        "url": "#?i=40&r=C%20%3A%20%5BB%5D%3CF%7CC%0AB%20%3A%20!AB!A-F%0AA%20%3A%20-AF%2B&p.size=9.86,0.01&p.angle=-192.8,0.05&s.size=1.6,3.2&s.angle=2.4,6&offsets=0,0,0",
+        "img": "lsys_clockwork_coil.png",
         "author": "benvan"
     }, {
-        "url": "#?i=31&r=L%20%3A%20SYS%0AS%20%3A%20-%7C%5BF%3C-Y%5BS%5D%5D%2B%0AY%20%3A%20%5B%7CFFF-F%3E%2B)Y%5D&p.size=20.38,0.01&p.angle=95.4,0.05&s.size=1.1,3.2&s.angle=2.4,6&offsets=0,0,0",
         "name": "number 8",
+        "url": "#?i=31&r=L%20%3A%20SYS%0AS%20%3A%20-%7C%5BF%3C-Y%5BS%5D%5D%2B%0AY%20%3A%20%5B%7CFFF-F%3E%2B)Y%5D&p.size=20.38,0.01&p.angle=95.4,0.05&s.size=1.1,3.2&s.angle=2.4,6&offsets=0,0,0",
         "img": "lsys_number_8.png",
         "author": "benvan"
     }, {
-        "url": "#?i=31&r=L%20%3A%20SYS%0AS%20%3A%20%3E-%7C%5BF%3E-Y%5B%3ES%5D%5D!%0AY%20%3A%20%5B%7CF%3E!FF-F%2B)Y%5D&p.size=9.44,0.01&p.angle=88.4,0.05&s.size=1.2,3.7&s.angle=2.4,6&offsets=0,0,0",
         "name": "wigglesaur",
+        "url": "#?i=31&r=L%20%3A%20SYS%0AS%20%3A%20%3E-%7C%5BF%3E-Y%5B%3ES%5D%5D!%0AY%20%3A%20%5B%7CF%3E!FF-F%2B)Y%5D&p.size=9.44,0.01&p.angle=88.4,0.05&s.size=1.2,3.7&s.angle=2.4,6&offsets=0,0,0",
         "img": "lsys_wigglesaur.png",
         "author": "benvan"
     }, {
-        "url": "#?i=70&r=L%20%3A%20SYS%0AS%20%3A%20%3E-%7C%5B%2BF%3E-Y%5B%3ES%5D%5D!%0AY%20%3A%20%5B%7CF%3E!FF-F%2B)Y%5D&p.size=16.12,0.01&p.angle=907.4,0.05&s.size=1.1,3.6&s.angle=2.4,6&offsets=0,0,0",
         "name": "I mustache you a question",
+        "url": "#?i=70&r=L%20%3A%20SYS%0AS%20%3A%20%3E-%7C%5B%2BF%3E-Y%5B%3ES%5D%5D!%0AY%20%3A%20%5B%7CF%3E!FF-F%2B)Y%5D&p.size=16.12,0.01&p.angle=907.4,0.05&s.size=1.1,3.6&s.angle=2.4,6&offsets=0,0,0",
         "img": "lsys_I_mustache_you_a_question.png",
         "author": "benvan"
     }, {
-        "url": "#?i=50&r=L%20%3A%20SYS%0AS%20%3A%20%3E-%7C%5B%2BF%3E-Y%3E%5B%3ES%5D%5D!%0AY%20%3A%20%5B%7CF%3E!F)F-F%2B)Y%5D&p.size=9.5,0.01&p.angle=3052.7,0.05&s.size=1.1,3.6&s.angle=2.4,6&offsets=0,0,0",
         "name": "twizzlestache",
+        "url": "#?i=50&r=L%20%3A%20SYS%0AS%20%3A%20%3E-%7C%5B%2BF%3E-Y%3E%5B%3ES%5D%5D!%0AY%20%3A%20%5B%7CF%3E!F)F-F%2B)Y%5D&p.size=9.5,0.01&p.angle=3052.7,0.05&s.size=1.1,3.6&s.angle=2.4,6&offsets=0,0,0",
         "img": "lsys_twizzlestache.png",
         "author": "benvan"
     }, {
-        "url": "#?i=41&r=L%20%3A%20SYSYSYS%0AS%20%3A%20F-%5BF-Y%5BS%2B%2BF%3EFF%5B%2BF%2BF%5D%5D%0AY%20%3A%20F%5B%7CF!F%3E%2BY%5D-F&p.size=3.22,0.01&p.angle=-2399.6,0.05&s.size=1.3,3&s.angle=2.4,6&offsets=0,0,0",
         "name": "samurai",
+        "url": "#?i=41&r=L%20%3A%20SYSYSYS%0AS%20%3A%20F-%5BF-Y%5BS%2B%2BF%3EFF%5B%2BF%2BF%5D%5D%0AY%20%3A%20F%5B%7CF!F%3E%2BY%5D-F&p.size=3.22,0.01&p.angle=-2399.6,0.05&s.size=1.3,3&s.angle=2.4,6&offsets=0,0,0",
         "img": "lsys_samurai.png",
         "author": "benvan"
     }, {
-        "url": "#?i=41&r=L%20%3A%20SYL%0AS%20%3A%20F-%3E%5BF-Y%5BS%2B%2BFFF%5B%2BF%2BF%5D%5D%0AY%20%3A%20F%5B%7CF!F%2B%3CY%5D-F&p.size=3.28,0&p.angle=-2756.2,0.05&s.size=2,4.3&s.angle=2.4,6&offsets=0,0,0",
         "name": "dragonfish",
+        "url": "#?i=41&r=L%20%3A%20SYL%0AS%20%3A%20F-%3E%5BF-Y%5BS%2B%2BFFF%5B%2BF%2BF%5D%5D%0AY%20%3A%20F%5B%7CF!F%2B%3CY%5D-F&p.size=3.28,0&p.angle=-2756.2,0.05&s.size=2,4.3&s.angle=2.4,6&offsets=0,0,0",
         "img": "lsys_dragonfish.png",
         "author": "benvan"
     }, {
-        "url": "#?i=32&r=L%20%3A%20SLY%0AS%20%3A%20F-%5BF!Y%5BS%2B%2BFF%3CF%5B%2BF%2BF%5D%5D%0AY%20%3A%20F%5B%7CF!%3CF%2BY%5D-F&p.size=4,0.01&p.angle=-1342.1,0.05&s.size=2,2.5&s.angle=2.4,6&offsets=0,0,0",
         "name": "3d pyramids",
+        "url": "#?i=32&r=L%20%3A%20SLY%0AS%20%3A%20F-%5BF!Y%5BS%2B%2BFF%3CF%5B%2BF%2BF%5D%5D%0AY%20%3A%20F%5B%7CF!%3CF%2BY%5D-F&p.size=4,0.01&p.angle=-1342.1,0.05&s.size=2,2.5&s.angle=2.4,6&offsets=0,0,0",
         "img": "lsys_3d_pyramids.png",
         "author": "benvan"
     }, {
-        "url": "#?i=100&r=L%20%3A%20SYS%0AS%20%3A%20F%7C%2B%5BF-%3EY%5BS%5D%5D%0AY%20%3A%20%5B%7CF-F%2B%2BFY%5D%2B)%0A&p.size=10.28,0&p.angle=179.3,0.05&s.size=1.5,3.4&s.angle=2.4,6&offsets=0,0,0",
         "name": "holy shit!",
+        "url": "#?i=100&r=L%20%3A%20SYS%0AS%20%3A%20F%7C%2B%5BF-%3EY%5BS%5D%5D%0AY%20%3A%20%5B%7CF-F%2B%2BFY%5D%2B)%0A&p.size=10.28,0&p.angle=179.3,0.05&s.size=1.5,3.4&s.angle=2.4,6&offsets=0,0,0",
         "img": "lsys_holy_shit!.png",
         "author": "benvan"
     }, {
-        "url": "#?i=80&r=L%20%3A%20SYS%0AS%20%3A%20F%7C%2B%5BF-Y%5BS%5D%5D%0AY%20%3A%20%5B%7CF-%3EF%2B%2BFY%5D%2B(!%0A&p.size=13.81,0&p.angle=-87.1,0.05&s.size=1.4,3.6&s.angle=2.4,6&offsets=0,100,0",
         "name": "the bomb",
+        "url": "#?i=80&r=L%20%3A%20SYS%0AS%20%3A%20F%7C%2B%5BF-Y%5BS%5D%5D%0AY%20%3A%20%5B%7CF-%3EF%2B%2BFY%5D%2B(!%0A&p.size=13.81,0&p.angle=-87.1,0.05&s.size=1.4,3.6&s.angle=2.4,6&offsets=0,100,0",
         "img": "lsys_the_bomb.png",
         "author": "benvan"
     }, {
-        "url": "#?i=80&r=L%20%3A%20SYS%0AS%20%3A%20F%7C%2B%5BF-Y%5BS%5D%5D%0AY%20%3A%20%5B%7CF-%3EF--FY%5D%2B(!%0A&p.size=5.4,0&p.angle=-1563.3,0.05&s.size=1,4&s.angle=2.4,6&offsets=0,0,0",
         "name": "ornate clock",
+        "url": "#?i=80&r=L%20%3A%20SYS%0AS%20%3A%20F%7C%2B%5BF-Y%5BS%5D%5D%0AY%20%3A%20%5B%7CF-%3EF--FY%5D%2B(!%0A&p.size=5.4,0&p.angle=-1563.3,0.05&s.size=1,4&s.angle=2.4,6&offsets=0,0,0",
         "img": "lsys_ornate_clock.png",
         "author": "benvan"
     }, {
-        "url": "#?i=80&r=L%20%3A%20S%0AS%20%3A%20%3EF%7C%2B%5BF-Y%5BS%5D%5D%0AY%20%3A%20%5B%7CF-F--%7CFY%5D%2B!%0A&p.size=4,0.01&p.angle=-2279.4,0.05&s.size=1.7,3.2&s.angle=2.4,6&offsets=-80,100,0",
         "name": "manta ray",
+        "url": "#?i=80&r=L%20%3A%20S%0AS%20%3A%20%3EF%7C%2B%5BF-Y%5BS%5D%5D%0AY%20%3A%20%5B%7CF-F--%7CFY%5D%2B!%0A&p.size=4,0.01&p.angle=-2279.4,0.05&s.size=1.7,3.2&s.angle=2.4,6&offsets=-80,100,0",
         "img": "lsys_manta_ray.png",
         "author": "benvan"
     }, {
-        "url": "#?i=80&r=L%20%3A%20SSS%0AS%20%3A%20%3EF%7C%2B%5BF-Y%5BS%5D%5D%0AY%20%3A%20F%5B-F--%7CFY%5D%2B!%0A&p.size=1.47,0.01&p.angle=-2819.5,0.05&s.size=2,3.5&s.angle=2.4,6&offsets=0,0,0",
         "name": "biohazard angel",
+        "url": "#?i=80&r=L%20%3A%20SSS%0AS%20%3A%20%3EF%7C%2B%5BF-Y%5BS%5D%5D%0AY%20%3A%20F%5B-F--%7CFY%5D%2B!%0A&p.size=1.47,0.01&p.angle=-2819.5,0.05&s.size=2,3.5&s.angle=2.4,6&offsets=0,0,0",
         "img": "lsys_biohazard_angel.png",
         "author": "benvan"
     }, {
         "name": "twistmas tree",
         "url": "#?i=40&r=C%20%3A%20%5BB%5DF%3CC%0AB%20%3A%20!A%3EBA%0AA%20%3A%20-AF-&p.size=6.6,0.01&p.angle=-480.2,0.05&s.size=1.3,3.4&s.angle=2.4,6&offsets=0,0,0",
-        "img": "lsys_twistmas_tree.png",        
+        "img": "lsys_twistmas_tree.png",
         "author": "benvan"
     }, {
-        "url": "#?i=80&r=L%20%3A%20SSS%0AS%20%3A%20%3EF%7C%2B%5BFY%5BS%5D%5D%0AY%20%3A%20F%5B-F--%7CFY%5D%2B!%0A&p.size=7.21,0.01&p.angle=-3185.1,0.05&s.size=1.5,4&s.angle=2.4,6&offsets=0,0,0",
         "name": "choose your tunnel",
+        "url": "#?i=80&r=L%20%3A%20SSS%0AS%20%3A%20%3EF%7C%2B%5BFY%5BS%5D%5D%0AY%20%3A%20F%5B-F--%7CFY%5D%2B!%0A&p.size=7.21,0.01&p.angle=-3185.1,0.05&s.size=1.5,4&s.angle=2.4,6&offsets=0,0,0",
         "img": "lsys_choose_your_tunnel.png",
         "author": "benvan"
     }, {
@@ -279,169 +279,169 @@
         "url": "#?i=80&r=L%20%3A%20SSSS%0AS%20%3A%20%3EF%7C%2B%5BFY%5BS%5D%5D%0AY%20%3A%20F%5B-F--%7CY%5D%2B%0A&p.size=9.03,0.01&p.angle=-3686.8,0.05&s.size=1.6,3.8&s.angle=2.4,6&offsets=0,0,0",
         "author": "benvan"
     }, {
-        "url": "#?i=60&r=L%20%3A%20SSS%0AS%20%3A%20%3EF%7C)%2B%5BFY%5BS%5D%5D%0AY%20%3A%20F%5B-F--FY%5D%2B!F%0A&p.size=14.49,0.01&p.angle=56.6,0.05&s.size=1.2,3.5&s.angle=2.4,6&offsets=0,0,0",
         "name": "trifecta",
+        "url": "#?i=60&r=L%20%3A%20SSS%0AS%20%3A%20%3EF%7C)%2B%5BFY%5BS%5D%5D%0AY%20%3A%20F%5B-F--FY%5D%2B!F%0A&p.size=14.49,0.01&p.angle=56.6,0.05&s.size=1.2,3.5&s.angle=2.4,6&offsets=0,0,0",
         "img": "lsys_trifecta.png",
         "author": "benvan"
     }, {
-        "url": "#?i=14&r=L%20%3A%20S%0AS%20%3A%20%3EF%7C%2B%5BFYS%5D%0AY%20%3A%20F%5B-F-FY%5D%2B!Y%0A&p.size=6.96,0.01&p.angle=-180,0.05&s.size=1,2.47&s.angle=2.4,6&offsets=0,0,0",
         "name": "fire!",
+        "url": "#?i=14&r=L%20%3A%20S%0AS%20%3A%20%3EF%7C%2B%5BFYS%5D%0AY%20%3A%20F%5B-F-FY%5D%2B!Y%0A&p.size=6.96,0.01&p.angle=-180,0.05&s.size=1,2.47&s.angle=2.4,6&offsets=0,0,0",
         "img": "lsys_fire!.png",
         "author": "benvan"
     }, {
-        "url": "#?i=14&r=L%20%3A%20S%0AS%20%3A%20%3E)F%7C%2B%5BFYS%5D%0AY%20%3A%20F%5B-F-FY%5D%2B!Y%0A&p.size=8.51,0.01&p.angle=1203.5,0.05&s.size=1.3,2.47&s.angle=2.4,6&offsets=0,0,0",
         "name": "birds",
+        "url": "#?i=14&r=L%20%3A%20S%0AS%20%3A%20%3E)F%7C%2B%5BFYS%5D%0AY%20%3A%20F%5B-F-FY%5D%2B!Y%0A&p.size=8.51,0.01&p.angle=1203.5,0.05&s.size=1.3,2.47&s.angle=2.4,6&offsets=0,0,0",
         "img": "lsys_birds.png",
         "author": "benvan"
     }, {
-        "url": "#?i=14&p.size=14.62&s.size=1.20&p.angle=901.5&r=L%20%3A%20S%0AS%20%3A%20%3CT-F%7C%2B%5BYS%5D%0AY%20%3A%20F%5B-%7CY%5D%2B!Y%0AT%20%3A%20))))))%2B%2B%2B((((((",
         "name": "brainchild",
+        "url": "#?i=14&p.size=14.62&s.size=1.20&p.angle=901.5&r=L%20%3A%20S%0AS%20%3A%20%3CT-F%7C%2B%5BYS%5D%0AY%20%3A%20F%5B-%7CY%5D%2B!Y%0AT%20%3A%20))))))%2B%2B%2B((((((",
         "img": "lsys_brainchild.png",
         "author": "benvan"
     }, {
-        "url": "#?i=8&r=A%20%3A%20FFFS%5B%2BA%5D%5B-A%5DFA%0AS%20%3A%20%3ES)&p.size=9.31,0.01&p.angle=-289.8,0.05&s.size=1,3.5&s.angle=2.4,6&offsets=0,0,0",
         "name": "rorschach test",
+        "url": "#?i=8&r=A%20%3A%20FFFS%5B%2BA%5D%5B-A%5DFA%0AS%20%3A%20%3ES)&p.size=9.31,0.01&p.angle=-289.8,0.05&s.size=1,3.5&s.angle=2.4,6&offsets=0,0,0",
         "img": "lsys_rorschach_test.png",
         "author": "benvan"
     }, {
-        "url": "#?i=9&r=A%20%3A%20FFFS%5B%2BA%5D%5B-A%5DFA%0AS%20%3A%20%3ES)&p.size=10.11,0.01&p.angle=-652.6,0.05&s.size=1,3.5&s.angle=2.4,6&offsets=0,0,0",
         "name": "beating heart (wiggle mouse)",
+        "url": "#?i=9&r=A%20%3A%20FFFS%5B%2BA%5D%5B-A%5DFA%0AS%20%3A%20%3ES)&p.size=10.11,0.01&p.angle=-652.6,0.05&s.size=1,3.5&s.angle=2.4,6&offsets=0,0,0",
         "img": "lsys_beating_heart_(wiggle_mouse).png",
         "author": "benvan"
     }, {
-        "url": "#?i=9&r=A%20%3A%20FFFS%5B%2BA%5D%5B-A%5DFA%0AS%20%3A%20%3ES)&p.size=10.94,0.01&p.angle=-1305.4,0.05&s.size=1.2,3.7&s.angle=2.4,6&offsets=0,0,0",
         "name": "needle in a haystack",
+        "url": "#?i=9&r=A%20%3A%20FFFS%5B%2BA%5D%5B-A%5DFA%0AS%20%3A%20%3ES)&p.size=10.94,0.01&p.angle=-1305.4,0.05&s.size=1.2,3.7&s.angle=2.4,6&offsets=0,0,0",
         "img": "lsys_needle_in_a_haystack.png",
         "author": "benvan"
     }, {
-        "url": "#?i=9&r=A%20%3A%20FFFS%5B%2BA%5D%5B-A%5DFA%0AS%20%3A%20%3ES)s&p.size=6.6,0.01&p.angle=-3164.2,0.05&s.size=1,3.5&s.angle=2.4,6&offsets=0,0,0",
         "name": "king of the jungle",
+        "url": "#?i=9&r=A%20%3A%20FFFS%5B%2BA%5D%5B-A%5DFA%0AS%20%3A%20%3ES)s&p.size=6.6,0.01&p.angle=-3164.2,0.05&s.size=1,3.5&s.angle=2.4,6&offsets=0,0,0",
         "img": "lsys_king_of_the_jungle.png",
         "author": "benvan"
     }, {
-        "url": "#?i=9&r=A%20%3A%20FFFS%5B%2BA%5D%5B-A%5DA%0AS%20%3A%20%3ES)s&p.size=9.99,0.01&p.angle=-3241.5,0.05&s.size=1.4,3.7&s.angle=2.4,6&offsets=0,0,0",
         "name": "amoeba",
+        "url": "#?i=9&r=A%20%3A%20FFFS%5B%2BA%5D%5B-A%5DA%0AS%20%3A%20%3ES)s&p.size=9.99,0.01&p.angle=-3241.5,0.05&s.size=1.4,3.7&s.angle=2.4,6&offsets=0,0,0",
         "img": "lsys_amoeba.png",
         "author": "benvan"
     }, {
-        "url": "#?i=10&r=A%20%3A%20FFFS%5B%2BA%5D%5B-A%5DFA%0AS%20%3A%20%3ES))&p.size=9.74,0.01&p.angle=-1194.6,0.05&s.size=1,4.2&s.angle=2.4,6&offsets=0,0,0",
         "name": "the grinch in a christmas hat...",
+        "url": "#?i=10&r=A%20%3A%20FFFS%5B%2BA%5D%5B-A%5DFA%0AS%20%3A%20%3ES))&p.size=9.74,0.01&p.angle=-1194.6,0.05&s.size=1,4.2&s.angle=2.4,6&offsets=0,0,0",
         "img": "lsys_the_grinch_in_a_christmas_hat.png",
         "author": "benvan"
     }, {
-        "url": "#?i=9&r=A%20%3A%20FFFS%5B%2BA%5D%5B-A%5DFA%0AS%20%3A%20%3E%3E%3ES))))&p.size=8.93,0.01&p.angle=-1243.2,0.05&s.size=1.2,4.3&s.angle=2.4,6&offsets=0,0,0",
         "name": "cthulu's daughter",
+        "url": "#?i=9&r=A%20%3A%20FFFS%5B%2BA%5D%5B-A%5DFA%0AS%20%3A%20%3E%3E%3ES))))&p.size=8.93,0.01&p.angle=-1243.2,0.05&s.size=1.2,4.3&s.angle=2.4,6&offsets=0,0,0",
         "img": "lsys_cthulu's_daughter.png",
         "author": "benvan"
     }, {
         "name": "trippy",
-        "img": "lsys_trippy.png",
         "url": "#?i=10&r=A%20%3A%20FFFS%5B%2BA%5D%5B-A%5DFA%0AS%20%3A%20%3ES))))&p.size=29.68,0.058&p.angle=-1345.1,0.05&s.size=0.6,3.7&s.angle=2.4,6&offsets=0,100,0",
+        "img": "lsys_trippy.png",
         "author": "benvan"
     }, {
         "name": "mandelbutt",
-        "img": "lsys_mandelbutt.png",
         "url": "#?i=10&r=A%20%3A%20FFFS%5B%2BA%5D%5B-A%5DFA%0AS%20%3A%20%3ES))))&p.size=29.62,0.058&p.angle=-1346.6,0.05&s.size=0.6,4.3&s.angle=2.4,6&offsets=0,100,0",
+        "img": "lsys_mandelbutt.png",
         "author": "benvan"
     }, {
         "name": "tree!",
-        "img": "lsys_tree!.png",
         "url": "#?i=10&r=A%20%3A%20FFFS%5B%2BA%5D%5B-A%5DFA%0AS%20%3A%20%3ES))))&p.size=29.24,0.058&p.angle=-1358,0.05&s.size=0.6,4.6&s.angle=2.4,6&offsets=0,100,0",
+        "img": "lsys_tree!.png",
         "author": "benvan"
     }, {
         "name": "freaky face",
-        "img": "lsys_freaky_face.png",
         "url": "#?i=10&p.size=29.3&s.size=.60&p.angle=-1373.3&r=A%20%3A%20FFFS%5B%2BA%5D%5B-A%5DFA%0AS%20%3A%20%3E%3E%3E%3E%3E%3ES))))",
+        "img": "lsys_freaky_face.png",
         "author": "benvan"
     }, {
         "name": "stardust",
-        "img": "lsys_stardust.png",
         "url": "#?i=10&r=A%20%3A%20FFFS%5B%2BA%5D%5B-A%5DFA%0AS%20%3A%20%3ES))))&p.size=30,0.058&p.angle=-1406.9,0.05&s.size=1,4.2&s.angle=2.4,6&offsets=0,100,0",
+        "img": "lsys_stardust.png",
         "author": "benvan"
     }, {
         "name": "clockwork",
-        "img": "lsys_clockwork.png",
         "url": "#?i=8&r=A%20%3A%20FFFS%5B%2BA%5D%5B-A%5DFA%0AS%20%3A%20%3EA))))&p.size=1.58,0.01&p.angle=-1817.5,0.05&s.size=2,3.12&s.angle=2.4,6&offsets=0,100,0",
+        "img": "lsys_clockwork.png",
         "author": "benvan"
     }, {
         "name": "helicopter plant (drag left)",
-        "img": "lsys_helicopter_plant_(drag_left).png",
         "url": "#?i=8&r=A%20%3A%20FFFS%5B%2BA%5D%5B-A%5DFAM%0AS%20%3A%20%3EA%7C%3E%0AM%3A%20)))))%2B(((((&p.size=5.56,0.01&p.angle=-1441.2,0.05&s.size=1.4,4&s.angle=2.4,6&offsets=0,0,0",
+        "img": "lsys_helicopter_plant_(drag_left).png",
         "author": "benvan"
     }, {
         "name": "dandelion",
-        "img": "lsys_dandelion.png",
         "url": "#?i=10&r=A%20%3A%20FFFS%5B%2BA%5D%5B-A%5DFA%0AS%20%3A%20%3ES)s&p.size=7.55,0.01&p.angle=-2923010.4,0.05&s.size=1.2,3.6&s.angle=2.4,6&offsets=0,0,0",
+        "img": "lsys_dandelion.png",
         "author": "benvan"
     }, {
         "name": "shaman face",
-        "img": "lsys_shaman_face.png",
         "url": "#?i=10&r=A%20%3A%20FFFS%5B%2BA%5D%5B-A%5DFA%0AS%20%3A%20%3ES)&p.size=5.66,0.01&p.angle=-926.5,0.05&s.size=1.7,4.2&s.angle=2.4,6&offsets=0,0,0",
+        "img": "lsys_shaman_face.png",
         "author": "benvan"
     }, {
         "name": "wormhole",
-        "img": "lsys_wormhole.png",
         "url": "#?i=100&p.size=26.87&s.size=.60&p.angle=283.4&r=L%20%3A%20SYS%0AS%20%3A%20F%7C%2B%5BF-Y%5BS%5D%5D%0AY%20%3A%20%5B%7CF-F%2B%2BFY%5D%2B%3C",
+        "img": "lsys_wormhole.png",
         "author": "benvan"
     }, {
         "name": "coral",
-        "img": "lsys_coral.png",
         "url": "#?i=18&r=L%20%3A%20S%0AS%20%3A%20F%7C%2B%5BF-%3EY%5BS%5D%5DFG%0AY%20%3A--%5B%7CF-FFF%2B%7C%2BY%5D%2B%0AG%3A%20FG%2BF%2B%7CL%2B&p.size=2.5,0.01&p.angle=-3082.2,0.05&s.size=2,2.47&s.angle=2.4,6&offsets=100,-50,0",
+        "img": "lsys_coral.png",
         "author": "benvan"
     }, {
         "name": "I will crush you (and various other critters)",
-        "img": "lsys_I_will_crush_you.png",
         "url": "#?i=31&r=L%20%3A%20SYS%0AS%20%3A%20F%3C%7C%2B%5BF-Y)%5B-S%5D%5DY-!Y%0AY%20%3A%20%5B%7CF%3E-F%2B)Y%5D&p.size=8.26,0.01&p.angle=2156.5,0.05&s.size=1,3.4&s.angle=2.4,6&offsets=0,0,-90",
+        "img": "lsys_I_will_crush_you.png",
         "author": "benvan"
     }, {
         "name": "the indomitable moustachio",
-        "img": "lsys_the_indomitable_moustachio.png",
         "url": "#?i=31&r=L%20%3A%20SYS%0AS%20%3A%20F%7C%2B%3E%5BF-Y)%5B-S%5D%5DY-!Y%0AY%20%3A%20%5B%3C%7CF-F%2B(Y%5D&p.size=16.67,0.01&p.angle=124.72,0.05&s.size=1,3.4&s.angle=2.4,6&offsets=0,0,0",
+        "img": "lsys_the_indomitable_moustachio.png",
         "author": "benvan"
     }, {
         "name": "seahorse .. moustache",
-        "img": "lsys_seahorse_moustache.png",
         "url": "#?i=31&r=L%20%3A%20SYS%0AS%20%3A%20F%7C%2B%5BF-Y)%5B-(S%5D%5DY-!Y%0AY%20%3A%20%5B%7C%3EF-(F%2BY%5D&p.size=11.79,0.01&p.angle=-859.18,0.05&s.size=1.2,3.5&s.angle=2.4,6&offsets=0,0,0",
+        "img": "lsys_seahorse_moustache.png",
         "author": "benvan"
     }, {
         "name": "the slug",
-        "img": "lsys_the_slug.png",
         "url": "#?i=30&r=L%20%3A%20SYS%0AS%20%3A%20F%3E%7C%2B%5BF-Y)%5B-(S%5D%5DY-Y%0AY%20%3A%20%5B%7CF-(F%2B!%3CY%5D&p.size=2.5,0.01&p.angle=-523.08,0.05&s.size=1.4,3.2&s.angle=2.4,6&offsets=0,0,0",
+        "img": "lsys_the_slug.png",
         "author": "benvan"
     }, {
         "name": "gears",
-        "img": "lsys_gears.png",
         "url": "#?i=31&r=L%20%3A%20SYS%0AS%20%3A%20F%7C%2B%5BF-Y)%5B-%3ES%5D%5DY-!Y%0AY%20%3A%20%5B%7CF-%3CF%2B%2BY%5D&p.size=13.79,0.01&p.angle=-138.18,0.05&s.size=1.3,3.1&s.angle=2.4,6&offsets=0,0,0",
+        "img": "lsys_gears.png",
         "author": "benvan"
     }, {
         "name": "jelly-crab",
-        "img": "lsys_jelly-crab.png",
         "url": "#?i=31&r=L%20%3A%20SYS%0AS%20%3A%20F%7C%2B%5BF%3C-Y)%5B-S%5D%5DY-!Y%0AY%20%3A%20%5B%7C%3EF-F)%2B%2B(Y%5D&p.size=7.01,0.01&p.angle=-1856.68,0.05&s.size=1,3.2&s.angle=2.4,6&offsets=0,0,0",
+        "img": "lsys_jelly-crab.png",
         "author": "benvan"
     }, {
         "name": "octosquid",
-        "img": "lsys_octosquid.png",
         "url": "#?i=31&r=L%20%3A%20SYS%0AS%20%3A%20F%7C%2B%5BF-%3EY)%5B-S%5D%5DY-!Y%0AY%20%3A%20%5B%7C%3EF-F)%2B%2B(Y%5D&p.size=15.2,0.01&p.angle=-169.08,0.05&s.size=1.2,3.3&s.angle=2.4,6&offsets=0,0,0",
+        "img": "lsys_octosquid.png",
         "author": "benvan"
     }, {
         "name": "dream catcher",
-        "img": "lsys_dream_catcher.png",
         "url": "#?i=30&r=L%20%3A%20S%0AS%20%3A%20F%2B%5BF-Y%5BS%5D%5DF)G%0AY%20%3A--%5B%7CF-F-)-F%3EY%5D-%0AG%3A%20FGF%5B%2BF%5D%2B%3CY&p.size=4,0.01&p.angle=-3769.7,0.05&s.size=1.4,3.3&s.angle=2.4,6&offsets=0,0,0",
+        "img": "lsys_dream_catcher.png",
         "author": "benvan"
     }, {
         "name": "tornado",
-        "img": "lsys_tornado.png",
         "url": "#?i=20&r=L%20%3A%20SSSL%0AS%20%3A%20F(%5BF-Y%5B(F%3EFFFFFS%5D%5D%0AY%20%3A%20%5B%7C%3CF-F%2B(Y%5D&p.size=2.79,0.01&p.angle=-117,0.05&s.size=1.6,3.2&s.angle=2.4,6&offsets=0,50,0",
+        "img": "lsys_tornado.png",
         "author": "benvan"
     }, {
         "name": "politic",
-        "img": "lsys_politic.png",
         "url": "#?i=25&r=L%20%3A%20SSFL%0AS%20%3A%20F%5BF-Y%5B(-FS%5D%5D%0AY%20%3A%20%5B!F%3E-F%2B)Y%5D&p.size=4,0.01&p.angle=-13.6,0.05&s.size=1.5,2.7&s.angle=2.4,6&offsets=0,50,0",
+        "img": "lsys_politic.png",
         "author": "benvan"
     }, {
         "name": "spin engine",
-        "img": "lsys_spin_engine.png",
         "url": "#?i=20&r=L%20%3A%20SFFSFFL%0AS%20%3A%20F%5BF-%3EY%5B(-FS%5D%5D%0AY%20%3A%20%3CF%2BY%7C&p.size=5.94,0&p.angle=378.5,0.05&s.size=1.5,3.1&s.angle=2.4,6&offsets=0,0,0"
+        "img": "lsys_spin_engine.png",
     }
 
     ]
