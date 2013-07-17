@@ -23,7 +23,7 @@ class Util
   @openDataUrl: (data) ->
     a = document.createElement("a")
     a.href = data
-    a.download="lsys/"+$("#systemName").text().replace(/[\ \/]/g,"_")
+    a.download="lsys/"+$("#system-name").val().replace(/[\ \/]/g,"_")
     evt = document.createEvent("MouseEvents")
     evt.initMouseEvent("click", true, true,window,0,0,0,0,0,true,false,false,false,0,null)
     a.dispatchEvent(evt)

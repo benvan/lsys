@@ -11,7 +11,7 @@ $bottom:240px;
 &::-webkit-scrollbar-thumb:horizontal{ width:5px;background-color:#999;-webkit-border-radius:4px; }
 }
 
-div{
+div {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -162,20 +162,6 @@ li{
   border-bottom:1px solid #3f3f3f;
 }
 
-input[type=text], textarea{
-  font-family:monospace;
-  color:#bbb;
-  border-radius:2px;
-  border:1px solid #1d1d1d;
-  background-color: #42474a;
-  font-size:9pt;
-  padding:3px 5px;
-}
-input[type=text]{
-  text-align: right;
-}
-
-
 .controls{
   @include scrollbar;
   font-size:9pt;
@@ -185,6 +171,20 @@ input[type=text]{
   right:1px;
   overflow:hidden;
   overflow-y:auto;
+
+  input[type=text], textarea{
+    font-family:monospace;
+    color:#bbb;
+    border-radius:2px;
+    border:1px solid #1d1d1d;
+    background-color: #42474a;
+    font-size:9pt;
+    padding:3px 5px;
+  }
+  input[type=text]{
+    text-align: right;
+  }
+
 
   &.validation-enabled{
     input:invalid{
@@ -319,6 +319,13 @@ input[type=text]{
     display:inline;
     font-size:14pt;
     letter-spacing: 2px;
+    input {
+      background:none;
+      text-align: center;
+      border:none;
+      color:#bbb;
+      width:100%;
+    }
   }
   .system-author {
     display:none;

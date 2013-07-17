@@ -51,7 +51,8 @@ class LSystem
     params = mkQueryString(@params)
     sensitivities = mkQueryString(@sensitivities)
     offsets = "&offsets=#{@offsets.x},#{@offsets.y},#{@offsets.rot}"
-    return base+params+sensitivities+offsets
+    name = "&name=#{encodeURIComponent(@name)}"
+    return base+params+sensitivities+offsets+name
 
   merge: (system) ->
     _.extend(@, _.pick(system, 'params', 'offsets', 'sensitivities')) if system
@@ -78,7 +79,7 @@ class LSystem
         y: parseFloat(o[1])
         rot: parseFloat(o[2])
 
-    return new LSystem(params, offsets, sensitivities, decodeURIComponent(config.r), config.i, "unnamed")
+    return new LSystem(params, offsets, sensitivities, decodeURIComponent(config.r), config.i, decodeURIComponent(config.name) or "unnamed")
 
   isIsomorphicTo: (system) -> if (!system) then false else @rules == system.rules and @iterations == system.iterations
 

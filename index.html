@@ -223,7 +223,9 @@
 
     <div class="drawing-pad">
         <div id="systemInfo" class="system-info blue">
-            <div id="systemName" class="system-name">click-and-drag!</div>
+            <div class="system-name" >
+                <input type="text" id="system-name" value="click-and-drag!"/>
+            </div>
             <div class="actions">
                 <a class="export tooltip" href="#" title="download png"><i class="icon-download"></i></a><!--
                 --><a href="#" class="tooltip" id="link" title="copy link" onclick="return false;"><i class="icon icon-link"></i><input readonly /></a><!--
@@ -271,7 +273,8 @@
                 offsets: 'offsets-container',
                 sensitivities: 'sensitivities-container',
                 iterations: 'iterations',
-                rules: 'rules'
+                rules: 'rules',
+                name: 'system-name'
             }, Util.control)
         );
 

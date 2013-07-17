@@ -117,6 +117,7 @@ class AppManager
     @sensitivityControls.create(@controls.sensitivities)
 
   syncAll: (system = @systemManager.activeSystem) ->
+    $(@controls.name).val(system.name)
     @syncControls(system)
     @syncRulesAndIterations(system)
 
