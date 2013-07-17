@@ -20,10 +20,10 @@ class Util
   @time: (n,f) ->
     f = n if n instanceof Function
     s = new Date; f(); (new Date - s)
-  @openDataUrl: (data) ->
+  @openDataUrl: (data, filename) ->
     a = document.createElement("a")
     a.href = data
-    a.download="lsys/"+$("#system-name").val().replace(/[\ \/]/g,"_")
+    a.download=filename
     evt = document.createEvent("MouseEvents")
     evt.initMouseEvent("click", true, true,window,0,0,0,0,0,true,false,false,false,0,null)
     a.dispatchEvent(evt)

@@ -86,7 +86,10 @@ class AppManager
       r.context.state.x = (x-b.x1+15)
       r.context.state.y = (y-b.y1+15)
 
-    @draw(r).then( -> Util.openDataUrl(c.toDataURL("image/png")) )
+    @draw(r).then( ->
+      filename = "lsys/"+@systemManager.activeSystem.name.replace(/[\ \/]/g,"_")
+      Util.openDataUrl( c.toDataURL("image/png"), filename )
+    )
 
   start: ->
     startingSystem = LSystem.fromUrl() or DefaultSystem
