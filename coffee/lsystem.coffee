@@ -55,7 +55,7 @@ class LSystem
     return base+params+sensitivities+offsets+name
 
   merge: (system) ->
-    _.extend(@, _.pick(system, 'params', 'offsets', 'sensitivities')) if system
+    _.extend(@, system) if system
 
   @fromUrl: (url = location.hash) ->
     return null if url == ""
