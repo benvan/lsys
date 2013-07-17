@@ -68,7 +68,7 @@ class AppManager
       @sensitivityControls.toJson(),
       $(@controls.rules).val(),
       parseInt($(@controls.iterations).val()),
-      @systemManager.activeSystem.name
+      $(@controls.name).val()
     )
 
   exportToPng: ->
