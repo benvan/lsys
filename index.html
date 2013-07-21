@@ -278,10 +278,8 @@
             }, Util.control)
         );
 
+        var syncLocationQuiet = _.debounce( _.bind(manager.syncLocationQuiet, manager) ,300);
         var sync = function(){
-            var syncLocationQuiet = _.debounce(function(){
-                manager.syncLocationQuiet();
-            },300);
             return manager.recalculate().pipe(syncLocationQuiet);
         };
 
