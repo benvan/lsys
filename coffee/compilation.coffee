@@ -23,7 +23,7 @@ class SystemCompiler
     textRules = system.rules.split("\n").map (r) -> (r.replace(/\ /g, '')).split(':')
 
     ruleMap = Util.toObj(textRules)
-    seed = _.keys(ruleMap)[0] #choose first rule as system initialiser
+    seed = textRules[0][0] #choose first rule as system initialiser
 
     removeNonInstructions = (expr) -> expr.split('').filter((e) -> true if (Renderer.prototype.definitions[e]))
 
