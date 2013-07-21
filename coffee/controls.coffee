@@ -112,7 +112,8 @@ class Control
   update: (setting) ->
     _.each(@el.find("[data-param]"), (el) =>
       key = $(el).data("param")
-      setting[key] = @getVal(key)
+      val = @getVal(key)
+      setting[key] = val if not isNaN(val)
     )
     return setting
 
