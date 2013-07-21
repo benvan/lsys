@@ -71,8 +71,8 @@ class AppManager
       $(@controls.name).val()
     )
 
-  exportToPng: ->
-    [x,y] = [@canvas.width / 2 , @canvas.height / 2]
+  exportToPng: (system = @systemManager.activeSystem) ->
+    [x,y] = [(@canvas.width / 2) + system.offsets.x, (@canvas.height / 2) + system.offsets.y]
 
     b = @renderer.context.bounding
     c = $('<canvas></canvas>').attr({
@@ -87,7 +87,7 @@ class AppManager
       r.context.state.y = (y-b.y1+15)
 
     @draw(r)
-    filename = "lsys/"+@systemManager.activeSystem.name.replace(/[\ \/]/g,"_")
+    filename = "lsys_"+system.name.replace(/[\ \/]/g,"_")
     Util.openDataUrl( c.toDataURL("image/png"), filename )
 
   start: ->
