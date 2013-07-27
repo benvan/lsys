@@ -42,8 +42,8 @@ function mkIntro(){
             var item = intro._introItems[intro._currentStep];
             var data = item.data;
             if (data.example) window.location.hash = examples[data.example];
-            if (data.overlay == 'on') $('.introjs-overlay').show();
-            if (data.overlay == 'off') $('.introjs-overlay').hide();
+            if (data.overlay == 'on') $('.introjs-overlay').removeClass('hidden');
+            if (data.overlay == 'off') $('.introjs-overlay').addClass('hidden');
         }).setOptions({
             exitOnOverlayClick: true,
             tooltipPosition:'right',

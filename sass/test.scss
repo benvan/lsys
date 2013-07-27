@@ -33,6 +33,9 @@ div {
   color: #e8e8e8;
   background-color: rgba(94, 97, 111, 0.51)
 }
+.introjs-overlay.hidden {
+  display: none;
+}
 .introjs-overlay{
   opacity: 0.3 !important;
 }
