@@ -363,6 +363,8 @@
                 $("#controls-container,#offsets-container").find("[data-param]").on("input", syncIfNotEmpty );
                 $("#sensitivities-container").find("[data-param]").on("input", syncIfNotEmpty );
                 $("#system-name").on("input", sync );
+                $("#rules").on("input", sync);
+                $("#iterations").on("input", syncIfNotEmpty);
                 $(".controls").addClass('validation-enabled');
             });
         },0);
