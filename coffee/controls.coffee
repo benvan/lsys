@@ -3,6 +3,59 @@ class Point
 
 # ===============================
 
+class Controls
+  tpl: (paramName) -> """
+          <table><tr>
+            <td><div data-control="joystick"</td>
+            <td>
+              <div class="jostick-inputs-label">#{paramName}</div>
+              <input data-control="y" type="text" style="width:100px;"/>
+              <input data-control="x" type="text" style="width:100px;"/>
+            </td>
+          </tr></table>
+          """
+
+  _makeJStick: (paramName, mode, flipped = false) ->
+    manager = @manager
+    control = $(@tpl(paramName))
+    $(@container).append(control)
+    jstick = new JStickUI(
+      container: control.find("[data-control=joystick]")[0]
+      mode: mode
+      inputs:
+        x: control.find("[data-control=x]")[0]
+        y: control.find("[data-control=y]")[0]
+      getData: ->
+        param = manager.getCurrentSystem().params[paramName]
+        sensitivity = manager.getCurrentSystem().sensitivities[paramName]
+        [x,y] = if not flipped then ['value', 'growth'] else ['growth', 'value']
+        return {
+          x: param[x]
+          y: param[y]
+          xSensitivity: sensitivity[x]
+          ySensitivity: sensitivity[y]
+        }
+      setData: (data) ->
+        param = manager.getCurrentSystem().params[paramName]
+        sensitivity = manager.getCurrentSystem().sensitivities[paramName]
+        [x,y] = if not flipped then ['value', 'growth'] else ['growth', 'value']
+        param[x] = data.x
+        param[y] = data.y
+        sensitivity[x] = data.xSensitivity
+        sensitivity[y] = data.ySensitivity
+    )
+  constructor: (@container, @manager) ->
+    @angleStick = @_makeJStick('angle', 'continuous')
+    @sizeStick = @_makeJStick('size', 'static', true)
+    @sync()
+  enable: ->
+  disable: ->
+  active: -> true
+  sync: ->
+    @angleStick.sync()
+    @sizeStick.sync()
+  syncRulesAndIterations: ->
+
 class Key
   @ctrl: 17
   @meta: 91
@@ -33,57 +86,6 @@ class KeyState
       for key of Key then do =>
         pressed = evt[key+"Key"]
         @[key] = pressed if pressed?
-    )
-
-# ===============================
-
-class Joystick
-  enabled:true
-  active:false
-  start: new Point(0,0)
-  now: new Point(0,0)
-
-  constructor: (@canvas) ->
-    @g = canvas.getContext('2d')
-    @createBindings()
-
-  enable: -> @enabled = true ;
-  disable: -> @enabled = false;
-
-  onActivate: -> # noop unless overriden
-  onRelease: -> # noop unless overriden
-
-  dx: (sensitivity) -> (@now.x - @start.x) / if (sensitivity) then Math.pow(10,sensitivity) else 1
-  dy: (sensitivity) -> (@now.y - @start.y) / if (sensitivity) then Math.pow(10,sensitivity) else 1
-
-  clear: -> #noop for now
-  draw: ->  #noop for now
-
-  center: ->
-    @start.x = @now.x; @start.y = @now.y
-
-  createBindings: ->
-    @canvas.onmousedown = (ev) =>
-      if ev.button == 0 and @enabled
-        @onActivate()
-        @active = true
-        @start = new Point(ev.pageX, ev.pageY)
-
-    document.onmouseup = =>
-      if @enabled
-        wasActive = @active
-        @active = false
-        @onRelease() if wasActive
-
-    document.onmousemove = (ev) =>
-      if @enabled
-        @now.x = ev.pageX
-        @now.y = ev.pageY
-
-    document.addEventListener("keydown", () =>
-      if (@enabled and @active)
-        @center()
-        @onActivate()
     )
 
 # ===============================
@@ -142,16 +144,3 @@ class SensitivityControl extends ParamControl
   toJson: ->
     dummy = new Sensitivity(@controlkey, 0, 0)
     return @update(dummy).toJson()
-
-# container class for all system variables
-class Controls
-  constructor: (params, ControlType) ->
-    @controls = Util.map(params, (p,k) -> new ControlType(k))
-
-  create: (container) ->
-    _.each(@controls, (c) -> c.create(container) )
-
-  sync: (params) ->
-    Util.map(params, (p) => @controls[p.name].sync(p) )
-
-  toJson: -> Util.map(@controls, (c) -> c.toJson())

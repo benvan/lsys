@@ -9,6 +9,7 @@
     <link href="css/fontello.css" rel="stylesheet" type="text/css"/>
     <link href="css/animation.css" rel="stylesheet" type="text/css"/>
     <link href="css/introjs.min.css" rel=" stylesheet" type="text/css"/>
+    <link href="jstick-ui/jstick-ui.css" rel="stylesheet" type="text/css"/>
     <link href="sass/test.css" rel="stylesheet" type="text/css"/>
 
     <!-- google analytics -->
@@ -153,33 +154,10 @@
     </div>
     <div class="controls">
         <ul id="control-set">
-            <li class="section">offsets</li>
-
-            <li class="group" id="offsets-container">
-                <ul class="labels">
-                    <li>x</li><li>y</li><li>rotation</li>
-                </ul>
-                <!-- offsets be here! -->
-            </li>
-
-            <li class="section">variables</li>
+            <li class="section">settings</li>
 
             <li class="group" id="controls-container">
-                <ul class="labels pair">
-                    <li>value</li><!--
-                 --><li>growth</li>
-                </ul>
-                <!-- controls be here! -->
-            </li>
 
-            <li class="section">sensitivities</li>
-
-            <li class="group" id="sensitivities-container">
-                <ul class="labels pair">
-                    <li>value</li><!--
-                 --><li>growth</li>
-                </ul>
-                <!-- sensitivities be here! -->
             </li>
 
             <li class="section">
@@ -260,22 +238,18 @@
 <script type="text/javascript" src="js/generated/compilation.js"></script>
 <script type="text/javascript" src="js/generated/rendering.js"></script>
 <script type="text/javascript" src="js/generated/manager.js"></script>
+
+<script type="text/javascript" src="jstick-ui/jstick/jstick.js"></script>
+<script type="text/javascript" src="jstick-ui/jstick-ui.js"></script>
+
 <script type="text/javascript">
     var manager; // Don't judge. I want to get ahold of it in the console!
     $(document).ready(function () {
 
         $(".elems").ticker("ticker.json");
-
         manager = new AppManager(
             Util.control("c"),
-            Util.map({
-                params: 'controls-container',
-                offsets: 'offsets-container',
-                sensitivities: 'sensitivities-container',
-                iterations: 'iterations',
-                rules: 'rules',
-                name: 'system-name'
-            }, Util.control)
+            function(m){ return new Controls(Util.control('controls-container'), m)}
         );
 
         var syncLocationQuiet = _.debounce( _.bind(manager.syncLocationQuiet, manager) ,300);
@@ -353,6 +327,7 @@
             manager.exportToPng();
             return false;
         });
+
 
         setTimeout(function(){
             manager.start().always(function(){
