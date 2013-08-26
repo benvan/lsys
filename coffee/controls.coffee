@@ -19,7 +19,7 @@ class Controls
     manager = @manager
     control = $(@tpl(paramName))
     $(@container).append(control)
-    jstick = new JStickUI(
+    return new JStickUI(
       container: control.find("[data-control=joystick]")[0]
       mode: mode
       inputs:
@@ -47,6 +47,7 @@ class Controls
   constructor: (@container, @manager) ->
     @angleStick = @_makeJStick('angle', 'continuous')
     @sizeStick = @_makeJStick('size', 'static', true)
+    @angleStick.addTarget(@manager.canvas)
     @sync()
   enable: ->
   disable: ->
