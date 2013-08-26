@@ -20,6 +20,37 @@ div {
   user-select: none;
 }
 
+.jstick-ui-container{
+  .sensitivity-handle{
+    border-radius: 0;
+    border: 1px solid #797979;
+    background-color: #222222;
+  }
+  .v-sensitivity-holder {
+    border-left: 1px solid rgb(34, 34, 34);
+    border-right: 1px solid rgb(71, 71, 71);
+  }
+  .h-sensitivity-holder{
+    border-top:1px solid rgb(34, 34, 34);
+    border-bottom:1px solid rgb(71, 71, 71);
+  }
+  .handle{
+    border: 1px solid #001C41;
+    background-color: #465366;
+  }
+  .ring{
+    border-width:1px;
+    border-color: rgb(97, 106, 112);
+    background-color: rgb(56, 61, 71);
+  }
+  .v-handle{
+    border-bottom-color: rgb(133, 133, 133)
+  }
+  .h-handle{
+    border-left-color: rgb(133, 133, 133)
+  }
+}
+
 .introjs-tooltip{ max-width: 350px; }
 .introjs-tooltip, .introjs-helperLayer{
   color: #e8e8e8;
