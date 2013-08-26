@@ -1,0 +1,3 @@
+[submodule "jstick-ui"]
+	path = jstick-ui
+	url = http://github.com/benvan/jstick-ui
