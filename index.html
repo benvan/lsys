@@ -249,7 +249,14 @@
         $(".elems").ticker("ticker.json");
         manager = new AppManager(
             Util.control("c"),
-            function(m){ return new Controls(Util.control('controls-container'), m)}
+            function(m){
+                return new Controls({
+                    container:  Util.control('controls-container'),
+                    iterations: Util.control('iterations'),
+                    rules:      Util.control('rules'),
+                    name:       Util.control('system-name')
+                }, m)
+            }
         );
 
         var syncLocationQuiet = _.debounce( _.bind(manager.syncLocationQuiet, manager) ,300);

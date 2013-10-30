@@ -49,6 +49,16 @@ div {
   .h-handle{
     border-left-color: rgb(133, 133, 133)
   }
+  &.active{
+    .ring{
+      border-color: rgb(135, 167, 224);
+      background-color: rgb(43, 97, 117);
+    }
+    .handle{
+      border: 1px solid #1A365A;
+      background-color: #3477DA;
+    }
+  }
 }
 
 .introjs-tooltip{ max-width: 350px; }

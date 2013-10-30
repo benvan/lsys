@@ -64,9 +64,9 @@ class AppManager
       .always(@run)
 
   run: =>
-    setTimeout(@run, 10)
     if @controls.active and not @renderer.isDrawing
       @draw()
+    requestAnimationFrame(@run)
 
   draw: (renderer = @renderer) =>
       elems = @systemManager.getInstructions()
