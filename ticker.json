@@ -27,7 +27,7 @@
         "img": "lsys_metamorphosis.png",
         "author": "benvan"
     }, {
-        "url": "#?i=40&r=C%20%3A%20%5BB%5DVFC%0AB%20%3A%20A!B%0AA%20%3A%20F%2BA%7C-%0AV%20%3A%20XVY%0AX%20%3A%20%3CX%0AY%20%3A%20%3EY&p.size=11.61&s.size=1.60,0.01&p.angle=810,0.05&s.size=1,4.2&s.angle=2.4,6&name=pulse%20engine",
+        "url": "#?i=40&r=C%20%3A%20%5BB%5DVFC%0AB%20%3A%20A!B%0AA%20%3A%20F%2BA%7C-%0AV%20%3A%20XVY%0AX%20%3A%20%3CX%0AY%20%3A%20%3EY&p.size=11.61&p.angle=810,0.05&s.size=1,4.2&s.angle=2.4,6&name=pulse%20engine",
         "img": "lsys_pulse_engine.png",
         "author": "benvan"
     }, {
@@ -62,7 +62,7 @@
         "img": "lsys_dance_for_me.png",
         "author": "benvan"
     }, {
-        "url" : "#?i=40&r=C%20%3A%20%5BB%5DFC%0AB%20%3A%20!A%3E)BA%0AA%20%3A%20AF-&p.size=6.6&s.size=3.00,0&p.angle=285.22,0.05096499999999985&s.size=1.7,4&s.angle=2.4,6&name=bubble%20trouble",
+        "url" : "#?i=40&r=C%20%3A%20%5BB%5DFC%0AB%20%3A%20!A%3E)BA%0AA%20%3A%20AF-&p.size=6.6&p.angle=285.22,0.05096499999999985&s.size=1.7,4&s.angle=2.4,6&name=bubble%20trouble",
         "img": "lsys_bubble_trouble.png",
         "author" : "benvan"
     }, {
@@ -121,7 +121,7 @@
         "img": "lsys_house_rules.png",
         "author": "benvan"
     }, {
-        "url": "#?i=80&r=L%20%3A%20SSS%0AS%20%3A%20%3EF%7C%2B%5BF)Y%5BS%5D%5D%0AY%20%3A%20F%5B-F--%7CFY%5D%2B!%0A&p.size=7.21&s.size=2.60,0.01&p.angle=-1746.6,0.00034700000000011826&s.size=1.6,4&s.angle=2.4,6&name=flagella",
+        "url": "#?i=80&r=L%20%3A%20SSS%0AS%20%3A%20%3EF%7C%2B%5BF)Y%5BS%5D%5D%0AY%20%3A%20F%5B-F--%7CFY%5D%2B!%0A&p.size=7.21&p.angle=-1746.6,0.00034700000000011826&s.size=1.6,4&s.angle=2.4,6&name=flagella",
         "img": "lsys_flagella.png",
         "author": "benvan"
     }, {
