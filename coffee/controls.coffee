@@ -53,8 +53,8 @@ class Joystick
   onActivate: -> # noop unless overriden
   onRelease: -> # noop unless overriden
 
-  dx: (sensitivity) -> (@now.x - @start.x) / if (sensitivity) then Math.pow(10,sensitivity) else 1
-  dy: (sensitivity) -> (@now.y - @start.y) / if (sensitivity) then Math.pow(10,sensitivity) else 1
+  dx: (sensitivity) -> (@now.x - @start.x) * if (sensitivity) then Math.pow(10,sensitivity-10) else 1
+  dy: (sensitivity) -> (@now.y - @start.y) * if (sensitivity) then Math.pow(10,sensitivity-10) else 1
 
   clear: -> #noop for now
   draw: ->  #noop for now
