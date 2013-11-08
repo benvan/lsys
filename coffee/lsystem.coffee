@@ -18,6 +18,9 @@ class Param
 
 class Sensitivity extends Param
   @urlPrefix: "s"
+  constructor:(@name,@value,@growth) ->
+    @value = Math.max(0,Math.min(10,value))
+    @growth = Math.max(0,Math.min(10,growth))
 
 # =========================================
 class Defaults
