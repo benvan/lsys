@@ -19,8 +19,6 @@ class Param
 class Sensitivity extends Param
   @urlPrefix: "s"
   constructor:(@name,@value,@growth) ->
-    @value = Math.max(0,Math.min(10,value))
-    @growth = Math.max(0,Math.min(10,growth))
 
 # =========================================
 class Defaults
@@ -33,7 +31,8 @@ class Defaults
   @_params: ->
     size: {value:1, growth: 0.01}
     angle: {value:1, growth: 0.05}
-  @sensitivities: (input) -> Util.map(Util.merge(Util.merge(Defaults.params(), Defaults._sensitivites()), input), (p,k) -> _.extend(p, {name:k}))
+  @sensitivities: (input) -> Util.map(Util.merge(Util.merge(Util.map(Defaults.params(),@_constrain(0,10)), Defaults._sensitivites()), input), (p,k) -> _.extend(p, {name:k}))
+  @_constrain: (min,max) -> (val) -> Math.max(min,Math.min(max,val))
   @_sensitivites: ->
     size: {value: 7.7, growth:7.53}
     angle: {value: 7.6, growth:4}
