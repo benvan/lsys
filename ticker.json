@@ -1,6 +1,6 @@
 {
     "systems": [{
-        "url": "#?i=30&r=L%20%3A%20S%0AS%20%3A%20F%3E%2B%5BF-Y%5BS%5D%5DF)G%0AY%20%3A--%5B%7CF-F--FY%5D-%0AG%3A%20FGF%5B%2BF%5D%2BY&p.size=4&s.size=5.00.46,0.003334&p.angle=-3832.29,0.08145300000000245&s.size=1.3,2.47&s.angle=2.3,6&name=re-coil",
+        "url": "#?i=30&r=L%20%3A%20S%0AS%20%3A%20F%3E%2B%5BF-Y%5BS%5D%5DF)G%0AY%20%3A--%5B%7CF-F--FY%5D-%0AG%3A%20FGF%5B%2BF%5D%2BY&p.size=4&p.angle=-3832.29,0.08145300000000245&s.size=1.3,2.47&s.angle=2.3,6&name=re-coil",
         "img": "lsys_re-coil.png",
         "author": "benvan"
     }, {
@@ -11,7 +11,7 @@
         "url": "#?i=12&r=L%20%3A%20%7C-S!L!Y%0AS%20%3A%20%5BF%5BFF-YS%5DF)G%5D%2B%0AY%20%3A--%5BF-)%3CF-FG%5D-%0AG%3A%20FGF%5BY%2B%3EF%5D%2BY&p.size=14.11,-1.359672&p.angle=-3963.7485,-0.138235&s.size=1.3,2.6&s.angle=2.3,6&offsets=0,105,90&name=tree%20horse",
         "img": "lsys_tree_horse.png"
     }, {
-        "url": "#?i=30&r=L%20%3A%20S%0AS%20%3A%20F%2B%5BF%3E-Y%5BS%5D%5DF)G%0AY%20%3A--%5B%7CF-F--FY%5D-%0AG%3A%20FGF%5B%2BF%5D%2BY&p.size=4&s.size=5.00.34,0.01&p.angle=-3869.97,0.11540900000000301&s.size=1.3,2.47&s.angle=2.3,6&name=flyweight",
+        "url": "#?i=30&r=L%20%3A%20S%0AS%20%3A%20F%2B%5BF%3E-Y%5BS%5D%5DF)G%0AY%20%3A--%5B%7CF-F--FY%5D-%0AG%3A%20FGF%5B%2BF%5D%2BY&p.size=4&p.angle=-3869.97,0.11540900000000301&s.size=1.3,2.47&s.angle=2.3,6&name=flyweight",
         "img": "lsys_flyweight.png",
         "author": "benvan"
     }, {
@@ -23,7 +23,7 @@
         "author": "benvan",
         "img": "lsys_try_force.png"
     }, {
-        "url": "#?i=40&r=C%20%3A%20%5BB%5DC%0AB%20%3A%20!A%3EFB)!A-%0AA%20%3A%20-AF%2B&p.size=4&s.size=5.00.44,0&p.angle=-2361.3,0.05&s.size=1,3&s.angle=2.69,8&offsets=0,100,0&name=metamorphosis",
+        "url": "#?i=40&r=C%20%3A%20%5BB%5DC%0AB%20%3A%20!A%3EFB)!A-%0AA%20%3A%20-AF%2B&p.size=4&p.angle=-2361.3,0.05&s.size=1,3&s.angle=2.69,8&offsets=0,100,0&name=metamorphosis",
         "img": "lsys_metamorphosis.png",
         "author": "benvan"
     }, {
@@ -113,7 +113,7 @@
         "img": "lsys_stargaze.png",
         "author": "benvan"
     }, {
-        "url": "#?i=44&r=C%20%3A%20B%7CVFC%0AB%20%3A%20A!BF%0AA%20%3A%20F%7C-A%7C%2BF%0AV%20%3A%20%3E&p.size=4&s.size=5.00.15,0.01&p.angle=-1793.1,0.05&s.size=2,3.5&s.angle=2.4,6&offsets=0,134,0&name=mortal%20coil",
+        "url": "#?i=44&r=C%20%3A%20B%7CVFC%0AB%20%3A%20A!BF%0AA%20%3A%20F%7C-A%7C%2BF%0AV%20%3A%20%3E&p.size=4&p.angle=-1793.1,0.05&s.size=2,3.5&s.angle=2.4,6&offsets=0,134,0&name=mortal%20coil",
         "img": "lsys_mortal_coil.png",
         "author": "benvan"
     }, {
