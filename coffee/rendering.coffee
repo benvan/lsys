@@ -8,8 +8,8 @@ class RenderingContext
   reset: (system) =>
     @initialised = true
     @state =
-      x:              (@canvas.width/2)+system.offsets.x
-      y:              (@canvas.height/2)+system.offsets.y
+      x:              (Util.canvasWidth(@canvas)/2)+system.offsets.x
+      y:              (Util.canvasHeight(@canvas)/2)+system.offsets.y
       orientation:    -90 + system.offsets.rot
       stepAngle:      system.params.angle.value
       stepSize:       system.params.size.value
@@ -41,12 +41,13 @@ class Renderer
   constructor: (@canvas) ->
     @context = new RenderingContext(canvas)
     @g = canvas.getContext("2d")
+    enhanceContext(@canvas,@g)
 
   clearCanvas: =>
     if (@context.initialised)
       b = @context.bounding
       p = padding = 5
-      b.constrain(@canvas.width, @canvas.height)
+      b.constrain(Util.canvasWidth(@canvas), Util.canvasHeight(@canvas))
       @g.clearRect(b.x1-p, b.y1-p, b.width()+2*p, b.height()+2*p)
 
   reset: (system) =>

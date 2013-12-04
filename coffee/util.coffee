@@ -27,3 +27,7 @@ class Util
     evt = document.createEvent("MouseEvents")
     evt.initMouseEvent("click", true, true,window,0,0,0,0,0,true,false,false,false,0,null)
     a.dispatchEvent(evt)
+
+  @canvasWidth = (canvas) => canvas.width / (window.devicePixelRatio or 1)
+  @canvasHeight = (canvas) => canvas.height / (window.devicePixelRatio or 1)
+

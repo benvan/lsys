@@ -72,7 +72,7 @@ class AppManager
     )
 
   exportToPng: (system = @systemManager.activeSystem) ->
-    [x,y] = [(@canvas.width / 2) + system.offsets.x, (@canvas.height / 2) + system.offsets.y]
+    [x,y] = [(Util.canvasWidth(@canvas) / 2) + system.offsets.x, (Util.canvasHeight(@canvas) / 2) + system.offsets.y]
 
     b = @renderer.context.bounding
     c = $('<canvas></canvas>').attr({
