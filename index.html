@@ -11,6 +11,23 @@
     <link href="css/introjs.min.css" rel=" stylesheet" type="text/css"/>
     <link href="sass/test.css" rel="stylesheet" type="text/css"/>
 
+    <script type="text/javascript">
+        // thanks Brian Nickel http://stackoverflow.com/questions/11163344/update-non-retina-canvas-app-to-retina-display
+        function enhanceContext(canvas, context) {
+            var ratio = window.devicePixelRatio || 1,
+                    width = canvas.width,
+                    height = canvas.height;
+
+            if (ratio > 1) {
+                canvas.width = width * ratio;
+                canvas.height = height * ratio;
+                canvas.style.width = width + "px";
+                canvas.style.height = height + "px";
+                context.scale(ratio,ratio);
+            }
+        }
+    </script>
+
     <!-- google analytics -->
     <script type="text/javascript">
 
@@ -314,6 +331,7 @@
             window.container = Util.control("drawingContainer");
             canvas.width = container.clientWidth;
             canvas.height = container.clientHeight;
+            enhanceContext(canvas,manager.renderer.g);
         };
 
         stretchCanvas();
