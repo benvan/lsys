@@ -20,6 +20,13 @@ div {
   user-select: none;
 }
 
+#helpTrigger{
+  background-color: rgb(163, 7, 7);
+  color: rgb(236, 236, 236);
+  border-color: rgb(202, 202, 202);
+  text-shadow: 1px 1px black;
+}
+
 .introjs-tooltip{ max-width: 350px; }
 .introjs-tooltip, .introjs-helperLayer{
   color: #e8e8e8;
@@ -354,6 +361,14 @@ li{
     display:inline-block;
     position: relative;
     background-color: #1f1f20;
+
+    &.facebook,&.twitter,&.gplus{
+      color:rgb(219, 219, 219);
+    }
+    &.facebook{ border-color: #3B5998;}
+    &.twitter{ border-color: #4099FF;}
+    &.gplus{ border-color: #d34836;}
+
     &.open input{
       width:100px;
     }
