@@ -255,7 +255,12 @@
             </div>
         </div>
         <div id="drawingContainer">
-            <canvas id="c"></canvas>
+
+            <canvas id="c1" width="1310" height="1274" style="width: 655px; height: 637px;"></canvas>
+            <canvas id="c2" width="1310" height="1274" style="width: 655px; height: 637px;"></canvas>
+            <canvas id="c3" width="1310" height="1274" style="width: 655px; height: 637px;"></canvas>
+            <canvas id="c0" width="1310" height="1274" style="width: 655px; height: 637px;"></canvas>
+
         </div>
     </div>
 
@@ -285,7 +290,7 @@
         $(".elems").ticker("ticker.json");
 
         manager = new AppManager(
-            Util.control("c"),
+            Util.control("c0"),
             Util.map({
                 params: 'controls-container',
                 offsets: 'offsets-container',
@@ -327,7 +332,7 @@
         };
 
         var stretchCanvas = function(){
-            var canvas = Util.control("c");
+            var canvas = Util.control("c0");
             window.container = Util.control("drawingContainer");
             canvas.width = container.clientWidth;
             canvas.height = container.clientHeight;

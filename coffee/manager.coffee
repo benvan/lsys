@@ -98,7 +98,7 @@ class AppManager
       .always(@run)
 
   run: =>
-    setTimeout(@run, 10)
+    requestAnimationFrame(@run, @canvas)
     @inputHandler.update(@systemManager.activeSystem)
     if @joystick.active and not @renderer.isDrawing
       @draw()
