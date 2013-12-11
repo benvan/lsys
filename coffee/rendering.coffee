@@ -13,6 +13,7 @@ class RenderingContext
       orientation:    -90 + system.offsets.rot
       stepAngle:      system.params.angle.value
       stepSize:       system.params.size.value
+      color:          0
     @bounding = new Bounding
     @stack = []
 
@@ -33,6 +34,10 @@ class Bounding
 
 #================================================================
 
+getC = (i) -> $('#c'+i)[0]
+getG = (i) -> getC(i).getContext('2d')
+strokes = ["#ffffff","#0044DD","#00DD44","#DD4400"]
+
 class Renderer
   context:null
   g:null
@@ -40,15 +45,16 @@ class Renderer
   isDrawing:false
   constructor: (@canvas) ->
     @context = new RenderingContext(canvas)
+    @gs = [0,1,2,3].map( getG )
     @g = canvas.getContext("2d")
-    enhanceContext(@canvas,@g)
+    [1,2,3].map (i) -> enhanceContext(getC(i),getG(i))
 
   clearCanvas: =>
     if (@context.initialised)
       b = @context.bounding
       p = padding = 5
       b.constrain(Util.canvasWidth(@canvas), Util.canvasHeight(@canvas))
-      @g.clearRect(b.x1-p, b.y1-p, b.width()+2*p, b.height()+2*p)
+      @gs.forEach (g) -> g.clearRect(b.x1-p, b.y1-p, b.width()+2*p, b.height()+2*p)
 
   reset: (system) =>
     @clearCanvas()
@@ -60,11 +66,11 @@ class Renderer
 
     this.reset(system)
 
-    @g.lineWidth = 0.118
-    @g.strokeStyle="#fff"
-
-    @g.beginPath()
-    @g.moveTo(@context.state.x, @context.state.y)
+    @gs.forEach (g,i) =>
+      g.lineWidth = 0.218
+      g.strokeStyle = strokes[i]
+      g.beginPath()
+      g.moveTo(@context.state.x, @context.state.y)
 
     #initialise lower-bounds
     [s,b] = [@context.state, @context.bounding]
@@ -72,9 +78,9 @@ class Renderer
 
     #draw
     _.each elems, (e) =>
-      @definitions[e](@context.state, system.params, @g, @context)
+      @definitions[e](@context.state, system.params, @g, @context, @)
 
-    @g.stroke()
+    @gs.forEach (g) -> g.stroke()
 
 
     @isDrawing = false
@@ -93,6 +99,7 @@ class Renderer
       orientation:    c.orientation
       stepAngle:      c.stepAngle
       stepSize:       c.stepSize
+      color:          c.color
     }
     return {
     "F": (state, params, g, context) ->
@@ -126,5 +133,9 @@ class Renderer
     ")": (state, params) -> state.stepAngle *= (1 + params.angle.growth)
     "<": (state, params) -> state.stepSize *= (1 + params.size.growth)
     ">": (state, params) -> state.stepSize *= (1 - params.size.growth)
+    "0": (state, params, g, context, r) -> if (g != r.gs[0]) then (r.g = g = r.gs[0]; g.moveTo(state.x,state.y))
+    "1": (state, params, g, context, r) -> if (g != r.gs[1]) then (r.g = g = r.gs[1]; g.moveTo(state.x,state.y))
+    "2": (state, params, g, context, r) -> if (g != r.gs[2]) then (r.g = g = r.gs[2]; g.moveTo(state.x,state.y))
+    "3": (state, params, g, context, r) -> if (g != r.gs[3]) then (r.g = g = r.gs[3]; g.moveTo(state.x,state.y))
     }
   )()
