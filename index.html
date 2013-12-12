@@ -13,7 +13,8 @@
 
     <script type="text/javascript">
         // thanks Brian Nickel http://stackoverflow.com/questions/11163344/update-non-retina-canvas-app-to-retina-display
-        function enhanceContext(canvas, context) {
+        function enhanceCanvas(canvas) {
+            var context = canvas.getContext('2d');
             var ratio = window.devicePixelRatio || 1,
                     width = canvas.width,
                     height = canvas.height;
@@ -256,10 +257,10 @@
         </div>
         <div id="drawingContainer">
 
-            <canvas id="c1" width="1310" height="1274" style="width: 655px; height: 637px;"></canvas>
-            <canvas id="c2" width="1310" height="1274" style="width: 655px; height: 637px;"></canvas>
-            <canvas id="c3" width="1310" height="1274" style="width: 655px; height: 637px;"></canvas>
-            <canvas id="c0" width="1310" height="1274" style="width: 655px; height: 637px;"></canvas>
+            <canvas id="c1"></canvas>
+            <canvas id="c2"></canvas>
+            <canvas id="c3"></canvas>
+            <canvas id="c0"></canvas>
 
         </div>
     </div>
@@ -331,19 +332,21 @@
             $recalculateButton.find(".progress").width(progress*100+"%")
         };
 
-        var stretchCanvas = function(){
-            var canvas = Util.control("c0");
-            window.container = Util.control("drawingContainer");
-            canvas.width = container.clientWidth;
-            canvas.height = container.clientHeight;
-            enhanceContext(canvas,manager.renderer.g);
+        var stretchCanvii = function(){
+            var container = Util.control("drawingContainer");
+            $('#drawingContainer').find('canvas').each(function(){
+                var canvas = $(this).get(0);
+                canvas.width = container.clientWidth;
+                canvas.height = container.clientHeight;
+                enhanceCanvas(canvas);
+            });
         };
 
-        stretchCanvas();
+        stretchCanvii();
         $(window).resize(function(){
             clearTimeout(window.resizeTimer);
             window.resizeTimer = setTimeout(function(){
-                stretchCanvas();
+                stretchCanvii();
                 manager.draw()
             },300);
         });

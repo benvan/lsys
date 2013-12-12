@@ -47,7 +47,7 @@ class Renderer
     @context = new RenderingContext(canvas)
     @gs = [0,1,2,3].map( getG )
     @g = canvas.getContext("2d")
-    [1,2,3].map (i) -> enhanceContext(getC(i),getG(i))
+    [1,2,3].map (i) -> enhanceCanvas(getC(i))
 
   clearCanvas: =>
     if (@context.initialised)
