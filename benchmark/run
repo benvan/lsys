@@ -1,0 +1,4 @@
+#!/bin/bash
+
+./benchmark.coffee 2> /dev/null | grep ms --line-buffered | tee >( tr '\n' ',' >> run_data)
+echo >> run_data
