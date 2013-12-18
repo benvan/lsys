@@ -17,6 +17,9 @@ class RenderingContext
     @bounding = new Bounding
     @stack = []
 
+  # receive gs from renderer. These will change on system change
+  prepare: (gs) => @gs = gs; @g = gs[0];
+
 #================================================================
 
 class Bounding
@@ -34,27 +37,35 @@ class Bounding
 
 #================================================================
 
-getC = (i) -> $('#c'+i)[0]
-getG = (i) -> getC(i).getContext('2d')
-strokes = ["#ffffff","#0044DD","#00DD44","#DD4400"]
+getG = (c) -> c.getContext('2d')
+getColors = (system) -> ["#ffffff","#0044DD","#00DD44","#DD4400"]
 
 class Renderer
   context:null
   g:null
   stack:[]
   isDrawing:false
-  constructor: (@canvas) ->
-    @context = new RenderingContext(canvas)
-    @gs = [0,1,2,3].map( getG )
-    @g = canvas.getContext("2d")
-    [1,2,3].map (i) -> enhanceCanvas(getC(i))
+  constructor: (@container) ->
+    @context = new RenderingContext(container)
+
+  prepare: (system) =>
+    colors = getColors(system)
+    # ensures numColors canvases available
+    diff = colors.length - @container.children.length
+    while (diff-- > 0)
+      @container.appendChild(document.createElement("canvas"))
+    canvii = [].slice.apply(@container.children)
+    canvii.forEach (c) => Util.enhanceCanvas(c,@container)
+    gs = canvii.map(getG)
+    colors.forEach (c,i) -> gs[i].strokeStyle = c
+    @context.prepare(gs)
 
   clearCanvas: =>
     if (@context.initialised)
       b = @context.bounding
       p = padding = 5
-      b.constrain(@canvas.clientWidth, @canvas.clientHeight)
-      @gs.forEach (g) -> g.clearRect(b.x1-p, b.y1-p, b.width()+2*p, b.height()+2*p)
+      b.constrain(@container.clientWidth, @container.clientHeight)
+      @context.gs.forEach (g) -> g.clearRect(b.x1-p, b.y1-p, b.width()+2*p, b.height()+2*p)
 
   reset: (system) =>
     @clearCanvas()
@@ -66,9 +77,8 @@ class Renderer
 
     this.reset(system)
 
-    @gs.forEach (g,i) =>
+    @context.gs.forEach (g,i) =>
       g.lineWidth = 0.218
-      g.strokeStyle = strokes[i]
       g.beginPath()
       g.moveTo(@context.state.x, @context.state.y)
 
@@ -78,9 +88,9 @@ class Renderer
 
     #draw
     _.each elems, (e) =>
-      @definitions[e](@context.state, system.params, @g, @context, @)
+      @definitions[e](@context.state, system.params, @context, @)
 
-    @gs.forEach (g) -> g.stroke()
+    @context.gs.forEach (g) -> g.stroke()
 
 
     @isDrawing = false
@@ -102,7 +112,7 @@ class Renderer
       color:          c.color
     }
     return {
-    "F": (state, params, g, context) ->
+    "F": (state, params, context) ->
 
       ang = ((state.orientation%360) / 180) * pi #todo - stop storing degrees?!
       state.x += cos(ang)*state.stepSize
@@ -120,22 +130,22 @@ class Renderer
       else if (state.y > bounding.y2)
         bounding.y2 = state.y
 
-      g.lineTo(state.x,state.y)
+      context.g.lineTo(state.x,state.y)
 
     "+": (state) -> state.orientation += state.stepAngle
     "-": (state) -> state.orientation -= state.stepAngle
     "|": (state) -> state.orientation += 180
     #todo: push stack changes into RenderingContext class
-    "[": (state, params, g, context) -> context.stack.push(cloneState state)
-    "]": (state, params, g, context) -> context.state = state = context.stack.pop(); g.moveTo(state.x,state.y)
+    "[": (state, params, context) -> context.stack.push(cloneState state)
+    "]": (state, params, context) -> context.state = state = context.stack.pop(); context.g.moveTo(state.x,state.y)
     "!": (state) -> state.stepAngle *= -1
     "(": (state, params) -> state.stepAngle *= (1 - params.angle.growth)
     ")": (state, params) -> state.stepAngle *= (1 + params.angle.growth)
     "<": (state, params) -> state.stepSize *= (1 + params.size.growth)
     ">": (state, params) -> state.stepSize *= (1 - params.size.growth)
-    "0": (state, params, g, context, r) -> if (g != r.gs[0]) then (r.g = g = r.gs[0]; g.moveTo(state.x,state.y))
-    "1": (state, params, g, context, r) -> if (g != r.gs[1]) then (r.g = g = r.gs[1]; g.moveTo(state.x,state.y))
-    "2": (state, params, g, context, r) -> if (g != r.gs[2]) then (r.g = g = r.gs[2]; g.moveTo(state.x,state.y))
-    "3": (state, params, g, context, r) -> if (g != r.gs[3]) then (r.g = g = r.gs[3]; g.moveTo(state.x,state.y))
+    "0": (state, params, context) -> if (context.g != context.gs[0]) then (context.g = context.gs[0]; context.g.moveTo(state.x,state.y))
+    "1": (state, params, context) -> if (context.g != context.gs[1]) then (context.g = context.gs[1]; context.g.moveTo(state.x,state.y))
+    "2": (state, params, context) -> if (context.g != context.gs[2]) then (context.g = context.gs[2]; context.g.moveTo(state.x,state.y))
+    "3": (state, params, context) -> if (context.g != context.gs[3]) then (context.g = context.gs[3]; context.g.moveTo(state.x,state.y))
     }
   )()

@@ -5,10 +5,8 @@
   </script>
 </head>
 <body>
-  <canvas style="background-color:black" id="c0" width="1000" height="800"></canvas>
-  <canvas style="background-color:black" id="c1" width="1000" height="800"></canvas>
-  <canvas style="background-color:black" id="c2" width="1000" height="800"></canvas>
-  <canvas style="background-color:black" id="c3" width="1000" height="800"></canvas>
+  <div id="container" style="width:1000px; height:800px;">
+  </div>
 
   <script type="text/javascript" src="../js/jquery-1.8.1.js"></script>
   <script type="text/javascript" src="../js/jquery.ellipsis.js"></script>
@@ -37,7 +35,7 @@
       "#?i=10&p.size=9.72&p.angle=-1194.3&r=A%20%3A%20FFFS%5B%2BA%5D%5B-A%5DFA%0AS%20%3A%20%3ES))"
     ];
 
-    var renderer = new Renderer(Util.control('c0'));
+    var renderer = new Renderer(Util.control('container'));
     var compiler = new SystemCompiler
 
     var iter = 5;
@@ -47,6 +45,7 @@
       var total = 0;
       return promise.pipe(function(){
         var system = LSystem.fromUrl(systemText);
+        renderer.prepare(system);
         return compiler.compile(system).pipe(
           function(elems){
             for (var i = 0; i < iter; i++){
