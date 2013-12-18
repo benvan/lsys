@@ -88,7 +88,7 @@ class Renderer
 
     #draw
     _.each elems, (e) =>
-      @definitions[e](@context.state, system.params, @context, @)
+      @definitions[e](@context.state, system.params, @context, e)
 
     @context.gs.forEach (g) -> g.stroke()
 
@@ -137,15 +137,15 @@ class Renderer
     "|": (state) -> state.orientation += 180
     #todo: push stack changes into RenderingContext class
     "[": (state, params, context) -> context.stack.push(cloneState state)
-    "]": (state, params, context) -> context.state = state = context.stack.pop(); context.g.moveTo(state.x,state.y)
+    "]": (state, params, context) -> context.state = state = context.stack.pop(); context.g = context.gs[state.color]; context.g.moveTo(state.x,state.y)
     "!": (state) -> state.stepAngle *= -1
     "(": (state, params) -> state.stepAngle *= (1 - params.angle.growth)
     ")": (state, params) -> state.stepAngle *= (1 + params.angle.growth)
     "<": (state, params) -> state.stepSize *= (1 + params.size.growth)
     ">": (state, params) -> state.stepSize *= (1 - params.size.growth)
-    "0": (state, params, context) -> if (context.g != context.gs[0]) then (context.g = context.gs[0]; context.g.moveTo(state.x,state.y))
-    "1": (state, params, context) -> if (context.g != context.gs[1]) then (context.g = context.gs[1]; context.g.moveTo(state.x,state.y))
-    "2": (state, params, context) -> if (context.g != context.gs[2]) then (context.g = context.gs[2]; context.g.moveTo(state.x,state.y))
-    "3": (state, params, context) -> if (context.g != context.gs[3]) then (context.g = context.gs[3]; context.g.moveTo(state.x,state.y))
+    "0": (state, params, context, a) -> state.color = a; if (context.g != context.gs[0]) then ( context.g = context.gs[0]; context.g.moveTo(state.x,state.y))
+    "1": (state, params, context, a) -> state.color = a; if (context.g != context.gs[1]) then ( context.g = context.gs[1]; context.g.moveTo(state.x,state.y))
+    "2": (state, params, context, a) -> state.color = a; if (context.g != context.gs[2]) then ( context.g = context.gs[2]; context.g.moveTo(state.x,state.y))
+    "3": (state, params, context, a) -> state.color = a; if (context.g != context.gs[3]) then ( context.g = context.gs[3]; context.g.moveTo(state.x,state.y))
     }
   )()
