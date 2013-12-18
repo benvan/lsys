@@ -27,3 +27,17 @@ class Util
     evt = document.createEvent("MouseEvents")
     evt.initMouseEvent("click", true, true,window,0,0,0,0,0,true,false,false,false,0,null)
     a.dispatchEvent(evt)
+
+  # thanks Brian Nickel http://stackoverflow.com/questions/11163344/update-non-retina-canvas-app-to-retina-display
+  @enhanceCanvas = (canvas, container) ->
+    context = canvas.getContext('2d')
+    ratio = window.devicePixelRatio || 1
+    width = canvas.width = container.clientWidth
+    height = canvas.height = container.clientHeight
+
+    if (ratio > 1)
+      canvas.width = width * ratio
+      canvas.height = height * ratio
+      canvas.style.width = width + "px"
+      canvas.style.height = height + "px"
+      context.scale(ratio,ratio)

@@ -21,15 +21,15 @@ class AppManager
   renderer:null
   systemManager: null
 
-  constructor: (@canvas, @controls) ->
-    @joystick = new Joystick(canvas)
+  constructor: (@container, @controls) ->
+    @joystick = new Joystick(container)
     @keystate = new KeyState
     @inputHandler = new InputHandler(@keystate, @joystick)
 
     @joystick.onRelease = => @syncLocationQuiet()
     @joystick.onActivate = => @inputHandler.snapshot = @systemManager.activeSystem.clone()
 
-    @renderer = new Renderer(canvas)
+    @renderer = new Renderer(@container)
 
     @systemManager = new SystemManager
 
@@ -54,6 +54,7 @@ class AppManager
     @recalculationPromise = @systemManager.activate(system).progress(@onRecalculateProgress)
     @recalculationPromise.done( =>
       @joystick.enable()
+      @renderer.prepare(system)
       @syncAll();
       @draw()
       @afterRecalculate()
@@ -72,15 +73,15 @@ class AppManager
     )
 
   exportToPng: (system = @systemManager.activeSystem) ->
-    [x,y] = [(@canvas.clientWidth / 2) + system.offsets.x, (@canvas.clientHeight / 2) + system.offsets.y]
+    [x,y] = [(@container.clientWidth / 2) + system.offsets.x, (@container.clientHeight / 2) + system.offsets.y]
 
     b = @renderer.context.bounding
-    c = $('<canvas></canvas>').attr({
+    container = $('<canvas></canvas>').attr({
       "width" : b.width()+30,
       "height": b.height()+30
-    })[0]
+    }).appendTo($('<div></div>'))[0]
 
-    r = new Renderer(c)
+    r = new Renderer(container)
     r.reset = (system) ->
       r.context.reset(system)
       r.context.state.x = (x-b.x1+15)
@@ -98,7 +99,7 @@ class AppManager
       .always(@run)
 
   run: =>
-    requestAnimationFrame(@run, @canvas)
+    requestAnimationFrame(@run, @container)
     @inputHandler.update(@systemManager.activeSystem)
     if @joystick.active and not @renderer.isDrawing
       @draw()
@@ -135,7 +136,7 @@ class AppManager
   createBindings: ->
     setClassIf = (onOff, className) =>
       method = if (onOff) then 'add' else 'remove'
-      $(@canvas)["#{method}Class"](className)
+      $(@container)["#{method}Class"](className)
 
     updateCursorType = (ev) =>
       setClassIf(ev.ctrlKey or ev.metaKey, "moving")

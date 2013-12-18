@@ -43,8 +43,7 @@ class Joystick
   start: new Point(0,0)
   now: new Point(0,0)
 
-  constructor: (@canvas) ->
-    @g = canvas.getContext('2d')
+  constructor: (@container) ->
     @createBindings()
 
   enable: -> @enabled = true ;
@@ -63,7 +62,7 @@ class Joystick
     @start.x = @now.x; @start.y = @now.y
 
   createBindings: ->
-    @canvas.onmousedown = (ev) =>
+    @container.onmousedown = (ev) =>
       if ev.button == 0 and @enabled
         @onActivate()
         @active = true
