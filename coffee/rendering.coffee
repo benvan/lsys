@@ -3,13 +3,13 @@ class RenderingContext
   state:null
   bounding:null
   stack:[]
-  constructor: (@canvas) ->
+  constructor: (@container) ->
 
   reset: (system) =>
     @initialised = true
     @state =
-      x:              (Util.canvasWidth(@canvas)/2)+system.offsets.x
-      y:              (Util.canvasHeight(@canvas)/2)+system.offsets.y
+      x:              (@container.clientWidth/2)+system.offsets.x
+      y:              (@container.clientHeight/2)+system.offsets.y
       orientation:    -90 + system.offsets.rot
       stepAngle:      system.params.angle.value
       stepSize:       system.params.size.value
@@ -53,7 +53,7 @@ class Renderer
     if (@context.initialised)
       b = @context.bounding
       p = padding = 5
-      b.constrain(Util.canvasWidth(@canvas), Util.canvasHeight(@canvas))
+      b.constrain(@canvas.clientWidth, @canvas.clientHeight)
       @gs.forEach (g) -> g.clearRect(b.x1-p, b.y1-p, b.width()+2*p, b.height()+2*p)
 
   reset: (system) =>
