@@ -5,8 +5,10 @@ node_modules/coffee-script/bin/coffee -b -c -o js/generated coffee
 node_modules/node-sass/bin/node-sass sass/test.scss sass/test.css
 
 # pack up resources
+echo "Packing resources..."
 tar -cf lsys.tar font/* css/*.css sass/*.css favicon.ico img index.html js ticker.json ticker_min.json
 
+echo "Clearing workspace..."
 rm -rf target/lsys
 mkdir -p target/lsys
 
@@ -14,11 +16,14 @@ mkdir -p target/lsys
 tar -xf lsys.tar -C target/lsys
 
 # prepare for live
+echo "Preparing CDN links..."
 sed -e 's#js/jquery-1.8.1.js#http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js#' -i "" target/lsys/index.html
 
 # clear old tarball
 rm lsys.tar
 
 # repack with appropriate root
+echo "Packaging lsys.tar..."
 tar -cf lsys.tar -C target lsys
 
+echo DONE
