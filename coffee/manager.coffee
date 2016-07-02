@@ -82,6 +82,7 @@ class AppManager
     }).appendTo($('<div></div>'))[0]
 
     r = new Renderer(container)
+    r.prepare(system)
     r.reset = (system) ->
       r.context.reset(system)
       r.context.state.x = (x-b.x1+15)
@@ -89,7 +90,7 @@ class AppManager
 
     @draw(r)
     filename = "lsys_"+system.name.replace(/[\ \/]/g,"_")
-    Util.openDataUrl( c.toDataURL("image/png"), filename )
+    Util.openDataUrl( container.toDataURL("image/png"), filename )
 
   start: ->
     startingSystem = LSystem.fromUrl() or DefaultSystem
