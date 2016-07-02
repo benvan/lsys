@@ -55,7 +55,7 @@ class Renderer
     while (diff-- > 0)
       @container.appendChild(document.createElement("canvas"))
     canvii = [].slice.apply(@container.children)
-    canvii.forEach (c) => Util.enhanceCanvas(c,@container)
+    Util.enhanceAndStretchCanviiInContainer(@container)
     gs = canvii.map(getG)
     colors.forEach (c,i) -> gs[i].strokeStyle = c
     @context.prepare(gs)

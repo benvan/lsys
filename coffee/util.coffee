@@ -32,8 +32,8 @@ class Util
   @enhanceCanvas = (canvas, container) ->
     context = canvas.getContext('2d')
     ratio = window.devicePixelRatio || 1
-    width = canvas.width = container.clientWidth
-    height = canvas.height = container.clientHeight
+    width = canvas.width = $(container).width()
+    height = canvas.height = $(container).height()
 
     if (ratio > 1)
       canvas.width = width * ratio
@@ -41,3 +41,8 @@ class Util
       canvas.style.width = width + "px"
       canvas.style.height = height + "px"
       context.scale(ratio,ratio)
+
+  @enhanceAndStretchCanviiInContainer = (container) ->
+    $(container).find('canvas').each(() ->
+        Util.enhanceCanvas($(this).get(0), container);
+    );

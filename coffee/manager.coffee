@@ -48,6 +48,8 @@ class AppManager
   onRecalculateFail: ->
   onRecalculateProgress: ->
 
+  prepareContainer: -> @renderer.prepare(@systemManager.activeSystem)
+
   isRecalculating: -> not @recalculationPromise or @recalculationPromise?.state() == 'pending'
   recalculate: (system = @lsystemFromControls()) ->
     @beforeRecalculate()
@@ -76,13 +78,16 @@ class AppManager
     [x,y] = [(@container.clientWidth / 2) + system.offsets.x, (@container.clientHeight / 2) + system.offsets.y]
 
     b = @renderer.context.bounding
-    container = $('<canvas></canvas>').attr({
-      "width" : b.width()+30,
-      "height": b.height()+30
-    }).appendTo($('<div></div>'))[0]
+    frameWidth = b.width()+30
+    frameHeight = b.height()+30
+    container = $('<div></div>').css({
+      "width" : frameWidth,
+      "height": frameHeight
+    })[0];
 
     r = new Renderer(container)
     r.prepare(system)
+
     r.reset = (system) ->
       r.context.reset(system)
       r.context.state.x = (x-b.x1+15)
@@ -90,7 +95,12 @@ class AppManager
 
     @draw(r)
     filename = "lsys_"+system.name.replace(/[\ \/]/g,"_")
-    Util.openDataUrl( container.toDataURL("image/png"), filename )
+    rootCanvas = container.children[0]
+    rootContext = rootCanvas.getContext('2d')
+    [].slice.call(container.children, 1).forEach( (c) ->
+      rootContext.drawImage(c,0,0,frameWidth,frameHeight)
+    )
+    Util.openDataUrl( rootCanvas.toDataURL("image/png"), filename )
 
   start: ->
     startingSystem = LSystem.fromUrl() or DefaultSystem

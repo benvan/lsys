@@ -314,23 +314,14 @@
             $recalculateButton.find(".progress").width(progress*100+"%")
         };
 
-        var stretchCanvii = function(){
-            var container = Util.control("drawingContainer");
-            $('#drawingContainer').find('canvas').each(function(){
-                var canvas = $(this).get(0);
-                canvas.width = container.clientWidth;
-                canvas.height = container.clientHeight;
-                Util.enhanceCanvas(canvas, container);
-            });
-        };
+        Util.enhanceAndStretchCanviiInContainer(Util.control("drawingContainer"));
 
-        stretchCanvii();
         $(window).resize(function(){
             clearTimeout(window.resizeTimer);
             window.resizeTimer = setTimeout(function(){
-                stretchCanvii();
-                manager.draw()
-            },300);
+                manager.prepareContainer();
+                manager.draw();
+            },50);
         });
 
         $('#rules,#iterations').on('input', function(){
