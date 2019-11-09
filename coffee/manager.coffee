@@ -94,7 +94,7 @@ class AppManager
       r.context.state.y = (y-b.y1+15)
 
     @draw(r)
-    filename = "lsys_"+system.name.replace(/[\ \/]/g,"_")
+    filename = "lsys_"+system.name.replace(/[\ \/]/g,"_")+".png"
     rootCanvas = container.children[0]
     rootContext = rootCanvas.getContext('2d')
     [].slice.call(container.children, 1).forEach( (c) ->

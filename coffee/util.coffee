@@ -24,8 +24,7 @@ class Util
     a = document.createElement("a")
     a.href = data
     a.download=filename
-    evt = document.createEvent("MouseEvents")
-    evt.initMouseEvent("click", true, true,window,0,0,0,0,0,true,false,false,false,0,null)
+    evt = new MouseEvent('click', { view: window })
     a.dispatchEvent(evt)
 
   # thanks Brian Nickel http://stackoverflow.com/questions/11163344/update-non-retina-canvas-app-to-retina-display
