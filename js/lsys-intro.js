@@ -26,7 +26,7 @@ function mkIntro(){
         return {
             "element" : step.data('element'),
             "intro" : step.html(),
-            "position" : step.data('position') || "right",
+            "position" : step.data('position') || "left",
             "data" : step.data()
         }
     });
@@ -46,7 +46,7 @@ function mkIntro(){
             if (data.overlay == 'off') $('.introjs-overlay').addClass('hidden');
         }).setOptions({
             exitOnOverlayClick: true,
-            tooltipPosition:'right',
+            tooltipPosition:'left',
             showStepNumbers: false,
             steps: steps
         });

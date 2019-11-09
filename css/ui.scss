@@ -1,15 +1,4 @@
-$menu-color: #333;
-$top:0;
-$left:228px;
-$bottom:240px;
-
-@mixin scrollbar{
-&::-webkit-scrollbar{width:4px;height:4px;}
-&::-webkit-scrollbar-button:start:decrement, &::-webkit-scrollbar-button:end:increment{ display:block;height:2px;background-color: #232323; }
-&::-webkit-scrollbar-track-piece{ background-color: #282828;-webkit-border-radius:0;-webkit-border-bottom-right-radius:4px;-webkit-border-bottom-left-radius:4px; }
-&::-webkit-scrollbar-thumb:vertical{ height:5px;background-color: #6d6d6d;-webkit-border-radius:4px; }
-&::-webkit-scrollbar-thumb:horizontal{ width:5px;background-color:#999;-webkit-border-radius:4px; }
-}
+$sideWidth: 230px;
 
 div {
   -webkit-touch-callout: none;
@@ -19,15 +8,22 @@ div {
   -ms-user-select: none;
   user-select: none;
 }
-
+/*
 #helpTrigger{
   background-color: rgb(163, 7, 7);
   color: rgb(236, 236, 236);
-  border-color: rgb(202, 202, 202);
   text-shadow: 1px 1px black;
 }
-
-.introjs-tooltip{ max-width: 350px; }
+#helpTrigger:hover {
+  border-color: rgb(202, 202, 202);
+}
+*/
+.introjs-tooltip{
+  max-height: 150px;
+  max-width: 350px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
 .introjs-tooltip, .introjs-helperLayer{
   color: #e8e8e8;
   background-color: rgb(70, 71, 77);
@@ -40,7 +36,7 @@ div {
   color: #e8e8e8;
   background-color: rgba(94, 97, 111, 0.51)
 }
-.introjs-overlay.hidden {
+.hidden {
   display: none;
 }
 .introjs-overlay{
@@ -100,12 +96,12 @@ li{
   -webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.1), 0 1px 10px rgba(0, 0, 0, 0.1);
   .actions{
     padding-top:13px;
-    padding-right:11px;
+    padding-right:0px;
     a{ padding:2px 1px 1px 1px; }
   }
   a.site{
     font-family:monospace;
-    padding-left:10px;
+    padding-left:0px;
     padding-top:4px;
     color: #dbdbdb;
     font-size:12pt;
@@ -124,35 +120,48 @@ li{
   }
 }
 
-.container-left{
-  bottom: 0;
-  cursor: default;
-  background-color:$menu-color;
-  left: 0;
-  padding: 0 0 0 0px;
-  position: absolute;
-  border-right:1px solid #555;
-  top: $top;
-  width: $left;
+.show-side.actions{
+  padding-top: 13px;
+}
+.show-side.actions a{
+  border: 0;
 }
 
-.container-right{
-  bottom: $bottom;
-  left: $left+1;
+.container-side{
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: $sideWidth;
+  cursor: default;
+  background-color:#333;
+  padding: 0 0 0 0px;
+  border-left:1px solid #555;
+  scrollbar-width: thin;
+  overflow-x: hidden;
+  overflow-y: auto;
+  opacity: 0.7;
+  /*
+  &::-webkit-scrollbar{width:4px;height:4px;}
+  &::-webkit-scrollbar-button:start:decrement, &::-webkit-scrollbar-button:end:increment{ display:block;height:2px;background-color: #232323; }
+  &::-webkit-scrollbar-track-piece{ background-color: #282828;-webkit-border-radius:0;-webkit-border-bottom-right-radius:4px;-webkit-border-bottom-left-radius:4px; }
+  &::-webkit-scrollbar-thumb:vertical{ height:5px;background-color: #6d6d6d;-webkit-border-radius:4px; }
+  &::-webkit-scrollbar-thumb:horizontal{ width:5px;background-color:#999;-webkit-border-radius:4px; }
+ */
+}
+
+.container-main{
+  bottom: 0;
+  left: 0;
   margin: 0;
   padding: 0;
   position: absolute;
   right: 0;
-  top: $top;
+  top: 0;
   background-color: #1d1f20;
 }
-.container-bottom{
-  position:absolute;
+.container-ticker{
   padding:0;
-  bottom:0;
-  left:$left+1;
-  right:0;
-  height:$bottom - 1;
   border-top:1px solid #666;
   background-color:#222;
   .fade{
@@ -162,23 +171,9 @@ li{
     background: linear-gradient(to bottom, rgba(34, 34, 34, 0) 0%, rgb(34,34,34) 70%)
   }
 }
-.top{
-  position:absolute;
-  top:0;
-  right:0;
-  left:0;
-  height:$top - 1;
-  background-color: #111115;
-  border-bottom:1px solid #3f3f3f;
-}
 
 .controls{
-  @include scrollbar;
   font-size:9pt;
-  position:absolute;
-  top:51px;
-  bottom:0;
-  right:1px;
   overflow:hidden;
   overflow-y:auto;
 
@@ -244,7 +239,7 @@ li{
       margin:0;
     }
     textarea{
-      width:132px;
+      width:204px;
     }
     &.half input{
       margin-left:72px;
@@ -255,6 +250,10 @@ li{
     li.label {
       width:64px;
       padding-left:8px;
+    }
+    li .label {
+      display:inline-block;
+      width:68px;
     }
   }
   ul.labels{
@@ -311,13 +310,8 @@ li{
 }
 
 .system-info {
-  position: absolute;
-  top:7px;
-  left:0;
-  right:0;
   text-align: center;
   background-color:rgba(0,0,0,0.3);
-
   color: #d6d6d6;
   border:1px solid #363636;
   border-left:none;
@@ -391,6 +385,11 @@ li{
       font-size:12px;
       padding:0px 0px 0px 0px;
     }
+    i.icon-toggle{
+      font-weight: bold;
+      letter-spacing: -2px;
+      padding: 0 3px;
+    }
     text-decoration: none;
     line-height:14px;
     color: #808080;
@@ -439,15 +438,17 @@ li{
     &.resizing{ cursor: ne-resize; }
   }
 }
+.help-pad {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: $sideWidth+10;
+}
 
 .ticker{
-  @include scrollbar;
-  overflow-y: scroll;
-  position:absolute;
-  top:0; bottom:0;left:0;right:0;
   margin:1px;
   padding:0px;
-  text-align:center;
   .elem{
     border:1px solid #6f6f6f;
     padding:2px;
@@ -455,10 +456,8 @@ li{
     border-radius:1px;
     position:relative;
     background-color: #2c2e33;
-
-    width:130px;
+    width:103px;
     height:125px;
-    //position:relative;
     font-size:8pt;
 
     &:hover{
@@ -492,6 +491,3 @@ li{
     }
   }
 }
-
-
-
