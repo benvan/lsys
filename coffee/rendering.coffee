@@ -46,7 +46,7 @@ class Renderer
   stack:[]
   isDrawing:false
   constructor: (@container) ->
-    @context = new RenderingContext(container)
+    @context = new RenderingContext(@container)
 
   prepare: (system) =>
     colors = getColors(system)

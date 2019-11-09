@@ -22,7 +22,7 @@ class AppManager
   systemManager: null
 
   constructor: (@container, @controls) ->
-    @joystick = new Joystick(container)
+    @joystick = new Joystick(@container)
     @keystate = new KeyState
     @inputHandler = new InputHandler(@keystate, @joystick)
 
