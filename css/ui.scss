@@ -158,7 +158,7 @@ li{
   position: absolute;
   right: 0;
   top: 0;
-  background-color: #1d1f20;
+  background-color: black;
 }
 .container-ticker{
   padding:0;
@@ -370,7 +370,6 @@ li{
     margin-right:5px;
     text-align:center;
     font-size:8pt;
-    background-color: #1f1f20;
 
     &.facebook,&.twitter,&.gplus{
       color:rgb(219, 219, 219);

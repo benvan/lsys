@@ -136,7 +136,7 @@
     </div>
 </div>
 
-<div class="show-side actions">
+<div class="show-side actions hidden">
   <a class="toggle-side" href="#"><i class="icon icon-toggle">&lt;&lt;&nbsp;</i></a>
 </div>
 
@@ -352,6 +352,7 @@
         // show/hide sidebar button
         $('a.toggle-side').click(function(){
             $('.container-side').toggleClass('hidden');
+            $('.show-side').toggleClass('hidden');
             return false;
         })
 
