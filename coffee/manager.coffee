@@ -13,21 +13,50 @@ class InputHandler
       system.params.angle.value = Util.round(system.params.angle.value + @joystick.dx(system.sensitivities.angle.value), 4)
       system.params.angle.growth = Util.round(system.params.angle.growth + @joystick.dy(system.sensitivities.angle.growth),9)
 
+class AnimationHandler
+  snapshot: null # lsystem params as they were was when joystick activated
+  constructor: (@animation) ->
+
+  sensitivity: (value) ->
+    if (value) then Math.pow(10,value-10) else 1
+
+  update: (system) =>
+    return if not @animation.active
+    d = @animation.state()
+    if (typeof d.angleX == 'number' && Number.isFinite d.angleX)
+      system.params.angle.value = Util.round(system.params.angle.value + d.angleX * @sensitivity(system.sensitivities.angle.value), 4)
+    if (typeof d.angleY == 'number' && Number.isFinite d.angleY)
+      system.params.angle.growth = Util.round(system.params.angle.growth + d.angleY * @sensitivity(system.sensitivities.angle.growth), 9)
+    if (typeof d.sizeX == 'number' && Number.isFinite d.sizeX)
+      system.params.size.value = Util.round(@snapshot.params.size.value + d.sizeX * @sensitivity(system.sensitivities.size.value), 2)
+    if (typeof d.sizeY == 'number' && Number.isFinite d.sizeY)
+      system.params.size.growth = Util.round(@snapshot.params.size.growth + d.sizeY * @sensitivity(system.sensitivities.size.growth), 6)
+    if (typeof d.offsetX == 'number' && Number.isFinite d.offsetX)
+      system.offsets.x = @snapshot.offsets.x + d.offsetX
+    if (typeof d.offsetY == 'number' && Number.isFinite d.offsetY)
+      system.offsets.y = @snapshot.offsets.y + d.offsetY
+    if (typeof d.rotation == 'number' && Number.isFinite d.rotation)
+      system.offsets.rot = @snapshot.offsets.rot + d.rotation
 
 class AppManager
   joystick:null
+  animation:null
   keystate: null
   inputHandler: null
   renderer:null
   systemManager: null
 
-  constructor: (@container, @controls) ->
+  constructor: (@container, @controls, @animation) ->
     @joystick = new Joystick(@container)
     @keystate = new KeyState
     @inputHandler = new InputHandler(@keystate, @joystick)
+    @animationHandler = new AnimationHandler(@animation)
 
     @joystick.onRelease = => @syncLocationQuiet()
     @joystick.onActivate = => @inputHandler.snapshot = @systemManager.activeSystem.clone()
+
+    @animation.onRelease = => @syncLocationQuiet()
+    @animation.onActivate = => @animationHandler.snapshot = @systemManager.activeSystem.clone()
 
     @renderer = new Renderer(@container)
 
@@ -56,6 +85,8 @@ class AppManager
     @recalculationPromise = @systemManager.activate(system).progress(@onRecalculateProgress)
     @recalculationPromise.done( =>
       @joystick.enable()
+      @animation.setF(system.animation, @controls.animation)
+      @animation.toggle(system.play)
       @renderer.prepare(system)
       @syncAll();
       @draw()
@@ -65,10 +96,16 @@ class AppManager
     @recalculationPromise
 
   lsystemFromControls: ->
+    play = $(@controls.play).hasClass('play')
+    animation = $(@controls.animation).val()
+    Defaults.play = play
+    Defaults.animation = animation
     return new LSystem(
       @paramControls.toJson(),
       @offsetControls.toJson(),
       @sensitivityControls.toJson(),
+      play,
+      animation,
       $(@controls.rules).val(),
       parseInt($(@controls.iterations).val()),
       $(@controls.name).val()
@@ -110,12 +147,17 @@ class AppManager
       .always(@run)
 
   run: =>
-    requestAnimationFrame(@run, @container)
-    @inputHandler.update(@systemManager.activeSystem)
     if @joystick.active and not @renderer.isDrawing
-      @draw()
       @joystick.draw()
+      @inputHandler.update(@systemManager.activeSystem)
       @syncControls()
+      @draw()
+    if @animation.active and not @renderer.isDrawing
+      @animation.draw()
+      @animationHandler.update(@systemManager.activeSystem)
+      @syncControls()
+      @draw()
+    requestAnimationFrame(@run, @container)
 
   draw: (renderer = @renderer) =>
       elems = @systemManager.getInstructions()
@@ -138,6 +180,11 @@ class AppManager
   syncRulesAndIterations: (system = @systemManager.activeSystem) ->
     $(@controls.iterations).val(system.iterations)
     $(@controls.rules).val(system.rules)
+    $(@controls.animation).val(system.animation)
+    if (system.play)
+      $(@controls.play).addClass('play')
+    else
+      $(@controls.play).removeClass('play')
 
   syncControls: (system = @systemManager.activeSystem) ->
     @paramControls.sync(system.params)

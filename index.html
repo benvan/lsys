@@ -136,18 +136,19 @@
     </div>
 </div>
 
-<div class="show-side actions"><!--
---><a class="toggle-side tooltip" href="#"><i class="icon icon-toggle">&lt;&lt;&nbsp;</i><input readonly /></a>
+<div class="show-side actions">
+  <a class="toggle-side" href="#"><i class="icon icon-toggle">&lt;&lt;&nbsp;</i></a>
 </div>
 
 <div class="container-side">
     <div class="header">
-        <a class="site" href="."><img src="img/logo3.png"><span>lsys</span></a>
+        <img src="img/logo3.png" /><a class="site" href="."><span>lsys</span></a>
         <div class="actions">
             <a id="helpTrigger" title="help" href="#"><i class="icon-help"></i></a><!--
          --><a class="export tooltip" title="download png" href="#"><i class="icon-download"></i></a><!--
          --><!--a id="link" class="tooltip" title="link" href="#"><i class="icon icon-link"></i><input readonly /></a--><!--
-         --><a class="toggle-side tooltip" title="hide" href="#"><i class="icon icon-toggle">&gt;&gt;</i><input readonly /></a>
+         --><a class="toggle-animation tooltip" title="animation" href="#"><i id="play" class="icon icon-animation"></i></a><!--
+         --><a class="toggle-side tooltip" title="hide" href="#"><i class="icon icon-side">&gt;&gt;</i></a>
         </div>
     </div>
     <div id="systemInfo" class="system-info blue">
@@ -187,17 +188,29 @@
             </li>
 
             <li class="section">
+              animation
+            </li>
+
+            <li class="group" id="animation-container">
+                <pre>function (t) = </pre>
+                <ul class="control-row" id="animation-row">
+                  <li><textarea id="animation" rows="9"></textarea></li>
+                </ul>
+            </li>
+
+            <li class="section">
                 system
-                <i id="syntaxTrigger" class="icon-help-circled"></i>
+                <i id="syntaxTrigger" class="icon-right icon-help-circled"></i>
             </li>
 
             <li class="group" id="rules-container">
                 <ul class="control-row">
-                    <li class="label">rules</li>
-                    <li><span class="label">levels</span><input id="iterations" type="text" required ></li>
+                    <li class="label"><pre>rules =</pre></li>
+                    <li><span class="label right">iterations</span>
+                        <input id="iterations" type="text" required ></li>
                 </ul>
                 <ul class="control-row" id="rules-row">
-                  <li><textarea id="rules" rows="10"></textarea></li>
+                  <li><textarea id="rules" rows="5"></textarea></li>
                 </ul>
                 <div class="recalculate">
                     <button class='recalculating'>
@@ -242,16 +255,34 @@
                 params: 'controls-container',
                 offsets: 'offsets-container',
                 sensitivities: 'sensitivities-container',
+                play: 'play',
+                animation: 'animation',
                 iterations: 'iterations',
                 rules: 'rules',
                 name: 'system-name'
-            }, Util.control)
+            }, Util.control),
+            new Animation()
         );
 
         var syncLocationQuiet = _.debounce( _.bind(manager.syncLocationQuiet, manager) ,300);
         var sync = function(){
             return manager.recalculate().pipe(syncLocationQuiet);
         };
+        var syncAnimation = function(){
+            $('#animation').removeClass('error');
+            $('#animation').attr('title', '');
+            try {
+                var f = Function (['t'], manager.controls.animation.value);
+                var d = f.call({}, 0);
+                if (! (d instanceof Object)) {
+                  throw 'Return value is not Object'
+                }
+                sync();
+            } catch (err) {
+                $('#animation').addClass('error');
+                $('#animation').attr('title', err.toString());
+            }
+        }
 
         var $recalculateButton = $('.recalculate button');
         $recalculateButton.click(function(){
@@ -324,6 +355,13 @@
             return false;
         })
 
+        // play/pause animation button
+        $('a.toggle-animation').click(function(){
+            $('.icon-animation').toggleClass('play');
+            sync();
+            return false;
+        })
+
         setTimeout(function(){
             manager.start().always(function(){
                 //this is kinda naughty... but I'd rather refactor Controls first than fudge this in otherwise
@@ -333,6 +371,7 @@
                 $("#controls-container,#offsets-container").find("[data-param]").on("input", syncIfNotEmpty );
                 $("#sensitivities-container").find("[data-param]").on("input", syncIfNotEmpty );
                 $("#system-name").on("input", sync );
+                $("#animation").on("input", syncAnimation);
                 $("#rules").on("input", sync);
                 $("#iterations").on("input", syncIfNotEmpty);
                 $(".controls").addClass('validation-enabled');

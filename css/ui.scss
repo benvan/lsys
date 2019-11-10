@@ -88,7 +88,7 @@ li{
 }
 
 .header{
-  height:50px;
+  height:40px;
   background-color: #1b1b1b;
   border-bottom:1px solid #545454;
   background-image:-webkit-linear-gradient(top, #222222, #111111);
@@ -97,7 +97,12 @@ li{
   .actions{
     padding-top:13px;
     padding-right:0px;
-    a{ padding:2px 1px 1px 1px; }
+  }
+  img{
+    float:left;
+    width:40px;
+    height:40px;
+    padding-top:4px;
   }
   a.site{
     font-family:monospace;
@@ -108,11 +113,6 @@ li{
     font-weight:bold;
     text-decoration: none;
     display:block;
-    img{
-      width:40px;
-      height:40px;
-      float:left;
-    }
     span{
       margin-left:10px;
       line-height:42px;
@@ -189,7 +189,13 @@ li{
   input[type=text]{
     text-align: right;
   }
-
+  textarea.error{
+    border-color: rgb(219, 43, 43);
+  }
+  pre{
+    padding: 0;
+    margin: 0;
+  }
 
   &.validation-enabled{
     input:invalid{
@@ -202,6 +208,7 @@ li{
   li{
     display:inline-block;
     &.section{
+      position: relative;
       background-color: #27292c;
       width:100%;
       padding:4px 0px;
@@ -210,7 +217,7 @@ li{
       border-bottom:1px solid #464646;
       border-top:1px solid #191919;
       text-align: center;
-      i{
+      i.icon-right{
         position:absolute;
         right:0;
         &:hover{
@@ -250,6 +257,12 @@ li{
     li.label {
       width:64px;
       padding-left:8px;
+    }
+    li.label pre {
+      margin-left:-8px;
+    }
+    .right {
+      text-align:right;
     }
     li .label {
       display:inline-block;
@@ -349,11 +362,14 @@ li{
   padding-top:7px;
   height:30px;
   a{
-    font-size:8pt;
-    padding:2px 0px 1px 1px;
-    margin-right:5px;
-    display:inline-block;
     position: relative;
+    display:inline-block;
+    width: 16px;
+    height: 16px;
+    padding: 2px 1px 1px 1px;
+    margin-right:5px;
+    text-align:center;
+    font-size:8pt;
     background-color: #1f1f20;
 
     &.facebook,&.twitter,&.gplus{
@@ -385,10 +401,20 @@ li{
       font-size:12px;
       padding:0px 0px 0px 0px;
     }
-    i.icon-toggle{
+    i.icon-side{
       font-weight: bold;
       letter-spacing: -2px;
       padding: 0 3px;
+    }
+    i.icon-animation{
+      padding: 2px;
+      letter-spacing: -1px;
+    }
+    i.icon-animation::after{
+      content: "▶";
+    }
+    i.icon-animation.play::after{
+      content: "▮▮";
     }
     text-decoration: none;
     line-height:14px;
@@ -418,6 +444,9 @@ li{
   }
 }
 
+li.section .actions {
+  padding: 2px 0 0 0;
+}
 
 .drawing-pad{
   position: absolute;

@@ -1,8 +1,14 @@
-NullSystem = new LSystem({},{},{},"",1,"no system")
-DefaultSystem = new LSystem({
-  size: {value:12.27}
-  angle: {value:4187.5}
-},{},{ size: {value:9} } ,"L : SS\nS : F->[F-Y[S(L]]\nY : [-|F-F+)Y]\n" ,12 ,"click-and-drag-me!" )
+NullSystem = new LSystem({},{},{},0,"","",1,"no system")
+DefaultSystem = new LSystem(
+  { size: {value:12.27}, angle: {value:4187.5} },
+  {},
+  { size: {value:9} },
+  false,
+  "",
+  "L : SS\nS : F->[F-Y[S(L]]\nY : [-|F-F+)Y]",
+  12,
+  "click-and-drag-me!"
+)
 
 # =========================================
 class CompiledSystem
@@ -92,4 +98,3 @@ class SystemManager
     )
 
   getInstructions: -> @compiledElements
-

@@ -87,6 +87,65 @@ class Joystick
 
 # ===============================
 
+class Animation
+  active: false
+  now: 0
+  f: (t) -> {}
+
+  constructor: (f) ->
+    @setF(f)
+
+  setF: (f, el) ->
+    if el
+      $(el).removeClass('error')
+      $(el).attr('title', '')
+    try
+      f = Function ['t'], f
+      r = f.call {}, 0
+      unless r instanceof Object
+        throw 'Return value is not Object'
+      @f = f
+    catch err
+      if el
+        $(el).addClass 'error'
+        $(el).attr 'title', err.toString()
+
+  enable: ->
+    @active = true
+    @onActivate()
+  disable: ->
+    @active = false
+    @onRelease()
+  toggle: (active = not @active) ->
+    if active
+      @enable()
+    else
+      @disable()
+
+  onActivate: -> # noop unless overriden
+  onRelease: -> # noop unless overriden
+
+  state: () ->
+    d =
+     try
+       @f(@now)
+     catch e
+       {}
+    if d instanceof Object
+      d
+    else
+      {}
+
+  clear: -> #noop for now
+  draw: ->
+    if @active
+      @now++
+
+  center: ->
+    @now = 0
+
+# ===============================
+
 # ui binding for a single system variable
 class Control
   constructor: (@controlkey) ->

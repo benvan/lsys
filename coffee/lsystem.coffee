@@ -36,13 +36,34 @@ class Defaults
   @_sensitivites: ->
     size: {value: 7.7, growth:7.53}
     angle: {value: 7.6, growth:4}
+  @play: 0
+  @animation: "
+   return {\n
+    angleX: t/100,\n
+    angleY: t/100,\n
+    sizeX: null,\n
+    sizeY: null,\n
+    offsetX: null,\n
+    offsetY: null,\n
+    rotation: null\n
+  }"
 
 # =========================================
 class LSystem
-  constructor: (params, offsets, sensitivities, @rules, @iterations, @name) ->
+  constructor: (params, offsets, sensitivities, play, animation, @rules, @iterations, @name) ->
     @params = Util.map(Defaults.params(params), (c) -> Param.fromJson(c))
     @offsets = Defaults.offsets(offsets)
     @sensitivities = Util.map(Defaults.sensitivities(sensitivities), (s) -> Sensitivity.fromJson(s))
+    @play =
+      if (typeof play == 'number' && Number.isFinite play) || (typeof play == 'boolean')
+        if play then 1 else 0
+      else
+        Defaults.play
+    @animation =
+      if typeof animation == 'string' and 0 < animation.length
+        animation
+      else
+        Defaults.animation
 
   # this is not the most efficient of methods...
   clone: -> return LSystem.fromUrl(@toUrl())
@@ -51,10 +72,12 @@ class LSystem
     base = "#?i=#{@iterations}&r=#{encodeURIComponent(@rules)}"
     mkQueryString = (params) -> _.reduce(params, ((acc,v) -> "#{acc}&#{v.toUrlComponent()}"), "")
     params = mkQueryString(@params)
-    sensitivities = mkQueryString(@sensitivities)
     offsets = "&offsets=#{@offsets.x},#{@offsets.y},#{@offsets.rot}"
+    sensitivities = mkQueryString(@sensitivities)
+    play = "&play="+@play
+    animation = "&anim="+encodeURIComponent(@animation)
     name = "&name=#{encodeURIComponent(@name)}"
-    return base+params+sensitivities+offsets+name
+    return base+params+offsets+sensitivities+play+animation+name
 
   merge: (system) ->
     _.extend(@, system) if system
@@ -81,7 +104,15 @@ class LSystem
         y: parseFloat(o[1])
         rot: parseFloat(o[2])
 
-    return new LSystem(params, offsets, sensitivities, decodeURIComponent(config.r), config.i, decodeURIComponent(config.name) or "unnamed")
+    anim =
+      if 'anim' of config
+        decodeURIComponent(config.anim)
+      else
+        null
+
+    return new LSystem(params, offsets, sensitivities, parseInt(config.play),
+                       anim, decodeURIComponent(config.r), config.i,
+                       decodeURIComponent(config.name) or "unnamed")
 
   isIsomorphicTo: (system) -> if (!system) then false else @rules == system.rules and @iterations == system.iterations
 
