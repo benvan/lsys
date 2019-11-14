@@ -1,3 +1,4 @@
+$opacity: 0.7;
 $sideWidth: 230px;
 
 div {
@@ -89,7 +90,7 @@ li{
 
 .header{
   height:40px;
-  background-color: #1b1b1b;
+  background-color: rgba(27,27,27,$opacity);
   border-bottom:1px solid #545454;
   background-image:-webkit-linear-gradient(top, #222222, #111111);
   box-shadow:inset 0 -1px 0 rgba(0, 0, 0, 0.1), 0 1px 10px rgba(0, 0, 0, 0.1);
@@ -123,8 +124,10 @@ li{
 .show-side.actions{
   padding-top: 13px;
 }
-.show-side.actions a{
+.show-side.actions a {
   border: 0;
+  color: white;
+  text-shadow: 1px 1px black;
 }
 
 .container-side{
@@ -134,13 +137,13 @@ li{
   bottom: 0;
   width: $sideWidth;
   cursor: default;
-  background-color:#333;
+  background-color: rgba(0,0,0,$opacity);
+  text-shadow: 1px 1px black;
   padding: 0 0 0 0px;
   border-left:1px solid #555;
   scrollbar-width: thin;
   overflow-x: hidden;
   overflow-y: auto;
-  opacity: 0.7;
   /*
   &::-webkit-scrollbar{width:4px;height:4px;}
   &::-webkit-scrollbar-button:start:decrement, &::-webkit-scrollbar-button:end:increment{ display:block;height:2px;background-color: #232323; }
@@ -163,7 +166,7 @@ li{
 .container-ticker{
   padding:0;
   border-top:1px solid #666;
-  background-color:#222;
+  background-color: rgba(34,34,34,$opacity);
   .fade{
     position:absolute;
     right:0; bottom:0; left:0;
@@ -182,12 +185,16 @@ li{
     color:#bbb;
     border-radius:2px;
     border:1px solid #1d1d1d;
-    background-color: #42474a;
+    background-color: rgba(66,71,74,$opacity);
+    text-shadow: 1px 1px black;
     font-size:9pt;
     padding:3px 5px;
   }
   input[type=text]{
     text-align: right;
+  }
+  input[type=text].color{
+    text-shadow: 1px 1px black;
   }
   textarea.error{
     border-color: rgb(219, 43, 43);
@@ -209,7 +216,7 @@ li{
     display:inline-block;
     &.section{
       position: relative;
-      background-color: #27292c;
+      background-color: rgba(39,41,44,$opacity);
       width:100%;
       padding:4px 0px;
       margin-top:6px;
@@ -483,13 +490,13 @@ li.section .actions {
     margin:1px;
     border-radius:1px;
     position:relative;
-    background-color: #2c2e33;
+    background-color: rgba(44,46,51,$opacity);
     width:103px;
     height:125px;
     font-size:8pt;
 
     &:hover{
-      background-color: #3f444a;
+      background-color: rgba(63,68,74,$opacity);
     }
     .img-holder{
       text-align: center;

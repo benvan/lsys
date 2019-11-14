@@ -128,10 +128,16 @@
     <div class="help-pad"></div>
     <div class="drawing-pad">
         <div id="drawingContainer">
+            <canvas id="c0"></canvas>
             <canvas id="c1"></canvas>
             <canvas id="c2"></canvas>
             <canvas id="c3"></canvas>
-            <canvas id="c0"></canvas>
+            <canvas id="c4"></canvas>
+            <canvas id="c5"></canvas>
+            <canvas id="c6"></canvas>
+            <canvas id="c7"></canvas>
+            <canvas id="c8"></canvas>
+            <canvas id="c9"></canvas>
         </div>
     </div>
 </div>
@@ -188,17 +194,6 @@
             </li>
 
             <li class="section">
-              animation
-            </li>
-
-            <li class="group" id="animation-container">
-                <pre>function (t) = </pre>
-                <ul class="control-row" id="animation-row">
-                  <li><textarea id="animation" rows="9"></textarea></li>
-                </ul>
-            </li>
-
-            <li class="section">
                 system
                 <i id="syntaxTrigger" class="icon-right icon-help-circled"></i>
             </li>
@@ -222,6 +217,59 @@
                         <span class="layer sheen"></span>
                     </button>
                 </div>
+            </li>
+
+            <li class="section">
+              animation
+            </li>
+
+            <li class="group" id="animation-container">
+                <pre>function (t) = </pre>
+                <ul class="control-row" id="animation-row">
+                  <li><textarea id="animation" rows="9"></textarea></li>
+                </ul>
+            </li>
+
+            <li class="section">
+              style
+            </li>
+
+            <li class="group">
+              <ul class="control-row">
+                  <li class="label">line width</li><!--
+               --><li class="label"></li><!--
+               --><li><input type="text" id="line-width"/></li>
+                </ul>
+                <ul class="control-row">
+                  <li class="label">background</li><!--
+               --><li class="label"></li><!--
+               --><li><input type="text" class="color"/></li>
+                </ul>
+                <ul class="control-row">
+                  <li class="label">color 0, 1</li><!--
+               --><li><input type="text" class="color"/></li><!--
+               --><li><input type="text" class="color"/></li>
+                </ul>
+                <ul class="control-row">
+                  <li class="label">color 2, 3</li><!--
+               --><li><input type="text" class="color"/></li><!--
+               --><li><input type="text" class="color"/></li>
+                </ul>
+                <ul class="control-row">
+                  <li class="label">color 4, 5</li><!--
+               --><li><input type="text" class="color"/></li><!--
+               --><li><input type="text" class="color"/></li>
+                </ul>
+                <ul class="control-row">
+                  <li class="label">color 6, 7</li><!--
+               --><li><input type="text" class="color"/></li><!--
+               --><li><input type="text" class="color"/></li>
+                </ul>
+                <ul class="control-row">
+                  <li class="label">color 8, 9</li><!--
+               --><li><input type="text" class="color"/></li><!--
+               --><li><input type="text" class="color"/></li>
+                </ul>
             </li>
         </ul>
     </div>
@@ -255,10 +303,12 @@
                 params: 'controls-container',
                 offsets: 'offsets-container',
                 sensitivities: 'sensitivities-container',
-                play: 'play',
-                animation: 'animation',
                 iterations: 'iterations',
                 rules: 'rules',
+                play: 'play',
+                animation: 'animation',
+                lineWidth: 'line-width',
+                colors: 'color',
                 name: 'system-name'
             }, Util.control),
             new Animation()
@@ -372,9 +422,11 @@
                 $("#controls-container,#offsets-container").find("[data-param]").on("input", syncIfNotEmpty );
                 $("#sensitivities-container").find("[data-param]").on("input", syncIfNotEmpty );
                 $("#system-name").on("input", sync );
-                $("#animation").on("input", syncAnimation);
                 $("#rules").on("input", sync);
                 $("#iterations").on("input", syncIfNotEmpty);
+                $("#line-width").on("input", syncIfNotEmpty);
+                $(".color").on("input", syncIfNotEmpty);
+                $("#animation").on("input", syncAnimation);
                 $(".controls").addClass('validation-enabled');
             });
         },0);

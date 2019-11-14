@@ -1,8 +1,10 @@
 class Util
   @log:(x) -> console.log(x)
-  @control:(name) -> document.getElementById(name)
+  @control: (name) ->
+    document.getElementById(name) || document.getElementsByClassName(name)
   @value: (name) => parseFloat(Util.stringvalue(name))
   @stringvalue: (name) -> Util.control(name).value
+  @arrayvalue: (name) -> Util.mapArray(Util.control(name), (el) -> el.value)
   @clone:(x) -> JSON.parse(JSON.stringify(x))
   @toObj:(kvPairs) ->
     obj = {}
@@ -10,8 +12,13 @@ class Util
     return obj
   @map: (obj, fn) ->
     result = {}
-    for key of obj then do ->
+    for own key of obj then do ->
       result[key] = fn(obj[key], key)
+    return result
+  @mapArray: (obj, fn) ->
+    result = []
+    for own key of obj then do ->
+      result.push(fn(obj[key], key))
     return result
   @merge: (a,b,c) -> $.extend(true, a,b,c)
   @round: (n,d) ->

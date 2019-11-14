@@ -104,10 +104,12 @@ class AppManager
       @paramControls.toJson(),
       @offsetControls.toJson(),
       @sensitivityControls.toJson(),
-      play,
-      animation,
       $(@controls.rules).val(),
       parseInt($(@controls.iterations).val()),
+      parseFloat($(@controls.lineWidth).val()),
+      Util.mapArray(@controls.colors, (el) -> el.value),
+      play,
+      animation,
       $(@controls.name).val()
     )
 
@@ -176,6 +178,7 @@ class AppManager
     $(@controls.name).val(system.name)
     @syncControls(system)
     @syncRulesAndIterations(system)
+    @syncLineStyle(system)
 
   syncRulesAndIterations: (system = @systemManager.activeSystem) ->
     $(@controls.iterations).val(system.iterations)
@@ -185,6 +188,18 @@ class AppManager
       $(@controls.play).addClass('play')
     else
       $(@controls.play).removeClass('play')
+
+  syncFloat: (input, value) ->
+    if (parseFloat(input.val()) != value and not isNaN(parseFloat(value))) then input.val(value)
+
+  syncColor: (input, value) ->
+    $(input).val(value)
+    input.style.backgroundColor = value
+
+  syncLineStyle: (system = @systemManager.activeSystem) ->
+    @syncFloat($(@controls.lineWidth), system.lineWidth)
+    @syncColor(@controls.colors[i], col) for col, i in system.colors
+    @container.style.backgroundColor = @controls.colors[0].value
 
   syncControls: (system = @systemManager.activeSystem) ->
     @paramControls.sync(system.params)
