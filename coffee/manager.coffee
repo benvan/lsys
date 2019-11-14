@@ -23,14 +23,14 @@ class AnimationHandler
   update: (system) =>
     return if not @animation.active
     d = @animation.state()
-    if (typeof d.angleX == 'number' && Number.isFinite d.angleX)
-      system.params.angle.value = Util.round(system.params.angle.value + d.angleX * @sensitivity(system.sensitivities.angle.value), 4)
-    if (typeof d.angleY == 'number' && Number.isFinite d.angleY)
-      system.params.angle.growth = Util.round(system.params.angle.growth + d.angleY * @sensitivity(system.sensitivities.angle.growth), 9)
-    if (typeof d.sizeX == 'number' && Number.isFinite d.sizeX)
-      system.params.size.value = Util.round(@snapshot.params.size.value + d.sizeX * @sensitivity(system.sensitivities.size.value), 2)
-    if (typeof d.sizeY == 'number' && Number.isFinite d.sizeY)
-      system.params.size.growth = Util.round(@snapshot.params.size.growth + d.sizeY * @sensitivity(system.sensitivities.size.growth), 6)
+    if (typeof d.angle == 'number' && Number.isFinite d.angle)
+      system.params.angle.value = Util.round(system.params.angle.value + d.angle * @sensitivity(system.sensitivities.angle.value), 4)
+    if (typeof d.angleG == 'number' && Number.isFinite d.angleG)
+      system.params.angle.growth = Util.round(system.params.angle.growth + d.angleG * @sensitivity(system.sensitivities.angle.growth), 9)
+    if (typeof d.size == 'number' && Number.isFinite d.size)
+      system.params.size.value = Util.round(@snapshot.params.size.value + d.size * @sensitivity(system.sensitivities.size.value), 2)
+    if (typeof d.sizeG == 'number' && Number.isFinite d.sizeG)
+      system.params.size.growth = Util.round(@snapshot.params.size.growth + d.sizeG * @sensitivity(system.sensitivities.size.growth), 6)
     if (typeof d.offsetX == 'number' && Number.isFinite d.offsetX)
       system.offsets.x = @snapshot.offsets.x + d.offsetX
     if (typeof d.offsetY == 'number' && Number.isFinite d.offsetY)

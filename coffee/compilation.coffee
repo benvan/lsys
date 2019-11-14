@@ -9,8 +9,14 @@ DefaultSystem = new LSystem(
   [ "black", "white", "cyan", "#e8cc00", "#007272", "#ff4c00" ],
   false,
   "return {\n
-    angleX: t/100,\n
-   }",
+    angle: t/100,\n
+    angleG: t/100,\n
+    size: null,\n
+    sizeG: null,\n
+    offsetX: null,\n
+    offsetY: null,\n
+    rotation: null\n
+  }",
   "click-and-drag-me!"
 )
 

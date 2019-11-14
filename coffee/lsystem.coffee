@@ -41,10 +41,10 @@ class Defaults
   @play: 0
   @animation: "
    return {\n
-    angleX: t/100,\n
-    angleY: t/100,\n
-    sizeX: null,\n
-    sizeY: null,\n
+    angle: t/100,\n
+    angleG: t/100,\n
+    size: null,\n
+    sizeG: null,\n
     offsetX: null,\n
     offsetY: null,\n
     rotation: null\n
