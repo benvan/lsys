@@ -38,7 +38,8 @@ class Bounding
 #================================================================
 
 getG = (c) -> c.getContext('2d')
-getColors = (system) -> ["#ffffff","#0044DD","#00DD44","#DD4400"]
+getColors = (system) -> system.colors.slice(1)
+getLineWidth = (system) -> system.lineWidth
 
 class Renderer
   context:null
@@ -46,7 +47,7 @@ class Renderer
   stack:[]
   isDrawing:false
   constructor: (@container) ->
-    @context = new RenderingContext(container)
+    @context = new RenderingContext(@container)
 
   prepare: (system) =>
     colors = getColors(system)
@@ -78,7 +79,7 @@ class Renderer
     this.reset(system)
 
     @context.gs.forEach (g,i) =>
-      g.lineWidth = 0.218
+      g.lineWidth = getLineWidth(system)
       g.beginPath()
       g.moveTo(@context.state.x, @context.state.y)
 
@@ -147,5 +148,11 @@ class Renderer
     "1": (state, params, context, a) -> state.color = a; if (context.g != context.gs[1]) then ( context.g = context.gs[1]; context.g.moveTo(state.x,state.y))
     "2": (state, params, context, a) -> state.color = a; if (context.g != context.gs[2]) then ( context.g = context.gs[2]; context.g.moveTo(state.x,state.y))
     "3": (state, params, context, a) -> state.color = a; if (context.g != context.gs[3]) then ( context.g = context.gs[3]; context.g.moveTo(state.x,state.y))
+    "4": (state, params, context, a) -> state.color = a; if (context.g != context.gs[4]) then ( context.g = context.gs[4]; context.g.moveTo(state.x,state.y))
+    "5": (state, params, context, a) -> state.color = a; if (context.g != context.gs[5]) then ( context.g = context.gs[5]; context.g.moveTo(state.x,state.y))
+    "6": (state, params, context, a) -> state.color = a; if (context.g != context.gs[6]) then ( context.g = context.gs[6]; context.g.moveTo(state.x,state.y))
+    "7": (state, params, context, a) -> state.color = a; if (context.g != context.gs[7]) then ( context.g = context.gs[7]; context.g.moveTo(state.x,state.y))
+    "8": (state, params, context, a) -> state.color = a; if (context.g != context.gs[8]) then ( context.g = context.gs[8]; context.g.moveTo(state.x,state.y))
+    "9": (state, params, context, a) -> state.color = a; if (context.g != context.gs[9]) then ( context.g = context.gs[9]; context.g.moveTo(state.x,state.y))
     }
   )()

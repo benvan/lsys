@@ -36,13 +36,44 @@ class Defaults
   @_sensitivites: ->
     size: {value: 7.7, growth:7.53}
     angle: {value: 7.6, growth:4}
+  @lineWidth: 0.218
+  @colors: [ "black", "white", "cyan", "#e8cc00", "#007272", "#ff4c00" ]
+  @play: 0
+  @animation: "
+   return {\n
+    angle: t/100,\n
+    angleG: t/100,\n
+    size: null,\n
+    sizeG: null,\n
+    offsetX: null,\n
+    offsetY: null,\n
+    rotation: null\n
+  }"
 
 # =========================================
 class LSystem
-  constructor: (params, offsets, sensitivities, @rules, @iterations, @name) ->
+  constructor: (params, offsets, sensitivities, @rules, @iterations, lineWidth, colors, play, animation, @name) ->
     @params = Util.map(Defaults.params(params), (c) -> Param.fromJson(c))
     @offsets = Defaults.offsets(offsets)
     @sensitivities = Util.map(Defaults.sensitivities(sensitivities), (s) -> Sensitivity.fromJson(s))
+    @play =
+      if (typeof play == 'number' && Number.isFinite play) || (typeof play == 'boolean')
+        if play then 1 else 0
+      else
+        Defaults.play
+    @animation =
+      if typeof animation == 'string' and 0 < animation.length
+        animation
+      else
+        Defaults.animation
+    @lineWidth =
+      if typeof lineWidth == 'number' && Number.isFinite lineWidth
+      then lineWidth
+      else Defaults.lineWidth
+    @colors =
+      if typeof colors == 'object'
+      then colors
+      else Defaults.colors
 
   # this is not the most efficient of methods...
   clone: -> return LSystem.fromUrl(@toUrl())
@@ -51,10 +82,14 @@ class LSystem
     base = "#?i=#{@iterations}&r=#{encodeURIComponent(@rules)}"
     mkQueryString = (params) -> _.reduce(params, ((acc,v) -> "#{acc}&#{v.toUrlComponent()}"), "")
     params = mkQueryString(@params)
-    sensitivities = mkQueryString(@sensitivities)
     offsets = "&offsets=#{@offsets.x},#{@offsets.y},#{@offsets.rot}"
+    sensitivities = mkQueryString(@sensitivities)
+    lineWidth = "&l="+@lineWidth
+    colors = "&c="+@colors.join(',')
+    play = "&play="+@play
+    animation = "&anim="+encodeURIComponent(@animation)
     name = "&name=#{encodeURIComponent(@name)}"
-    return base+params+sensitivities+offsets+name
+    return base+params+offsets+sensitivities+lineWidth+colors+play+animation+name
 
   merge: (system) ->
     _.extend(@, system) if system
@@ -81,7 +116,21 @@ class LSystem
         y: parseFloat(o[1])
         rot: parseFloat(o[2])
 
-    return new LSystem(params, offsets, sensitivities, decodeURIComponent(config.r), config.i, decodeURIComponent(config.name) or "unnamed")
+    anim =
+      if 'anim' of config
+        decodeURIComponent(config.anim)
+      else
+        null
+
+    colors = undefined
+    if (config.c)
+      colors = config.c.split(',')
+
+    return new LSystem(params, offsets, sensitivities,
+                       decodeURIComponent(config.r), parseInt(config.i),
+                       parseFloat(config.l), colors,
+                       parseInt(config.play), anim,
+                       decodeURIComponent(config.name) or "unnamed")
 
   isIsomorphicTo: (system) -> if (!system) then false else @rules == system.rules and @iterations == system.iterations
 

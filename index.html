@@ -5,26 +5,10 @@
     <meta charset="utf-8">
     <title>lsys</title>
     <link href="css/normalize.css" rel="stylesheet" type="text/css"/>
-    <link href="css/forkme.css" rel="stylesheet" type="text/css"/>
     <link href="css/fontello.css" rel="stylesheet" type="text/css"/>
     <link href="css/animation.css" rel="stylesheet" type="text/css"/>
     <link href="css/introjs.min.css" rel=" stylesheet" type="text/css"/>
-    <link href="sass/test.css" rel="stylesheet" type="text/css"/>
-
-    <!-- google analytics -->
-    <script type="text/javascript">
-
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', 'UA-35201182-1']);
-        _gaq.push(['_trackPageview']);
-
-        (function() {
-            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-        })();
-
-    </script>
+    <link href="css/ui.css" rel="stylesheet" type="text/css"/>
 </head>
 <body class="bg-slategray">
 
@@ -41,10 +25,10 @@
         </a>
     </li>
     <!-- tour bit -->
-    <li data-element=".drawing-pad" data-position="bottom" data-overlay="off">
+    <li data-element=".help-pad" data-position="right" data-overlay="off">
         <p>Click and drag!</p>
     </li>
-    <li data-element=".drawing-pad" data-position="bottom">
+    <li data-element=".help-pad" data-position="right">
         <p>As you drag your mouse, you change the parameters of the system, which then gets redrawn.</p>
     </li>
     <li data-element="#control-set">
@@ -76,7 +60,7 @@
         <p>The system's parameters are also sync'd automatically with the url - meaning you can share systems by pasting the url somewhere.</p>
         <p>Also - since systems are just urls, your browsers back button works the way you would expect it to :)</p>
     </li>
-    <li data-element=".elem" data-position="left">
+    <li data-element=".container-ticker" data-position="top">
         <p>Take a look at some of the examples here (you can scroll down!)</p>
     </li>
     <!-- syntax bit -->
@@ -138,17 +122,44 @@
     <li data-element="#helpTrigger">
         That's it! Whew!
     </li>
-
 </ol>
 
-<div class="container-left">
+<div class="container-main">
+    <div class="help-pad"></div>
+    <div class="drawing-pad">
+        <div id="drawingContainer">
+            <canvas id="c0"></canvas>
+            <canvas id="c1"></canvas>
+            <canvas id="c2"></canvas>
+            <canvas id="c3"></canvas>
+            <canvas id="c4"></canvas>
+            <canvas id="c5"></canvas>
+            <canvas id="c6"></canvas>
+            <canvas id="c7"></canvas>
+            <canvas id="c8"></canvas>
+            <canvas id="c9"></canvas>
+        </div>
+    </div>
+</div>
 
+<div class="show-side actions hidden">
+  <a class="toggle-side" href="#"><i class="icon icon-toggle">&lt;&lt;&nbsp;</i></a>
+</div>
+
+<div class="container-side">
     <div class="header">
-        <a class="site" href="http://benvan.co.uk/lsys"><img src="img/logo3.png"><span>lsys</span></a>
+        <img src="img/logo3.png" /><a class="site" href="."><span>lsys</span></a>
         <div class="actions">
-            <a id="helpTrigger" href="#">
-                <i class="icon-help"></i>
-            </a>
+            <a id="helpTrigger" title="help" href="#"><i class="icon-help"></i></a><!--
+         --><a class="export tooltip" title="download png" href="#"><i class="icon-download"></i></a><!--
+         --><!--a id="link" class="tooltip" title="link" href="#"><i class="icon icon-link"></i><input readonly /></a--><!--
+         --><a class="toggle-animation tooltip" title="animation" href="#"><i id="play" class="icon icon-animation"></i></a><!--
+         --><a class="toggle-side tooltip" title="hide" href="#"><i class="icon icon-side">&gt;&gt;</i></a>
+        </div>
+    </div>
+    <div id="systemInfo" class="system-info blue">
+        <div class="system-name" >
+            <input type="text" id="system-name" value="click-and-drag!"/>
         </div>
     </div>
     <div class="controls">
@@ -184,17 +195,17 @@
 
             <li class="section">
                 system
-                <i id="syntaxTrigger" class="icon-help-circled"></i>
+                <i id="syntaxTrigger" class="icon-right icon-help-circled"></i>
             </li>
 
             <li class="group" id="rules-container">
-                <ul class="control-row half">
-                    <li class="label">levels</li><!--
-                 --><li><input id="iterations" type="text" required ></li>
+                <ul class="control-row">
+                    <li class="label"><pre>rules =</pre></li>
+                    <li><span class="label right">iterations</span>
+                        <input id="iterations" type="text" required ></li>
                 </ul>
                 <ul class="control-row" id="rules-row">
-                    <li class="label">rules</li><!--
-                 --><li><textarea id="rules" rows="12"></textarea></li>
+                  <li><textarea id="rules" rows="5"></textarea></li>
                 </ul>
                 <div class="recalculate">
                     <button class='recalculating'>
@@ -208,58 +219,72 @@
                 </div>
             </li>
 
+            <li class="section">
+              style
+            </li>
 
+            <li class="group">
+              <ul class="control-row">
+                  <li class="label">line width</li><!--
+               --><li class="label"></li><!--
+               --><li><input type="text" id="line-width"/></li>
+                </ul>
+                <ul class="control-row">
+                  <li class="label">background</li><!--
+               --><li class="label"></li><!--
+               --><li><input type="text" class="color"/></li>
+                </ul>
+                <ul class="control-row">
+                  <li class="label">color 0, 1</li><!--
+               --><li><input type="text" class="color"/></li><!--
+               --><li><input type="text" class="color"/></li>
+                </ul>
+                <ul class="control-row">
+                  <li class="label">color 2, 3</li><!--
+               --><li><input type="text" class="color"/></li><!--
+               --><li><input type="text" class="color"/></li>
+                </ul>
+                <ul class="control-row">
+                  <li class="label">color 4, 5</li><!--
+               --><li><input type="text" class="color"/></li><!--
+               --><li><input type="text" class="color"/></li>
+                </ul>
+                <ul class="control-row">
+                  <li class="label">color 6, 7</li><!--
+               --><li><input type="text" class="color"/></li><!--
+               --><li><input type="text" class="color"/></li>
+                </ul>
+                <ul class="control-row">
+                  <li class="label">color 8, 9</li><!--
+               --><li><input type="text" class="color"/></li><!--
+               --><li><input type="text" class="color"/></li>
+                </ul>
+            </li>
+
+            <li class="section">
+              animation
+            </li>
+
+            <li class="group" id="animation-container">
+                <pre>function (t) = </pre>
+                <ul class="control-row" id="animation-row">
+                  <li><textarea id="animation" rows="9"></textarea></li>
+                </ul>
+            </li>
         </ul>
     </div>
 
-</div>
-<div class="container-bottom bg-slategray">
-    <footer class="ticker">
-        <ul class="elems"></ul>
-    </footer>
-    <div class="fade"></div>
-</div>
-<div class="container-right">
-
-    <div class="drawing-pad">
-        <div id="drawingContainer">
-
-            <canvas id="c1"></canvas>
-            <canvas id="c2"></canvas>
-            <canvas id="c3"></canvas>
-            <canvas id="c0"></canvas>
-
-        </div>
-        <div id="systemInfo" class="system-info blue">
-            <div class="system-name" >
-                <input type="text" id="system-name" value="click-and-drag!"/>
-            </div>
-            <div class="actions">
-                <a class="export tooltip" href="#" title="download png"><i class="icon-download"></i></a><!--
-                --><a href="#" class="tooltip" id="link" title="link" onclick="return false;"><i class="icon icon-link"></i><input readonly /></a><!--
-
-                --><a href="#" class="facebook" title="share on facebook" data-params="width=626,height=436" data-base="https://www.facebook.com/sharer/sharer.php?u="><i class="icon icon-facebook"></i></a><!--
-                --><a href="#" class="twitter" title="share on twitter" data-base="http://twitter.com/share?url="><i class="icon icon-twitter"></i></a><!--
-                --><a href="#" class="gplus" title="share on google+" data-base="https://plus.google.com/share?url="><i class="icon icon-gplus"></i></a>
-
-
-            </div>
-        </div>
+    <div class="container-ticker controls bg-slategray">
+        <ul><li class="section">gallery</li></ul>
+        <footer class="ticker">
+            <ul class="elems"></ul>
+        </footer>
     </div>
-
-    <div class="github-fork-ribbon-wrapper fm-left">
-        <div class="github-fork-ribbon">
-            <a href="https://github.com/benvan/lsys">Fork me on GitHub</a>
-        </div>
-    </div>
-
 </div>
 
 <script type="text/javascript" src="js/underscore.js"></script>
 <script type="text/javascript" src="js/jquery-1.8.1.js"></script>
-
 <script type="text/javascript" src="js/system-ticker.js"></script>
-
 <script type="text/javascript" src="js/generated/util.js"></script>
 <script type="text/javascript" src="js/generated/controls.js"></script>
 <script type="text/javascript" src="js/generated/lsystem.js"></script>
@@ -280,14 +305,34 @@
                 sensitivities: 'sensitivities-container',
                 iterations: 'iterations',
                 rules: 'rules',
+                play: 'play',
+                animation: 'animation',
+                lineWidth: 'line-width',
+                colors: 'color',
                 name: 'system-name'
-            }, Util.control)
+            }, Util.control),
+            new Animation()
         );
 
         var syncLocationQuiet = _.debounce( _.bind(manager.syncLocationQuiet, manager) ,300);
         var sync = function(){
             return manager.recalculate().pipe(syncLocationQuiet);
         };
+        var syncAnimation = function(){
+            $('#animation').removeClass('error');
+            $('#animation').attr('title', '');
+            try {
+                var f = Function (['t'], manager.controls.animation.value);
+                var d = f.call({}, 0);
+                if (! (d instanceof Object)) {
+                  throw 'Return value is not Object'
+                }
+                sync();
+            } catch (err) {
+                $('#animation').addClass('error');
+                $('#animation').attr('title', err.toString());
+            }
+        }
 
         var $recalculateButton = $('.recalculate button');
         $recalculateButton.click(function(){
@@ -354,6 +399,20 @@
             return false;
         });
 
+        // show/hide sidebar button
+        $('a.toggle-side').click(function(){
+            $('.container-side').toggleClass('hidden');
+            $('.show-side').toggleClass('hidden');
+            return false;
+        })
+
+        // play/pause animation button
+        $('a.toggle-animation').click(function(){
+            $('.icon-animation').toggleClass('play');
+            sync();
+            return false;
+        })
+
         setTimeout(function(){
             manager.start().always(function(){
                 //this is kinda naughty... but I'd rather refactor Controls first than fudge this in otherwise
@@ -365,6 +424,9 @@
                 $("#system-name").on("input", sync );
                 $("#rules").on("input", sync);
                 $("#iterations").on("input", syncIfNotEmpty);
+                $("#line-width").on("input", syncIfNotEmpty);
+                $(".color").on("input", syncIfNotEmpty);
+                $("#animation").on("input", syncAnimation);
                 $(".controls").addClass('validation-enabled');
             });
         },0);
